@@ -1,0 +1,142 @@
+html{
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: 'Ubuntu Mono', monospace;
+	padding: 0;
+	margin: 0;
+	color: #fff;
+/*	background-color: black;
+*/}
+a {
+	text-decoration: none;
+	color: #fff;
+}
+input {
+	width: 100%
+}
+
+
+ input[type="text"],
+ input[type="password"]{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	/*outline removes border;*/
+	outline: none;
+	font-size: 16px;
+	color: #fff;
+	height: 30px;
+
+}
+
+ input[type="submit"]{
+	border:none;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+	background-color: #ae704a;
+	cursor: pointer;
+	
+	margin-top: 20
+}
+.top-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 10vh;
+	background-color: #ae704a;
+	margin-top: 0;
+
+}
+.logo {
+	margin-left: 10px;
+	color: #fff;
+}
+.right-nav {
+	display: flex;
+	justify-content: space-around;
+	margin-right: 20px;
+
+}
+.nav-text {
+	margin-right: 20px
+}
+.coverContainer {
+	display: flex;
+	height: 90vh
+}
+.coverImg {
+	width: 100%;
+}
+.contentBox{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40vw;
+	height: 70vh;
+	padding:60px  20px 20px 20px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,.5);
+	display: flex;
+	flex-direction: column;
+	
+}
+.form-p {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0;
+}
+.forgotB {
+	display: flex;
+	justify-content: center;
+}
+@media only screen and (max-width: 900px) {
+.contentBox{
+	width: 60vw;
+	height: 60vh;
+	padding:0 20px;
+}
+
+.info {
+	height: 20vh;
+
+}
+.inputs {
+	height: 40vh
+}
+.info-h, .info-p{
+	margin: 0;
+	text-align: center;
+}
+
+}
+@media only screen and (min-width: 901px) {
+	.contentBox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.info-h, .info-p{
+		width: 90%;
+	margin-bottom: 0;
+	text-align: center;
+}/*
+	 input[type="submit"]{
+	 	width: 70%;
+	 	position: center;
+	 }
+*/
+}
+

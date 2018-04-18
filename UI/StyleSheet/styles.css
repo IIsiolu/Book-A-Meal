@@ -9,14 +9,15 @@ html{
 
 body {
 	font-size: 16px;
-	/*line-height: 1.5;
-	font-family: sans-serif;*/
+	line-height: 1.5;
+	font-family: 'Ubuntu Mono', monospace;
 	padding: 0;
 	margin: 0;
 /*	background-color: black;
 */}
 a {
 	text-decoration: none;
+	color: #fff;
 }
 .container {
 	background-image: url("../images/pexels-photo-262918.jpeg");
@@ -25,10 +26,16 @@ a {
 .top-nav {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #c49413;
+	background-color: #ae704a;
 	margin-top: 0;
+
+}
+.logo {
+	margin-left: 10px;
+	color: #fff;
 }
 .right-nav {
 	display: flex;
@@ -70,34 +77,35 @@ a {
 
 }
 .info {
-	height: 60vh;
-	display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+
 }
 .top-content-header {
+	text-align: center;
 	margin: 0 
 }
 .topP {
 	width: 80%;
+	text-align: center;
 }
 .bottom-content {
+	margin-top: 20px;
 	display: flex;
 	justify-content: center;
 }
 .loginBtn {
 	border: none;
-    border-bottom: 1px solid #81e60b;
-    background: #b49d2a;
+    border-bottom: 1px solid #fff;
+    background: #ae704a;
     outline: none;
     font-size: 16px;
     color: #fff;
     height: 40px;
-    width: 20vw;
+    width: 15vw;
+    margin-right: 10px;
 }
-.later {
-	color: #fff
+.later a{
+	color: #fff;
+
 }
 
 .btns {

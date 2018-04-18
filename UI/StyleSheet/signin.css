@@ -84,9 +84,9 @@ input {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 60vw;
+	width: 40vw;
 	height: 70vh;
-	padding:0 20px;
+	padding:60px  20px 20px 20px;
 	box-sizing: border-box;
 	background: rgba(0,0,0,.5);
 	display: flex;
@@ -99,8 +99,8 @@ input {
 	margin: 0;
 }
 .forgotB {
-	width: 100%;
-	text-align: center;
+	display: flex;
+	justify-content: center;
 }
 @media only screen and (max-width: 900px) {
 .contentBox{
@@ -121,5 +121,22 @@ input {
 	text-align: center;
 }
 
+}
+@media only screen and (min-width: 901px) {
+	.contentBox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.info-h, .info-p{
+		width: 90%;
+	margin-bottom: 0;
+	text-align: center;
+}/*
+	 input[type="submit"]{
+	 	width: 70%;
+	 	position: center;
+	 }
+*/
 }
 

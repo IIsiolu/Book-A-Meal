@@ -1,0 +1,145 @@
+html{
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: 'Ubuntu Mono', monospace;
+	padding: 0;
+	margin: 0;
+	color: #fff;
+/*	background-color: black;
+*/}
+a {
+	text-decoration: none;
+	color: #fff;
+} 
+
+input {
+	width: 100%;
+}
+ input[type="text"],
+ input[type="password"]{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	/*outline removes border;*/
+	outline: none;
+	font-size: 16px;
+	color: #fff;
+	height: 30px;
+
+}
+
+.top-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 10vh;
+	background-color: #ae704a;
+	margin-top: 0;
+
+}
+.logo {
+	margin-left: 10px;
+	color: #fff;
+}
+.right-nav {
+	display: flex;
+	justify-content: space-around;
+	margin-right: 20px;
+
+}
+.nav-text {
+	margin-right: 20px
+}
+.coverContainer {
+	display: flex;
+	height: 90vh
+}
+.coverImg {
+	width: 100%;
+}
+.contentBox{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40vw;
+	height: 70vh;
+	padding:60px  20px 20px 20px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	
+}
+.loginBtn {
+	border: none;
+    border-bottom: 1px solid #fff;
+    background: #ae704a;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    height: 40px;
+    width: 20vw;
+    margin-right: 10px;
+}
+.btn {
+	align-self: center;
+	margin: 20px 0;
+
+}
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+.inputs {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+@media only screen and (max-width: 900px) {
+.contentBox{
+	width: 60vw;
+	height: 60vh;
+	padding:0 20px;
+}
+p, h2 {
+	margin: 0;
+}
+.info {
+		
+}
+.inputs {
+	
+}
+
+
+
+}
+@media only screen and (min-width: 901px) {
+	.contentBox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 10px 20px;
+	}
+	p, h2 {
+	margin: 5px 0;
+}
+	
+}
+

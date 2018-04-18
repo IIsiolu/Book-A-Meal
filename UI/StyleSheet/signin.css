@@ -23,6 +23,32 @@ a {
 input {
 	width: 100%
 }
+
+
+ input[type="text"],
+ input[type="password"]{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	/*outline removes border;*/
+	outline: none;
+	font-size: 16px;
+	color: #fff;
+	height: 30px;
+
+}
+
+ input[type="submit"]{
+	border:none;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+	background-color: #ae704a;
+	cursor: pointer;
+	
+	margin-top: 20
+}
 .top-nav {
 	display: flex;
 	justify-content: space-between;
@@ -59,32 +85,41 @@ input {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 60vw;
-	height: 60vh;
-	padding: 20px 20px;
+	height: 70vh;
+	padding:0 20px;
 	box-sizing: border-box;
-	background: rgba(0,0,0,.5)
+	background: rgba(0,0,0,.5);
+	display: flex;
+	flex-direction: column;
 	
 }
+.form-p {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0;
+}
+.forgotB {
+	width: 100%;
+	text-align: center;
+}
+@media only screen and (max-width: 900px) {
+.contentBox{
+	width: 60vw;
+	height: 60vh;
+	padding:0 20px;
+}
 
- input[type="text"],
- input[type="password"]{
-	border: none;
-	border-bottom: 1px solid #fff;
-	background: transparent;
-	/*outline removes border;*/
-	outline: none;
-	font-size: 16px;
-	color: #fff;
-	height: 40px;
+.info {
+	height: 20vh;
 
 }
- input[type="submit"]{
-	border:none;
-	outline: none;
-	height: 40px;
-	color: #fff;
-	font-size: 16px;
-	background-color: #8a6a1a;
-	cursor: pointer;
-	border-radius: 20px;
+.inputs {
+	height: 40vh
 }
+.info-h, .info-p{
+	margin: 0;
+	text-align: center;
+}
+
+}
+

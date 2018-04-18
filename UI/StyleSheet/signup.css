@@ -19,12 +19,11 @@ body {
 a {
 	text-decoration: none;
 	color: #fff;
-}
+} 
+
 input {
-	width: 100%
+	width: 100%;
 }
-
-
  input[type="text"],
  input[type="password"]{
 	border: none;
@@ -38,17 +37,6 @@ input {
 
 }
 
- input[type="submit"]{
-	border:none;
-	outline: none;
-	height: 40px;
-	color: #fff;
-	font-size: 16px;
-	background-color: #ae704a;
-	cursor: pointer;
-	
-	margin-top: 20
-}
 .top-nav {
 	display: flex;
 	justify-content: space-between;
@@ -91,16 +79,37 @@ input {
 	background: rgba(0,0,0,.5);
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
 	
 }
-.form-p {
-	font-weight: bold;
-	font-size: 20px;
-	margin: 0;
+.loginBtn {
+	border: none;
+    border-bottom: 1px solid #fff;
+    background: #ae704a;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    height: 40px;
+    width: 20vw;
+    margin-right: 10px;
 }
-.forgotB {
+.btn {
+	align-self: center;
+	margin: 20px 0;
+
+}
+.info {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+
+}
+.inputs {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 @media only screen and (max-width: 900px) {
 .contentBox{
@@ -108,18 +117,17 @@ input {
 	height: 60vh;
 	padding:0 20px;
 }
-
+p, h2 {
+	margin: 0;
+}
 .info {
-	height: 20vh;
-
+		
 }
 .inputs {
-	height: 40vh
+	
 }
-.info-h, .info-p{
-	margin: 0;
-	text-align: center;
-}
+
+
 
 }
 @media only screen and (min-width: 901px) {
@@ -128,15 +136,6 @@ input {
 		flex-direction: column;
 		justify-content: space-between;
 	}
-	.info-h, .info-p{
-		width: 90%;
-	margin-bottom: 0;
-	text-align: center;
-}/*
-	 input[type="submit"]{
-	 	width: 70%;
-	 	position: center;
-	 }
-*/
+	
 }
 

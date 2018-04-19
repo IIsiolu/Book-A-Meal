@@ -87,7 +87,11 @@ a {
 	height: 60vh;
 }
 .chef {
+	/*display: flex;
+	flex-direction: column;*/
+	justify-content: space-between;
 	width: 50vw;
+	height: 60vh;
 	background-color: yellow;
 
 }
@@ -95,6 +99,34 @@ a {
 	width: 30vw;
 	background: url(../images/home1.jpeg) no-repeat;
 	background-size: cover;
+}
+.chef-top {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 20vh;
+}
+.chef-top-h{ 
+	margin: 0
+ }
+.chef-top-p {
+	margin: 0;
+	text-align: center;
+	text-align-last: center;
+	width: 70%;
+}
+.chef-bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+.chef-info {
+	display: flex;
+}
+.unique {
+	margin: 0;
+	text-align: center;
 }
 @media only screen and (max-width: 900px) {
 	.top-content-h {

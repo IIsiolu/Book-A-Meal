@@ -52,8 +52,54 @@ a {
 	align-items: center;
 	color: 
 }
+.top-content-h {
+	font-weight: bold;
+	font-size: 70px;
+	margin-bottom: 0;
+}
+.top-content-line {
+	font-weight: bold;
+	color: #ca8a71;
+	margin-top: 0;
+}
 .top-content-p {
 	text-align: center;
 	text-align-last: center;
 	width: 50%
+}
+.btn {
+	
+}
+.loginBtn {
+	background: rgba(0,0,0,.5);
+    border: 0.5px solid #ca8a71;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    height: 40px;
+    /*width: 15vw;*/
+    margin-right: 10px;
+}
+.staff {
+	display: flex;
+	justify-content: space-around;
+	padding: 1rem;
+	height: 40vh;
+}
+.chef {
+	width: 50vw;
+	background-color: yellow;
+
+}
+.foodImg {
+	width: 30vw;
+	background: url(../images/homeBg.jpg) no-repeat;
+	background-size: cover;
+}
+@media only screen and (max-width: 900px) {
+	.top-content-h {
+	font-weight: bold;
+	font-size: 50px;
+	margin-bottom: 0;
+	}
 }

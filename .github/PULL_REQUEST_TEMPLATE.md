@@ -2,13 +2,16 @@
 
 
 #### Description of Task to be completed?
-a complete layout of book a meal home page
+creating a page wher caterer can add modify and 
+delete
 
 #### How should this be manually tested?
 
-
+checking the interface
 
 #### Any background context you want to provide?
+A page where the caterer can manage (i.e: add, modify and delete) meal
+options in the application.
 
 
 #### What are the relevant pivotal tracker stories? (If applicable)

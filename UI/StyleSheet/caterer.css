@@ -43,7 +43,27 @@ a {
 .nav-text {
 	margin-right: 20px
 }
-
+.container {
+}
+.content {
+	display: flex;
+	height: 80vh;
+	padding: 10px
+}
+.main {
+	flex: 65vw;
+	background-color: yellow;
+	height: 80vh;
+}
+.sidebar {
+	flex: 35vw;
+	background-color: blue;
+}
+.sidebar-c {
+	position: fixed;
+		height: 100vh;
+		width: 35vw;
+}
 
 @media only screen and (max-width: 900px) {
 	

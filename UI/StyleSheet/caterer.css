@@ -47,23 +47,117 @@ a {
 }
 .content {
 	display: flex;
-	height: 80vh;
+	/*height: 80vh;*/
 	padding: 10px
 }
 .main {
-	flex: 65vw;
-	background-color: yellow;
-	height: 80vh;
+	flex: 60vw;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	color: #000;
+	justify-content: center;
 }
 .sidebar {
-	flex: 35vw;
-	background-color: blue;
+	flex: 20vw;
+	
 }
 .sidebar-c {
-	position: fixed;
-		height: 100vh;
-		width: 35vw;
+		position: fixed;
+		height: 70vh;
+		width: 20vw;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-color: #8e5838;
+
 }
+	.add-meal {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+	}
+.right-sidebar {
+	flex: 20vw;
+	
+}
+.sidebar-d {
+
+}
+.meal-info {
+	display: flex;
+	flex-direction: column;
+	border:	1px solid #deddd8;
+	width: 40%;
+	height: 400px;
+	margin: 10px;
+	outline: none;
+	padding: 0;
+
+}
+.meal-info:hover {
+	box-shadow: inset -1px 0px 1px 2px rgba(164, 182, 189, 0.3), 0 6px 20px 0 rgb(233, 212, 157);
+}
+.foodies {
+	height: 60%;
+}
+.foodD {
+		background-color: #fff;
+		height: 30%;
+		padding: 2px 5px;
+		
+	}
+	.foodD h3 {
+		margin: 0;
+		text-align: center;
+	}
+	.foodD p{
+		padding: 0 0px 0px 0px;
+		margin: 0;
+		line-height: 1.2;
+		text-align: center;
+	}
+	.btns {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+	}
+	#order-now {
+		/*background-color: blue;*/
+		height: 15%;
+		padding-top: 10px;
+		
+		text-align: center;
+		background-color: inherit;
+		border: none;
+		width: 50%;
+		border-top: 1px solid grey;
+    outline: none;
+    font-size: 20px;
+ 
+
+	}
+	footer {
+/*	margin-top: 10px;
+*/	width: 100%;
+	background-color: #ae704a;
+	height: 50px;
+	bottom: 0;
+}
+	.footNav{
+		display: flex;
+		width: 100%;
+		flex-flow: row ;
+	}
+		.footNav a{
+			
+			padding: 10px 15px;
+		}
+		.copyR{
+			margin-right: auto;
+		}
 
 @media only screen and (max-width: 900px) {
 	

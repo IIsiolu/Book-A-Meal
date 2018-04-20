@@ -20,8 +20,6 @@ a {
 	color: #fff;
 }
 .container {
-	background-image: url("../images/pexels-photo-262918.jpeg");
-
 }
 .top-nav {
 	display: flex;
@@ -46,3 +44,51 @@ a {
 .nav-text {
 	margin-right: 20px
 }
+.orders-h {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #000;
+}
+.content {
+
+}
+.orders {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 80vw;
+	color: #000;
+	justify-content: center;
+}
+.meal-info {
+	display: flex;
+	flex-direction: column;
+	border:	1px solid #deddd8;
+	width: 40%;
+	height: 400px;
+	margin: 10px;
+	outline: none;
+	padding: 0;
+
+}
+.meal-info:hover {
+	box-shadow: inset -1px 0px 1px 2px rgba(164, 182, 189, 0.3), 0 6px 20px 0 rgb(233, 212, 157);
+}
+.foodies {
+	height: 60%;
+}
+.foodD {
+		background-color: #fff;
+		height: 30%;
+		padding: 2px 5px;
+		
+	}
+	.foodD h3, h1 {
+		text-align: center;
+	}
+	.money {
+		text-align: center;
+		background-color: #ae704a;
+		margin: 0 20vw 0 20vw;
+	}

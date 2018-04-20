@@ -236,7 +236,51 @@ a {
 		margin-top: 5rem;
 		background-color: yellow;
 		height: 70vh;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	align-items: initial;
+	justify-content: space-around;
+
 	}
+	.aboutImg {
+		width: 50%;
+		margin: 0;
+		height: 70vh;
+	}
+	.aboutBook {
+		width: 50%;
+		margin: 0;
+		height: 70vh;
+		background-color: #fff;
+		color: #ae704a;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.bottom-p {
+		text-align: center;
+	}
+	footer {
+/*	margin-top: 10px;
+*/	width: 100%;
+	background-color: #ae704a;
+	height: 50px;
+	bottom: 0;
+}
+	.footNav{
+		display: flex;
+		width: 100%;
+		flex-flow: row ;
+	}
+		.footNav a{
+			
+			padding: 10px 15px;
+		}
+		.copyR{
+			margin-right: auto;
+		}
+
 @media only screen and (max-width: 900px) {
 	.top-content-h {
 	font-weight: bold;

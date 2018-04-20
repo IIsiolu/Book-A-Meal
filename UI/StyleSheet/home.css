@@ -112,9 +112,6 @@ a {
 	align-items: center;
 	flex: 20vh;
 }
-.chef-top-h{ 
-	margin: 0
- }
 .chef-top-p {
 	margin: 0;
 	text-align: center;
@@ -137,10 +134,121 @@ a {
 	margin: 0;
 	text-align: center;
 }
+#todaySec {
+	text-align: center;
+}
+.imgBody {
+	margin: 10px;
+	background-color: #fff;
+}
+
+.imgBody:hover {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	}
+.images {
+	width: 250px;
+		height: 150px;
+}
+.foodInfo {
+			margin: 20px 0;
+            padding-left: 5px;
+		}
+		.book {
+			border-top: 1px solid blue;
+			width: 250px;
+		}
+.today {
+	margin-top: 5rem;
+	background-color: #9b7659;
+	color: #000;
+}
+.today-meal {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+}
+.today-menu {
+	text-align: center;
+}
+.meal-info {
+	display: flex;
+	flex-direction: column;
+	border:	1px solid #deddd8;
+	width: 30%;
+	height: 400px;
+	margin: 10px;
+	outline: none;
+	padding: 0;
+
+}
+.meal-info:hover {
+	box-shadow: inset -1px 0px 1px 2px rgba(164, 182, 189, 0.3), 0 6px 20px 0 rgb(233, 212, 157);
+}
+.foodies {
+	height: 60%;
+}
+.foodD {
+		background-color: #fff;
+		height: 30%;
+		padding: 10px 15px;
+		
+	}
+	.foodD h3 {
+		margin: 0;
+		text-align: center;
+	}
+	.foodD p{
+		padding: 0 5px 5px 5px;
+		margin: 0;
+		line-height: 1.3;
+		text-align: center;
+	}
+	.order-now {
+		/*background-color: blue;*/
+		height: 15%;
+		text-align: center;
+		padding-top: 10px;
+		border-top: 1px solid grey;
+		color: #fff;
+
+	}
 @media only screen and (max-width: 900px) {
 	.top-content-h {
 	font-weight: bold;
 	font-size: 50px;
 	margin-bottom: 0;
 	}
+	.chef-top-h{ 
+	margin: 0
+ }
+}
+@media only screen and (min-width: 901px) {
+	.chef {
+	/*display: flex;
+	flex-direction: column;*/
+	justify-content: space-between;
+	width: 50vw;
+	height: 40vh;
+
+}
+.unique {
+	width: 60%;
+}
+.chefL {
+	width: 15vw;
+	height: 15vh;
+	margin: 10px;
+}
+.chef-info {
+	justify-content: center;
+	align-items: center;
+}
+.foodImg {
+	width: 30vw;
+	background: url(../images/gbeans.jpg) no-repeat;
+	background-size: contain;
+	height: 60vh;
+}
 }

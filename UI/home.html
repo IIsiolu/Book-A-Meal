@@ -46,6 +46,7 @@
 
 		<div class="today">
 			<h1 class="today-menu">Meal for today</h1>
+			<div class="center-meal">
 			<div class="today-meal">
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal1.jpg" alt="canned-pizza-dough">
@@ -56,7 +57,7 @@
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
+						<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 					
 				</div>
 				<div class="meal-info" >
@@ -120,8 +121,21 @@
 					
 				</div>
 			</div>
+			<div class="bookings">
+				<h1 class="bookings-h">
+					Today's order
+				</h1>
+				<div id="bookings-orders">
+					
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="bottom">
+			
 		</div>
 	</div>
 
 </body>
+<script type="text/javascript" src="./js/home.js"></script>
 </html>

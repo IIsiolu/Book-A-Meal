@@ -13,15 +13,16 @@
 		<div class="top-nav">
 			<h2 class="logo">Book-A-Meal</h2>
 			<div class="right-nav">
-				<h2 class="nav-text"> <a href="#">About Us</a></h2>
-				<h2 class="nav-text"> <a href="#">Log-out</a></h2></h2>
+				<h2 class="nav-text"> <a href="#aboutBook">About Us</a></h2>
+				<h2 class="nav-text"> <a href="selectmeal.html">Meals</a></h2>
+				<h2 class="nav-text"> <a href="index.html">Log-out</a></h2>
 			</div>
 		</div>
-		<div class="top-content">
+		<div class="top-content"> 
 			<h1 class="top-content-h">Made with Love</h1>
 			<p class="top-content-line">_____________________________</p>
 			<p class="top-content-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat interdum ipsum, ornare molestie lorem dictum nec. Vestibulum in congue lacus. Nulla ullamcorper laoreet orci </p>
-			<a class="btn" href="home.html"><span><button class="loginBtn"> MENU FOR TODAY</button></span></a>
+			<a class="btn" href="#target"><span><button class="loginBtn"> MENU FOR TODAY</button></span></a>
 		</div>
 		<div class="staff">
 			<div class="chef">
@@ -45,13 +46,13 @@
 		</div>
 
 		<div class="today">
-			<h1 class="today-menu">Meal for today</h1>
+			<h1 id="target" class="today-menu">Meal for today</h1>
 			<div class="center-meal">
 			<div class="today-meal">
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal1.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Chicken (#400)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
@@ -63,77 +64,85 @@
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal2.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Spanul (#700)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
+					<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 					
 				</div>
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal3.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Smiggles (#1000)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
-					
+					<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 				</div>
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal4.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Sucro (#800)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
-					
+					<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 				</div>
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal5.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Shhannon (#2000)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
-					
+					<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 				</div>
 				<div class="meal-info" >
 					<img class="foodies" src="./images/meal6.jpg" alt="canned-pizza-dough">
 					<div class="foodD">
-						<h3>Chicken</h3>
+						<h3>Grass (#200)</h3>
 						<p>
 							Fried chicken  mehn, guys this recipe will change your lunch game forever! I am not even kidding. ITs specially made in nigeria anytime
 						</p>
 						
 					</div>
-					<a class="order-now" href="#">Book a meal</a>
-					
+					<button onclick="order('order-now', 'meal1.jpg','chicken' )" id="order-now"> Book a meal</button>
 				</div>
 			</div>
 			<div class="bookings">
 				<h1 class="bookings-h">
-					Today's order
+					My Orders
 				</h1>
 				<div id="bookings-orders">
-					
+					<div class="bookings-info" >
+						<img class="foodies" src="./images/meal6.jpg" alt="canned-pizza-dough">
+						<div class="foodD">
+							<h3>Chicken (#400 * 1)</h3>
+							<div class="pay">
+								<div class="incre">
+								<button class="incre-btn">-</button>
+								<button class="incre-btn">+</button>
+								</div>
+								<button class="pay-btn">remove</button>
+							</div>
+						</div>
+				   </div>
 				</div>
 			</div>
 			</div>
 		</div>
 		<div class="bottom">
 			<img class="aboutImg" src="./images/spice1.jpg" alt="img" >
-			<div class="aboutBook">
+			<div id="aboutBook">
 				<h1 class="bottom-h">Book a meal</h1>
 				<p class="bottom-p">
 					Curabitur dapibus enim vel velit condimentum, egestas lobortis velit pulvinar. Donec congue, est ut ultrices ullamcorper, felis odio feugiat urna, et vehicula erat lorem nec diam. Aenean ut leo accumsan, imperdiet lectus vel, faucibus nunc. Praesent placerat lacus id aliquet efficitur. Phasellus varius eros a ullamcorper gravida.

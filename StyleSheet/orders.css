@@ -48,7 +48,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	color: #000;
+	color: #ae704a;
 }
 .content {
 
@@ -58,7 +58,7 @@ a {
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 80vw;
-	color: #000;
+	color: #ae704a;
 	justify-content: center;
 }
 .meal-info {
@@ -92,3 +92,22 @@ a {
 		background-color: #ae704a;
 		margin: 0 20vw 0 20vw;
 	}
+	footer {
+/*	margin-top: 10px;
+*/	width: 100%;
+	background-color: #ae704a;
+	height: 50px;
+	bottom: 0;
+}
+	.footNav{
+		display: flex;
+		width: 100%;
+		flex-flow: row ;
+	}
+		.footNav a{
+			
+			padding: 10px 15px;
+		}
+		.copyR{
+			margin-right: auto;
+		}

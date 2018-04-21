@@ -215,14 +215,13 @@ a {
 		text-align: center;
 	}
 	#order-now {
-		/*background-color: blue;*/
 		height: 15%;
 		text-align: center;
-		background-color: inherit;
+		background-color: #ae704a;
 		border: none;
 		border-top: 1px solid grey;
     outline: none;
-    font-size: 16px;
+    font-size: 20px;
     color: #fff;
 
 	}
@@ -245,7 +244,18 @@ a {
 		margin: 0;
 		height: 70vh;
 	}
-	.aboutBook {
+#bookings-orders {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.bookings-info {
+		display: flex;
+		flex-direction: column;
+		width: 70%;
+	}
+	#aboutBook {
 		width: 50%;
 		margin: 0;
 		height: 70vh;
@@ -254,6 +264,34 @@ a {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+	.pay {
+		display: flex;
+		flex-direction: row;
+
+	}
+	.incre {
+		width: 50%;
+		margin:0;
+		display: flex;
+		flex-direction: row;
+	}
+	.pay-btn {
+		width: 50%;
+		border: 0 1px 0 0;
+		padding: 5px;
+		font-size: 16px;
+		margin:0;
+		margin-top: 10px;
+		
+	}
+	.incre-btn {
+		width: 50%;
+		border: 0 1px 0 0;
+		padding: 5px;
+		margin:0;
+		margin-top: 10px;
+		font-size: 16px;
 	}
 	.bottom-p {
 		text-align: center;
@@ -279,6 +317,22 @@ a {
 		}
 
 @media only screen and (max-width: 900px) {
+	.top-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: auto;
+
+}
+.logo, .right-nav {
+	margin:0;
+}
+.right-nav {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
 	.top-content-h {
 	font-weight: bold;
 	font-size: 50px;
@@ -328,22 +382,12 @@ a {
 	flex-direction: column;
 }
 .bookings {
-	background-color: #947c6d;
+	background-color: #f3e7e0;
 }
 	.bookings-h{
 		text-align: center;
 	}
-	#bookings-orders {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-	}
-	.bookings-info {
-		display: flex;
-		flex-direction: column;
-		width: 70%;
-	}
+	
 .bottom {
 		margin-top: 5rem;
 		height: auto;
@@ -358,7 +402,7 @@ a {
 		margin: 0;
 		height: 70vh;
 	}
-	.aboutBook {
+	#aboutBook {
 		width: 100%;
 		margin: 0;
 		height: 70vh;

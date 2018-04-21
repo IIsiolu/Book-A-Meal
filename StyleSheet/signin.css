@@ -38,7 +38,7 @@ input {
 
 }
 
- input[type="submit"]{
+ input[type="button"]{
 	border:none;
 	outline: none;
 	height: 40px;
@@ -48,6 +48,10 @@ input {
 	cursor: pointer;
 	
 	margin-top: 20
+}
+form {
+	display: flex;
+	flex-direction: column;
 }
 .top-nav {
 	display: flex;
@@ -93,6 +97,12 @@ input {
 	flex-direction: column;
 	
 }
+.info-h {
+	font-size: 30px;
+}
+.info-p {
+	font-size: 16px;
+}
 .form-p {
 	font-weight: bold;
 	font-size: 20px;
@@ -101,6 +111,10 @@ input {
 .forgotB {
 	display: flex;
 	justify-content: center;
+}
+input[type="button"]:hover {
+    background-color: burlywood;
+    color: #fff;
 }
 @media only screen and (max-width: 900px) {
 .contentBox{
@@ -118,6 +132,7 @@ input {
 }
 .info-h, .info-p{
 	margin: 0;
+	padding: 0;
 	text-align: center;
 }
 
@@ -127,6 +142,7 @@ input {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		width: 40vw;
 	}
 	.info-h, .info-p{
 		width: 90%;

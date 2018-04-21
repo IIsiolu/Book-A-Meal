@@ -13,7 +13,7 @@ body {
 	font-family: 'Ubuntu Mono', monospace;
 	padding: 0;
 	margin: 0;
-	color: #fff;
+	color: #ae704a;
 /*	background-color: black;
 */}
 a {
@@ -48,25 +48,22 @@ a {
 	flex-direction: row;
 }
 .todays {
-	flex: 70vw;
-	height: 80vw;
+	flex: 70%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
-	color: #000;
+	color: #ae704a;
 	align-items: center;
 }
 .main {
-	flex: 70vw;
+	flex: 70%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	color: #000;
+	color: #ae704a;
 	justify-content: center;
 }
-.sidebar {
-	flex: 30vw;
-	height: 80vw;
-}
+
 .meal-info {
 	display: flex;
 	flex-direction: column;
@@ -86,6 +83,7 @@ a {
 }
 .foodD {
 		background-color: #fff;
+		color: #ae704a;
 		height: 30%;
 		padding: 2px 5px;
 		
@@ -100,6 +98,10 @@ a {
 		line-height: 1.2;
 		text-align: center;
 	}
+	.remove {
+		width: 100%;
+		font-size: 20px;
+	}
 	.btns {
 		display: flex;
 		align-items: center;
@@ -111,27 +113,109 @@ a {
 		/*background-color: blue;*/
 		height: 15%;
 		text-align: center;
-		background-color: inherit;
+		background-color: #ae704a;
 		border: none;
 		border-top: 1px solid grey;
+		color: #fff;
 	    outline: none;
 	    font-size: 24px;
 	}
+	footer {
+/*	margin-top: 10px;
+*/	width: 100%;
+	background-color: #ae704a;
+	height: 50px;
+	bottom: 0;
+}
+	.footNav{
+		display: flex;
+		width: 100%;
+		flex-flow: row ;
+	}
+		.footNav a{
+			
+			padding: 10px 15px;
+		}
+		.copyR{
+			margin-right: auto;
+		}
+
+
+@media only screen and (max-width: 800px) {
+	.top-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: auto;
+
+}
+.logo, .right-nav {
+	margin:0;
+}
+.right-nav {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
+	.content {
+	display: flex;
+	flex-direction: column;
+}
+	.todays {
+		width: 100%;
+	display: flex;
+	flex-direction: column;
+	color: #ae704a;
+	justify-content: center;
+}
+.main {
+	height: auto;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	
+}
+.sidebar {
+	width: 100%;
+	height: auto;
+}
 .sidebar-c {
+	margin-top: 20px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #f3f1f0;
+
+}
+.meal-info {
+	display: flex;
+	flex-direction: column;
+	border:	1px solid #deddd8;
+	width: 70%;
+	height: 400px;
+	margin: 10px;
+	outline: none;
+	padding: 0;
+
+}
+}
+@media only screen and (min-width: 801px) {
+	.sidebar {
+	flex: 30vw;
+	height: auto;
+}
+	.sidebar-c {
 	position: fixed;
 	margin-top: 20px;
-	height: 70vh;
+	height: auto;
 	width: 30vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #8e5838;
+	background-color: #f3f1f0;
 
 }
-
-@media only screen and (max-width: 900px) {
-	
-}
-@media only screen and (min-width: 901px) {
-	
 }

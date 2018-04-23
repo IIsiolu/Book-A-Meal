@@ -4,8 +4,9 @@
   "description": "an app for food orders",
   "main": "Server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-watch ./Server.js"
+    "start": "babel-watch ./Server.js",
+    "test": "mocha --exit --compilers  js:babel-core/register",
+    "lint": "eslint --fix src"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "babel-watch": "^2.0.7",
+    "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",

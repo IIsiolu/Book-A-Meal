@@ -6,6 +6,7 @@ import api from './src/routes/api';
 // Instance of the express app
 const app = express();
 
+export default app;
 //Request logger
 app.use(morgan('dev'));
 

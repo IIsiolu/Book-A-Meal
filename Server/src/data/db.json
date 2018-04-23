@@ -1,0 +1,32 @@
+{
+    "Meals": [
+        {
+            "id": 1,
+            "name": "Chicken",
+            "description": "its very good for everything",
+            "price": "#400",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 2,
+            "name": "Beans",
+            "description": "its very good for everything",
+            "price": "#500",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 3,
+            "name": "Rice",
+            "description": "its very good for everything",
+            "price": "#900",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 4,
+            "name": "Soupie",
+            "description": "its very good for everything",
+            "price": "#1400",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        }
+    ]
+}

@@ -2,19 +2,15 @@
 
 
 #### Description of Task to be completed?
-creating a page where caterer can choose a meal for the day
-
+should get all meals from the dumy data
 #### How should this be manually tested?
 
-checking the interface
-
+should return an array of meals and status code 200
 #### Any background context you want to provide?
-user should be able to get menu for a specific day.
-
-
+user should be able to get all menu
 
 #### What are the relevant pivotal tracker stories? (If applicable)
-user should be able to get menu for a specific day.
+user should be able to get all menu
 
 
 #### Screenshots (If applicable)

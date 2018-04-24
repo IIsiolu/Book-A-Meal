@@ -57,27 +57,26 @@ describe('Book-A-Meal', () => {
       });
     });
 
-    // describe('Should update an EVENT', () => {
-    //   it('responds with status 200', (done) => {
-    //     chai.request(server)
-    //       .put('/api/events/1')
-    //       .send({
-    //         "id": "1",
-    //         'name': 'Dancing', 
-    //         'date': '21-30-2018',
-    //         "center": "Yaba Center",
-    //         "time": "12:00",
-    //         "purpose": "  Free style"
-    //       })
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(200);
-    //         expect(res).to.be.json;
-    //         expect(res.body).to.be.an('object')
+    describe('Should update a Meal', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .put('/api/v1/meals/1')
+          .send({
+            "id": "1",
+            'name': 'turkey', 
+            'price': '#1000',
+            'description': 'very cool to eat',
+            'image': 'http://faceboo.com/home.png'
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res).to.be.json;
+            expect(res.body).to.be.an('object')
             
-    //         done();
-    //       });
-    //   });
-    // });
+            done();
+          });
+      });
+    });
 
     //  describe('Should fail  to update an EVENT not in the DB', () => {
     //   it('responds with status 404', (done) => {

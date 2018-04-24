@@ -45,6 +45,7 @@ describe('Book-A-Meal', () => {
           .send({
             'name': 'Eba', 
             'id': 10,
+            'price': '#1000',
             'description': 'very cool to eat',
             'image': 'http://faceboo.com/home.png'
           })

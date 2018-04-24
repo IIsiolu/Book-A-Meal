@@ -12,7 +12,10 @@ class UpdateMeal {
                 meal.image = req.body.image;
                 meal.price = req.body.price;
                 return(
-                    res.status(200).send(data)
+                    res.status(200).json({
+                        message: 'success',
+                        result: meal
+                    })
                 )
             }
            

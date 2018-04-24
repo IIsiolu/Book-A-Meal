@@ -1,0 +1,32 @@
+{
+    "Menu": [
+        {
+            "id": 1,
+            "name": "Rice",
+            "description": "its very good for everything",
+            "price": "#400",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 2,
+            "name": "Tea",
+            "description": "its very good for everything",
+            "price": "#500",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 3,
+            "name": "Egusi and Eba",
+            "description": "its very good for everything",
+            "price": "#900",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        },
+        {
+            "id": 4,
+            "name": "Yam flakes",
+            "description": "its very good for everything",
+            "price": "#1400",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+        }
+    ]
+}

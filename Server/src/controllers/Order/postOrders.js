@@ -7,6 +7,7 @@ class PlaceOrder {
             data.push({
                 'id': data.length + 1,
                 "customerName": req.body.customerName,
+                "number": req.body.number,
                 'name': req.body.name,
                 'description': req.body.description,
                 'price': req.body.price,

@@ -1,9 +1,9 @@
 import express from 'express';
-import { PlaceOrder } from '../controllers/Order';
+import { PlaceOrder, AllOrders } from '../controllers/Order';
 
 const orderRouter = express.Router();
 
-// orderRouter.get('/', AllMeals.all);
+orderRouter.get('/', AllOrders.getOrder);
 orderRouter.post('/', PlaceOrder.order);
 // orderRouter.put('/:id', UpdateMeal.update);
 

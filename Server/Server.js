@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import api from './src/routes/api';
+import { mealRouter } from './src/routes/';
 
 // Instance of the express app
 const app = express();
@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 // Parsing body data
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api/v1', api);
+app.use('/api/v1/meals', mealRouter);
 
 app.get('/',  (req, res) => {
     res.status(200).send({

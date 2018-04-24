@@ -2,6 +2,7 @@
     "Orders": [
         {
             "id": 1,
+            "customerName": "oluwa nifemi",
             "name": "Chicken",
             "number": "3",
             "price": "#400",
@@ -9,6 +10,7 @@
         },
         {
             "id": 2,
+            "customerName": "oluwa nifemi",
             "name": "Bread",
             "number": "4",
             "price": "#4000",
@@ -16,6 +18,7 @@
         },
         {
             "id": 4,
+            "customerName": "oluwa nifemi",
             "name": "Rice",
             "number": "3",
             "price": "#2000",
@@ -23,6 +26,7 @@
         },
         {
             "id": 5,
+            "customerName": "oluwa nifemi",
             "name": "Sauce",
             "number": "1",
             "price": "#900",

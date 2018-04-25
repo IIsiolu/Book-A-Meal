@@ -162,24 +162,25 @@ describe('Book-A-Meal', () => {
       });
     });
 
-    // describe('Should edit a CENTER', () => {
-    //      it('responds with status 200', (done) => {
-    //        chai.request(server)
-    //          .put('/api/centers/1')
-    //          .send({
-    //            "name":  "Suru Center", 
-    //            "city":  "Lagos Main Land",
-    //            "address": "No 22, Akerele Street Lagos",
-    //            "facility": "['radio', 'open roof', '2, 000 chairs', ]"
-    //          })
-    //          .end((err, res) => {
-    //            expect(res).to.have.status(200);
-    //            expect(res.body).to.be.an('object');
-    //            expect(res).to.be.json;
-    //            done();
-    //          });
-    //      });
-    // });
+    describe('Should edit an ORDER', () => {
+         it('responds with status 200', (done) => {
+           chai.request(server)
+             .put('/api/v1/orders/1')
+             .send({
+              "customerName": "oluwa timothy",
+              "name": "Sauce",
+              "number": "3",
+              "price": "#7000",
+              "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+             })
+             .end((err, res) => {
+               expect(res).to.have.status(200);
+               expect(res.body).to.be.an('object');
+               expect(res).to.be.json;
+               done();
+             });
+         });
+    });
 
 
 //     describe('Should fail to edit a CENTER not in the DB', () => {

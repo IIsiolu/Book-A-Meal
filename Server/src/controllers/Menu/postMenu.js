@@ -11,7 +11,10 @@ class PostMenu {
             'price': req.body.price,
             'image': req.body.image
         });
-        res.status(200).send(data);
+        res.status(200).send({
+            message: 'success',
+            data: data
+        });
     }
 }
 

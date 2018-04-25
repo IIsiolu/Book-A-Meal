@@ -214,6 +214,28 @@ describe('Book-A-Meal', () => {
       });
     });
 
+    describe('Should post an ORDER', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .post('/api/v1/orders')
+          .set('Content-Type', 'application/json')
+          .send({
+            "id": 2,
+            "customerName": "oluwa nifemi",
+            "name": "Bread",
+            "number": "4",
+            "price": "#4000",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('object');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
 
      describe('Should catch any invalid routes ', () => {
       it('responds with status 404', (done) => {

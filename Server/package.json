@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel-watch ./Server.js",
     "test": "mocha --exit --compilers  js:babel-core/register",
-    "lint": "eslint --fix src"
+    "lint": "eslint --fix src",
+    "coveralls": "jscoverage lib && YOURPACKAGE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls"
   },
   "repository": {
     "type": "git",

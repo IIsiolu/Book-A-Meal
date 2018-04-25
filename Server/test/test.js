@@ -99,18 +99,18 @@ describe('Book-A-Meal', () => {
 
 
 
-    // describe('Should delete an EVENT', () => {
-    //   it('responds with status 200', (done) => {
-    //     chai.request(server)
-    //       .delete('/api/events/2')
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(200);
-    //         expect(res).to.be.json;
-    //         expect(res.body).to.be.an('object');
-    //         done();
-    //       });
-    //   });
-    // });
+    describe('Should delete a MEAL', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .delete('/api/v1/meals/2')
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res).to.be.json;
+            expect(res.body).to.be.an('object');
+            done();
+          });
+      });
+    });
 
 
     // describe('Should fail for delete EVENT not in DB', () => {

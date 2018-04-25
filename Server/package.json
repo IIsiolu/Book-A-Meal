@@ -40,5 +40,8 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-compat": "^2.2.0",
     "mocha": "^5.1.1"
+  },
+  "engines": {
+    "node": "8.9.4"
   }
 }

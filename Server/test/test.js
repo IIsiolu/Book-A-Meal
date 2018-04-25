@@ -201,6 +201,19 @@ describe('Book-A-Meal', () => {
       });
     });
 
+    describe('Should get ORDERS', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .get('/api/v1/orders')
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
 
      describe('Should catch any invalid routes ', () => {
       it('responds with status 404', (done) => {

@@ -182,6 +182,25 @@ describe('Book-A-Meal', () => {
          });
     });
 
+    describe('Should fail to modify ORDER not in DB', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+             .put('/api/v1/orders/11')
+             .send({
+              "customerName": "oluwa timothy",
+              "name": "Sauce",
+              "number": "3",
+              "price": "#7000",
+              "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+             })
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
 
 //     describe('Should fail to edit a CENTER not in the DB', () => {
 //          it('responds with status 404', (done) => {

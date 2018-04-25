@@ -129,25 +129,25 @@ describe('Book-A-Meal', () => {
 
 
 
-    // describe('Should add a new CENTER', () => {
-    //   it('responds with status 200', (done) => {
-    //     chai.request(server)
-    //       .post('/api/centers')
-    //       .set('Content-Type', 'application/json')
-    //       .send({
-    //         "name":  "Cms Center", 
-    //         "city":  "Lagos Island",
-    //         "address": "77, Lagos Island Lagos",
-    //         "facility": "['radio', 'open roof', '2, 000 chairs', 'free wifi']"
-    //       })
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(200);
-    //         expect(res.body).to.be.an('object');
-    //         expect(res).to.be.json;
-    //         done();
-    //       });
-    //   });
-    // });
+    describe('Should add a new Menu', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .post('/api/v1/menu')
+          .set('Content-Type', 'application/json')
+          .send({
+            "name": "Wheat",
+            "description": "its very good for everything",
+            "price": "#500",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('object');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
    
 

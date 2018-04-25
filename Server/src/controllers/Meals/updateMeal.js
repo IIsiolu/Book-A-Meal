@@ -5,8 +5,10 @@ const data = db.Meals;
 class UpdateMeal {
     static update(req, res){
         const { id } = req.params;
+        let seen = false;
         data.forEach( meal => {
             if(id == meal.id){
+                seen = true
                 meal.name = req.body.name;
                 meal.description = req.body.description;
                 meal.image = req.body.image;
@@ -20,9 +22,12 @@ class UpdateMeal {
             }
            
         })
+    if(!seen){
         res.status(404).send({
             message: 'meal does not exist'
         })
+    }
+       
     }
 }
 export default UpdateMeal;

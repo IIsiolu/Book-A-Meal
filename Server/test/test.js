@@ -99,124 +99,155 @@ describe('Book-A-Meal', () => {
 
 
 
-    // describe('Should delete an EVENT', () => {
-    //   it('responds with status 200', (done) => {
-    //     chai.request(server)
-    //       .delete('/api/events/2')
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(200);
-    //         expect(res).to.be.json;
-    //         expect(res.body).to.be.an('object');
-    //         done();
-    //       });
-    //   });
-    // });
+    describe('Should delete a MEAL', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .delete('/api/v1/meals/2')
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res).to.be.json;
+            expect(res.body).to.be.an('object');
+            done();
+          });
+      });
+    });
 
 
-    // describe('Should fail for delete EVENT not in DB', () => {
-    //   it('responds with status 404', (done) => {
-    //     chai.request(server)
-    //       .delete('/api/events/20')
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(404);
-    //         expect(res).to.be.json;
-    //         done();
-    //       });
-    //   });
-    // });
-
-
-
-
-
-    // describe('Should add a new CENTER', () => {
-    //   it('responds with status 200', (done) => {
-    //     chai.request(server)
-    //       .post('/api/centers')
-    //       .set('Content-Type', 'application/json')
-    //       .send({
-    //         "name":  "Cms Center", 
-    //         "city":  "Lagos Island",
-    //         "address": "77, Lagos Island Lagos",
-    //         "facility": "['radio', 'open roof', '2, 000 chairs', 'free wifi']"
-    //       })
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(200);
-    //         expect(res.body).to.be.an('object');
-    //         expect(res).to.be.json;
-    //         done();
-    //       });
-    //   });
-    // });
-
-   
-
-
-//     describe('Should get Single CENTER from id', () => {
-//       it('responds with status 200', (done) => {
-//         chai.request(server)
-//           .get('/api/centers/1')
-//           .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             expect(res.body).to.be.an('object');
-//             expect(res).to.be.json;
-//             done();
-//           });
-//       });
-//     });
+    describe('Should fail for delete MEAL not in DB', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .delete('/api/v1/meals/20')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
 
 
-//     describe('Should edit a CENTER', () => {
-//          it('responds with status 200', (done) => {
-//            chai.request(server)
-//              .put('/api/centers/1')
-//              .send({
-//                "name":  "Suru Center", 
-//                "city":  "Lagos Main Land",
-//                "address": "No 22, Akerele Street Lagos",
-//                "facility": "['radio', 'open roof', '2, 000 chairs', ]"
-//              })
-//              .end((err, res) => {
-//                expect(res).to.have.status(200);
-//                expect(res.body).to.be.an('object');
-//                expect(res).to.be.json;
-//                done();
-//              });
-//          });
-//     });
 
 
-//     describe('Should fail to edit a CENTER not in the DB', () => {
-//          it('responds with status 404', (done) => {
-//            chai.request(server)
-//              .put('/api/centers/2221')
-//              .send({
-//                "name":  "Suru Center", 
-//                "city":  "Lagos Main Land",
-//                "address": "No 22, Akerele Street Lagos",
-//                "facility": "['radio', 'open roof', '2, 000 chairs', ]"
-//              })
-//              .end((err, res) => {
-//                expect(res).to.have.status(404);
-//                expect(res).to.be.json;
-//                expect(res.body).to.be.an('object');
-//                done();
-//              });
-//          });
-//     });
+    describe('Should add a new Menu', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .post('/api/v1/menu')
+          .set('Content-Type', 'application/json')
+          .send({
+            "name": "Wheat",
+            "description": "its very good for everything",
+            "price": "#500",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('object');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
-//      describe('Should catch any invalid routes ', () => {
-//       it('responds with status 404', (done) => {
-//         chai.request(server)
-//           .get('/kkfkf/ff')
-//           .set('Content-Type', 'application/json')
-//           .end((err, res) => {
-//             expect(res).to.have.status(404);
-//             expect(res).to.be.json;
-//             done();
-//           });
-//       });
-//     });
+    describe('Should get all Menu for a day', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .get('/api/v1/menu')
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
+    describe('Should edit an ORDER', () => {
+         it('responds with status 200', (done) => {
+           chai.request(server)
+             .put('/api/v1/orders/1')
+             .send({
+              "customerName": "oluwa timothy",
+              "name": "Sauce",
+              "number": "3",
+              "price": "#7000",
+              "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+             })
+             .end((err, res) => {
+               expect(res).to.have.status(200);
+               expect(res.body).to.be.an('object');
+               expect(res).to.be.json;
+               done();
+             });
+         });
+    });
+
+    describe('Should fail to modify ORDER not in DB', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+             .put('/api/v1/orders/11')
+             .send({
+              "customerName": "oluwa timothy",
+              "name": "Sauce",
+              "number": "3",
+              "price": "#7000",
+              "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+             })
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
+    describe('Should get ORDERS', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .get('/api/v1/orders')
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
+    describe('Should post an ORDER', () => {
+      it('responds with status 200', (done) => {
+        chai.request(server)
+          .post('/api/v1/orders')
+          .set('Content-Type', 'application/json')
+          .send({
+            "id": 2,
+            "customerName": "oluwa nifemi",
+            "name": "Bread",
+            "number": "4",
+            "price": "#4000",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('object');
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
+
+     describe('Should catch any invalid routes ', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .get('/kkfkf/ff')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
  });

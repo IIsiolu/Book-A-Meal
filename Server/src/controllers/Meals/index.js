@@ -1,7 +1,7 @@
 import AllMeals from './getMeals';
 import AddMeal from './addMeal';
 import UpdateMeal from './updateMeal';
-import RemoveMeal from './RemoveMeal';
+import RemoveMeal from './removeMeal';
 
 export {
     AllMeals,

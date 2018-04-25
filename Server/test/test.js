@@ -113,17 +113,17 @@ describe('Book-A-Meal', () => {
     });
 
 
-    // describe('Should fail for delete EVENT not in DB', () => {
-    //   it('responds with status 404', (done) => {
-    //     chai.request(server)
-    //       .delete('/api/events/20')
-    //       .end((err, res) => {
-    //         expect(res).to.have.status(404);
-    //         expect(res).to.be.json;
-    //         done();
-    //       });
-    //   });
-    // });
+    describe('Should fail for delete MEAL not in DB', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .delete('/api/v1/meals/20')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
 
 

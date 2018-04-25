@@ -1,16 +1,14 @@
  #### What does this PR do?
-
+make sure all test passes for all routes
 
 #### Description of Task to be completed?
-should post customers order
+test cases for all routes
 #### How should this be manually tested?
 
-should return an array of meals and status code 200
+should return the right status code
 #### Any background context you want to provide?
-user should be able to post an order
 
 #### What are the relevant pivotal tracker stories? (If applicable)
-user should be able to post an order
 
 
 #### Screenshots (If applicable)

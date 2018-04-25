@@ -202,36 +202,17 @@ describe('Book-A-Meal', () => {
     });
 
 
-//     describe('Should fail to edit a CENTER not in the DB', () => {
-//          it('responds with status 404', (done) => {
-//            chai.request(server)
-//              .put('/api/centers/2221')
-//              .send({
-//                "name":  "Suru Center", 
-//                "city":  "Lagos Main Land",
-//                "address": "No 22, Akerele Street Lagos",
-//                "facility": "['radio', 'open roof', '2, 000 chairs', ]"
-//              })
-//              .end((err, res) => {
-//                expect(res).to.have.status(404);
-//                expect(res).to.be.json;
-//                expect(res.body).to.be.an('object');
-//                done();
-//              });
-//          });
-//     });
-
-//      describe('Should catch any invalid routes ', () => {
-//       it('responds with status 404', (done) => {
-//         chai.request(server)
-//           .get('/kkfkf/ff')
-//           .set('Content-Type', 'application/json')
-//           .end((err, res) => {
-//             expect(res).to.have.status(404);
-//             expect(res).to.be.json;
-//             done();
-//           });
-//       });
-//     });
+     describe('Should catch any invalid routes ', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .get('/kkfkf/ff')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
 
  });

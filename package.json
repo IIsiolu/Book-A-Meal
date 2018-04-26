@@ -1,0 +1,51 @@
+{
+  "name": "book-a-meal",
+  "version": "1.0.0",
+  "description": "book a meal",
+  "main": "server.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-watch": "^2.0.7",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "coveralls": "^3.0.0",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-compat": "^2.2.0",
+    "express": "^4.16.3",
+    "express-validate": "^0.0.8",
+    "istanbul": "^0.4.5",
+    "istanbul-coveralls": "^1.0.3",
+    "mocha-lcov-reporter": "^1.3.0",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.3",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.6"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phemonick/Book-A-Meal.git"
+  },
+  "keywords": [
+    "JAVASCRIPT"
+  ],
+  "author": "phemy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phemonick/Book-A-Meal/issues"
+  },
+  "homepage": "https://github.com/phemonick/Book-A-Meal#readme"
+}

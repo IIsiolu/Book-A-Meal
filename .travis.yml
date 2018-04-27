@@ -4,7 +4,7 @@ node_js:
 before_script: 
   - npm install -g codecov
 script: 
-      - cd server && npm install && npm test
+      - npm install && npm test
 after_success:
   - npm run coveralls
   

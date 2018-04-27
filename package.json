@@ -6,8 +6,10 @@
   "scripts": {
     "start": "babel-watch ./Server/Server.js",
     "test": "mocha --exit --compilers  js:babel-core/register Server/test",
-    "coverage": "istanbul cover _mocha Server/test/",
-    "coveralls": "jscoverage lib && YOURPACKAGE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "nyc:run": "nyc --reporter=html --reporter=text",
+    "coverages": "npm run coverage",
+    "start:test": "nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-core/register Server/test/test.js"
   },
   "repository": {
     "type": "git",

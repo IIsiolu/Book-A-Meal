@@ -9,7 +9,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "nyc:run": "nyc --reporter=html --reporter=text",
     "coverages": "npm run coverage",
-    "start:test": "nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-core/register Server/test/test.js"
+    "start:test": "nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-core/register server/test/test.js"
   },
   "repository": {
     "type": "git",

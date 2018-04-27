@@ -1,9 +1,10 @@
-language: node
 language: node_js
 node_js: 
   - "stable"
+before_script: 
+  - npm install -g codecov
 script: 
-      - cd Server && npm install && npm test
+      - cd server && npm install && npm test
 after_success:
   - npm run coverages
-  - codeclimate-test-reporter < ./coverage/icov.info
+  - codeclimate-test-reporter < ./coverage/lcov.info

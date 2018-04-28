@@ -15,10 +15,16 @@ class Validate {
       'Password Cannot be Blank cant be less than six Charaters!'
     )
       .notEmpty().isLength({ min: 6 });
-    req.sanitizeBody('fullname');
+    req.sanitizeBody('firstname');
     req.checkBody(
-      'fullname',
-      'input a name'
+      'firstname',
+      'input a firstname'
+    )
+      .notEmpty();
+    req.sanitizeBody('lastname');
+    req.checkBody(
+      'lastname',
+      'input a lastname'
     )
       .notEmpty();
     const errors = req.validationErrors();

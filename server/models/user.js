@@ -1,6 +1,12 @@
+import bcrypt from 'bcrypt';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    fullname: {
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -18,8 +24,15 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'user',
     }
-  }, {});
-  User.associate = function(models) {
+  }, {
+
+    hooks: {
+      afterValidate: (user, options) => {
+        user.password = bcrypt.hashSync(user.password, 10);
+      }
+    }
+  });
+  User.associate = function (models) {
     // associations can be defined here
   };
   return User;

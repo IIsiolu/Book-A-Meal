@@ -1,18 +1,21 @@
-// import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import 'babel-polyfill';
 import { User } from '../models';
+
+const secret = process.env.SECRET;
 
 class UserController {
 
   static signup(req, res) {
     const {
-      password, fullname, email, role
+      password, firstname, lastname, email
     } = req.body;
     User
       .findOrCreate({
         where: { email },
         defaults: {
-          password, role, fullname
+          password, firstname, lastname, role: 'user'
         }
       })
       .spread((user, created) => {
@@ -32,6 +35,68 @@ class UserController {
           message: err
         });
       });
+  }
+
+  static async signin(req, res) {
+    try {
+      const check = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      });
+      if (check) {
+        bcrypt.compare(
+          req.body.password, check.password, (err, response) => {
+            if (response) {
+              const token = jwt.sign({
+                id: check.id,
+                firstname: check.firstname
+              }, secret, { expiresIn: '500h' });
+              return res.status(200).json({
+                result: 'success',
+                message: `welcome ${check.firstname}`,
+                token
+              });
+            }
+            return res.status(409).json({
+              result: 'failed',
+              message: 'Email or password is incorrect'
+            });
+          }
+        );
+      } else {
+        res.status(404).json({
+          result: 'failed',
+          message: 'Email or password incorrect'
+        });
+      }
+    }
+    catch (err) {
+      console.log({
+        err
+      });
+    }
+  }
+
+  static async getUsers(req, res) {
+    const allUsers = await User.all();
+    try {
+      if (allUsers) {
+        return res.status(201).json({
+          result: 'success',
+          allUsers
+        });
+      }
+      return res.status(404).send({
+        result: 'failed',
+      });
+    } catch(err) {
+      return res.json({
+        result: 'failed',
+        err
+      });
+    }
+
   }
 }
 export default UserController;

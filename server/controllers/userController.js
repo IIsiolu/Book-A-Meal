@@ -1,7 +1,9 @@
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import 'babel-polyfill';
 import { User } from '../models';
+
+const secret = process.env.SECRET;
 
 class UserController {
 
@@ -46,9 +48,14 @@ class UserController {
         bcrypt.compare(
           req.body.password, check.password, (err, response) => {
             if (response) {
+              const token = jwt.sign({
+                id: check.id,
+                firstname: check.firstname
+              }, secret, { expiresIn: '500h' });
               return res.status(200).json({
                 result: 'success',
-                message: `welcome ${check.firstname}`
+                message: `welcome ${check.firstname}`,
+                token
               });
             }
             return res.status(409).json({
@@ -69,6 +76,27 @@ class UserController {
         err
       });
     }
+  }
+
+  static async getUsers(req, res) {
+    const allUsers = await User.all();
+    try {
+      if (allUsers) {
+        return res.status(201).json({
+          result: 'success',
+          allUsers
+        });
+      }
+      return res.status(404).send({
+        result: 'failed',
+      });
+    } catch(err) {
+      return res.json({
+        result: 'failed',
+        err
+      });
+    }
+
   }
 }
 export default UserController;

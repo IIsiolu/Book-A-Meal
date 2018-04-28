@@ -21,16 +21,17 @@ class Validate {
       'input a name'
     )
       .notEmpty();
-      const errors = req.validationErrors();
-      if (errors) {
-        const errorMessage = errors.map(err => err.msg);
-        res.status(400).json({
-          message: 'Signup Errors',
-          errorMessage
-        });
-        return; // stop the req from proceeding
-      }
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorMessage = errors.map(err => err.msg);
+      res.status(400).json({
+        message: 'Signup Errors',
+        errorMessage
+      });
+      return; // stop the req from proceeding
+    }
     //   no errors
-      next();
+    next();
   }
 }
+export default Validate;

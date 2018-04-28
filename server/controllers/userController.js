@@ -6,13 +6,13 @@ class UserController {
 
   static signup(req, res) {
     const {
-      password, fullname, email, role
+      password, firstname, lastname, email
     } = req.body;
     User
       .findOrCreate({
         where: { email },
         defaults: {
-          password, role, fullname
+          password, firstname, lastname, role: 'user'
         }
       })
       .spread((user, created) => {

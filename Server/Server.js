@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
 import { userRouter } from './routes';
 // import { mealRouter, menuRouter, orderRouter } from './src/routes/';
@@ -14,6 +15,7 @@ app.use(morgan('dev'));
 // Parsing body data
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use('/api/v1', userRouter);
 // app.use('/api/v1/menu', menuRouter);
 // app.use('/api/v1/orders', orderRouter)

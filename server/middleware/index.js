@@ -1,5 +1,6 @@
 import Auth from './auth';
+import Validate from './validate';
 
 export {
-    Auth
-}
+  Auth, Validate
+};

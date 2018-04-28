@@ -24,6 +24,7 @@
     "eslint-plugin-compat": "^2.2.0",
     "express": "^4.16.3",
     "express-validate": "^0.0.8",
+    "express-validator": "^5.1.2",
     "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
     "jsonwebtoken": "^8.2.1",

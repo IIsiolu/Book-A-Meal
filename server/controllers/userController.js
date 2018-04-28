@@ -1,5 +1,6 @@
 // import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
+import 'babel-polyfill';
 import { User } from '../models';
 
 class UserController {
@@ -32,6 +33,42 @@ class UserController {
           message: err
         });
       });
+  }
+
+  static async signin(req, res) {
+    try {
+      const check = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      });
+      if (check) {
+        bcrypt.compare(
+          req.body.password, check.password, (err, response) => {
+            if (response) {
+              return res.status(200).json({
+                result: 'success',
+                message: `welcome ${check.firstname}`
+              });
+            }
+            return res.status(409).json({
+              result: 'failed',
+              message: 'Email or password is incorrect'
+            });
+          }
+        );
+      } else {
+        res.status(404).json({
+          result: 'failed',
+          message: 'Email or password incorrect'
+        });
+      }
+    }
+    catch (err) {
+      console.log({
+        err
+      });
+    }
   }
 }
 export default UserController;

@@ -1,18 +1,16 @@
  #### What does this PR do?
-Setup configuration for postgresql and sequelize
-
+user should be able to create account
 #### Description of Task to be completed?
 
-complete setup of postgresql and sequelize
+create user route
 
 #### How should this be manually tested?
 
-checking postgresql db connection
+checking for user being successfully created
 
 #### Any background context you want to provide?
 
 #### What are the relevant pivotal tracker stories? (If applicable)
 
-user should set up database
 
 #### Screenshots (If applicable)

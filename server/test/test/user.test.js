@@ -92,5 +92,18 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
+  it('trown error if email already exisit in database', (done) => {
+    request(server)
+      .post('/api/v1/users/signup')
+      .set('Content-Type', 'application/json')
+      .send(testData.singupUser1)
+      .expect(409)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('User already exist');
+        if (err) return done(err);
+        done();
+      });
+  });
+
 
 });

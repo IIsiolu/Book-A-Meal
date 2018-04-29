@@ -20,7 +20,7 @@ class UserController {
       })
       .spread((user, created) => {
         if (!created) {
-          return res.status(301).send({
+          return res.status(409).send({
             result: 'Failed',
             message: 'User already exist'
           });

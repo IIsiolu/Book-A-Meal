@@ -52,4 +52,26 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
+  it('return error if email field is empty on signin', (done) => {
+    request(server).post('/api/v1/users/signin')
+      .send(testData.loginerror1)
+      .end((error, res) => {
+        expect(400);
+        expect(res.body.errorMessage).to.include('invalid email address');
+        if (error) done(error);
+        done();
+      });
+  });
+
+  it('return error if password field is empty on signin', (done) => {
+    request(server).post('/api/v1/users/signin')
+      .send(testData.loginerror2)
+      .end((error, res) => {
+        expect(400);
+        expect(res.body.errorMessage).to.include('Password Cannot be Blank');
+        if (error) done(error);
+        done();
+      });
+  });
+
 });

@@ -90,7 +90,7 @@ class UserController {
       return res.status(404).send({
         result: 'failed',
       });
-    } catch(err) {
+    } catch (err) {
       return res.json({
         result: 'failed',
         err

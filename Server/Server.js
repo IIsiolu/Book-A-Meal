@@ -20,7 +20,7 @@ app.use('/api/v1', userRouter);
 // app.use('/api/v1/menu', menuRouter);
 // app.use('/api/v1/orders', orderRouter)
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.status(200).send({
     message: 'Welcome to Book a Meal',
   });

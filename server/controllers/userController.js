@@ -25,7 +25,7 @@ class UserController {
             message: 'User already exist'
           });
         }
-        return res.status(200).send({
+        return res.status(201).send({
           result: 'success',
           message: user
         });

@@ -74,4 +74,23 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
+  it('creates a new user', (done) => {
+    request(server)
+      .post('/api/v1/users/signup')
+      .set('Content-Type', 'application/json')
+      .send(testData.singupUser1)
+      .expect(201)
+      .end((err, res) => {
+        testUser.user = res.body.message;
+        expect(testUser.user).to.have.property('firstname');
+        expect(testUser.user).to.have.property('lastname');
+        expect(testUser.user).to.have.property('email');
+        expect(res.body.message.email).to.equal(testData.singupUser1.email);
+        expect(res.body.message.firstname).to.equal(testData.singupUser1.firstname);
+        if (err) return done(err);
+        done();
+      });
+  });
+
+
 });

@@ -29,4 +29,16 @@ describe('Book-a-Meal User Test', () => {
         done();
       });
   });
+
+  it('return error if password field is empty on signup', (done) => {
+    request(server).post('/api/v1/users/signup')
+      .send(testData.wronginfo1)
+      .end((error, res) => {
+        expect(400);
+        expect(res.body.errorMessage).to.include('Password Cannot be Blank cant be less than six Charaters!');
+        if (error) done(error);
+        done();
+      });
+  });
+
 });

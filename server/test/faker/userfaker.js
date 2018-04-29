@@ -13,7 +13,6 @@ const userfake = {
     lastname: 'lastnames',
     email: 'testuser@example.com',
     password: '1234567',
-    confirmPassword: '1234567'
   },
   loginUser: {
     email: 'johndoe@example.com',
@@ -24,14 +23,18 @@ const userfake = {
     lastname: 'lastnames',
     email: '',
     password: '1234567',
-    confirmPassword: '1234567'
   },
   wronginfo1: {
     firstname: 'johndo',
     lastname: 'lastnames',
     email: 'johndoe@example.com',
     password: '',
-    confirmPassword: '1234567'
+  },
+  wronginfos: {
+    firstname: 'johndo',
+    lastname: 'lastnames',
+    email: 'johndoe@example.com',
+    password: '12345',
   },
   loginUser1: {
     email: 'testuser@example.com',
@@ -53,10 +56,6 @@ const userfake = {
     email: 'kaka@example.com',
     password: '1234567',
   },
-  passwordReset: {
-    password: '1234567',
-    confirmPassword: '1234567',
-  },
   missingPass: {
     email: faker.internet.email(),
   },
@@ -67,17 +66,6 @@ const userfake = {
   wrongPassWord: {
     email: faker.internet.email(),
     password: '12345999',
-  },
-  adminsignup: {
-    firstname: 'test',
-    lastname: 'lastnames',
-    email: process.env.ADMINEMAIL,
-    password: process.env.ADMINTESTPASSWORD,
-    confirmPassword: process.env.ADMINTESTPASSWORD
-  },
-  adminLogin: {
-    email: process.env.ADMINEMAIL,
-    password: process.env.ADMINTESTPASSWORD,
   }
 };
 

@@ -54,7 +54,7 @@ class UserController {
               }, secret, { expiresIn: '500h' });
               return res.status(200).json({
                 result: 'success',
-                message: `welcome ${check.firstname}`,
+                message: `Welcome ${check.firstname}`,
                 token
               });
             }

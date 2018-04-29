@@ -1,5 +1,5 @@
  #### What does this PR do?
-user should be able to create account
+user should be authenticated when signed in
 #### Description of Task to be completed?
 
 create user route

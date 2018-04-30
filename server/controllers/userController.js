@@ -20,12 +20,12 @@ class UserController {
       })
       .spread((user, created) => {
         if (!created) {
-          return res.status(301).send({
+          return res.status(409).send({
             result: 'Failed',
             message: 'User already exist'
           });
         }
-        return res.status(200).send({
+        return res.status(201).send({
           result: 'success',
           message: user
         });
@@ -54,7 +54,7 @@ class UserController {
               }, secret, { expiresIn: '500h' });
               return res.status(200).json({
                 result: 'success',
-                message: `welcome ${check.firstname}`,
+                message: `Welcome ${check.firstname}`,
                 token
               });
             }
@@ -90,7 +90,7 @@ class UserController {
       return res.status(404).send({
         result: 'failed',
       });
-    } catch(err) {
+    } catch (err) {
       return res.json({
         result: 'failed',
         err

@@ -8,13 +8,12 @@ class ModifyOrder {
         let seen = false;
         data.forEach( order => {
             if(orderId == order.id){
-                seen=true;
-                order.name = req.body.name;
-                order.number = req.body.number;
-                order.customerName = req.body.customerName;
-                order.description = req.body.description;
-                order.image = req.body.image;
-                order.price = req.body.price;
+                seen = true
+                // console.log(Object.keys(myreq))
+                let myreq = req.body
+                Object.keys(myreq).forEach( val => {
+                    order[val]=req.body[val]
+                })
                 return(
                     res.status(200).send({
                         message: 'success',

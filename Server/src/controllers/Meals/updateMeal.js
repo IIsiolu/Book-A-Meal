@@ -8,11 +8,14 @@ class UpdateMeal {
         let seen = false;
         data.forEach( meal => {
             if(id == meal.id){
+                
+                let myreq = req.body
+                console.log(req.body.name)
                 seen = true
-                meal.name = req.body.name;
-                meal.description = req.body.description;
-                meal.image = req.body.image;
-                meal.price = req.body.price;
+                // console.log(Object.keys(myreq))
+                Object.keys(myreq).forEach( val => {
+                    meal[val]=req.body[val]
+                })
                 return(
                     res.status(200).json({
                         message: 'success',

@@ -32,7 +32,10 @@ export default (sequelize, DataTypes) => {
       }
     }
   });
-  User.associate = function (models) {
+  User.associate = (models) => {
+    User.hasMany(models.Order, {
+      foreignKey: 'userId'
+    });
     // associations can be defined here
   };
   return User;

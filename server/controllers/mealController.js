@@ -67,8 +67,30 @@ class MealController {
         result: 'failed',
         message: ' No meal with that ID'
       }));
-
-
+  }
+  static deleteMeal(req, res) {
+    Meal.findOne({
+      where: {
+        id: req.params.mealId,
+      }
+    })
+      .then((meal) => {
+        if (meal) {
+          meal.destroy();
+          res.status(200).json({
+            result: 'success',
+            message: 'meal successfully deleted!'
+          });
+        } else {
+          res.status(404).json({
+            result: 'failed',
+            message: 'There is no meal with that id!!'
+          });
+        }
+      })
+      .catch(err => res.status(400).json({
+        message: 'Invalid Parameter In Url'
+      }));
   }
 }
 export default MealController;

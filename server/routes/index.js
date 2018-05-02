@@ -1,3 +1,4 @@
 import userRouter from './userApi';
+import mealRouter from './mealApi';
 
-export { userRouter };
+export { userRouter, mealRouter };

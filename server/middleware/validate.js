@@ -66,5 +66,24 @@ class Validate {
     }
     next();
   }
+  static validatemealInput(req, res, next) {
+    req.checkBody('name', 'input meal name').notEmpty();
+    req.sanitizeBody('description');
+    req.checkBody('description', 'input meal description').notEmpty();
+    req.checkBody('price', 'input meal price').notEmpty();
+    req.checkBody('image', 'input meal image').notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorMessage = errors.map(err => err.msg);
+      res.status(400).json({
+        message: 'Meal input Errors',
+        errorMessage
+      });
+      return;
+      // stop the req from proceeding
+    }
+    next();
+  }
 }
 export default Validate;

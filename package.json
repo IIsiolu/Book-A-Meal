@@ -32,6 +32,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-validate": "0.0.8",
+    "express-validator": "^5.1.2",
     "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
     "morgan": "^1.9.0",

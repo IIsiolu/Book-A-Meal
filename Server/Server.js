@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 // Parsing body data
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use('/api/v1/meals', mealRouter);
 app.use('/api/v1/menu', menuRouter);
 app.use('/api/v1/orders', orderRouter)

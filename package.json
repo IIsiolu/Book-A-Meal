@@ -8,7 +8,6 @@
     "test": "npm run migrations && npm run start:test",
     "migrations": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "start:test": "mocha --timeout 50000 --exit --require babel-core/register server/test/**/*.test.js"
-
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

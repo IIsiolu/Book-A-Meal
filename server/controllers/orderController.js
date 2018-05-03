@@ -25,5 +25,29 @@ class OrderController {
       );
 
   }
+
+  static modifyOrder(req, res) {
+    Order
+      .findOne({
+        where: {
+          id: req.params.orderId
+        }
+      }).then((order) => {
+        order.update({
+          mealName: req.body.mealName,
+          quantity: req.body.quantity,
+          price: req.body.price,
+          userId: req.body.userId
+        });
+        res.status(200).json({
+          result: 'updated',
+          message: order
+        });
+      })
+      .catch(err => res.status(404).json({
+        result: 'failed',
+        message: ' No order with that ID'
+      }));
+  }
 }
 export default OrderController;

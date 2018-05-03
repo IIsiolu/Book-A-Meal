@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
 import { mealRouter, menuRouter, orderRouter } from './src/routes/';
 

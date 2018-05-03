@@ -11,7 +11,7 @@ class AddMeal {
                 'price': req.body.price,
                 'image': req.body.image
             });
-            res.status(200).send(data);
+            res.status(201).send(data);
     }
 }
 export default AddMeal;

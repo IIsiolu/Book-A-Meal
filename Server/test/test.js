@@ -38,7 +38,7 @@ describe('Book-A-Meal', () => {
       });
 
    describe('Should create a Meal', () => {
-      it('responds with status 200', (done) => {
+      it('responds with status 201', (done) => {
         chai.request(server)
           .post('/api/v1/meals')
           .set('Content-Type', 'application/json')
@@ -50,7 +50,7 @@ describe('Book-A-Meal', () => {
             'image': 'http://faceboo.com/home.png'
           })
           .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(201);
             expect(res).to.be.json;
             done();
           });
@@ -130,7 +130,7 @@ describe('Book-A-Meal', () => {
 
 
     describe('Should add a new Menu', () => {
-      it('responds with status 200', (done) => {
+      it('responds with status 201', (done) => {
         chai.request(server)
           .post('/api/v1/menu')
           .set('Content-Type', 'application/json')
@@ -141,7 +141,7 @@ describe('Book-A-Meal', () => {
             "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
           })
           .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(201);
             expect(res.body).to.be.an('object');
             expect(res).to.be.json;
             done();
@@ -215,20 +215,21 @@ describe('Book-A-Meal', () => {
     });
 
     describe('Should post an ORDER', () => {
-      it('responds with status 200', (done) => {
+      it('responds with status 201', (done) => {
         chai.request(server)
           .post('/api/v1/orders')
           .set('Content-Type', 'application/json')
           .send({
             "id": 2,
             "customerName": "oluwa nifemi",
+            "description": "very fantastic meal in nigerian market",
             "name": "Bread",
             "number": "4",
             "price": "#4000",
             "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
           })
           .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(201);
             expect(res.body).to.be.an('object');
             expect(res).to.be.json;
             done();
@@ -249,5 +250,61 @@ describe('Book-A-Meal', () => {
           });
       });
     });
+
+    describe('Should catch any invalid post routes ', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .post('/kkfkf/ff')
+          .send({
+            "id": 2,
+            "customerName": "oluwa nifemi",
+            "description": "very fantastic meal in nigerian market",
+            "name": "Bread",
+            "number": "4",
+            "price": "#4000",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
+    describe('Should catch any invalid delete routes ', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .put('/kkfkf/ff')
+          .send({
+            "id": 2,
+            "customerName": "oluwa nifemi",
+            "description": "very fantastic meal in nigerian market",
+            "name": "Bread",
+            "number": "4",
+            "price": "#4000",
+            "image": "https://www.google.com.ng/imgres?imgurl=https%3A"
+          })
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+    describe('Should catch any invalid delete routes', () => {
+      it('responds with status 404', (done) => {
+        chai.request(server)
+          .delete('/ysdd/hhh')
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res).to.be.json;
+            done();
+          });
+      });
+    });
+
 
  });

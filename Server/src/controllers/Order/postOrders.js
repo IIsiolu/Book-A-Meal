@@ -13,7 +13,7 @@ class PlaceOrder {
                 'price': req.body.price,
                 'image': req.body.image
             });
-            res.status(200).send({
+            res.status(201).send({
                 message: 'success',
                 data: data
             });

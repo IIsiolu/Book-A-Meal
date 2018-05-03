@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
-import { userRouter, mealRouter } from './routes';
+import { userRouter, mealRouter, menuRouter } from './routes';
 // import { mealRouter, menuRouter, orderRouter } from './src/routes/';
 
 // Instance of the express app
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use('/api/v1', userRouter);
 app.use('/api/v1', mealRouter);
-// app.use('/api/v1/menu', menuRouter);
+app.use('/api/v1/menu', menuRouter);
 // app.use('/api/v1/orders', orderRouter)
 
 app.get('/api/v1', (req, res) => {

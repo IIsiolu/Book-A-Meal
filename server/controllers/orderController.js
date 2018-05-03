@@ -49,5 +49,13 @@ class OrderController {
         message: ' No order with that ID'
       }));
   }
+
+  static allOrders(req, res) {
+    Order.all()
+      .then(orders => res.status(200).json({
+        result: 'success',
+        message: orders
+      })).catch(error => res.status(400).json(error));
+  }
 }
 export default OrderController;

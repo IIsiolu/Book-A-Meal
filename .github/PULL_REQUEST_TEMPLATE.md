@@ -1,9 +1,8 @@
  #### What does this PR do?
-user should be authenticated when signed in
+user should be able to add, delete, modify and get all meals
 #### Description of Task to be completed?
 
-create user route
-
+Meal CRUD operations
 #### How should this be manually tested?
 
 checking for user being successfully created

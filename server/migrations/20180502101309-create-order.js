@@ -27,13 +27,14 @@ module.exports = {
       references: {
         model: 'Meals',
         key: 'name'
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        model: 'Users',
-        key: 'id',
-        as: 'userId',
       }
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
     }
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('Orders')

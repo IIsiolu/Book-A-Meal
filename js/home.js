@@ -1,4 +1,4 @@
-const order= (input, sent) => {
+const orders= (input, sent) => {
 	console.log(input)
 	let dom = document.createElement('div');
 	dom.id = input;

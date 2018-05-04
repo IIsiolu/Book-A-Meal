@@ -1,5 +1,5 @@
 import express from 'express';
-import ValidateMeal from '../middleware/validateMeal';
+import ValidateMeal from '../middleware/validateMeal.js';
 import { PlaceOrder, AllOrders, ModifyOrder } from '../controllers/Order';
 
 const orderRouter = express.Router();

@@ -4,8 +4,9 @@ class OrderController {
 
   static createOrder(req, res) {
     const {
-      mealName, quantity, price, userId
+      mealName, quantity, price
     } = req.body;
+    const userId = req.user.id;
     Order
       .create({
         quantity,

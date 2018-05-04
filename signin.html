@@ -26,12 +26,12 @@
 				<p class="info-p">Use your email and password to login below</p>
 			</div>
 			<div class="inputs">
-				<form>  
+				<form action="./home.html" >  
 					<p class="form-p">Email</p>
-					<input required type="text" name="email" placeholder="Enter Email">
+					<input id="email" required type="text" name="email" placeholder="Enter Email">
 					<p class="form-p">Password</p>
-					<input required type="Password" name="password" placeholder="*******"><br />
-					<input type="submit" name="" value="Sign In" onclick="window.location.href='home.html'">
+					<input id="password" required type="Password" name="password" placeholder="*******"><br />
+					<input type="submit" name="" value="Sign In" >
 					<a href="#" class="forgotB"> forget password?</a>
 		</form>
 			</div>
@@ -40,4 +40,5 @@
 	</div>
 
 </body>
+<script type="text/javascript" src="./js/home.js"></script>
 </html>

@@ -13,3 +13,13 @@ const orders= (input, sent) => {
 	dom.appendChild(img)
 	document.getElementById('bookings-orders').appendChild(dom)
 }
+
+const signIn = () => {
+	let email = document.getElementById('email').value;
+	let password = document.getElementById('password').value;
+	if(email.length<3 && password.length<2){
+		alert('field must not be empty')
+	}else{
+		window.location.href='../home.html'
+	}
+}

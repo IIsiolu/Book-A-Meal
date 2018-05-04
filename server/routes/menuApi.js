@@ -1,10 +1,10 @@
 import express from 'express';
-// import { Validate } from '../middleware';
+import { Validate, Auth } from '../middleware';
 import { MenuController } from '../controllers';
 
 const menuRouter = express.Router();
 
-menuRouter.post('/', MenuController.createMenu);
+menuRouter.post('/', Auth.verifyAdmin, Validate.validateMenuInput, MenuController.createMenu);
 menuRouter.get('/', MenuController.getMenu);
 
 export default menuRouter;

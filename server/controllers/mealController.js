@@ -52,12 +52,8 @@ class MealController {
         id: mealId
       }
     }).then((meal) => {
-      meal.update({
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        image: req.body.image
-      });
+      const userInfo = Object.assign({}, meal);
+      meal.update({ ...userInfo, ...req.body });
       res.status(200).json({
         result: 'updated',
         message: meal

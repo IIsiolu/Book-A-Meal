@@ -4,8 +4,9 @@ class OrderController {
 
   static createOrder(req, res) {
     const {
-      mealName, quantity, price, userId
+      mealName, quantity, price
     } = req.body;
+    const userId = req.user.id;
     Order
       .create({
         quantity,
@@ -33,12 +34,10 @@ class OrderController {
           id: req.params.orderId
         }
       }).then((order) => {
-        order.update({
-          mealName: req.body.mealName,
-          quantity: req.body.quantity,
-          price: req.body.price,
-          userId: req.body.userId
-        });
+
+        const userInfo = Object.assign({}, order);
+        // console.log({ userInfoInDb: userInfo });
+        order.update({...userInfo, ...req.body });
         res.status(200).json({
           result: 'updated',
           message: order

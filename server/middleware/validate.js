@@ -85,5 +85,22 @@ class Validate {
     }
     next();
   }
+
+  static validateMenuInput(req, res, next) {
+    req.checkBody('mealName', 'input meal name').notEmpty();
+    req.checkBody('date', 'input meal date').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorMessage = errors.map(err => err.msg);
+      res.status(400).json({
+        message: 'Meal input Errors',
+        errorMessage
+      });
+      return;
+      // stop the req from proceeding
+    }
+    next();
+  }
+
 }
 export default Validate;

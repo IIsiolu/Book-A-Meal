@@ -50,6 +50,7 @@ class UserController {
             if (response) {
               const token = jwt.sign({
                 id: check.id,
+                role: check.role,
                 firstname: check.firstname
               }, secret, { expiresIn: '500h' });
               return res.status(200).json({

@@ -43,5 +43,5 @@ meal options available on the system.
 - DELETE /meals/<mealId>  Remove a meal option  Only Admin(caterer) should  be able to do this. 
 - POST/menu/              Setup the menu for the day   Only Admin(caterer) should  be able to do this. 
   
-##Licence
+#Licence
 - MIT

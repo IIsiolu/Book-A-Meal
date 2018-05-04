@@ -37,7 +37,7 @@ class OrderController {
           mealName: req.body.mealName,
           quantity: req.body.quantity,
           price: req.body.price,
-          userId: req.body.userId
+          userId: req.user.id
         });
         res.status(200).json({
           result: 'updated',

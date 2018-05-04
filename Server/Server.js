@@ -33,6 +33,21 @@ app.get('*', (req, res) => {
     message: 'That url does not exist on this server'
   });
 });
+app.post('*', (req, res) => {
+  res.status(404).send({
+    message: 'That url does not exist on this server'
+  });
+});
+app.delete('*', (req, res) => {
+  res.status(404).send({
+    message: 'That url does not exist on this server'
+  });
+});
+app.put('*', (req, res) => {
+  res.status(404).send({
+    message: 'That url does not exist on this server'
+  });
+});
 
 const port = process.env.PORT || 7000;
 

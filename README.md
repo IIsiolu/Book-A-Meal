@@ -37,11 +37,11 @@ meal options available on the system.
 ## API End points
 - POST /auth/signup     Register a user   
 - POST /auth/login      Login a user   
--GET /meals/            Get all the meal options  Only Admin (caterer) should  be able to do this. 
--POST /meals/           Add a meal option  Only Admin (caterer) should  be able to do this. 
--PUT /meals/<mealId>    Update the information of a  meal option 
--DELETE /meals/<mealId>  Remove a meal option  Only Admin(caterer) should  be able to do this. 
--POST/menu/              Setup the menu for the day   Only Admin(caterer) should  be able to do this. 
+- GET /meals/            Get all the meal options  Only Admin (caterer) should  be able to do this. 
+- POST /meals/           Add a meal option  Only Admin (caterer) should  be able to do this. 
+- PUT /meals/<mealId>    Update the information of a  meal option 
+- DELETE /meals/<mealId>  Remove a meal option  Only Admin(caterer) should  be able to do this. 
+- POST/menu/              Setup the menu for the day   Only Admin(caterer) should  be able to do this. 
   
 ##Licence
 - MIT

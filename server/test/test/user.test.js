@@ -1,7 +1,7 @@
 import request from 'supertest';
 import chai from 'chai';
-import server from '../../server';
-import { User } from '../../models';
+import server from '../../Server';
+// import { User } from '../../models';
 import testData from '../faker/userfaker';
 
 const { expect } = chai;
@@ -15,13 +15,13 @@ describe('Book-a-Meal User Test', () => {
       .expect(200)
       .end((err) => {
         if (err)
-          done(err);
+          {done(err);}
         done();
       });
   });
 
   it('return error if email field is empty on signup', (done) => {
-    request(server).post('/api/v1/users/signup')
+    request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfo)
       .end((error, res) => {
         expect(400);
@@ -32,7 +32,7 @@ describe('Book-a-Meal User Test', () => {
   });
 
   it('return error if password field is empty on signup', (done) => {
-    request(server).post('/api/v1/users/signup')
+    request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfo1)
       .end((error, res) => {
         expect(400);
@@ -43,7 +43,7 @@ describe('Book-a-Meal User Test', () => {
   });
 
   it('return error if password field is less thab six character on signup', (done) => {
-    request(server).post('/api/v1/users/signup')
+    request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfos)
       .end((error, res) => {
         expect(400);
@@ -54,7 +54,7 @@ describe('Book-a-Meal User Test', () => {
   });
 
   it('return error if email field is empty on signin', (done) => {
-    request(server).post('/api/v1/users/signin')
+    request(server).post('/api/v1/auth/login')
       .send(testData.loginerror1)
       .end((error, res) => {
         expect(400);
@@ -65,7 +65,7 @@ describe('Book-a-Meal User Test', () => {
   });
 
   it('return error if password field is empty on signin', (done) => {
-    request(server).post('/api/v1/users/signin')
+    request(server).post('/api/v1/auth/login')
       .send(testData.loginerror2)
       .end((error, res) => {
         expect(400);
@@ -77,7 +77,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('creates a new user', (done) => {
     request(server)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(testData.singupUser1)
       .expect(201)
@@ -95,7 +95,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('trown error if email already exisit in database', (done) => {
     request(server)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(testData.singupUser1)
       .expect(409)
@@ -108,7 +108,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('creates user with name and email', (done) => {
     request(server)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(testData.singupUser)
       .expect(201)
@@ -125,7 +125,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('user cant login if the password is not correct', (done) => {
     request(server)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/auth/login')
       .send(testData.loginUser1)
       .expect(409)
       .end((err, res) => {
@@ -137,7 +137,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('user cant login if the email is not correct.', (done) => {
     request(server)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/auth/login')
       .send(testData.loginUser3)
       .expect(404)
       .end((err, res) => {
@@ -149,7 +149,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('user login Successfully with correct details', (done) => {
     request(server)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/auth/login')
       .send(testData.loginUser2)
       .expect(200)
       .end((err, res) => {
@@ -161,7 +161,7 @@ describe('Book-a-Meal User Test', () => {
 
   it('return a token when user successful signin', (done) => {
     request(server)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/auth/login')
       .send(testData.loginUser2)
       .expect(200)
       .end((err, res) => {

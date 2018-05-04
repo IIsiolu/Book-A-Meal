@@ -10,7 +10,7 @@ html{
 body {
 	font-size: 16px;
 	line-height: 1.5;
-	font-family: 'Ubuntu Mono', monospace;
+	font-family: 'Pangolin', cursive;
 	padding: 0;
 	margin: 0;
 	color: #fff;
@@ -85,6 +85,93 @@ a {
 .sidebar-d {
 
 }
+.imageUp {
+	margin: 5px 0;
+	background-color: #eac26f;
+	font-size: 20px;
+	color: #fff;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 30%;
+    top: 10%;
+    width: 40%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-header {
+    padding: 2px 16px;
+    background-color: #ae704a;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {
+	padding: 2px 16px;
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	justify-content: center;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #ae704a;
+    color: white;
+}
+.sub {
+	margin: 10px 0;
+	color: #fff;
+	font-size: 20px;
+	background-color: #eac26f;
+}
+
+/* Modal Content */
+/* .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+} */
+
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 .meal-info {
 	display: flex;
 	flex-direction: column;
@@ -124,7 +211,7 @@ a {
 		justify-content: center;
 		color: #000;
 	}
-	#order-now {
+	.order-now {
 		/*background-color: blue;*/
 		height: 15%;
 		padding-top: 10px;

@@ -10,7 +10,7 @@ html{
 body {
 	font-size: 16px;
 	line-height: 1.5;
-	font-family: 'Ubuntu Mono', monospace;
+	font-family: 'Pangolin', cursive;
 	padding: 0;
 	margin: 0;
 	color: #ae704a;
@@ -101,6 +101,8 @@ a {
 	.remove {
 		width: 100%;
 		font-size: 20px;
+		background-color: #ae704a;
+		color: #fff
 	}
 	.btns {
 		display: flex;

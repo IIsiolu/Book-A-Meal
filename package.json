@@ -4,10 +4,11 @@
   "description": "book a meal",
   "main": "server.js",
   "scripts": {
-    "start": "babel-watch ./server/server.js",
+    "start": "babel-node ./server/server.js",
     "test": "npm run migrations && npm run start:test",
     "migrations": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "heroku-postbuild": "NODE_ENV=production && NODE_END=production && npm run migrations",
     "start:test": "nyc mocha --timeout 50000 --exit --require babel-core/register server/test/**/*.test.js"
   },
   "dependencies": {

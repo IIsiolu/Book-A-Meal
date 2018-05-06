@@ -5,11 +5,11 @@ module.exports = {
     id: {
       allowNull: false,
       autoIncrement: true,
+      primaryKey: true,
       type: Sequelize.INTEGER
     },
     name: {
       allowNull: false,
-      primaryKey: true,
       type: Sequelize.STRING
       
     },

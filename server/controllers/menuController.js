@@ -1,4 +1,4 @@
-import { Menu } from '../models';
+import { Menu, Meal } from '../models';
 
 class MenuController {
 
@@ -30,6 +30,9 @@ class MenuController {
     console.log(new Date());
     Menu
       .findAll({
+        include: [
+          Meal
+        ],
         where: {
           date: '2018-05-02T00:00:00.000Z'
         }

@@ -59,108 +59,49 @@ describe('Book-a-meal MEAL Test', () => {
   });
 
 
-  //   it('return error if login is admin and center name is empty', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(403);
-  //         expect(res.body.errorMessage).to.include('You must supply a Center  name!');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
+  it('return error if login is admin and MEAL name is empty', (done) => {
+    request(server)
+      .post('/api/v1/meals')
+      .send(testData.newMeal1)
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(403);
+        expect(res.body.errorMessage).to.include('input meal name');
+        if (error) done(error);
+        done();
+      });
+  });
 
-  //   it('return error if login is admin and center city is empty', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter1)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(403);
-  //         expect(res.body.errorMessage).to.include('You must supply a city !');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
+  it('return error if login is admin and description is empty', (done) => {
+    request(server)
+      .post('/api/v1/meals')
+      .send(testData.newMeal3)
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(403);
+        expect(res.body.errorMessage).to.include('input meal description');
+        if (error) done(error);
+        done();
+      });
+  });
 
-  //   it('return error if login is admin and center address is empty', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter2)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(403);
-  //         expect(res.body.errorMessage).to.include('You must supply a address!');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-  //   it(
-  //     'return error if login is admin and center publicUrlId is empty',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send(testData.newCenter3)
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(403);
-  //           expect(res.body.errorMessage).to.include('You add public Id from cloudinary!');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
-
-  //   it(
-  //     'return error if login is admin and center publicUrlId is empty',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send(testData.newCenter33)
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(403);
-  //           expect(res.body.errorMessage)
-  //             .to.include('You must add imageurl form cloudinary!');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
-
-  //   it('return error if login is admin and center about is empty', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter4)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(403);
-  //         expect(res.body.errorMessage).to.include('You must About for center!');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-  //   it(
-  //     'save center 3 to database if login is' +
-  //     'admin and and body is filed correctly',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send(testData.newCenter5)
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(201);
-  //           expect(res.body.message)
-  //             .to.include('successfully created');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
+  it(
+    'save MEAL to database if login is ' +
+      'admin and and body is filed correctly',
+    (done) => {
+      request(server)
+        .post('/api/v1/meals')
+        .send(testData.newMeal4)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(201);
+          expect(res.body.result)
+            .to.include('success');
+          if (error) done(error);
+          done();
+        });
+    }
+  );
 
   //   it(
   //     'save center 4 to database if login is' +

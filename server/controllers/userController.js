@@ -15,7 +15,7 @@ class UserController {
       .findOrCreate({
         where: { email },
         defaults: {
-          password, firstname, lastname, role: 'user'
+          password, firstname, lastname, role: req.body.role || 'user'
         }
       })
       .spread((user, created) => {

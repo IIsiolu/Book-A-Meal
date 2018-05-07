@@ -7,11 +7,19 @@ export default (sequelize, DataTypes) => {
     price: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    mealId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {});
   Order.associate = (models) => {
     Order.belongsTo(models.Meal, {
-      foreignKey: 'mealName'
+      foreignKey: 'mealId'
     });
     Order.belongsTo(models.User, {
       foreignKey: 'userId'

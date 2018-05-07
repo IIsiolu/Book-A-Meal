@@ -1,6 +1,6 @@
 import request from 'supertest';
 import chai from 'chai';
-import server from '../../Server';
+import server from '../../server';
 // import { User } from '../../models';
 import testData from '../faker/userfaker';
 

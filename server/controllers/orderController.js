@@ -37,7 +37,7 @@ class OrderController {
 
         const userInfo = Object.assign({}, order);
         // console.log({ userInfoInDb: userInfo });
-        order.update({...userInfo, ...req.body });
+        order.update({ ...userInfo, ...req.body });
         res.status(200).json({
           result: 'updated',
           message: order

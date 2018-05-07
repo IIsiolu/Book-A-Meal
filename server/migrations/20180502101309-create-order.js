@@ -22,11 +22,11 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE
     },
-    mealName: {
-      type: Sequelize.STRING,
+    mealId: {
+      type: Sequelize.INTEGER,
       references: {
         model: 'Meals',
-        key: 'name'
+        key: 'id'
       }
     },
     userId: {

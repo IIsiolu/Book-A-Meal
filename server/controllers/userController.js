@@ -32,7 +32,7 @@ class UserController {
       }).catch((err) => {
         res.status(500).send({
           result: 'Failed',
-          message: err
+          message: err.errors[0].message
         });
       });
   }

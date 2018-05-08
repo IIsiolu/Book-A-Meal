@@ -1,5 +1,5 @@
 const removeChar = input => (
-  input.match(/\w/g).join('').toLowerCase()
+  input.match(/\w/g).join('')
 );
 class Validate {
   static validateSignUp(req, res, next) {

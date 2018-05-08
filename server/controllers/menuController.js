@@ -1,12 +1,12 @@
 import { Menu, Meal } from '../models';
 
 class MenuController {
-
   static createMenu(req, res) {
-    const { mealName, date } = req.body;
+    const { mealId, date } = req.body;
+    const data = new Date(date);
     Menu
       .findOrCreate({
-        where: { mealName, date }
+        where: { mealId, date: data }
       })
       .spread((menu, created) => {
         if (!created) {
@@ -28,13 +28,18 @@ class MenuController {
   }
   static getMenu(req, res) {
     console.log(new Date());
+    const date = req.query.date;
+    console.log({
+      date: 'date in menu',
+      date
+    });
     Menu
       .findAll({
         include: [
           Meal
         ],
         where: {
-          date: '2018-05-02T00:00:00.000Z'
+          date
         }
       }).then(menu => res.status(200).send({
         result: 'success',
@@ -42,7 +47,7 @@ class MenuController {
       })).catch((error) => {
         res.status(500).send({
           result: 'Failed',
-          message: err
+          message: error
         });
       });
   }

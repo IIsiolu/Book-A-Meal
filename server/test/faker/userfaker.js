@@ -9,7 +9,7 @@ const userfake = {
     password: '1234567',
   },
   singupUser1: {
-    firstname: 'Test',
+    firstname: 'Test', 
     lastname: 'lastnames',
     email: 'testuser@example.com',
     password: '1234567',

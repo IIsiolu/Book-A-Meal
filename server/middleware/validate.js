@@ -87,7 +87,7 @@ class Validate {
   }
 
   static validateMenuInput(req, res, next) {
-    req.checkBody('mealName', 'input meal name').notEmpty();
+    req.checkBody('mealId', 'input meal Id').notEmpty();
     req.checkBody('date', 'input meal date').notEmpty();
     const errors = req.validationErrors();
     if (errors) {

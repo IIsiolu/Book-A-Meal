@@ -1,6 +1,7 @@
-
+const removeChar = input => (
+  input.match(/\w/g).join('').toLowerCase()
+);
 class Validate {
-
   static validateSignUp(req, res, next) {
     req.checkBody('email', 'invalid email address')
       .isEmail();
@@ -37,6 +38,8 @@ class Validate {
       return; // stop the req from proceeding
     }
     //   no errors
+    req.body.firstname = removeChar(req.body.firstname);
+    req.body.lastname = removeChar(req.body.lastname);
     next();
   }
 
@@ -83,6 +86,8 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    req.body.name = removeChar(req.body.name);
+    req.body.description = removeChar(req.body.description);
     next();
   }
 

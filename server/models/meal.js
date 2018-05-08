@@ -4,6 +4,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input name',
+        }
+      },
     },
     description: {
       type: DataTypes.STRING,
@@ -11,7 +17,13 @@ export default (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.DOUBLE,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input price',
+        }
+      }
     },
     image: {
       type: DataTypes.STRING,

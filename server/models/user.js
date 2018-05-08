@@ -23,6 +23,17 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'user',
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input your quantity',
+        },
+        isIn: {
+          args: [['admin', 'user']],
+          msg: "Must be an 'admin' or 'user'"
+        }
+      }
+
     }
   }, {
 

@@ -4,7 +4,13 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY
     },
     mealId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Id must be a number'
+        },
+      },
     }
   }, {});
   Menu.associate = (models) => {

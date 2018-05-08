@@ -35,7 +35,7 @@ class Auth {
       jwt.verify(token, secret, (err, data) => {
         if (err || data.role !== 'admin') {
           return res.status(401).json({
-            message: 'Authentication failed',
+            message: 'You have to be an admin',
           });
         }
         // console.log({ data: data.role });

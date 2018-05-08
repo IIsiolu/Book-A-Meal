@@ -6,7 +6,9 @@ import testData from '../faker/userfaker';
 
 const { expect } = chai;
 const testUser = {};
+const testAdmin = {};
 const validToken = {};
+const adminToken = {};
 
 describe('Book-a-Meal User Test', () => {
   it('loads the api home page', (done) => {
@@ -15,7 +17,7 @@ describe('Book-a-Meal User Test', () => {
       .expect(200)
       .end((err) => {
         if (err)
-          {done(err);}
+        { done(err); }
         done();
       });
   });
@@ -172,6 +174,37 @@ describe('Book-a-Meal User Test', () => {
         done();
       });
   });
+  it('creates a new admin user', (done) => {
+    request(server)
+      .post('/api/v1/auth/signup')
+      .set('Content-Type', 'application/json') 
+      .send(testData.adminsignup)
+      .expect(201)
+      .end((err, res) => {
+        testAdmin.user = res.body.message;
+        expect(testAdmin.user).to.have.property('firstname');
+        expect(testAdmin.user).to.have.property('email');
+        expect(res.body.message.email).to.equal(testData.adminsignup.email);
+        expect(res.body.message.firstname).to.equal(testData.adminsignup.firstname);
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('return a token when admin successful signin', (done) => {
+    request(server)
+      .post('/api/v1/auth/login')
+      .send(testData.adminLogin)
+      .expect(200)
+      .end((err, res) => {
+        adminToken.token = res.body.token;
+        expect(adminToken.token);
+        expect(res.body.message).to.equal(`Welcome ${testData.adminsignup.firstname}`);
+        if (err) return done(err);
+        done();
+      });
+  });
 
 
 });
+
+export { validToken, adminToken };

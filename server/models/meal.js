@@ -4,14 +4,26 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input name',
+        }
+      },
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false
     },
     price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input price',
+        }
+      }
     },
     image: {
       type: DataTypes.STRING,
@@ -20,10 +32,10 @@ export default (sequelize, DataTypes) => {
   }, {});
   Meal.associate = (models) => {
     Meal.hasMany(models.Order, {
-      foreignKey: 'mealName'
+      foreignKey: 'mealId'
     });
     Meal.hasMany(models.Menu, {
-      foreignKey: 'mealName'
+      foreignKey: 'mealId'
     });
     // associations can be defined here
   };

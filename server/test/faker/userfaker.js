@@ -9,7 +9,7 @@ const userfake = {
     password: '1234567',
   },
   singupUser1: {
-    firstname: 'Test',
+    firstname: 'Test', 
     lastname: 'lastnames',
     email: 'testuser@example.com',
     password: '1234567',
@@ -66,6 +66,17 @@ const userfake = {
   wrongPassWord: {
     email: faker.internet.email(),
     password: '12345999',
+  },
+  adminsignup: {
+    firstname: 'test',
+    lastname: 'admin',
+    email: 'admin123@gmail.com',
+    password: 'adminqwe1234',
+    role: 'admin'
+  },
+  adminLogin: {
+    email: 'admin123@gmail.com',
+    password: 'adminqwe1234',
   }
 };
 

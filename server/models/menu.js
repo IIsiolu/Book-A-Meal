@@ -1,10 +1,16 @@
 export default (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
     date: {
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
-    MealId: {
-      type: DataTypes.INTEGER
+    mealId: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Id must be a number'
+        },
+      },
     }
   }, {});
   Menu.associate = (models) => {
@@ -14,4 +20,4 @@ export default (sequelize, DataTypes) => {
     // associations can be defined here
   };
   return Menu;
-}; 
+};

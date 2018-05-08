@@ -15,7 +15,7 @@ class UserController {
       .findOrCreate({
         where: { email },
         defaults: {
-          password, firstname, lastname, role: 'user'
+          password, firstname, lastname, role: req.body.role || 'user'
         }
       })
       .spread((user, created) => {
@@ -32,7 +32,7 @@ class UserController {
       }).catch((err) => {
         res.status(500).send({
           result: 'Failed',
-          message: err
+          message: err.errors[0].message
         });
       });
   }

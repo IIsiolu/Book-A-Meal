@@ -28,7 +28,7 @@ class MenuController {
   }
   static getMenu(req, res) {
     console.log(new Date());
-    const date = req.query.date;
+    const date = req.query.date || new Date().setHours(0, 0, 0, 0);
     console.log({
       date: 'date in menu',
       date

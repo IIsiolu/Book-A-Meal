@@ -1,9 +1,9 @@
 export default (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
     date: {
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
-    MealId: {
+    mealId: {
       type: DataTypes.INTEGER
     }
   }, {});
@@ -14,4 +14,4 @@ export default (sequelize, DataTypes) => {
     // associations can be defined here
   };
   return Menu;
-}; 
+};

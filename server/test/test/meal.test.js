@@ -103,177 +103,130 @@ describe('Book-a-meal MEAL Test', () => {
     }
   );
 
-  //   it(
-  //     'save center 4 to database if login is' +
-  //     'admin and and body is filed correctly',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send(testData.newCenter5)
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(201);
-  //           expect(res.body.message)
-  //             .to.include('successfully created');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
+  it(
+    'save MEAL5 to database if login is ' +
+    'admin and and body is filed correctly',
+    (done) => {
+      request(server)
+        .post('/api/v1/meals')
+        .send(testData.newMeal5)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(201);
+          expect(res.body.result)
+            .to.include('success');
+          if (error) done(error);
+          done();
+        });
+    }
+  );
+  it('fail to return all the MEALS in database, if user is not an admin', (done) => {
+    request(server)
+      .get('/api/v1/meals')
+      .set('Authorization', validToken.token)
+      .end((error, res) => {
+        expect(403);
+        expect(res.body.message).to.include('You have to be an admin');
+        if (error) done(error);
+        done();
+      });
+  });
 
-  //   it(
-  //     'save center 5 to database if login is' +
-  //     'admin and and body is filed correctly',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send(testData.newCenter5)
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(201);
-  //           expect(res.body.message).to.include('successfully created');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
-
-  //   it('save center to database if login is admin and and body is filed correctly', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter5)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(201);
-  //         expect(res.body.message).to.include('successfully created');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
+  it('return all the MEALS in database, if user an admin', (done) => {
+    request(server)
+      .get('/api/v1/meals')
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(200);
+        expect(res.body.result).to.include('success');
+        if (error) done(error);
+        done();
+      });
+  });
 
 
-  //   it('return all the centers in database', (done) => {
-  //     request(server)
-  //       .get('/api/v1/centers')
-  //       .expect(200)
-  //       .end((error, res) => {
-  //         expect(200);
-  //         expect(res.body.message).to.include('success');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-  //   it('return 1 center from the databse', (done) => {
-  //     request(server)
-  //       .get('/api/v1/centers/1')
-  //       .expect(200)
-  //       .end((error, res) => {
-  //         expect(200);
-  //         expect(res.body.message).to.include('Center');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-  //   it('return error if center is not found in the  database', (done) => {
-  //     request(server)
-  //       .get('/api/v1/centers/100')
-  //       .expect(400)
-  //       .end((error, res) => {
-  //         expect(200);
-  //         expect(res.body.message).to.include('center not found');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-
-  //   it('save another center to database if login is admin and and body is filed correctly', (done) => {
-  //     request(server)
-  //       .post('/api/v1/centers')
-  //       .send(testData.newCenter5)
-  //       .set('Authorization', adminToken.token)
-  //       .end((error, res) => {
-  //         expect(201);
-  //         expect(res.body.message).to.include('successfully created');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
+  it('return error if login user is not an admin when updating MEAL', (done) => {
+    request(server)
+      .put('/api/v1/meals/1')
+      .send(testData.newMeal6)
+      .set('Authorization', validToken.token)
+      .end((error, res) => {
+        expect(401);
+        expect(res.body.message).to.include('You have to be an admin');
+        if (error) done(error);
+        done();
+      });
+  });
+  it('return error if no token', (done) => {
+    request(server)
+      .put('/api/v1/meals/1')
+      .send(testData.newMeal6)
+      .end((error, res) => {
+        expect(403);
+        expect(res.body.message).to.include('You need to sign up or login');
+        if (error) done(error);
+        done();
+      });
+  });
+  it('return error if MEAL ID is incorrect', (done) => {
+    request(server)
+      .put('/api/v1/meals/xx')
+      .send(testData.newMeal6)
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(404);
+        expect(res.body.message).to.include('No meal with that ID');
+        if (error) done(error);
+        done();
+      });
+  });
+  it('should Update a MEAL when Token is correct', (done) => {
+    request(server)
+      .put('/api/v1/meals/2')
+      .send(testData.newMeal6)
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(404);
+        expect(res.body.result).to.include('updated');
+        if (error) done(error);
+        done();
+      });
+  });
 
 
-  //   it('return error if login user is not an admin when updating center', (done) => {
-  //     request(server)
-  //       .put('/api/v1/centers/1')
-  //       .send(testData.newCenter6)
-  //       .set('Authorization', validToken.token)
-  //       .end((error, res) => {
-  //         expect(400);
-  //         expect(res.body.message).to.include('You have to be an Admin to do that');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-
-  //   it('return error if login user is not an admin when deleting center', (done) => {
-  //     request(server)
-  //       .delete('/api/v1/centers/3')
-  //       .send(testData.newCenter6)
-  //       .set('Authorization', validToken.token)
-  //       .end((error, res) => {
-  //         expect(400);
-  //         expect(res.body.message).to.include('You have to be an Admin to do that');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   });
-
-
-  //   it(
-  //     'save new centerto database if login is' +
-  //     'admin and and body is filed correctly',
-  //     (done) => {
-  //       request(server)
-  //         .post('/api/v1/centers')
-  //         .send({
-  //           name: 'center name updated',
-  //           city: 'lagos island',
-  //           address: 'No 22 Lagos island',
-  //           facility: ['car pack', 'free wifi', 'sound system'],
-  //           about: 'this is a test',
-  //           availability: 'availability',
-  //           imageurl: 'pictue.png',
-  //           publicUrlId: 'picture'
-  //         })
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(201);
-  //           expect(res.body.message)
-  //             .to.include('successfully created');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
-
-  //   it(
-  //     'return error for imvalied url imvent event when user is signin in',
-  //     (done) => {
-  //       request(server)
-  //         .get('/api/v1/centers/1swew')
-  //         .set('Authorization', adminToken.token)
-  //         .end((error, res) => {
-  //           expect(404);
-  //           expect(res.body.message)
-  //             .to.include('Invalid Parameter In Url');
-  //           if (error) done(error);
-  //           done();
-  //         });
-  //     }
-  //   );
-
+  it('return error if login user is not an admin when deleting MEAL', (done) => {
+    request(server)
+      .delete('/api/v1/meals/1')
+      .send(testData.newMeal6)
+      .set('Authorization', validToken.token)
+      .end((error, res) => {
+        expect(401);
+        expect(res.body.message).to.include('You have to be an admin');
+        if (error) done(error);
+        done();
+      });
+  });
+  it('return error if admin inputs invalid id for meal when deleting', (done) => {
+    request(server)
+      .delete('/api/v1/meals/xx')
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(404);
+        if (error) done(error);
+        done();
+      });
+  });
+  it('Authenticated user should delete a meal', (done) => {
+    request(server)
+      .delete('/api/v1/meals/1')
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(200);
+        expect(res.body.message).to.include('meal successfully deleted!');
+        if (error) done(error);
+        done();
+      });
+  });
 
 });
 

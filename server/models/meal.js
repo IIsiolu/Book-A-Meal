@@ -20,10 +20,10 @@ export default (sequelize, DataTypes) => {
   }, {});
   Meal.associate = (models) => {
     Meal.hasMany(models.Order, {
-      foreignKey: 'mealName'
+      foreignKey: 'mealId'
     });
     Meal.hasMany(models.Menu, {
-      foreignKey: 'mealName'
+      foreignKey: 'mealId'
     });
     // associations can be defined here
   };

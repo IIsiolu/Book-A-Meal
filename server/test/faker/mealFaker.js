@@ -32,25 +32,17 @@ const mealFaker = {
     price: faker.commerce.price(),
     image: faker.image.imageUrl(),
   },
-  newCenter6: {
-    name: 'center name updated',
-    city: faker.address.city(),
-    address: faker.address.streetAddress(),
-    facility: ['car pack', 'free wifi', 'sound system'],
-    about: 'this is a test',
-    availability: 'availability',
-    imageurl: 'pictue.png',
-    publicUrlId: 'picture'
+  newMeal5: {
+    name: 'Ewela',
+    description: faker.lorem.paragraph(),
+    price: faker.commerce.price(),
+    image: faker.image.imageUrl(),
   },
-  newCenter33: {
-    name: faker.name.findName(),
-    city: faker.address.city(),
-    address: 'no 3 adestreet',
-    facility: faker.random.arrayElement(),
-    about: 'this is a test',
-    availability: 'availability',
-    imageurl: '',
-    publicUrlId: 'pictue.png'
+  newMeal6: {
+    name: 'Ewel',
+    description: faker.lorem.paragraph(),
+    price: faker.commerce.price(),
+    image: faker.image.imageUrl(),
   },
 };
 

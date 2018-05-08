@@ -5,6 +5,6 @@ import { MenuController } from '../controllers';
 const menuRouter = express.Router();
 
 menuRouter.post('/', Auth.verifyAdmin, Validate.validateMenuInput, MenuController.createMenu);
-menuRouter.get('/', MenuController.getMenu);
+menuRouter.get('/', Auth.verifyToken, MenuController.getMenu);
 
 export default menuRouter;

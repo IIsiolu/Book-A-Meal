@@ -9,7 +9,7 @@
     "migrations": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "NODE_ENV=production && NODE_END=production && npm run migrations",
-    "start:test": "nyc mocha --timeout 50000 --exit --require babel-core/register server/test/**/*.test.js"
+    "start:test": "nyc mocha --timeout 50000 --exit --require babel-core/register server/test/test/index.text.js"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

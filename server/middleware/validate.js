@@ -1,6 +1,14 @@
 const removeChar = input => (
   input.match(/\w/g).join('')
 );
+const checkDate = (input) => {
+  if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return true;
+  }
+  return false;
+
+};
+
 class Validate {
   static validateSignUp(req, res, next) {
     req.checkBody('email', 'invalid email address')
@@ -92,16 +100,10 @@ class Validate {
   }
 
   static validateMenuInput(req, res, next) {
-    req.checkBody('mealId', 'input meal Id').notEmpty();
-    req.checkBody('date', 'input meal date').notEmpty();
+    req.checkBody('mealId', 'input menu Id').notEmpty();
+    req.checkBody('date', 'input menu date').notEmpty();
     const errors = req.validationErrors();
-    if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      return (
-        res.status(400).json({
-          message: 'invalid date input'
-        })
-      );
-    }
+
     if (errors) {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
@@ -111,7 +113,25 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      return (
+        res.status(400).json({
+          message: 'invalid date input'
+        })
+      );
+    }
     next();
+  }
+  static validateDate(req, res, next) {
+    if (req.query.date && !checkDate(req.query.date)) {
+      return (
+        res.status(400).send({
+          message: 'invalid date input'
+        })
+      );
+    }
+    next();
+
   }
 }
 export default Validate;

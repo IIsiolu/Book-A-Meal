@@ -10,6 +10,9 @@ class MenuController {
       })
       .spread((menu, created) => {
         if (!created) {
+          console.log({
+            message: 'this is menu issue here',
+          });
           return res.status(409).send({
             result: 'Failed',
             message: 'Meal already in menu for that day'
@@ -20,6 +23,7 @@ class MenuController {
           message: menu
         });
       }).catch((err) => {
+
         res.status(500).send({
           result: 'Failed',
           message: err
@@ -41,10 +45,19 @@ class MenuController {
         where: {
           date
         }
-      }).then(menu => res.status(200).send({
-        result: 'success',
-        message: menu
-      })).catch((error) => {
+      }).then((menu) => {
+        if (menu.length === 0) {
+          return res.status(404).send({
+            result: 'failed',
+            message: 'no menu for that day'
+          });
+        }
+        res.status(200).send({
+          result: 'success',
+          message: menu
+        });
+      }
+      ).catch((error) => {
         res.status(500).send({
           result: 'Failed',
           message: error

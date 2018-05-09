@@ -79,7 +79,6 @@ class Validate {
   }
   static validatemealInput(req, res, next) {
     req.checkBody('name', 'input meal name').notEmpty();
-    req.sanitizeBody('description');
     req.checkBody('description', 'input meal description').notEmpty();
     req.checkBody('price', 'input meal price').notEmpty();
     req.checkBody('image', 'input meal image').notEmpty();
@@ -132,6 +131,22 @@ class Validate {
     }
     next();
 
+  }
+  static validateOrder(req, res, next) {
+    req.checkBody('mealId', 'input meal Id').notEmpty();
+    req.checkBody('quantity', 'input meal quantity').notEmpty();
+    const errors = req.validationErrors();
+
+    if (errors) {
+      const errorMessage = errors.map(err => err.msg);
+      res.status(400).json({
+        message: 'Order input Errors',
+        errorMessage
+      });
+      return;
+      // stop the req from proceeding
+    }
+    next();
   }
 }
 export default Validate;

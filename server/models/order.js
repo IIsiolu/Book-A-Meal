@@ -10,19 +10,9 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'must be a valid number'
+          msg: 'quantity must be a valid number'
         },
       },
-    },
-    price: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'input price',
-        }
-      }
     },
     mealId: {
       type: DataTypes.INTEGER,
@@ -34,7 +24,7 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'must be a valid number'
+          msg: 'mealId must be a valid number'
         },
       },
     },
@@ -48,7 +38,7 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'must be a valid number'
+          msg: 'userId must be a valid number'
         },
       },
     }

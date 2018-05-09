@@ -4,13 +4,12 @@ class OrderController {
 
   static createOrder(req, res) {
     const {
-      mealId, quantity, price
+      mealId, quantity
     } = req.body;
     const userId = req.user.id;
     Order
       .create({
         quantity,
-        price,
         mealId,
         userId
       }).then(order => res.status(201).send({
@@ -20,7 +19,7 @@ class OrderController {
         console.log(err);
         res.status(500).send({
           result: 'failed',
-          message: err
+          message: err.errors[0].message
         });
       }
       );

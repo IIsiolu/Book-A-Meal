@@ -3,7 +3,7 @@ module.exports =
   development: {
     username: 'postgres',
     password: 'phemonick',
-    database: 'book-a-meal',
+    database: 'book_a_meal',
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres'

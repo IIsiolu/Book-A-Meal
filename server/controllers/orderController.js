@@ -1,17 +1,17 @@
-import { Order } from '../models';
+import { Order, User, Meal } from '../models';
 
 class OrderController {
 
   static createOrder(req, res) {
     const {
-      mealName, quantity, price
+      mealId, quantity, price
     } = req.body;
     const userId = req.user.id;
     Order
       .create({
         quantity,
         price,
-        mealName,
+        mealId,
         userId
       }).then(order => res.status(201).send({
         result: 'success',
@@ -50,7 +50,11 @@ class OrderController {
   }
 
   static allOrders(req, res) {
-    Order.all()
+    Order.all({
+      include: [
+        Meal, User
+      ],
+    })
       .then(orders => res.status(200).json({
         result: 'success',
         message: orders

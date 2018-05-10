@@ -100,7 +100,7 @@ describe('Book-a-meal MENU Test', () => {
           if (error) done(error);
           done();
         });
-    }
+    },
   );
 
   it(
@@ -118,7 +118,7 @@ describe('Book-a-meal MENU Test', () => {
           if (error) done(error);
           done();
         });
-    }
+    },
   );
   it('should fail to return all the MENU in database, if user is not valid', (done) => {
     request(server)
@@ -223,6 +223,5 @@ describe('Book-a-meal MENU Test', () => {
 //         done();
 //       });
 //   });
-
 });
 

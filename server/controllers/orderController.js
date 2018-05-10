@@ -1,7 +1,6 @@
 import { Order, User, Meal } from '../models';
 
 class OrderController {
-
   static createOrder(req, res) {
     const {
       mealId, quantity,
@@ -16,14 +15,11 @@ class OrderController {
         result: 'success',
         message: order,
       })).catch((err) => {
-        console.log(err);
         res.status(500).send({
           result: 'failed',
           message: err.errors[0].message,
         });
-      },
-      );
-
+      });
   }
 
   static modifyOrder(req, res) {
@@ -33,21 +29,18 @@ class OrderController {
           id: req.params.orderId,
         },
       }).then((order) => {
-
         const userInfo = Object.assign({}, order);
         // console.log({ userInfoInDb: userInfo });
-        order.update({ ...userInfo, ...req.body }).then((order) => {
+        order.update({ ...userInfo, ...req.body }).then((newOrder) => {
           res.status(200).json({
             result: 'updated',
-            message: order,
+            message: newOrder,
           });
         }).catch(err => res.status(400).json({
           result: 'failed',
           message: err,
         }));
-
-      })
-      .catch(err => res.status(404).json({
+      }).catch(err => res.status(404).json({
         result: 'failed',
         message: err,
       }));

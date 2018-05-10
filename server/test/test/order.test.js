@@ -85,7 +85,7 @@ describe('Book-a-meal Order Test', () => {
           if (error) done(error);
           done();
         });
-    }
+    },
   );
 
   it(
@@ -103,14 +103,14 @@ describe('Book-a-meal Order Test', () => {
           if (error) done(error);
           done();
         });
-    }
+    },
   );
   it(
     'should return 200 if login is ' +
     'user update is successful',
     (done) => {
       request(server)
-        .put('/api/v1/orders/2')
+        .put('/api/v1/orders/1')
         .send(testData.newUpdate)
         .set('Authorization', validToken.token)
         .end((error, res) => {
@@ -120,7 +120,7 @@ describe('Book-a-meal Order Test', () => {
           if (error) done(error);
           done();
         });
-    }
+    },
   );
   it('should fail to return all the ORDER in database, if user is not valid', (done) => {
     request(server)
@@ -166,53 +166,5 @@ describe('Book-a-meal Order Test', () => {
         done();
       });
   });
-  // it('should Update a MEAL when Token is correct', (done) => {
-  //   request(server)
-  //     .put('/api/v1/meals/2')
-  //     .send(testData.newMeal6)
-  //     .set('Authorization', adminToken.token)
-  //     .end((error, res) => {
-  //       expect(404);
-  //       expect(res.body.result).to.include('updated');
-  //       if (error) done(error);
-  //       done();
-  //     });
-  // });
-
-
-//   it('return error if login user is not an admin when deleting MEAL', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/1')
-//       .send(testData.newMeal6)
-//       .set('Authorization', validToken.token)
-//       .end((error, res) => {
-//         expect(401);
-//         expect(res.body.message).to.include('You have to be an admin');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-//   it('return error if admin inputs invalid id for meal when deleting', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/xx')
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(404);
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-//   it('Authenticated user should delete a meal', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/1')
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(200);
-//         expect(res.body.message).to.include('meal successfully deleted!');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-
 });
 

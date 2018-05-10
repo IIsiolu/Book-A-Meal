@@ -21,19 +21,37 @@ a {
 }
 .container {
 }
-.top-nav {
+h1 {
+	text-align: center;
+	color: #bc6000
+}
+.top-nav { 
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #ae704a;
+	background-color: #f19433;
 	margin-top: 0;
 
+}
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 20vw;
+	height: 30vh;
+}
+.image {
+	margin-top: 10px;
+	width: 18vw;
+	height: 20vh;
 }
 .logo {
 	margin-left: 10px;
 	color: #fff;
+	font-size: 30px;
 }
 .right-nav {
 	display: flex;
@@ -48,54 +66,42 @@ a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	color: #ae704a;
+	color: #f19433;
 }
 .content {
-
-}
-.orders {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 80vw;
-	color: #ae704a;
-	justify-content: center;
-}
-.meal-info {
 	display: flex;
 	flex-direction: column;
-	border:	1px solid #deddd8;
-	width: 40%;
-	height: 400px;
-	margin: 10px;
-	outline: none;
-	padding: 0;
+	align-items: center;
+	justify-content: center;
+}
+tr.headings {
+	background-color: #f19433;
+	border: 1px solid #f19433;
+	color: #fff;
+	border-collapse: collapse;
+}
+table {
+    /* border: 1px solid black; */
+	border-collapse: collapse;
+	margin: 40px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+td, th {
+    
+    text-align: center;
+    padding: 15px;
+}
+.total {
+	font-size: 30px;
+	font-style: bold;
+}
 
-}
-.meal-info:hover {
-	box-shadow: inset -1px 0px 1px 2px rgba(164, 182, 189, 0.3), 0 6px 20px 0 rgb(233, 212, 157);
-}
-.foodies {
-	height: 60%;
-}
-.foodD {
-		background-color: #fff;
-		height: 30%;
-		padding: 2px 5px;
-		
-	}
-	.foodD h3, h1 {
-		text-align: center;
-	}
-	.money {
-		text-align: center;
-		background-color: #ae704a;
-		margin: 0 20vw 0 20vw;
-	}
 	footer {
 /*	margin-top: 10px;
 */	width: 100%;
-	background-color: #ae704a;
+	background-color: #f19433;
 	height: 50px;
 	bottom: 0;
 }

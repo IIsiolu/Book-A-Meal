@@ -10,7 +10,7 @@ html{
 body {
 	font-size: 16px;
 	line-height: 1.5;
-	font-family: 'Pangolin', cursive;
+	font-family: 'Maven Pro', sans-serif;
 	padding: 0;
 	margin: 0;
 	color: #fff;
@@ -26,12 +26,13 @@ a {
 	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #ae704a;
+	background-color: #f19433;
 	margin-top: 0;
 
 }
 .logo {
 	margin-left: 10px;
+	font-size: 30px;
 	color: #fff;
 }
 .right-nav {
@@ -47,20 +48,24 @@ a {
 	background: url(../images/homeBg.jpg) no-repeat;
 	background-size: cover;
 	height: 80vh;
+	
+}
+.topblur {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	color: 
+	background: rgba(0,0,0,.5);
+	height: 80vh;
 }
 .top-content-h {
-	font-family: 'Pangolin', cursive;
+	font-family: 'Lobster', cursive;
 	font-weight: bold;
 	font-size: 80px;
 	margin-bottom: 0;
 }
 .top-content-line {
 	font-weight: bold;
-	color: #ca8a71;
+	color: #fb9d3d;
 	margin-top: 0;
 }
 .top-content-p {
@@ -74,7 +79,7 @@ a {
 }
 .loginBtn {
 	background: rgba(0,0,0,.5);
-	border: 0.5px solid #ca8a71;
+	border: 0.5px solid #fb9d3d;
 	font-family: 'Pangolin', cursive;
     outline: none;
     font-size: 20px;
@@ -84,12 +89,17 @@ a {
     /*width: 15vw;*/
     margin-right: 10px;
 }
+.loginBtn:hover {
+	background-color: #fbb76f;
+	color: #fff
+}
 .staff {
 	display: flex;
+	font-family: 'Pangolin', cursive;
 	justify-content: space-around;
 	padding: 1rem;
 	height: 60vh;
-	color: #ae704a;
+	color: #fb9d3d;
 }
 .chef {
 	/*display: flex;
@@ -100,6 +110,12 @@ a {
 
 }
 .chefL {
+	width: 100%;
+	height: 10vh;
+	margin: 10px;
+	align-self: center;
+}
+.che{
 	width: 10vw;
 	height: 10vh;
 	margin: 10px;
@@ -169,7 +185,7 @@ a {
 .today {
 	margin-top: 5rem;
 	background-color: #f3f1f0;
-	color: #ae704a;
+	color: #f19433;
 }
 .today-meal {
 	display: flex;
@@ -213,17 +229,17 @@ a {
 	.foodD p{
 		padding: 0 0px 0px 0px;
 		margin: 0;
-		line-height: 1;
+		/* line-height: 2; */
 		text-align: center;
 	}
 	#order-now {
 		height: 15%;
 		text-align: center;
-		background-color: #ae704a;
+		background-color: #f19433;
 		border: none;
-		border-top: 1px solid grey;
+		/* border-top: 1px solid grey; */
     outline: none;
-    font-size: 20px;
+    font-size: 24px;
     color: #fff;
 
 	}
@@ -262,7 +278,7 @@ a {
 		margin: 0;
 		height: 70vh;
 		background-color: #fff;
-		color: #ae704a;
+		color: #f19433;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -286,12 +302,14 @@ a {
 		background-color: #ec9317;
 		color: #fff;
 		margin:0;
+		border: none;
 		margin-top: 10px;
 		
 	}
 	.incre-btn {
 		width: 50%;
 		border: 0 1px 0 0;
+		border: none;
 		padding: 5px;
 		color: #fff;
 		background-color: #ec9317;
@@ -306,7 +324,7 @@ a {
 	footer {
 /*	margin-top: 10px;
 */	width: 100%;
-	background-color: #ae704a;
+	background-color: #f19433;
 	height: 50px;
 	bottom: 0;
 }
@@ -368,7 +386,7 @@ a {
 	flex-direction: column;
 	justify-content: space-around;
 	padding: 1rem;
-	color: #000;
+	color: #fb9d3d;
 	height: auto;
 }
 .chef {
@@ -414,7 +432,7 @@ a {
 		margin: 0;
 		height: 70vh;
 		background-color: #fff;
-		color: #ae704a;
+		color: #f19433;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

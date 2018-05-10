@@ -50,6 +50,7 @@ input {
 .logo {
 	margin-left: 10px;
 	color: #fff;
+	font-size: 30px;
 }
 .right-nav {
 	display: flex;

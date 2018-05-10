@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         isInt: {
           args: true,
-          msg: 'Id must be a number'
+          msg: 'meal Id must be an integer'
         },
       },
     }

@@ -11,7 +11,7 @@ const validToken = {};
 const adminToken = {};
 
 describe('Book-a-Meal User Test', () => {
-  it('loads the api home page', (done) => {
+  it('should loads the api home page', (done) => {
     request(server)
       .get('/api/v1/')
       .expect(200)
@@ -22,7 +22,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return error if email field is empty on signup', (done) => {
+  it('should return error if email field is empty on signup', (done) => {
     request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfo)
       .end((error, res) => {
@@ -33,7 +33,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return error if password field is empty on signup', (done) => {
+  it('should return error if password field is empty on signup', (done) => {
     request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfo1)
       .end((error, res) => {
@@ -44,7 +44,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return error if password field is less thab six character on signup', (done) => {
+  it('should return error if password field is less thab six character on signup', (done) => {
     request(server).post('/api/v1/auth/signup')
       .send(testData.wronginfos)
       .end((error, res) => {
@@ -55,7 +55,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return error if email field is empty on signin', (done) => {
+  it('should return error if email field is empty on signin', (done) => {
     request(server).post('/api/v1/auth/login')
       .send(testData.loginerror1)
       .end((error, res) => {
@@ -66,7 +66,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return error if password field is empty on signin', (done) => {
+  it('should return error if password field is empty on signin', (done) => {
     request(server).post('/api/v1/auth/login')
       .send(testData.loginerror2)
       .end((error, res) => {
@@ -77,7 +77,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('creates a new user', (done) => {
+  it('should creates a new user', (done) => {
     request(server)
       .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
@@ -95,7 +95,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('trown error if email already exisit in database', (done) => {
+  it('should trown error if email already exisit in database', (done) => {
     request(server)
       .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
@@ -108,7 +108,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('creates user with name and email', (done) => {
+  it('should creates user with name and email', (done) => {
     request(server)
       .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
@@ -161,7 +161,7 @@ describe('Book-a-Meal User Test', () => {
       });
   });
 
-  it('return a token when user successful signin', (done) => {
+  it('should return a token when user successful signin', (done) => {
     request(server)
       .post('/api/v1/auth/login')
       .send(testData.loginUser2)
@@ -174,7 +174,7 @@ describe('Book-a-Meal User Test', () => {
         done();
       });
   });
-  it('creates a new admin user', (done) => {
+  it('should creates a new admin user', (done) => {
     request(server)
       .post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json') 
@@ -190,7 +190,7 @@ describe('Book-a-Meal User Test', () => {
         done();
       });
   });
-  it('return a token when admin successful signin', (done) => {
+  it('should return a token when admin successful signin', (done) => {
     request(server)
       .post('/api/v1/auth/login')
       .send(testData.adminLogin)

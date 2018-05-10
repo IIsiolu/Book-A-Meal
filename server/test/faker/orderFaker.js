@@ -11,23 +11,27 @@ const orderFaker = {
   },
   newOrder2: {
     mealId: '',
-    quantity: 6
+    quantity: 6,
   },
   newOrder3: {
     mealId: '',
-    quantity: 4
+    quantity: 4,
   },
   newOrder4: {
     mealId: 1,
-    quantity: ''
+    quantity: '',
   },
   newOrder5: {
     mealId: 2,
-    quantity: 10
+    quantity: 10,
+  },
+  newUpdate: {
+    mealId: 2,
+    quantity: 20,
   },
   newOrder6: {
     mealId: 6,
-    quantity: 3
+    quantity: 3,
   },
 };
 

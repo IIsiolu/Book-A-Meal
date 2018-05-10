@@ -25,6 +25,10 @@ const orderFaker = {
     mealId: 2,
     quantity: 10
   },
+  newUpdate: {
+    mealId: 2,
+    quantity: 20
+  },
   newOrder6: {
     mealId: 6,
     quantity: 3

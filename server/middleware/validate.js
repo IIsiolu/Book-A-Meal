@@ -1,6 +1,9 @@
 const removeChar = input => (
   input.match(/\w/g).join('')
 );
+const descriptive = input => (
+  input.replace(/[^a-zA-Z ]/g, '')
+);
 const checkDate = (input) => {
   if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
     return true;
@@ -17,23 +20,23 @@ class Validate {
       .normalizeEmail({
         remove_dots: false,
         remove_extension: false,
-        gmail_remove_subaddress: false
+        gmail_remove_subaddress: false,
       });
     req.checkBody(
       'password',
-      'Password Cannot be Blank cant be less than six Charaters!'
+      'Password Cannot be Blank cant be less than six Charaters!',
     )
       .notEmpty().isLength({ min: 6 });
     req.sanitizeBody('firstname');
     req.checkBody(
       'firstname',
-      'input a firstname'
+      'input a firstname',
     )
       .notEmpty();
     req.sanitizeBody('lastname');
     req.checkBody(
       'lastname',
-      'input a lastname'
+      'input a lastname',
     )
       .notEmpty();
     const errors = req.validationErrors();
@@ -41,7 +44,7 @@ class Validate {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
         message: 'Signup Errors',
-        errorMessage
+        errorMessage,
       });
       return; // stop the req from proceeding
     }
@@ -58,11 +61,11 @@ class Validate {
       .normalizeEmail({
         remove_dots: false,
         remove_extension: false,
-        gmail_remove_subaddress: false
+        gmail_remove_subaddress: false,
       });
     req.checkBody(
       'password',
-      'Password Cannot be Blank'
+      'Password Cannot be Blank',
     )
       .notEmpty();
     const errors = req.validationErrors();
@@ -70,7 +73,7 @@ class Validate {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
         message: 'Signin Errors',
-        errorMessage
+        errorMessage,
       });
       return;
       // stop the req from proceeding
@@ -88,13 +91,13 @@ class Validate {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
         message: 'Meal input Errors',
-        errorMessage
+        errorMessage,
       });
       return;
       // stop the req from proceeding
     }
     req.body.name = removeChar(req.body.name);
-    req.body.description = removeChar(req.body.description);
+    req.body.description = descriptive(req.body.description);
     next();
   }
 
@@ -107,7 +110,7 @@ class Validate {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
         message: 'Meal input Errors',
-        errorMessage
+        errorMessage,
       });
       return;
       // stop the req from proceeding
@@ -115,7 +118,7 @@ class Validate {
     if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
       return (
         res.status(400).json({
-          message: 'invalid date input'
+          message: 'invalid date input',
         })
       );
     }
@@ -125,7 +128,7 @@ class Validate {
     if (req.query.date && !checkDate(req.query.date)) {
       return (
         res.status(400).send({
-          message: 'invalid date input'
+          message: 'invalid date input',
         })
       );
     }
@@ -141,10 +144,27 @@ class Validate {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
         message: 'Order input Errors',
-        errorMessage
+        errorMessage,
       });
       return;
       // stop the req from proceeding
+    }
+    next();
+  }
+  static updateOrder(req, res, next) {
+    // console.log({
+    //   body: req.body,
+    // });
+    if (req.body.mealId && isNaN(req.body.mealId)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'mealId must be a number',
+      });
+    } else if (req.body.quantity && isNaN(req.body.quantity)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'quantity must be a number',
+      });
     }
     next();
   }

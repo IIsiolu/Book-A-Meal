@@ -105,6 +105,23 @@ describe('Book-a-meal Order Test', () => {
         });
     }
   );
+  it(
+    'should return 200 if login is ' +
+    'user update is successful',
+    (done) => {
+      request(server)
+        .put('/api/v1/orders/2')
+        .send(testData.newUpdate)
+        .set('Authorization', validToken.token)
+        .end((error, res) => {
+          expect(200);
+          expect(res.body.result)
+            .to.include('updated');
+          if (error) done(error);
+          done();
+        });
+    }
+  );
   it('should fail to return all the ORDER in database, if user is not valid', (done) => {
     request(server)
       .get('/api/v1/orders')
@@ -149,18 +166,18 @@ describe('Book-a-meal Order Test', () => {
         done();
       });
   });
-//   it('should Update a MEAL when Token is correct', (done) => {
-//     request(server)
-//       .put('/api/v1/meals/2')
-//       .send(testData.newMeal6)
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(404);
-//         expect(res.body.result).to.include('updated');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
+  // it('should Update a MEAL when Token is correct', (done) => {
+  //   request(server)
+  //     .put('/api/v1/meals/2')
+  //     .send(testData.newMeal6)
+  //     .set('Authorization', adminToken.token)
+  //     .end((error, res) => {
+  //       expect(404);
+  //       expect(res.body.result).to.include('updated');
+  //       if (error) done(error);
+  //       done();
+  //     });
+  // });
 
 
 //   it('return error if login user is not an admin when deleting MEAL', (done) => {

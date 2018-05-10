@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: 'input name',
+          msg: 'input meal name',
         }
       },
     },
@@ -21,7 +21,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: 'input price',
+          msg: 'input meal price',
         }
       }
     },

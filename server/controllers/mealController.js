@@ -53,11 +53,16 @@ class MealController {
       }
     }).then((meal) => {
       const userInfo = Object.assign({}, meal);
-      meal.update({ ...userInfo, ...req.body });
-      res.status(200).json({
-        result: 'updated',
-        message: meal
-      });
+      meal.update({ ...userInfo, ...req.body }).then((meal) => {
+        res.status(200).json({
+          result: 'updated',
+          message: meal
+        });
+      }).catch(err => res.status(400).json({
+        result: 'failed',
+        message: err
+      }))
+      
     })
       .catch(err => res.status(404).json({
         result: 'failed',

@@ -43,7 +43,7 @@ input {
 	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #ae704a;
+	background-color: #f19433;
 	margin-top: 0;
 
 }
@@ -88,7 +88,7 @@ input {
 .loginBtn {
 	border: none;
     border-bottom: 1px solid #fff;
-    background: #ae704a;
+    background: #f19433;
     outline: none;
     font-size: 16px;
     color: #fff;

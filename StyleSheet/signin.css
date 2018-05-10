@@ -44,7 +44,7 @@ input {
 	height: 40px;
 	color: #fff;
 	font-size: 16px;
-	background-color: #ae704a;
+	background-color: #f19433;
 	cursor: pointer;
 	
 	margin-top: 20
@@ -59,7 +59,7 @@ form {
 	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #ae704a;
+	background-color: #f19433;
 	margin-top: 0;
 
 }
@@ -90,8 +90,8 @@ form {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 40vw;
-	height: 70vh;
-	padding:60px  20px 20px 20px;
+	height: 75vh;
+	padding:40px  20px 20px 20px;
 	box-sizing: border-box;
 	background: rgba(0,0,0,.5);
 	display: flex;
@@ -114,7 +114,7 @@ form {
 	justify-content: center;
 }
 input[type="button"]:hover {
-    background-color: burlywood;
+    background-color: #f19433;
     color: #fff;
 }
 @media only screen and (max-width: 900px) {

@@ -21,19 +21,20 @@ a {
 }
 .container {
 }
-.top-nav {
+.top-nav { 
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	height: 10vh;
-	background-color: #ae704a;
+	background-color: #f19433;
 	margin-top: 0;
 
 }
 .logo {
 	margin-left: 10px;
 	color: #fff;
+	font-size: 30px;
 }
 .right-nav {
 	display: flex;
@@ -48,7 +49,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	color: #ae704a;
+	color: #f19433;
 }
 .content {
 
@@ -58,7 +59,7 @@ a {
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 80vw;
-	color: #ae704a;
+	color: #f19433;
 	justify-content: center;
 }
 .meal-info {
@@ -89,13 +90,13 @@ a {
 	}
 	.money {
 		text-align: center;
-		background-color: #ae704a;
+		background-color: #f19433;
 		margin: 0 20vw 0 20vw;
 	}
 	footer {
 /*	margin-top: 10px;
 */	width: 100%;
-	background-color: #ae704a;
+	background-color: #f19433;
 	height: 50px;
 	bottom: 0;
 }

@@ -111,7 +111,7 @@ describe('Book-a-meal MEAL Test', () => {
         .post('/api/v1/meals')
         .send(testData.newMeal5)
         .set('Authorization', adminToken.token)
-        .end((error, res) => {
+        .end((error, res) => { 
           expect(201);
           expect(res.body.result)
             .to.include('success');
@@ -182,7 +182,7 @@ describe('Book-a-meal MEAL Test', () => {
   });
   it('should should Update a MEAL when Token is correct', (done) => {
     request(server)
-      .put('/api/v1/meals/1')
+      .put('/api/v1/meals/2')
       .send(testData.newMeal6)
       .set('Authorization', adminToken.token)
       .end((error, res) => {

@@ -12,7 +12,7 @@ class Auth {
     if (token) {
       const secret = process.env.SECRET;
       jwt.verify(token, secret, (err, data) => {
-        if (err) {
+        if (err || data.role !== 'user') {
           return res.status(401).json({
             message: 'Authentication failed',
           });

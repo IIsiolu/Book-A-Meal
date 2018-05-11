@@ -17,7 +17,7 @@ class OrderController {
       })).catch((err) => {
         res.status(500).send({
           result: 'failed',
-          message: err.errors[0].message,
+          message: 'cannot create meal order',
         });
       });
   }
@@ -38,11 +38,11 @@ class OrderController {
           });
         }).catch(err => res.status(400).json({
           result: 'failed',
-          message: err,
+          message: 'cannot create order, put a valid input',
         }));
       }).catch(err => res.status(404).json({
         result: 'failed',
-        message: err,
+        message: 'No order exist with that Id',
       }));
   }
 
@@ -55,7 +55,7 @@ class OrderController {
       .then(orders => res.status(200).json({
         result: 'success',
         message: orders,
-      })).catch(error => res.status(400).json(error));
+      })).catch(error => res.status(400).json('failed to get all orders'));
   }
 }
 export default OrderController;

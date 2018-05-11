@@ -22,7 +22,7 @@ class MenuController {
       }).catch((err) => {
         res.status(500).send({
           result: 'Failed',
-          message: err,
+          message: 'cannot create menu, check your input',
         });
       });
   }

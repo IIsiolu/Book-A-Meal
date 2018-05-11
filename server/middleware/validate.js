@@ -1,6 +1,10 @@
 const removeChar = input => (
   input.match(/\w/g).join('')
 );
+const testString = (input) => {
+  const reg = /^[a-z]+$/i;
+  return reg.test(input);
+};
 const descriptive = input => (
   input.replace(/[^a-zA-Z ]/g, '')
 );
@@ -49,8 +53,18 @@ class Validate {
       return; // stop the req from proceeding
     }
     //   no errors
-    req.body.firstname = removeChar(req.body.firstname);
-    req.body.lastname = removeChar(req.body.lastname);
+    if (!testString(req.body.firstname)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'input a valid first name',
+      });
+    }
+    if (!testString(req.body.lastname)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'input a valid last name',
+      });
+    }
     next();
   }
 
@@ -96,8 +110,38 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    if (!testString(req.body.name)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'invalid meal name input',
+      });
+    }
+    if (isNaN(req.body.price)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'invalid meal price',
+      });
+    }
     req.body.name = removeChar(req.body.name);
     req.body.description = descriptive(req.body.description);
+    next();
+  }
+  static validatemealUpdate(req, res, next) {
+    if (req.body.name && !testString(req.body.name)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'invalid meal name',
+      });
+    }
+    else if (req.body.price && isNaN(req.body.price)) {
+      return res.status(400).send({
+        result: 'failed',
+        message: 'invalid meal price',
+      });
+    }
+    else if (req.body.description) {
+      req.body.description = descriptive(req.body.description);
+    }
     next();
   }
 

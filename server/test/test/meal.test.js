@@ -7,11 +7,7 @@ import { validToken, adminToken } from '../../test/test/user.test';
 const { expect } = chai;
 
 describe('Book-a-meal MEAL Test', () => {
-<<<<<<< HEAD
   it('should load the api home page', (done) => {
-=======
-  it('should loads the api home page', (done) => {
->>>>>>> deb7f713ea4db7db6451f2d86d2edd85fef21cb5
     request(server)
       .get('/api/v1/')
       .expect(200)
@@ -22,11 +18,7 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
-<<<<<<< HEAD
   it('should return an error if the token is not present when adding a meal', (done) => {
-=======
-  it('should return error if token is not present when adding Meal', (done) => {
->>>>>>> deb7f713ea4db7db6451f2d86d2edd85fef21cb5
     request(server)
       .post('/api/v1/meals')
       .send(testData.newMeal)

@@ -24,11 +24,10 @@ class MealController {
           result: 'success',
           message: meal,
         });
-      }).catch((err) => {
-        console.log(err);
+      }).catch(() => {
         res.status(500).send({
           result: 'Failed',
-          message: err,
+          message: 'failed to create meal',
         });
       });
   }
@@ -59,7 +58,7 @@ class MealController {
         });
       }).catch(err => res.status(400).json({
         result: 'failed',
-        message: err,
+        message: 'fail to modify meal, Invalid input',
       }));
     })
       .catch(error => res.status(404).json({
@@ -82,7 +81,7 @@ class MealController {
             })).catch((err) => {
             res.status(500).send({
               result: 'failed',
-              message: err,
+              message: 'fail to delete meal',
             });
           });
         } else {

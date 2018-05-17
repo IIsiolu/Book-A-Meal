@@ -132,10 +132,10 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-  it('should return all the MENU in database, if user an admin', (done) => {
+  it('should return all the MENU in database, if user is an admin', (done) => {
     request(server)
       .get('/api/v1/menu?date=2018-01-01')
-      .set('Authorization', adminToken.token)
+      .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(200);
         expect(res.body.result).to.include('success');

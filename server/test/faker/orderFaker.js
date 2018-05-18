@@ -1,13 +1,29 @@
 
 const orderFaker = {
   newOrder: {
-    mealId: 1,
-    quantity: 5
+    orders: [
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
 
   },
   newOrder1: {
-    mealId: 2,
-    quantity: 6
+    orders: [
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
   },
   newOrder2: {
     mealId: '',
@@ -22,16 +38,58 @@ const orderFaker = {
     quantity: '',
   },
   newOrder5: {
-    mealId: 2,
-    quantity: 10,
+    orders: [
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
   },
   newUpdate: {
-    mealId: 2,
-    quantity: 20,
+    orders: [
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
   },
   newOrder6: {
-    mealId: 6,
-    quantity: 3,
+    orders: [
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
+  },
+  newOrder7: {
+    orders: [],
+  },
+  newOrder8: {
+    orders: [],
+  },
+  newOrder9: {
+    orders: [
+      {
+        mealId: 'y',
+        quantity: 5,
+      },
+      {
+        mealId: 2,
+        quantity: 5,
+      },
+    ],
   },
 };
 

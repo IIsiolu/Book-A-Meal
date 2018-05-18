@@ -4,8 +4,7 @@ import { MenuController } from '../controllers';
 
 const menuRouter = express.Router();
 
-// menuRouter.post('/', Auth.verifyAdmin, Validate.validateMenuInput, MenuController.createMenu);
-menuRouter.post('/', Auth.verifyAdmin, Validate.validateMenuInput, MenuController.testMenu);
+menuRouter.post('/', Auth.verifyAdmin, Validate.validateMenuInput, MenuController.createMenu);
 menuRouter.get('/', Auth.verifyToken, Validate.validateDate, MenuController.getMenu);
 
 export default menuRouter;

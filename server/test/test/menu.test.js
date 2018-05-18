@@ -95,8 +95,7 @@ describe('Book-a-meal MENU Test', () => {
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.success);
           if (error) done(error);
           done();
         });
@@ -113,8 +112,41 @@ describe('Book-a-meal MENU Test', () => {
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.success);
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+  it(
+    'should return 400 if login is ' +
+    'admin and menu is not an array',
+    (done) => {
+      request(server)
+        .post('/api/v1/menu')
+        .send(testData.newMenu7)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(400);
+          expect(res.body.message)
+            .to.include('Input must be an array');
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+  it(
+    'should return 400 if login is ' +
+    'admin and menu contains incorrect data input',
+    (done) => {
+      request(server)
+        .post('/api/v1/menu')
+        .send(testData.newMenu8)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(400);
+          expect(res.body.message)
+            .to.include('Array input must be integer');
           if (error) done(error);
           done();
         });
@@ -138,7 +170,7 @@ describe('Book-a-meal MENU Test', () => {
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(200);
-        expect(res.body.result).to.include('success');
+        expect(res.body.success);
         if (error) done(error);
         done();
       });

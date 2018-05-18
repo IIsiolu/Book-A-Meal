@@ -14,7 +14,7 @@ describe('Book-a-meal Order Test', () => {
       .end((err) => {
         if (err) {
           done(err);
-        }
+        } 
         done();
       });
   });
@@ -44,14 +44,14 @@ describe('Book-a-meal Order Test', () => {
       });
   });
 
-  it('should return 403 if login is User and mealId is empty', (done) => {
+  it('should return 403 if login is User and Order is empty', (done) => {
     request(server)
       .post('/api/v1/orders')
-      .send(testData.newOrder3)
+      .send(testData.newOrder7)
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(400);
-        expect(res.body.errorMessage).to.include('input meal Id');
+        expect(res.body.errorMessage).to.include('input meal Orders');
         if (error) done(error);
         done();
       });
@@ -64,7 +64,7 @@ describe('Book-a-meal Order Test', () => {
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(400);
-        expect(res.body.errorMessage).to.include('input meal quantity');
+        expect(res.body.errorMessage).to.include('input meal Orders');
         if (error) done(error);
         done();
       });
@@ -80,8 +80,7 @@ describe('Book-a-meal Order Test', () => {
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.data)
           if (error) done(error);
           done();
         });
@@ -98,8 +97,39 @@ describe('Book-a-meal Order Test', () => {
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.data)
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+  it(
+    'should return 400 if login is ' +
+    'user and Order body is empty',
+    (done) => {
+      request(server)
+        .post('/api/v1/orders')
+        .send(testData.newOrder8)
+        .set('Authorization', validToken.token)
+        .end((error, res) => {
+          expect(400);
+          expect(res.body.message).to.include('Order input Errors')
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+  it(
+    'should return 400 if login is ' +
+    'user and Order body contains invalid data',
+    (done) => {
+      request(server)
+        .post('/api/v1/orders')
+        .send(testData.newOrder9)
+        .set('Authorization', validToken.token)
+        .end((error, res) => {
+          expect(400);
+          expect(res.body.message).to.include('Meal Id and quantity must be an Integer')
           if (error) done(error);
           done();
         });

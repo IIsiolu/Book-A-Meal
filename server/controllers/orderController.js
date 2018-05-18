@@ -3,23 +3,25 @@ import { Order, User, Meal } from '../models';
 class OrderController {
   static createOrder(req, res) {
     const {
-      mealId, quantity,
+      orders,
     } = req.body;
     const userId = req.user.id;
+    const allOrders = orders.map(newOrder => ({
+      mealId: newOrder.mealId,
+      quantity: newOrder.quantity,
+      userId,
+    }));
     Order
-      .create({
-        quantity,
-        mealId,
-        userId,
-      }).then(order => res.status(201).send({
-        result: 'success',
-        message: order,
-      })).catch((err) => {
-        res.status(500).send({
-          result: 'failed',
-          message: 'cannot create meal order',
+      .bulkCreate(allOrders, { individualHooks: true }).then((created) => {
+        res.status(201).send({
+          success: true,
+          data: created,
         });
-      });
+      }).catch(err => res.status(500).send({
+        success: false,
+        error: err, 
+      }));
+
   }
 
   static modifyOrder(req, res) {

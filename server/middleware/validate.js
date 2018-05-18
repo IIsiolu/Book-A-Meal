@@ -13,7 +13,17 @@ const checkDate = (input) => {
     return true;
   }
   return false;
-
+};
+const checkInt = current => (
+  Number.isInteger(current)
+);
+const checkObj = (current) => {
+  // if(Number.isInteger(current.mealId)  Number.isInteger(current.quantity)){
+  //   check = true;
+  // }
+  const check = !!(Number.isInteger(current.mealId) && Number.isInteger(current.quantity));
+  console.log(check);
+  return check;
 };
 
 class Validate {
@@ -132,14 +142,12 @@ class Validate {
         result: 'failed',
         message: 'invalid meal name',
       });
-    }
-    else if (req.body.price && isNaN(req.body.price)) {
+    } else if (req.body.price && isNaN(req.body.price)) {
       return res.status(400).send({
         result: 'failed',
         message: 'invalid meal price',
       });
-    }
-    else if (req.body.description) {
+    } else if (req.body.description) {
       req.body.description = descriptive(req.body.description);
     }
     next();
@@ -148,6 +156,7 @@ class Validate {
   static validateMenuInput(req, res, next) {
     req.checkBody('mealId', 'input menu Id').notEmpty();
     req.checkBody('date', 'input menu date').notEmpty();
+    const meal = req.body.mealId;
     const errors = req.validationErrors();
 
     if (errors) {
@@ -159,12 +168,25 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    // console.log(isArray);
+    if (!Array.isArray(meal) || meal.length === 0) {
+      res.status(400).send({
+        success: false,
+        message: 'Input must be an array',
+      });
+      return;
+    } else if (meal.every(checkInt) === false) {
+      res.status(400).send({
+        success: false,
+        message: 'Array input must be integer',
+      });
+      return;
+    }
     if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      return (
-        res.status(400).json({
-          message: 'invalid date input',
-        })
-      );
+      res.status(400).json({
+        message: 'invalid date input',
+      });
+      return;
     }
     next();
   }
@@ -177,13 +199,11 @@ class Validate {
       );
     }
     next();
-
   }
   static validateOrder(req, res, next) {
-    req.checkBody('mealId', 'input meal Id').notEmpty();
-    req.checkBody('quantity', 'input meal quantity').notEmpty();
+    req.checkBody('orders', 'input meal Orders').notEmpty();
+    const cusOrders = req.body.orders;
     const errors = req.validationErrors();
-
     if (errors) {
       const errorMessage = errors.map(err => err.msg);
       res.status(400).json({
@@ -193,6 +213,21 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    if (!Array.isArray(cusOrders) || cusOrders.length === 0) {
+      res.status(400).send({
+        success: false,
+        message: 'Input must be an array of orders',
+      });
+      return;
+    }
+    if (cusOrders.every(checkObj) === false) {
+      res.status(400).send({
+        success: false,
+        message: 'Meal Id and quantity must be an Integer',
+      });
+      return;
+    }
+
     next();
   }
   static updateOrder(req, res, next) {

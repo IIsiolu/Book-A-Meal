@@ -16,17 +16,17 @@ class MealController {
       .spread((meal, created) => {
         if (!created) {
           return res.status(409).json({
-            result: 'Failed',
+            success: false,
             message: 'Meal already exist',
           });
         }
         return res.status(201).json({
-          result: 'success',
-          message: meal,
+          success: false,
+          data: meal,
         });
       }).catch(() => {
         res.status(500).send({
-          result: 'Failed',
+          success: false,
           message: 'failed to create meal',
         });
       });
@@ -36,8 +36,8 @@ class MealController {
     Meal
       .all()
       .then(meal => res.status(200).json({
-        result: 'success',
-        message: meal,
+        success: true,
+        data: meal,
       }))
       .catch(error => res.status(400).json(error));
   }
@@ -53,16 +53,16 @@ class MealController {
       const userInfo = Object.assign({}, meal);
       meal.update({ ...userInfo, ...req.body }).then((newMeal) => {
         res.status(200).json({
-          result: 'updated',
-          message: newMeal,
+          success: true,
+          message: 'updated',
         });
       }).catch(err => res.status(400).json({
-        result: 'failed',
+        success: false,
         message: 'fail to modify meal, Invalid input',
       }));
     })
       .catch(error => res.status(404).json({
-        result: 'failed',
+        success: false,
         message: ' No meal with that ID',
       }));
   }
@@ -76,22 +76,23 @@ class MealController {
         if (meal) {
           meal.destroy().then(meal =>
             res.status(200).json({
-              result: 'success',
+              success: true,
               message: 'meal successfully deleted!',
             })).catch((err) => {
             res.status(500).send({
-              result: 'failed',
+              success: false,
               message: 'fail to delete meal',
             });
           });
         } else {
           res.status(404).json({
-            result: 'failed',
+            success: false,
             message: 'There is no meal with that id!!',
           });
         }
       })
       .catch(err => res.status(400).json({
+        success: false,
         message: 'Invalid Parameter In Url',
       }));
   }

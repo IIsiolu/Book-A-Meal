@@ -95,8 +95,8 @@ describe('Book-a-meal MEAL Test', () => {
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.data);
+          // .to.include('success');
           if (error) done(error);
           done();
         });
@@ -111,10 +111,9 @@ describe('Book-a-meal MEAL Test', () => {
         .post('/api/v1/meals')
         .send(testData.newMeal5)
         .set('Authorization', adminToken.token)
-        .end((error, res) => { 
+        .end((error, res) => {
           expect(201);
-          expect(res.body.result)
-            .to.include('success');
+          expect(res.body.data)
           if (error) done(error);
           done();
         });
@@ -138,7 +137,7 @@ describe('Book-a-meal MEAL Test', () => {
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(200);
-        expect(res.body.result).to.include('success');
+        expect(res.body.data)
         if (error) done(error);
         done();
       });
@@ -187,7 +186,7 @@ describe('Book-a-meal MEAL Test', () => {
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(404);
-        expect(res.body.result).to.include('updated');
+        expect(res.body.message).to.include('updated');
         if (error) done(error);
         done();
       });

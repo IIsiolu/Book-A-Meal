@@ -84,12 +84,12 @@ describe('Book-a-Meal User Test', () => {
       .send(testData.singupUser1)
       .expect(201)
       .end((err, res) => {
-        testUser.user = res.body.message;
+        testUser.user = res.body.data;
         expect(testUser.user).to.have.property('firstname');
         expect(testUser.user).to.have.property('lastname');
         expect(testUser.user).to.have.property('email');
-        expect(res.body.message.email).to.equal(testData.singupUser1.email);
-        expect(res.body.message.firstname).to.equal(testData.singupUser1.firstname);
+        expect(res.body.data.email).to.equal(testData.singupUser1.email);
+        expect(res.body.data.firstname).to.equal(testData.singupUser1.firstname);
         if (err) return done(err);
         done();
       });
@@ -115,11 +115,11 @@ describe('Book-a-Meal User Test', () => {
       .send(testData.singupUser)
       .expect(201)
       .end((err, res) => {
-        testUser.user2 = res.body.message;
+        testUser.user2 = res.body.data;
         expect(testUser.user2).to.have.property('firstname');
         expect(testUser.user2).to.have.property('email');
-        expect(res.body.message.email).to.equal(testData.singupUser.email);
-        expect(res.body.message.firstname).to.equal(testData.singupUser.firstname);
+        expect(res.body.data.email).to.equal(testData.singupUser.email);
+        expect(res.body.data.firstname).to.equal(testData.singupUser.firstname);
         if (err) return done(err);
         done();
       });
@@ -181,11 +181,11 @@ describe('Book-a-Meal User Test', () => {
       .send(testData.adminsignup)
       .expect(201)
       .end((err, res) => {
-        testAdmin.user = res.body.message;
+        testAdmin.user = res.body.data;
         expect(testAdmin.user).to.have.property('firstname');
         expect(testAdmin.user).to.have.property('email');
-        expect(res.body.message.email).to.equal(testData.adminsignup.email);
-        expect(res.body.message.firstname).to.equal(testData.adminsignup.firstname);
+        expect(res.body.data.email).to.equal(testData.adminsignup.email);
+        expect(res.body.data.firstname).to.equal(testData.adminsignup.firstname);
         if (err) return done(err);
         done();
       });

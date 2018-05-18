@@ -20,18 +20,24 @@ class UserController {
       .spread((user, created) => {
         if (!created) {
           return res.status(409).send({
-            result: 'Failed',
+            success: false,
             message: 'User already exist',
           });
         }
+        const createdUser = {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          role: user.role,
+          email: user.email,
+        };
         return res.status(201).send({
-          result: 'success',
-          message: user,
+          success: true,
+          data: createdUser,
         });
       }).catch((err) => {
         res.status(500).send({
-          result: 'Failed',
-          message: err.errors[0].message,
+          success: false,
+          message: 'User cannot be created',
         });
       });
   }
@@ -52,26 +58,26 @@ class UserController {
               firstname: check.firstname,
             }, secret, { expiresIn: '500h' });
             return res.status(200).json({
-              result: 'success',
+              success: true,
               message: `Welcome ${check.firstname}`,
               token,
             });
           }
           return res.status(409).json({
-            result: 'failed',
+            success: false,
             message: 'Email or password is incorrect',
           });
         });
       } else {
         res.status(404).json({
-          result: 'failed',
+          success: 'false',
           message: 'Email or password incorrect',
         });
       }
     } catch (err) {
       res.status(500).send({
-        result: 'failed',
-        message: err,
+        success: false,
+        message: 'User cannot be signed in',
       });
     }
   }

@@ -15,6 +15,9 @@ const checkDate = (input) => {
   return false;
 
 };
+const checkInt = current => (
+  Number.isInteger(current)
+);
 
 class Validate {
   static validateSignUp(req, res, next) {
@@ -148,6 +151,7 @@ class Validate {
   static validateMenuInput(req, res, next) {
     req.checkBody('mealId', 'input menu Id').notEmpty();
     req.checkBody('date', 'input menu date').notEmpty();
+    const meal = req.body.mealId;
     const errors = req.validationErrors();
 
     if (errors) {
@@ -159,12 +163,27 @@ class Validate {
       return;
       // stop the req from proceeding
     }
+    // console.log(isArray);
+    if (!Array.isArray(meal) || meal.length === 0) {
+      res.status(400).send({
+        success: false,
+        data: 'Input must be an array',
+      });
+      return;
+    }
+    else if (meal.every(checkInt) === false) {
+      res.status(400).send({
+        success: false,
+        data: 'Array input must be integer',
+      });
+      return;
+    }
     if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      return (
-        res.status(400).json({
-          message: 'invalid date input',
-        })
+      res.status(400).json({
+        message: 'invalid date input',
+      },
       );
+      return;
     }
     next();
   }

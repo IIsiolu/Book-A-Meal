@@ -1,6 +1,37 @@
 import { Menu, Meal } from '../models';
 
 class MenuController {
+
+  static testMenu(req, res) {
+    const { mealId, date } = req.body;
+    const data = new Date(date);
+
+    Menu.findOne({
+      where: { date: data },
+    }).then((found) => {
+      if (found) {
+        res.status(400).send({
+          success: false,
+          data: 'meal already exist for that day',
+        });
+      }
+      else {
+        const allMenu = mealId.map(id => ({
+          mealId: id,
+          date: data,
+        }));
+        Menu.bulkCreate(allMenu, { individualHooks: true }).then((created) => {
+          res.status(201).send({
+            success: true,
+            data: created,
+          });
+        }).catch(err => res.status(500).send({
+          success: false,
+          error: err,
+        }));
+      }
+    });
+  }
   static createMenu(req, res) {
     const { mealId, date } = req.body;
     const data = new Date(date);
@@ -37,6 +68,7 @@ class MenuController {
           date,
         },
       }).then((menu) => {
+        console.log(date);
         if (menu.length === 0) {
           return res.status(404).send({
             result: 'failed',

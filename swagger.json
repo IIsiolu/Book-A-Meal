@@ -1,0 +1,627 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Book-A-Meal is an application that allows customers to make food orders and helps the food  vendor know what the customers want to eat.",
+    "version": "1.0.0",
+    "title": "Book A Meal",
+    "contact": {
+      "email": "phemy.smith@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://book-meal.herokuapp.com/api/v1"
+    }
+  },
+  "host": "book-meal.herokuapp.com",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Handles user authentication and authorization"
+    },
+    {
+      "name": "Meals",
+      "description": "Creates and provide all meal options"
+    },
+    {
+      "name": "Orders",
+      "description": "Creates user order and order management"
+    },
+    {
+      "name": "Menu",
+      "description": "Creates menu option for a specific day"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Create a new user in the database",
+        "description": "",
+        "operationId": "adduser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User that needs to be created in the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSignup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User successfully created"
+          },
+          "400": {
+            "description": "Signup errors"
+          },
+          "500": {
+            "description": "user cannot be created"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login a user with an account to the application",
+        "description": "",
+        "operationId": "loginuser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user that needs to login to the application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully signin"
+          },
+          "400": {
+            "description": "Signup errors"
+          },
+          "404": {
+            "description": "user not found"
+          },
+          "500": {
+            "description": "user cannot be signed in"
+          }
+        }
+      }
+    },
+    "/meals": {
+      "post": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Creates new meal",
+        "description": "",
+        "operationId": "createmeal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "creating a new meal",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Meals"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Meal successfull created"
+          },
+          "400": {
+            "description": "input errors",
+            "schema": {
+              "$ref": "#/definitions/ResponseMessage"
+            }
+          },
+          "409": {
+            "description": "meal already exist",
+            "schema": {
+              "$ref": "#/definitions/ResponseMessage"
+            }
+          },
+          "500": {
+            "description": "meal cannot be created",
+            "schema": {
+              "$ref": "#/definitions/ResponseMessage"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Get all meals",
+        "description": "gets all meals created",
+        "operationId": "getmeal",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "description": "Authorization key",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meals"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/ResponseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/meals/<mealId>": {
+      "put": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Modify an existing meal",
+        "description": "",
+        "operationId": "editmeal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "edit an existing meal",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Meals"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meal successfully updated"
+          },
+          "400": {
+            "description": "fail to modify meal, Invalid input"
+          },
+          "404": {
+            "description": "Meal not found"
+          },
+          "500": {
+            "description": "Meal cannot be updated"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "delete an existing meal",
+        "description": "",
+        "operationId": "deletemeal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "deletes an existing meal",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Meals"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "meal successfully deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Meal not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "book_a_meal_auth": [
+              "write:meals",
+              "read:meals"
+            ]
+          }
+        ]
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Create a meal Order",
+        "description": "",
+        "operationId": "orderMeal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Ordering a meal from a menu",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orders"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Order successfully created"
+          },
+          "400": {
+            "description": "input errors"
+          },
+          "500": {
+            "description": "Order cannot be created"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "get all orders",
+        "description": "Multiple orders created by customers are gotten",
+        "operationId": "getorders",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Orders"
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to get all orders"
+          }
+        }
+      }
+    },
+    "/orders/<orderId>": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Modify an existing meal",
+        "description": "",
+        "operationId": "editorder",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "edit an existing order",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orders"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order successfully updated"
+          },
+          "400": {
+            "description": "fail to modify order, Invalid input"
+          },
+          "404": {
+            "description": "order not found"
+          },
+          "500": {
+            "description": "ordeer cannot be updated"
+          }
+        }
+      }
+    },
+    "/menu": {
+      "post": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Login a user with an account to the application",
+        "description": "",
+        "operationId": "postMenu",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creating a menu for a specific day",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Menu successful created"
+          },
+          "400": {
+            "description": "Input errors"
+          },
+          "500": {
+            "description": "menu cannot be created"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "menu for a specific day",
+        "description": "Collection of meals set for a specific day",
+        "operationId": "getmenu",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Menu for a specific day",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Menu"
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to get all Menu"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "book_a_meal_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://book-meal.herokuapp.com/api/v1/auth",
+      "flow": "implicit",
+      "scopes": {
+        "write:meals": "modify a meal",
+        "read:meals": "read a meal",
+        "write:orders": "create/modify orders",
+        "read:orders": "read orders",
+        "write:menu": "create/modify a menu",
+        "read:menu": "read a menu"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Orders": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mealId": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Meals"
+          }
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Meals": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "image": {
+          "type": "string"
+        }
+      }
+    },
+    "UserSignup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Menu": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mealId": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Meals"
+          }
+        },
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseMessage": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

@@ -43,7 +43,9 @@
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.37.6",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "swagger-jsdoc": "^1.9.7",
+    "swagger-ui-express": "^3.0.9"
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.11.0",

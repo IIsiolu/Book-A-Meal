@@ -3,11 +3,13 @@ import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
 import { userRouter, mealRouter, menuRouter, orderRouter } from './routes';
-// import { mealRouter, menuRouter, orderRouter } from './src/routes/';
+
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerDocument = require('../swagger.json');
 
 // Instance of the express app
 const app = express();
-
 export default app;
 // Request logger
 app.use(morgan('dev'));
@@ -20,8 +22,7 @@ app.use('/api/v1', userRouter);
 app.use('/api/v1', mealRouter);
 app.use('/api/v1/menu', menuRouter);
 app.use('/api/v1/orders', orderRouter);
-
-// app.use('/api/v1/orders', orderRouter)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/v1', (req, res) => {
   res.status(200).send({
@@ -30,22 +31,22 @@ app.get('/api/v1', (req, res) => {
 });
 app.get('*', (req, res) => {
   res.status(404).send({
-    message: 'That url does not exist on this server'
+    message: 'That url does not exist on this server',
   });
 });
 app.post('*', (req, res) => {
   res.status(404).send({
-    message: 'That url does not exist on this server'
+    message: 'That url does not exist on this server',
   });
 });
 app.delete('*', (req, res) => {
   res.status(404).send({
-    message: 'That url does not exist on this server'
+    message: 'That url does not exist on this server',
   });
 });
 app.put('*', (req, res) => {
   res.status(404).send({
-    message: 'That url does not exist on this server'
+    message: 'That url does not exist on this server',
   });
 });
 

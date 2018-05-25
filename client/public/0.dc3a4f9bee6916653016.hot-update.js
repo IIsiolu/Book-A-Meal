@@ -1,0 +1,1 @@
+exports.id=0,exports.modules={701:function(e,t,u){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,r=u(700),o=(n=r)&&n.__esModule?n:{default:n};t.default={user:{login:function(e){return o.default.post("/api/v1/auth/login",{credentials:e}).then(function(e){return e.data.user})}}}}};

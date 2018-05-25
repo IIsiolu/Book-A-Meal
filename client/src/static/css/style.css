@@ -14,7 +14,7 @@ body {
 	margin: 0;
 /*	background-color: black;
 */}
-a {
+a { 
 	text-decoration: none;
 	/* color: #fff; */
 }
@@ -22,7 +22,7 @@ a {
 	color: #ae5856
 }
 .container {
-	/* background-image: url("../images/pexels-photo-262918.jpeg"); */
+	background-image: url("../images/pexel.jpeg");
 
 }
 .top-nav {
@@ -34,4 +34,115 @@ a {
 	background-color: #ae704a;
 	margin-top: 0;
 
+}
+.logo {
+	margin-left: 10px;
+	color: #fff;
+}
+.right-nav {
+	display: flex;
+	justify-content: space-around;
+	margin-right: 20px;
+
+}
+.nav-text {
+	margin-right: 20px
+}
+.coverContainer {
+	display: flex;
+	height: 90vh
+}
+.coverImg {
+	width: 100%;
+}
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: 70vh;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.top-content {
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+.info {
+
+}
+.top-content-header {
+	text-align: center;
+	margin: 0 
+}
+.topP {
+	width: 80%;
+	text-align: center;
+}
+.bottom-content {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+.loginBtn {
+	border: none;
+    border-bottom: 1px solid #fff;
+    background: #ae704a;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    height: 40px;
+    width: 15vw;
+    margin-right: 10px;
+}
+.later a{
+	color: #fff;
+
+}
+
+.btns {
+
+}
+@media only screen and (max-width: 800px) {
+	.top-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: auto;
+
+}
+.logo, .right-nav {
+	margin:0;
+}
+.right-nav {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
+.content {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: 80vh;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 }

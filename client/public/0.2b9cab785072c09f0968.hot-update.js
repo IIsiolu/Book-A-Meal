@@ -1,0 +1,2 @@
+exports.id=0,exports.modules={674:function(e,t,u){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l,d=u(1),r=(l=d)&&l.__esModule?l:{default:l};t.default=function(e){return r.default.createElement("div",null)}}};
+//# sourceMappingURL=bundle.map

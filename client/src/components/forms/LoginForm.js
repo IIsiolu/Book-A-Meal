@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import validator from 'validator';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import InlineError from '../messages/inlineError';
@@ -24,9 +24,8 @@ class LoginForm extends Component {
     
   
   onChange =(e) => {
-    console.log(e.target.value)
     this.setState({
-      data: { ...this.state.data, [e.target.name]: [e.target.value] },
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     });
   }
   onSubmit =(e) => {
@@ -40,7 +39,9 @@ class LoginForm extends Component {
 
   validate(data) {
     const errors = {};
-    if (!validator.isEmail(data.email)) errors.email = 'Invalid email';
+    const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+    if (!emailRegex.test(data.email) || !data.email) errors.email = 'Invalid email';
     if (!data.password) errors.password = "Can't be blank";
     return errors;
   }
@@ -48,7 +49,11 @@ class LoginForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-            <Form onSubmit={this.onSubmit} >
+            <Form onSubmit={this.onSubmit} loading={this.props.loading} >
+            { this.props.error && <Message negative>
+                <Message.Header> Something went wrong </Message.Header>
+                <p>{this.props.error} </p>
+            </Message>}
               <Form.Field error={!!errors.email}>
                 <label htmlFor='email'> Email </label>
                 <input
@@ -70,8 +75,9 @@ class LoginForm extends Component {
                   onChange={this.onChange}
                   />
                  {errors.password && <InlineError text={errors.password} /> }
-              </Form.Field>
 
+              </Form.Field>
+              {/* {this.props.error && <InlineError text={this.props.error} /> } */}
               <Button
                 type="submit"
                 primary
@@ -82,7 +88,7 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm.prototypes = {
+LoginForm.propTypes = {
   submit: PropTypes.func.isRequired
 }
 

@@ -1,0 +1,2 @@
+exports.id=0,exports.modules={674:function(e,t,u){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=o(u(1)),r=(u(103),o(u(0))),l=u(102);function o(e){return e&&e.__esModule?e:{default:e}}var d=function(){return n.default.createElement("div",null,n.default.createElement("h1",null," Home Page "))};d.propTypes={isAuthenticated:r.default.bool.isRequired};t.default=(0,l.connect)(function(e){return{isAuthenticated:!!e.user.token}})(d)}};
+//# sourceMappingURL=bundle.map

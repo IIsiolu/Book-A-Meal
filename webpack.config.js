@@ -17,7 +17,9 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
+    sourceMapFilename: 'bundle.map',
   },
+  devtool: '#source-map',
   module: {
     rules: [
       {
@@ -37,14 +39,13 @@ module.exports = {
       },
       { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
       { test: /\.(sass|scss)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.(png|woff|woff2|eot|ttf|jpg|gif|svg)$/i, loaders: ['file-loader', 'url-loader?limit=100000'] },
+      { test: /\.(png|woff|woff2|eot|ttf|jpg|jpeg|gif|svg)$/i, loaders: ['file-loader', 'url-loader?limit=100000'] },
     ],
   },
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('development'),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {

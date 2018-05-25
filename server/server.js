@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
@@ -18,6 +19,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
+
+app.use(express.static(path.join(__dirname, '/../client/public')));
+app.use(express.static(path.join(__dirname, '/../client/src')));
 app.use('/api/v1', userRouter);
 app.use('/api/v1', mealRouter);
 app.use('/api/v1/menu', menuRouter);
@@ -30,9 +34,7 @@ app.get('/api/v1', (req, res) => {
   });
 });
 app.get('*', (req, res) => {
-  res.status(404).send({
-    message: 'That url does not exist on this server',
-  });
+  res.status(404).sendFile(path.join(__dirname, '/../client/public/index.html'))
 });
 app.post('*', (req, res) => {
   res.status(404).send({

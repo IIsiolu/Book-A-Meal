@@ -13,7 +13,7 @@ const dotenv = new Dotenv({
 
 
 module.exports = {
-  entry: './client/src/index.jsx',
+  entry: ['react-hot-loader/patch', './client/src/index.jsx'],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
@@ -21,7 +21,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/], query: { presets: ['react'] },
+        test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/], query: { presets: ['react', 'env', 'stage-2'] },
       },
       {
         test: /\.jsx?$/,
@@ -30,29 +30,26 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['react'],
+              presets: ['react', 'env', 'stage-2'],
             },
           },
         ],
       },
       { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
-      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.(png|jpg|gif|svg)$/i, loader: 'file-loader' },
+      { test: /\.(sass|scss)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(png|woff|woff2|eot|ttf|jpg|gif|svg)$/i, loaders: ['file-loader', 'url-loader?limit=100000'] },
     ],
   },
   mode: process.env.NODE_ENV,
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'client/public/index.html'),
-      filename: 'index.html',
-      inject: 'body',
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
-    dotenv,
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    port: 4000,
     contentBase: path.join(__dirname, 'public'),
-    compress: true,
+    hot: true,
   },
   target: 'node',
 };

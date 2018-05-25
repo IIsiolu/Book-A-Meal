@@ -1,6 +1,6 @@
 {
     "root": true,
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "prettier/react"],
     "parserOptions": {
       "ecmaFeatures": {
         "jsx": true
@@ -13,13 +13,6 @@
       "browser": true
     },
     "rules": {
-      "require-jsdoc": ["error", {
-        "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-        }
-    }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "react/forbid-prop-types": ["<enabled>"],
       "linebreak-style": [0, "windows"],

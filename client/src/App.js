@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+// url loader solved issue with semantic
+import 'semantic-ui-css/semantic.min.css';
+import  HomePage  from './components/pages/HomePage';
+import LoginPage from './components/pages/LoginPage';
+import './static/css/style.css';
+/**
+ * Documentation
+ * stateless component
+ */
 
-class App extends Component {
-    render(){
-        return (
-            <h1>Hello</h1>
-        )
-    }
-}
+const App = () => (
+     <div>
+         <Route path='/' exact component={LoginPage} />
+         <Route path='/login' exact component={LoginPage} />
+     </div>
+);
+
 export default App;

@@ -9,13 +9,15 @@ import InlineError from '../messages/inlineError';
  *
  * @extends {React.Component}
  */
-class LoginForm extends Component {
+class SignupForm extends Component {
   constructor(){
     super()
     this.state = {
       data: {
         email: '',
         password: '',
+        firstname: '',
+        lastname: '',
       },
       loading: false,
       errors: {},
@@ -40,9 +42,12 @@ class LoginForm extends Component {
   validate(data) {
     const errors = {};
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    let letterRegex =  /^[a-zA-Z]+$/;
 
     if (!emailRegex.test(data.email) || !data.email) errors.email = 'Invalid email';
-    if (!data.password) errors.password = "Can't be blank";
+    if (!data.password || data.password.length<6) errors.password = "Can't be blank and must be minimum 6";
+    if(!data.firstname || !letterRegex.test(data.firstname)) errors.firstname = 'firstname must be a valid letter'
+    if(!data.lastname || !letterRegex.test(data.lastname)) errors.lastname = 'name must be a valid letter'
     return errors;
   }
 
@@ -77,19 +82,39 @@ class LoginForm extends Component {
                  {errors.password && <InlineError text={errors.password} /> }
 
               </Form.Field>
+              <Form.Field error={!!errors.firstname}>
+                <label htmlFor='firstname'> First Name </label>
+                <input
+                  type='text'
+                  id='firstname' name='firstname'
+                  value={data.firstname}
+                  onChange={this.onChange}
+                  placeholder='example@example.com' />
+                  {errors.firstname && <InlineError text={errors.firstname} /> }
+              </Form.Field>
+              <Form.Field error={!!errors.lastname}>
+                <label htmlFor='lastname'> First Name </label>
+                <input
+                  type='text'
+                  id='lastname' name='lastname'
+                  value={data.lastname}
+                  onChange={this.onChange}
+                  placeholder='example@example.com' />
+                  {errors.lastname && <InlineError text={errors.lastname} /> }
+              </Form.Field>
               {/* {this.props.error && <InlineError text={this.props.error} /> } */}
               <Button
                 type="submit"
                 primary
-              >Login
+              >Signup
               </Button>
             </Form>
     );
   }
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 }
 
-export default LoginForm;
+export default SignupForm;

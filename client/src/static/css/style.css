@@ -23,7 +23,7 @@ a {
 	color: #fff;
 }
 .container {
-	/* background-image: url("../images/pexels-photo-262918.jpeg"); */
+	/* background-image: url("../images/pexel.jpeg"); */
 
 }
 .top-nav {
@@ -96,10 +96,36 @@ flex-direction: column;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
 }
-.info {
-
+.top-content2 {
+	background: url(../images/homeBg.jpg) no-repeat;
+	background-size: cover;
+	height: 80vh;
+	
+}
+.topblur {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: rgba(0,0,0,.5);
+	height: 80vh;
+}
+.top-content-h {
+	font-family: 'Lobster', cursive;
+	font-weight: bold;
+	font-size: 80px;
+	margin-bottom: 0;
+}
+.top-content-line {
+	font-weight: bold;
+	color: #fb9d3d;
+	margin-top: 0;
+}
+.top-content-p {
+	text-align: center;
+	text-align-last: center;
+	font-size: 20px;
+	width: 50%
 }
 .top-content-header {
 	/* font-family: 'Cormorant Unicase', serif; */
@@ -140,10 +166,87 @@ margin-right: 10px;
 	color: #fff;
 
 }
-
-.btns {
-
+.footNav{
+	display: flex;
+	width: 100%;
+  flex-flow: row ;
+  background-color: #f19433;
+	height: 50px;
+	bottom: 0;
 }
+	.footNav a{
+		
+		padding: 10px 15px;
+	}
+	.copyR{
+		margin-right: auto;
+  }
+  .bottom {
+		margin-top: 5rem;
+		background-color: yellow;
+		height: 70vh;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	align-items: initial;
+	justify-content: space-around;
+
+	}
+	.aboutImg {
+		width: 50%;
+		margin: 0;
+		height: 70vh;
+	}
+  .aboutBook {
+		width: 50%;
+		margin: 0;
+		height: 70vh;
+		background-color: #fff;
+		color: #f19433;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.bottom-p {
+		padding: 2rem;
+		padding-top: 0;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-around;
+  }
+  .sidebar {
+    flex: 30vw;
+    height: auto;
+  }
+    .sidebar-c {
+    position: fixed;
+    /* margin-top: 20px; */
+    height: 100%;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f3f1f0;
+  }
+  .sidebar-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-bar {
+    flex: 70vw;
+    height: auto;
+  }
+  .dp {
+    height: 30%;
+
+  }
+  .sidebar-links {
+
+  }
+
 @media only screen and (max-width: 800px) {
 	.top-nav {
 	display: flex;

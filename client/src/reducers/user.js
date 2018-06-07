@@ -1,9 +1,14 @@
+import isEmpty from 'lodash/isEmpty';
 import * as actionsTypes from '../actions/actionsTypes';
 // loading state
 // most suitable things to have in a token
+// create a general initial state
+// change loading to isloading
 const initialState = {
   loading: false,
+  success: false,
   error: null,
+  isAuthenticated: false,
   user: {
     role: null,
   },
@@ -25,9 +30,18 @@ const user = (state = initialState, action) => {
     case actionsTypes.USER_LOGGED_IN:
       return {
         ...state,
-        user: action.user,
+        success: !isEmpty(action.payload),
+        user: action.payload,
+        isAuthenticated: !isEmpty(action.payload),
         error: null,
         loading: false,
+      };
+    case actionsTypes.SET_CURRENT_USER:
+      return {
+        ...state,
+        success: !isEmpty(action.payload),
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload,
       };
     case actionsTypes.USER_ERROR:
       return {

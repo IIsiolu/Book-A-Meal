@@ -1,4 +1,12 @@
 
 export const USER_ERROR = 'USER_ERROR';
+export const USER_SIGN_UP = 'USER_SIGN_UP';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const LOADING = 'LOADING';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const IMAGE_UPLOADED = 'IMAGE_UPLOADED';
+export const IMAGE_UPLOAD_ERROR = 'IMAGE_UPLOAD_ERROR';
+export const IMAGE_LOADING = 'IMAGE_LOADING';
+export const MEAL_ADDED = 'MEAL_ADDED';
+export const CREATE_MEAL_ERROR = 'CREATE_MEAL_ERROR';
+export const CREATING_MEAL = 'CREATING_MEAL';

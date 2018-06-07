@@ -7,7 +7,7 @@ const InlineError = ({ text }) => (
     </span >
 );
 
-InlineError.prototypes = {
+InlineError.propTypes = {
   text: PropTypes.string.isRequired,
 };
 export default InlineError;

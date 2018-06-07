@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import LoginForm from '../forms/LoginForm';
-import { logIn } from '../../actions';
+import { SignupForm } from '../forms';
+import { signup } from '../../actions';
 import img from '../../static/images/gbeans.jpg';
 
-class LoginPage extends Component {
+class SignupPage extends Component {
     submit = (data) => (
-     this.props.logIn(data, this.props.history)
+     this.props.signup(data, this.props.history)
     )
   render() {
+
     return (
             <div>
                 <div className="top-nav">
@@ -26,26 +27,25 @@ class LoginPage extends Component {
                 </div>
                 <div className="content contentBox">
                     <div className="info">
-                        <h2 className="info-h">ALREADY HAVE AN ACCOUNT?</h2>
-                        <p className="info-p">Use your email and password to login below</p>
-                        <LoginForm submit={this.submit} {...this.props} />
+                        <h2 className="info-h">SIGN UP</h2>
+                        <p className="info-p">Sign up to your account</p>
+                        <SignupForm submit={this.submit} {...this.props} />
                     </div>
                 </div>
-
             </div>
     );
   }
 }
 
-LoginPage.propTypes = {
+SignupPage.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired
     }).isRequired,
-    logIn: PropTypes.func.isRequired
+    signup: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
     error: state.user.error,
     loading: state.user.loading
 })
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, {logIn})(LoginPage);
+export default connect(mapStateToProps, {signup})(SignupPage);

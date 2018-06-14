@@ -3,6 +3,11 @@ import path from 'path';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
+import webpack from 'webpack';
+import cors from 'cors';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from '../webpack.config';
 import { userRouter, mealRouter, menuRouter, orderRouter } from './routes';
 
 const swaggerUi = require('swagger-ui-express');
@@ -19,9 +24,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
+app.use(cors());
+app.use('/', express.static(path.join(__dirname, '../dist')));
+// app.use(express.static(path.join(__dirname, 'client/public')));
+// app.use(express.static(('client/src')));
 
-app.use(express.static(path.join(__dirname, '/../client/public')));
-app.use(express.static(path.join(__dirname, '/../client/src')));
 app.use('/api/v1', userRouter);
 app.use('/api/v1', mealRouter);
 app.use('/api/v1/menu', menuRouter);
@@ -33,24 +40,34 @@ app.get('/api/v1', (req, res) => {
     message: 'Welcome to Book a Meal',
   });
 });
+
+app.use(webpackMiddleware(webpack(webpackConfig), {
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath,
+}));
+
+app.use(webpackHotMiddleware(webpack(webpackConfig)));
+
 app.get('*', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '/../client/public/index.html'))
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
-app.post('*', (req, res) => {
-  res.status(404).send({
-    message: 'That url does not exist on this server',
-  });
-});
-app.delete('*', (req, res) => {
-  res.status(404).send({
-    message: 'That url does not exist on this server',
-  });
-});
-app.put('*', (req, res) => {
-  res.status(404).send({
-    message: 'That url does not exist on this server',
-  });
-});
+
+// app.all('*', (req, res) => {
+//   res.status(404).send({
+//     message: 'That url does not exist on this server',
+//   });
+// });
+
+// app.delete('*', (req, res) => {
+//   res.status(404).send({
+//     message: 'That url does not exist on this server',
+//   });
+// });
+// app.put('*', (req, res) => {
+//   res.status(404).send({
+//     message: 'That url does not exist on this server',
+//   });
+// });
 
 const port = process.env.PORT || 7000;
 

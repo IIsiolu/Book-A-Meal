@@ -1,21 +1,31 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 // url loader solved issue with semantic
-import 'semantic-ui-css/semantic.min.css';
-import  HomePage  from './components/pages/HomePage';
-import LoginPage from './components/pages/LoginPage';
-import './static/css/style.css';
+import { UserRoute, AdminRoute } from './components/routes';
+import { NotFoundPage, SignupPage, LoginPage, HomePage, DashboardPage, LandingPage, MealPage } from './components/pages';
+import Authenticate from './utils/Authenticate';
+import Navigate from './utils/Navigate';
 /**
  * Documentation
  * stateless component
  */
 
-const App = () => (
+const App = ({ location }) => (
      <div>
-         <Route path='/' exact component={LoginPage} />
+         <Route location={location} path='/' exact component={Navigate(LandingPage)} />
          <Route path='/login' exact component={LoginPage} />
+         <Route path='/signup' exact component={SignupPage} />
+         <Route path='/dashboard' exact component={Authenticate(DashboardPage)} />
+         <Route path='/meal' exact component={Authenticate(MealPage)} />
+         <UserRoute path='/user' exact component={DashboardPage} />
+         <Route path='/home' exact component={Authenticate(HomePage)} />
      </div>
 );
+App.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default App;

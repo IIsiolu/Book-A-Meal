@@ -1,61 +1,64 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const BUILD_DIR = path.resolve(__dirname, './client/public');
-const APP_DIR = path.resolve(__dirname, './client/src');
+const BUILD_DIR = path.resolve(__dirname, './client/dist');
+// const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+//   template: './client/dist/index.html',
+//   filename: './index.html',
+// });
 
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
-  entry: `${APP_DIR}/index.js`,
+  entry: [
+    '/client/src/index.jsx',
+  ],
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    sourceMapFilename: 'bundle.map',
   },
+  devtool: '#source-map',
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js?$/,
-        include: APP_DIR,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: ['react', 'env', 'stage-1']
-          },
-        },
+        test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/], query: { presets: ['react', 'env', 'stage-2'] },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        test: /\.jsx?$/,
+        exclude: [/node_modules/],
         use: [
           {
-            loader: 'url-loader',
-            options: { limit: 10000 }
-          }
-        ]
+            loader: 'babel-loader',
+            options: {
+              presets: ['react', 'env', 'stage-2'],
+            },
+          },
+        ],
       },
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
+      { test: /\.(sass|scss)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(png|woff|woff2|eot|ttf|jpg|jpeg|gif|svg)$/i, loaders: ['file-loader', 'url-loader?limit=100000'] },
     ],
   },
+  mode: 'development',
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
-    }),
-    new webpack.optimize.UglifyJsPlugin()
+    new HtmlWebpackPlugin(),
   ],
   devServer: {
-    port: 4000,
-    open: true,
-    overlay: true,
-},
+    hot: true,
+    inline: true,
+    contentBase: './client/dist/',
+    historyApiFallback: true,
+    proxy: {
+      '/api/v1': 'http://localhost:7000',
+    },
+    stats: 'errors-only',
+  },
+  node: {
+    net: 'empty',
+    dns: 'empty',
+    fs: 'empty',
+  },
+  target: 'node',
 };

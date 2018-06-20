@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // url loader solved issue with semantic
 import { UserRoute, AdminRoute } from './components/routes';
-import { NotFoundPage, SignupPage, LoginPage, HomePage, DashboardPage, LandingPage, MealPage } from './components/pages';
+import { NotFoundPage, SignupPage, LoginPage, HomePage, DashboardPage, LandingPage, MealPage, MenuPage } from './components/pages';
 import Authenticate from './utils/Authenticate';
 import Navigate from './utils/Navigate';
 /**
@@ -20,6 +20,7 @@ const App = ({ location }) => (
          <Route path='/meal' exact component={Authenticate(MealPage)} />
          <UserRoute path='/user' exact component={DashboardPage} />
          <Route path='/home' exact component={Authenticate(HomePage)} />
+         <Route path='/menu' exact component={Authenticate(MenuPage)} />
      </div>
 );
 App.propTypes = {

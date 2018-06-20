@@ -239,7 +239,7 @@ margin-right: 10px;
     flex: 70vw;
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
   .dp {
     height: 30%;

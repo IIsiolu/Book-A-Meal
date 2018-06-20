@@ -10,7 +10,7 @@ const SideNav = () => (
       <h2><Link to="/meal"> Meal Options </Link></h2>
       <h2><Link to="/login"> Orders </Link></h2>
       <h2><Link to="/login"> Account  </Link></h2>
-      <h2><Link to="/login"> Meal For Today </Link></h2>
+      <h2><Link to="/menu"> Set Menu </Link></h2>
     </div>
   </div>
 );

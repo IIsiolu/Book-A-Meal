@@ -6,8 +6,20 @@ import fetchMeals from './fetchMeals';
 import isModalOpened from './isModalOpened';
 import updateMeals from './updateMeal';
 import deleteMeal from './deleteMeal';
+import menu from './menu';
+import menuForToday from './menuForToday';
+import order from './order';
 
 export default combineReducers({
-  user, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeals, deleteMeal,
+  user,
+  imageUpload,
+  createMeal,
+  fetchMeals,
+  isModalOpened,
+  updateMeals,
+  deleteMeal,
+  menu,
+  menuForToday,
+  order,
 });
 

@@ -111,6 +111,10 @@ class AddMeal extends Component {
              />
             {errors.image && <InlineError text={errors.image} /> }
         </Form.Field>
+        {this.props.imageUrl ? 
+        <div className="postedImg">
+          <img className="imgup" src={this.props.imageUrl} alt="image" />
+        </div> : ''}
         <Button
           type="submit"
           primary

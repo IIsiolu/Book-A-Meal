@@ -238,6 +238,8 @@ margin-right: 10px;
   .main-bar {
     flex: 70vw;
     height: auto;
+    display: flex;
+    flex-direction: row;
   }
   .dp {
     height: 30%;
@@ -245,6 +247,34 @@ margin-right: 10px;
   }
   .sidebar-links {
 
+  }
+  .postedImg {
+    flex: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imgup {
+    width: 40%;
+    height: 10vh;
+  }
+  .mealoption-container {
+    display: flex;
+    flex-direction: column;
+    border:	1px solid #deddd8;
+    width: 40%;
+    height: 400px;
+    margin: 10px;
+    outline: none;
+    padding: 0;
+  }
+  .meal-info {
+    background-color: #fff;
+		height: 30%;
+		padding: 2px 5px;
+  }
+  .food-img {
+    height: 60%;
   }
 
 @media only screen and (max-width: 800px) {

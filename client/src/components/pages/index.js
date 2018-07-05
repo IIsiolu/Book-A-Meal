@@ -6,6 +6,7 @@ import NotFoundPage from './NotFoundPage';
 import DashboardPage from './DashboardPage';
 import LandingPage from './LandingPage';
 import MealPage from './MealPage';
+import MenuPage from './MenuPage';
 
 export {
   HomePage,
@@ -15,5 +16,6 @@ export {
   SignupPage,
   LandingPage,
   MealPage,
+  MenuPage,
 };
 

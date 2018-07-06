@@ -13,24 +13,21 @@ class SignupPage extends Component {
   render() {
 
     return (
-            <div>
-                <div className="top-nav">
-                    <h2 className="logo">Book-A-Meal</h2>
-                    <div className="right-nav">
-                        <h2 className="nav-text"> <a href="#">About Us</a></h2>
-                        <h2 className="nav-text"> <Link to="/login">Login</Link></h2>
-                        <h2 className="nav-text"> <Link to="/signup">SignUp</Link></h2>
-                    </div>
+            <div id="signupPage">
+                <div className="top-nav landing-nav">
+                  <Link className="logo" to="/">Book-A-Meal</Link>
+                  <div className="right-nav">
+                      <Link className="nav-text" to="/login">Login</Link>
+                  </div>
                 </div>
-                <div className="coverContainer">
-                    <img className="coverImg" src={img} />
-                </div>
-                <div className="content contentBox">
-                    <div className="info">
-                        <h2 className="info-h">SIGN UP</h2>
-                        <p className="info-p">Sign up to your account</p>
-                        <SignupForm submit={this.submit} {...this.props} />
-                    </div>
+                <div className="bg-img">
+                  <div className="content contentBox">
+                      <div className="info">
+                          <h2 className="info-h">SIGN UP</h2>
+                          <p className="info-p">Sign up to your account</p>
+                          <SignupForm submit={this.submit} {...this.props} />
+                      </div>
+                  </div>
                 </div>
             </div>
     );

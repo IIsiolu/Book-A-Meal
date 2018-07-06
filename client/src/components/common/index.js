@@ -7,5 +7,6 @@ import MealCard from './MealCard';
 import MenuItems from './MenuItems';
 import MenuCard from './MenuCard';
 import OrderItem from './OrderItem';
+import FoodModal from './FoodModal';
 
-export { Footer, SideNav, TopNav, ImageUpload, MealOptions, MealCard, MenuItems, MenuCard, OrderItem };
+export { Footer, SideNav, TopNav, ImageUpload, MealOptions, MealCard, MenuItems, MenuCard, OrderItem, FoodModal };

@@ -49,13 +49,13 @@ class LoginForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-            <Form onSubmit={this.onSubmit} loading={this.props.loading} >
+            <Form  onSubmit={this.onSubmit} loading={this.props.loading} >
             { this.props.error && <Message negative>
                 <Message.Header> Something went wrong </Message.Header>
                 <p>{this.props.error} </p>
             </Message>}
               <Form.Field error={!!errors.email}>
-                <label htmlFor='email'> Email </label>
+                <label className="input-form" htmlFor='email'> Email </label>
                 <input
                   type='email'
                   id='email' name='email'
@@ -79,6 +79,7 @@ class LoginForm extends Component {
               </Form.Field>
               {/* {this.props.error && <InlineError text={this.props.error} /> } */}
               <Button
+                
                 type="submit"
                 primary
               >Login

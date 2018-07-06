@@ -10,7 +10,7 @@ import { setUser } from './actions/auth';
 import verifyToken from './utils/verifyToken';
 
 import '../../node_modules/semantic-ui-css/semantic.min.css';
-import './static/css/style.css';
+import './static/css/index.css';
 
 const store = configureStore();
 

@@ -12,26 +12,23 @@ class LoginPage extends Component {
     )
   render() {
     return (
-            <div>
-                <div className="top-nav">
-                    <h2 className="logo">Book-A-Meal</h2>
-                    <div className="right-nav">
-                        <h2 className="nav-text"> <a href="#">About Us</a></h2>
-                        <h2 className="nav-text"> <Link to="/login">Login</Link></h2>
-                        <h2 className="nav-text"> <Link to="/signup">SignUp</Link></h2>
-                    </div>
+            <div id="loginPage">
+                <div className="top-nav landing-nav">
+                  {/* <h2 className="logo">Book-A-Meal</h2> */}
+                  <Link className="logo" to="/">Book-A-Meal</Link>
+                  <div className="right-nav">
+                      <Link className="nav-text" to="/signup">SignUp</Link>
+                  </div>
                 </div>
-                <div className="coverContainer">
-                    <img className="coverImg" src={img} />
+                <div className="bg-img">
+                  <div className="content contentBox">
+                      <div className="info">
+                          <h2 className="info-h">ALREADY HAVE AN ACCOUNT?</h2>
+                          <p className="info-p">Use your email and password to login below</p>
+                          <LoginForm submit={this.submit} {...this.props} />
+                      </div>
+                  </div>
                 </div>
-                <div className="content contentBox">
-                    <div className="info">
-                        <h2 className="info-h">ALREADY HAVE AN ACCOUNT?</h2>
-                        <p className="info-p">Use your email and password to login below</p>
-                        <LoginForm submit={this.submit} {...this.props} />
-                    </div>
-                </div>
-
             </div>
     );
   }

@@ -1,35 +1,139 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import img from '../../static/images/gbeans.jpg';
+// import { FoodForkDrinkIcon } from 'mdi-react';
+
+import { Footer } from '../common/';
+import food1 from '../../static/images/food1.jpg';
+import food2 from '../../static/images/food2.jpg';
+import food3 from '../../static/images/food3.jpg';
+import food4 from '../../static/images/food4.jpg';
 
 const LandingPage = () => (
     <div className="container">
-            <div className="top-nav">
+            <div className="top-nav landing-nav">
                 <h2 className="logo">Book-A-Meal</h2>
                 <div className="right-nav">
-                    <h2 className="nav-text"> <a href="#">About Us</a></h2>
-                    <h2 className="nav-text"> <Link to="/login">Login</Link></h2>
-                    <h2 className="nav-text"> <Link to="/signup">SignUp</Link></h2>
+                    <Link className="nav-text" to="/login">Login</Link>
+                    <Link className="nav-text" to="/signup">SignUp</Link>
                 </div>
             </div>
             <div className="coverContainer">
-                <img className="coverImg" src={ img } />
+
+              <div className="top-content">
+                <div className="top-text">
+                  <h1 className="h-title">
+                    <span>W</span>
+                    <span>e</span>
+                    <span>l</span>
+                    <span>c</span>
+                    <span>o</span>
+                    <span>m</span>
+                    <span>e</span>
+                  </h1>
+                  <h1>COOK WHAT ?</h1>
+                  <p>why not order a home made meal</p>
+                </div>
+              </div>
+
             </div>
-            <div className="content content-index">
-                <div className="info">
-                    <div className="top-content">
-                        <h1 className="top-content-header">Booking a meal is what we love</h1>
-                        <p className="top-content-header">___________________________</p>
-                        <p className="topP"> Donec elementum erat libero, ultricies molestie justo hendrerit vel. Nullam venenatis orci sit amet volutpat porttitor,</p>                    </div>
-                    <div className="bottom-content">
-                        <Link to="/login"><button className="loginBtn"> Log In</button></Link>
-                        <Link to="/signup"><button className="loginBtn"> Sign Up</button></Link>
+            <div className="welcome">
+              <div className="welcome-content">
+                <h1 className="best">WE ARE THE BEST!</h1>
+                <p>We exclusively use sun ripened whole grains to provide you with a source of power, stamina and health! Spoil yourself with our breads natural flavor! We use only the finest quality ingredients providing your body with important fiber and nutrients.
+                   For people who suffer from allergies we offer a delicious range of wheat and yeast free products.</p>
+              </div>
+            </div>
+            {/* <hr /> */}
+            <div className="popular">
+              <h1 className="titles">What Customers Love</h1>
+              <div className="ourFoods">
+                <div className="food-E">
+                  <Link to="/">
+                    <img className="foodies" src={food1} alt="foodies img" />
+                    <div className="food-E-overlay"></div>
+                    <div className="foodies-info">
+                      <h1>Dubesi</h1>
+                      <p>Enjoy your food. This is the part where you get to eat your food while </p>
+                      <h3>Mondays</h3>
                     </div>
+                  </Link>
                 </div>
-                <div className="later">
-                    <a href="home.html">i will create an account later</a>
+                <div className="food-E">
+                  <Link to="/">
+                    <img className="foodies" src={food2} alt="foodies img" />
+                    <div className="food-E-overlay"></div>
+                    <div className="foodies-info">
+                      <h1>Wheat</h1>
+                      <p>Enjoy your food. This is the part where you get to eat your food while </p>
+                      <h3>Wednessday</h3>
+                    </div>
+                  </Link>
                 </div>
+                <div className="food-E">
+                  <Link to="/">
+                    <img className="foodies" src={food3} alt="foodies img" />
+                    <div className="food-E-overlay"></div>
+                    <div className="foodies-info">
+                      <h1>Eba</h1>
+                      <p>Enjoy your food. This is the part where you get to eat your food while </p>
+                      <h3>Fridays</h3>
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
-        </div>
+            <div className="offer">
+              <h1 className="titles">Booking a meal is easy as 1, 2, 3 ...</h1>
+              <p>Enjoy your food prepared by professional cooks specially for you.</p>
+              <div className="services">
+                <div className="service1 service-card">
+                  <h3>Menu</h3>
+                  <p>We have delicious sets of foods prepared by professional cooks,
+                    For each day of the week</p>
+                </div>
+                <div className="service2 service-card">
+                  <h3>Select</h3>
+                  <p>Take a good look at the menu, click whatever you want to eat and
+                    drink, and head to the checkout.</p>
+                </div>
+                <div className="service3 service-card">
+                <h3>Enjoy</h3>
+                  <p>Enjoy your food. This is the part where you get to eat your food
+                     while basking in the warm glow of time not spent cooking.</p>
+                </div>
+              </div>
+              <Link className="menu-btn" to='/login'>Order Now </Link>
+            </div>
+            <div className="testimonials">
+              <div className="testimonials-content">
+                <h2>Testimonials</h2>
+                <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa eniptaiad esertyatya
+                    nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
+                    convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
+                    sapien molestie nec...” </p>
+                    <h4>Oluwa Mark,</h4>
+                    <h4>Client</h4>
+              </div>
+            </div>
+            <div className="intro">
+              <div className="intro-content">
+                <div className="intro-best">
+                  <img className="intro-img" src={food4} alt="foodies img" />
+                  <div className="intro-info">
+                    <h1>How we choose a menu</h1>
+                    <h5>Donec euismod imperdiet feugiat. Vivamus non interdum eros. Cum sociis natoque penatibus et magnis dis parturient montes,
+                      nascetur ridiculus mus. Morbi tristique ut lacus et scelerisque.</h5>
+                    <p>Suspendisse potenti. Sed fermentum, libero eget euismod convallis, justo lectus egestas dui,
+                      eu tempor lectus risus a dolor. Suspendisse tempor quam purus, sit amet feugiat sapien molestie
+                      nec. Sed aliquam, justo ut pharetra dapibus, leo risus iaculis nulla, ut sagittis nunc diam lobortis metus. Nulla pulvinar odio vitae nisl dignissim, id rutrum lorem molestie. Maecenas euismod hendrerit risus, ut congue arcu tincidunt sed. Nullam at ipsum vel ante interdum lobortis. Etiam quis ultricies enim, in venenatis sapien. Phasellus interdum 
+                      consectetur enim, venenatis eleifend urna sed nulla id magna placerat hendrerit.</p>
+                      <Link className="menu-btn" to='/login'>Menu For Today </Link>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <Footer />
+    </div>
 );
 export default LandingPage;

@@ -1,20 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MenuCard = ({ meal, addMealToOrder }) => (
+const MenuCard = ({ meal, addMealToOrder, isOverlayOpened }) => (
   <div className="mealoption-container">
-      <img className="food-img" src={meal.image} alt="my food" />
-      <div className="meal-info">
-        <h3>{meal.name} (#{meal.price})</h3>
-        <p>{meal.description}</p>
+      <div className="cardt">
+        <img className="food-img" src={meal.image} alt="my food" />
+        <div className="meal-overlay">
+          <h2 onClick={() => isOverlayOpened(true, meal.id)} className="f-detail">Food Details</h2>
+        </div>
       </div>
-      <div>
-        <button onClick={() => addMealToOrder(meal)} className="order-now" > <i id="f-awe" className="far fa-plus fa-2x"></i></button>
+      <div className="meal-info">
+        <h3 onClick={() => isOverlayOpened(true, meal.id)}>{meal.name}</h3>
+        <hr />
+        {/* <p>{meal.description}</p> */}
+      </div>
+      <div className='buy'>
+        <span className='price'><sup>$</sup>{meal.price}</span>
+        <button onClick={() => addMealToOrder(meal)} className="order-now" > Add to Order </button>
       </div>
     </div>
 );
 MenuCard.propTypes = {
   meal: PropTypes.object.isRequired,
   addMealToOrder: PropTypes.func.isRequired,
+  isOverlayOpened: PropTypes.func.isRequired,
 };
 export default MenuCard;

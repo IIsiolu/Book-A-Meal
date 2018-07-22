@@ -16,12 +16,14 @@ export const updateMealState = {
   loading: false,
   success: false,
   error: null,
-  meal: null,
+  isError: false,
+  meal: {},
 };
 
 export const deleteMealState = {
   loading: false,
   success: false,
+  isMealDeleteError: false,
   error: null,
 };
 

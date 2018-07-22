@@ -13,6 +13,10 @@ const order = (state = orderState, action) => {
         ...state,
         orders: [...state.orders.filter(meal => meal.mealId !== action.payload)],
       };
+    case actionsTypes.CLEAR_ORDER:
+      return {
+        orders: [],
+      };
     case actionsTypes.INCREASE_MEAL_QUANTITY:
       const meal = state.orders.map(meal => (
         meal.mealId === action.payload.mealId ?

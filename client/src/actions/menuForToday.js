@@ -12,17 +12,18 @@ export const getMenuError = menu => ({
 
 export const menuForToday = date => (dispatch) => {
   console.log(date);
-  return ( 
+  return (
     instance.get(`menu?date=${date}`).then((res) => {
       dispatch(getMenu(res.data.data));
       console.log(res.data);
     }).catch((error) => {
       let myError = null;
-      console.log(error.response);
+      console.log('error in menufortoday>>>>>>>>>>', error);
       if (error.response) {
         myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data;
         dispatch(getMenuError(myError));
       } else {
+        // console.log(error);
         myError = 'poor internet connection';
         dispatch(getMenuError(myError));
       }

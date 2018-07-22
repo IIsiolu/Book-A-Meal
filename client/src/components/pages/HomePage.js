@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 import { Footer, MenuCard, OrderItem, FoodModal } from '../common/';
-import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened } from '../../actions';
+import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder } from '../../actions';
 import img from '../../static/images/spice1.jpg';
 import best from '../../static/images/best-now.png';
 
 class HomePage extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      isToggled: false
+    }
+  }
   componentWillMount() {
     console.log(this.props.isAuthenticated);
     const newLocal = this.props.role === 'user';
@@ -46,10 +53,16 @@ class HomePage extends Component {
     // this.props.addMealToOrder(meal) 
   }
   menuCards = () => (
-    this.props.menus.map((meal, key) => <MenuCard key={key} meal={meal.Meal} addMealToOrder={this.addMealToOrder} isOverlayOpened={this.props.isOverlayOpened}  />)
+    this.props.menus.map((meal, key) => (
+      meal.Meal !== null ? <MenuCard key={key} meal={meal.Meal} addMealToOrder=
+      {this.addMealToOrder} isOverlayOpened={this.props.isOverlayOpened} /> : ''
+    )
+  )
   )
   orderCard = () => (
-    this.props.placedOrders.map((order, key) => <OrderItem key={key} increaseQuantity={this.props.increaseQuantity} order={order} removeOrder={this.props.removeOrder} /> )
+    this.props.placedOrders.map((order, key) => <OrderItem key={key}
+     increaseQuantity={this.props.increaseQuantity} order={order} removeOrder=
+     {this.props.removeOrder} /> )
   )
   noMenu = () => (
     <div>
@@ -67,8 +80,34 @@ class HomePage extends Component {
     </div>
   )
   submit = () => {
-    this.props.requestForOrder(this.props.placedOrders)
+    // this.props.requestForOrder(this.props.placedOrders)
+    console.log(document.getElementById('lolo').innerHTML)
   }
+  subTotal = () => {
+    let total = 0;
+    this.props.placedOrders.map(cost => {
+      let newCost = cost.quantity * cost.mealCost
+      total += newCost;
+      // console.log(total)
+    })
+    return total
+  }
+  vat = () => {
+    // (5/100 * (this.subTotal())).toFixed(2)
+    let tax = 5/100
+    let myTax = tax * this.subTotal();
+    return myTax.toFixed(2)
+  }
+  // clearCat = () => {
+  //   this.props.clearOrder()
+  // }
+  toggle = () => {
+    console.log(this.state.isToggled)
+    this.setState({
+      isToggled: !this.state.isToggled
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -94,13 +133,49 @@ class HomePage extends Component {
             <div className = "main-bar">
               {this.props.isMenu ? this.menuCards() : this.noMenu()}
             </div>
-            <div className = "sidebar">
-              <div className="cus-orders">
-                {this.props.placedOrders.length ? this.orderCard() : this.noOrder()}
+            {this.props.placedOrders.length ? 
+            (<div className = "drawer-layout">
+              {/* <div  className="order-cart"> <i className="fa fa-cart-plus order-cart-btn"></i></div> */}
+              <div className={this.state.isToggled?"sidebar-container is-up" :"sidebar-container is-down"}>
+                <div onClick={this.toggle} className='order-header'>
+                  <h1><span className='meal-notific'>{this.props.placedOrders.length}</span> {this.props.placedOrders.length >1 ? 'meals' : 'meal'} selected</h1>
+                  <i className={!this.state.isToggled ? 'fa fa-chevron-up': 'fa fa-chevron-down'}></i>
+                </div>
+                <div class="rect-title">
+                  <h1>My Orders</h1>
+                  <div className="rect"></div>
+                </div>
+                <div className="orders-budg">
+                  <div className="cus-orders">
+                    {this.props.placedOrders.length ? this.orderCard() : this.noOrder()}
+                  </div>
+                  <div className="order-charge">
+                    <div className="myOrders border-text">
+                      <h4>Orders</h4>
+                      <h4>{this.props.placedOrders.length}</h4>
+                    </div>
+                    <div className="mySubtotal border-text">
+                      <h4>Sub-total</h4>
+                      <h4>${this.subTotal()}</h4>
+                    </div>
+                    <div className="vat border-text">
+                      <h4>VAT (5%)</h4>
+                      <h4>${this.vat()}</h4>
+                    </div>
+                    <div className="total-orders border-text">
+                      <h4>Total</h4>
+                      <h4>${this.subTotal() - this.vat()}</h4>
+                    </div>
+                  </div>
+                  <div className="cat">
+                    <h4 onClick={this.props.clearOrder}>Clear Cart</h4>
+                    <button onClick={this.submit}>Check out</button>
+                  </div>
+                </div>
                 {/* u dont invoke it, you allow react do that. this.submit arrow function automatically binds */}
-                {this.props.placedOrders.length ? <button onClick={this.submit}>Order now</button> : ''}
               </div>
-            </div>
+            </div>) : ''
+            }
           </div>
         </div>
         <div id="myModal" className="modal">
@@ -108,21 +183,7 @@ class HomePage extends Component {
           this.props.isOpened ? <FoodModal addMealToOrder={this.addMealToOrder} isOpened={this.props.isOpened} menus={this.props.menus} overlayId={this.props.overlayId} isOverlayOpened={this.props.isOverlayOpened} /> :
           ''
         }
-          
-
         </div>
-        <div className="bottom">
-          <img className="aboutImg" src={img} alt="img" />
-          <div className="aboutBook">
-            <h1 className="bottom-h">Book a meal</h1>
-            <p className="bottom-p">
-              A lot of people are opting out of traditional meals in this way. Indeed,
-               one study says that more than half of Americans’ meals are now eaten in a room with the TV on. This trend has been taking place for some time, and what’s more, we are also eating a lot more fast food than ever before,
-              which means much more salt and sugar than we really should be eating.
-            </p>
-          </div>
-        </div>
-        <button onClick={this.props.logout} > Logout</button>
         <Footer />
       </div>
     );
@@ -146,4 +207,4 @@ const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
   overlayId: isOverlayOpened.id,
 });
 
-export default connect(mapStateToProps, { logout, menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened })(HomePage);
+export default connect(mapStateToProps, { logout, menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder })(HomePage);

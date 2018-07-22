@@ -50,24 +50,29 @@ class AddMeal extends Component {
   }
   validate(data) {
     const errors = {};
-    const nameregex = /^[a-z]+$/i;;
+    const nameRegex = /^([a-z']+(-| )?)+$/i
 
-    if (!nameregex.test(data.name) || !data.name) errors.name = 'Invalid name input';
-    if (!data.description) errors.description = "Can't be blank";
+    if (!nameRegex.test(data.name) || !data.name) errors.name = 'Invalid name input';
+    if (!data.description && !nameRegex.test(data.description)) errors.description = "invalid description";
     if (!data.image) errors.image = "upload a valid image"
     if (!data.price) errors.price = "Can't be blank"
     return errors;
   }
   upload =(e) => {
     console.log(e.target.files[0])
-    this.props.imageUpload(e.target.files[0])
+    this.props.imageUpload(e.target.files[0], (secure_url) => {
+      this.setState({
+        data: {...this.state.data, image: secure_url}
+      })
+    })
     
   }
 
   render() {
     const { data, errors } = this.state;
     return (
-      <Form onSubmit={this.onSubmit} loading={this.props.isloading} >
+      <Form onSubmit={this.onSubmit} loading={this.props.creatingMeal} >
+        <h1>Create Meal</h1>
       { this.props.addMealError && <Message negative>
                 <Message.Header> Something went wrong </Message.Header>
                 <p>{this.props.addMealError} </p>
@@ -87,6 +92,7 @@ class AddMeal extends Component {
           <Form.TextArea label='description'
           placeholder='Input meal description...'
           name='description'
+          maxLength="120"
           onChange={this.onChange} />
           {errors.description && <InlineError text={errors.description} /> }
         </Form.Field>

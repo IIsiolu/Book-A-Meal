@@ -10,6 +10,7 @@ import menu from './menu';
 import menuForToday from './menuForToday';
 import order from './order';
 import isOverlayOpened from './isOverlayOpened';
+import orderHistories from './orderHistory';
 
 export default combineReducers({
   user,
@@ -23,5 +24,6 @@ export default combineReducers({
   menuForToday,
   order,
   isOverlayOpened,
+  orderHistories,
 });
 

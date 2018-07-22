@@ -15,13 +15,23 @@ const deleteMeal = (state = deleteMealState, action) => {
         success: true,
         error: null,
       };
-    case actionsTypes.CREATE_MEAL_ERROR:
+    case actionsTypes.DELETE_MEAL_ERROR:
       return {
         ...state,
         success: false,
         error: action.payload,
         loading: false,
-
+        isMealDeleteError: true,
+      };
+    case actionsTypes.IS_DELETE_ERROR:
+      return {
+        ...state,
+        isMealDeleteError: action.payload,
+      };
+    case actionsTypes.IS_DELETE_STATE:
+      return {
+        ...state,
+        success: action.payload,
       };
     default:
       return state;

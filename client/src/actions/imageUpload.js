@@ -15,7 +15,7 @@ export const uploadError = error => ({
   payload: error,
 });
 // read on define plugin for webpack
-export const imageUpload = file => (dispatch) => {
+export const imageUpload = (file, cb) => (dispatch) => {
   // Push all the axios request promise into a single array
   // Initial FormData
   dispatch(isLoading(true));
@@ -34,7 +34,8 @@ export const imageUpload = file => (dispatch) => {
     const fileURL = data.secure_url; // You should store this URL for future references in your app
     dispatch(imageUploaded(fileURL));
     dispatch(isLoading(false));
-    console.log(data);
+    // console.log(data);
+    cb(data.secure_url);
   }).catch((err) => {
     dispatch(uploadError(err));
     console.log(err);

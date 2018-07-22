@@ -7,6 +7,7 @@ const initialState = {
   success: false,
   error: null,
   imageUrl: null,
+  id: null,
 };
 const imageUpload = (state = initialState, action) => {
   switch (action.type) {
@@ -22,6 +23,11 @@ const imageUpload = (state = initialState, action) => {
         success: true,
         loading: false,
         imageUrl: action.payload,
+      };
+    case actionsTypes.IMAGE_ID:
+      return {
+        ...state,
+        id: action.payload,
       };
     case actionsTypes.IMAGE_UPLOAD_ERROR:
       return {

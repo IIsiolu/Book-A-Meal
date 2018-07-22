@@ -7,6 +7,7 @@ import DashboardPage from './DashboardPage';
 import LandingPage from './LandingPage';
 import MealPage from './MealPage';
 import MenuPage from './MenuPage';
+import AdminSignUp from './AdminSignUp';
 
 export {
   HomePage,
@@ -17,5 +18,6 @@ export {
   LandingPage,
   MealPage,
   MenuPage,
+  AdminSignUp,
 };
 

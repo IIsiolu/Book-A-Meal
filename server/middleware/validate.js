@@ -1,6 +1,10 @@
 const removeChar = input => (
   input.match(/\w/g).join('')
 );
+const testFullname = (input) => {
+  const reg = /^([a-z']+(-| )?)+$/i;
+  return reg.test(input);
+};
 const testString = (input) => {
   const reg = /^[a-z]+$/i;
   return reg.test(input);
@@ -120,7 +124,7 @@ class Validate {
       return;
       // stop the req from proceeding
     }
-    if (!testString(req.body.name)) {
+    if (!testFullname(req.body.name)) {
       return res.status(400).send({
         result: 'failed',
         message: 'invalid meal name input',
@@ -137,7 +141,7 @@ class Validate {
     next();
   }
   static validatemealUpdate(req, res, next) {
-    if (req.body.name && !testString(req.body.name)) {
+    if (req.body.name && !testFullname(req.body.name)) {
       return res.status(400).send({
         result: 'failed',
         message: 'invalid meal name',

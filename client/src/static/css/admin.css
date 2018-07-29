@@ -1,0 +1,114 @@
+.admin-container {
+  display: flex;
+  
+}
+.admin-page {
+  background: #F6F9FC;
+  width: 100%;
+  height: 100%;
+}
+.order-bar {
+  display: flex;
+  width: 80%;
+}
+.sidebar-c {
+  position: fixed;
+  /* margin-top: 20px; */
+  height: 100%;
+  /* width: 30vw; */
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: center; */
+  /* background-color:#eef2f9; */
+  
+}
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  /* -webkit-padding-start: 40px; */
+  
+}
+.sidebar-links>h2 {
+  margin: 0;
+  padding: 6px;
+  font-weight: 300;
+}
+.side-header {
+  font-size: 16px;
+  padding: 10px 10px 15px 25px !important;
+}
+.s-links {
+  border-bottom: 1px solid #c6d5ea;
+  
+}
+.s-links a{
+  padding: 10px 5px 10px 40px;
+  color: #86939e;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .4px;
+}
+.admin-form-container {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #F6F9FC;
+}
+.form-con-bg {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+.form-info-con {
+  width: 80%;
+}
+.form-info-title {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.main-m-nav {
+  background-color: #2185d0;
+  border-radius: 0.125rem;
+  font-weight: 600 !important;
+  color: #FFF !important;
+}
+.form-nav {
+  display: flex;
+  flex-direction: column;
+}
+.form-nav a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.125rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.4375rem;
+  text-decoration: none;
+  color: #6D6D6D;
+}
+.form-info-title h2{
+  font-size: 1.3rem;
+  font-weight: 200;
+  line-height: 2.375rem;
+  text-transform: uppercase;
+  color: #151517;
+}
+.form-info-body {
+  background-color: #FFF;
+  height: auto;
+  border-radius: 0.25rem;
+  padding: 3.75rem 4.90625rem 3.125rem 4.90625rem;
+  border: 0.0625rem solid #E0E0E0;
+}
+.form-info-h {
+  margin-bottom: 1.875rem;
+  font-size: 1.3125rem;
+  font-weight: 500;
+  line-height: 1.6875rem;
+  color: #303030;
+}

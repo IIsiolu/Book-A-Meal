@@ -10,14 +10,15 @@ import InlineError from '../messages/inlineError';
  * @extends {React.Component}
  */
 class SignupForm extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       data: {
         email: '',
         password: '',
         firstname: '',
         lastname: '',
+        role: props.role,
       },
       loading: false,
       errors: {},
@@ -93,7 +94,7 @@ class SignupForm extends Component {
                   {errors.firstname && <InlineError text={errors.firstname} /> }
               </Form.Field>
               <Form.Field error={!!errors.lastname}>
-                <label htmlFor='lastname'> First Name </label>
+                <label htmlFor='lastname'> Last Name </label>
                 <input
                   type='text'
                   id='lastname' name='lastname'

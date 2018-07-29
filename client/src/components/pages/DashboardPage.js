@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SideNav, TopNav } from '../common/';
-import { logout } from '../../actions/';
+import { SideNav, TopNav, Orders } from '../common/';
+import { logout, orderHistory } from '../../actions/';
 
 class DashboardPage extends Component {
   componentWillMount() {
@@ -18,20 +18,20 @@ class DashboardPage extends Component {
       this.props.history.push('/');
     }
   }
+  componentDidMount() {
+    this.props.orderHistory();
+  }
 
   render() {
     return (
-      <div>
+      <div className='admin-form-container'>
         <TopNav logout={this.props.logout} />
-        <div className = "main-container">
-          <div className = "sidebar">
-            <SideNav />
-          </div>
-          <div className = "main-bar" >
-            <h1>Dashboard page</h1>
+        <div className = "form-con-bg">
+          <SideNav />
+          <div className = "order-bar" >
+            <Orders {...this.props} />
           </div>
         </div>
-        <p>Welcome to admin page </p>
       </div>
     );
   }
@@ -41,9 +41,11 @@ DashboardPage.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
+  orderHistory: PropTypes.func.isRequired,
 };
-const mapstatetoProps = ({ user }) => ({
+const mapstatetoProps = ({ user, orderHistories }) => ({
   isAuthenticated: user.isAuthenticated,
   role: user.user.role,
+  orders: orderHistories.orderHistory,
 });
-export default connect(mapstatetoProps, { logout })(DashboardPage);
+export default connect(mapstatetoProps, { logout, orderHistory })(DashboardPage);

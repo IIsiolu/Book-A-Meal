@@ -18,15 +18,23 @@ const removeAnOrder = meal => ({
   payload: meal,
 });
 export const addMealToOrder = meal => (dispatch) => {
+  // console.log('meal image', meal);
   const mealData = {
     mealId: meal.id,
     name: meal.name,
     quantity: 1,
+    mealImg: meal.image,
+    mealCost: meal.price,
   };
   return dispatch(addToOrder(mealData));
 };
 export const removeOrder = mealId => (dispatch) => {
   dispatch(removeAnOrder(mealId));
+};
+export const clearOrder = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.CLEAR_ORDER,
+  });
 };
 export const increaseQuantity = (mealId, quantity) => dispatch => (
   dispatch({

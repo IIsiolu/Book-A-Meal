@@ -20,7 +20,21 @@ const deleteMealError = error => ({
   payload: error,
 });
 
-const deleteMeal = id => (dispatch) => {
+export const DeleteErrorState = bool => (dispatch) => {
+  dispatch({
+    type: actionTypes.IS_DELETE_ERROR,
+    payload: bool,
+  });
+};
+
+export const changeSuccessState = bool => (dispatch) => {
+  dispatch({
+    type: actionTypes.IS_DELETE_STATE,
+    payload: bool,
+  });
+};
+
+export const deleteMeal = id => (dispatch) => {
   dispatch(isLoading(true));
   return instance.delete(`meals/${id}`).then((res) => {
     console.log(res);
@@ -38,6 +52,3 @@ const deleteMeal = id => (dispatch) => {
     }
   });
 };
-
-export default deleteMeal;
-

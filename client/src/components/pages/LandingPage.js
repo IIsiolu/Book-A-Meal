@@ -107,12 +107,34 @@ const LandingPage = () => (
             <div className="testimonials">
               <div className="testimonials-content">
                 <h2>Testimonials</h2>
-                <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa eniptaiad esertyatya
+                <div className="testimonial-collection">
+                  <div className="test-item">
+                    <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa eniptaiad esertyatya
                     nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
                     convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
                     sapien molestie nec...” </p>
                     <h4>Oluwa Mark,</h4>
                     <h4>Client</h4>
+                  </div>
+                  <div className="test-item">
+                    <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa eniptaiad esertyatya
+                    nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
+                    convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
+                    sapien molestie nec...” </p>
+                    <h4>Oluwa Mark,</h4>
+                    <h4>Client</h4>
+                  </div>
+                  <div className="test-item">
+                    <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa eniptaiad esertyatya
+                    nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
+                    convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
+                    sapien molestie nec...” </p>
+                    <h4>Oluwa Mark,</h4>
+                    <h4>Client</h4>
+                  </div>
+                    
+                </div>
+                
               </div>
             </div>
             <div className="intro">

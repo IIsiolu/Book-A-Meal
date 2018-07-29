@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { SignupForm } from '../forms';
 import { signup } from '../../actions';
 import img from '../../static/images/gbeans.jpg';
@@ -25,7 +25,7 @@ class SignupPage extends Component {
                       <div className="info">
                           <h2 className="info-h">SIGN UP</h2>
                           <p className="info-p">Sign up to your account</p>
-                          <SignupForm submit={this.submit} {...this.props} />
+                          <SignupForm role={'user'} submit={this.submit} {...this.props} />
                       </div>
                   </div>
                 </div>

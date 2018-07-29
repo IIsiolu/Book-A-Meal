@@ -1,0 +1,28 @@
+.order-h-c {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.order-h-c h2{
+  font-size: 1.7rem;
+  line-height: 3rem;
+}
+.order-row-container {
+  display: flex;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 0.625rem;
+  border-radius: 0.25rem;
+  
+}
+.order-row-cc {
+  background-color: #FFF;
+  color: #1d0e0e;
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+.o-row-item {
+  flex: 1
+}

@@ -9,11 +9,11 @@
     "test": "npm run migrations && npm run start:test",
     "migrations": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "heroku-postbuild": "NODE_ENV=production && NODE_END=production && npm run migrations",
+    "heroku-postbuild": "NODE_ENV=production && NODE_END=production && npm run migrations && npm run webpack:build",
     "start:test": "nyc mocha --timeout 50000 --exit --require babel-core/register server/test/test/index.text.js",
     "webpack:watch": "webpack --watch",
     "webpack:start": "webpack-dev-server --progress --colors",
-    "webpack:build": "./node_modules/.bin/webpack",
+    "webpack:build": "rm -rf dist && webpack ",
     "build-production": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors"
   },
   "dependencies": {

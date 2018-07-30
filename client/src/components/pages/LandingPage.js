@@ -1,21 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import { FoodForkDrinkIcon } from 'mdi-react';
-
+import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
 import { Footer } from '../common/';
 import food1 from '../../static/images/food1.jpg';
 import food2 from '../../static/images/food2.jpg';
 import food3 from '../../static/images/food3.jpg';
 import food4 from '../../static/images/food4.jpg';
 
-const LandingPage = () => (
+const LandingPage = ({ isAuthenticated, logout }) => (
     <div className="container">
             <div className="top-nav landing-nav">
                 <h2 className="logo">Book-A-Meal</h2>
-                <div className="right-nav">
-                    <Link className="nav-text" to="/login">Login</Link>
-                    <Link className="nav-text" to="/signup">SignUp</Link>
-                </div>
+
+                {
+                  isAuthenticated ? (
+                    <div className="right-nav">
+                      <Link className="nav-text" to="/home">Menu</Link>
+                      {/* <Link className="nav-text" to="/signup">Logout</Link> */}
+                      <h5 className="nav-text-h" onClick={logout}>Log-out</h5>
+                    </div>
+                  ) :
+                  (
+                  <div className="right-nav">
+                      <Link className="nav-text" to="/login">Login</Link>
+                      <Link className="nav-text" to="/signup">signup</Link>
+                  </div>
+                  )
+                }
             </div>
             <div className="coverContainer">
 
@@ -87,22 +100,22 @@ const LandingPage = () => (
               <p>Enjoy your food prepared by professional cooks specially for you.</p>
               <div className="services">
                 <div className="service1 service-card">
-                  <h3>Menu</h3>
+                  <h3><i className="fa fa-calendar"></i> Menu</h3>
                   <p>We have delicious sets of foods prepared by professional cooks,
                     For each day of the week</p>
                 </div>
                 <div className="service2 service-card">
-                  <h3>Select</h3>
+                  <h3><i className="fa fa-check-square"></i> Select</h3>
                   <p>Take a good look at the menu, click whatever you want to eat and
                     drink, and head to the checkout.</p>
                 </div>
                 <div className="service3 service-card">
-                <h3>Enjoy</h3>
+                <h3><i className="fa fa-grin-beam-sweat"></i> Enjoy</h3>
                   <p>Enjoy your food. This is the part where you get to eat your food
                      while basking in the warm glow of time not spent cooking.</p>
                 </div>
               </div>
-              <Link className="menu-btn" to='/login'>Order Now </Link>
+              <Link className="menu-btn" to='/home'>Order Now </Link>
             </div>
             <div className="testimonials">
               <div className="testimonials-content">
@@ -132,9 +145,9 @@ const LandingPage = () => (
                     <h4>Oluwa Mark,</h4>
                     <h4>Client</h4>
                   </div>
-                    
+
                 </div>
-                
+
               </div>
             </div>
             <div className="intro">
@@ -147,15 +160,18 @@ const LandingPage = () => (
                       nascetur ridiculus mus. Morbi tristique ut lacus et scelerisque.</h5>
                     <p>Suspendisse potenti. Sed fermentum, libero eget euismod convallis, justo lectus egestas dui,
                       eu tempor lectus risus a dolor. Suspendisse tempor quam purus, sit amet feugiat sapien molestie
-                      nec. Sed aliquam, justo ut pharetra dapibus, leo risus iaculis nulla, ut sagittis nunc diam lobortis metus. Nulla pulvinar odio vitae nisl dignissim, id rutrum lorem molestie. Maecenas euismod hendrerit risus, ut congue arcu tincidunt sed. Nullam at ipsum vel ante interdum lobortis. Etiam quis ultricies enim, in venenatis sapien. Phasellus interdum 
+                      nec. Sed aliquam, justo ut pharetra dapibus, leo risus iaculis nulla, ut sagittis nunc diam lobortis metus. Nulla pulvinar odio vitae nisl dignissim, id rutrum lorem molestie. Maecenas euismod hendrerit risus, ut congue arcu tincidunt sed. Nullam at ipsum vel ante interdum lobortis. Etiam quis ultricies enim, in venenatis sapien. Phasellus interdum
                       consectetur enim, venenatis eleifend urna sed nulla id magna placerat hendrerit.</p>
-                      <Link className="menu-btn" to='/login'>Menu For Today </Link>
+                      <Link className="menu-btn" to='/home'>Menu For Today </Link>
                   </div>
                 </div>
-                
+
               </div>
             </div>
             <Footer />
     </div>
 );
-export default LandingPage;
+const mapStateToProps = ({ user }) => ({
+  isAuthenticated: user.isAuthenticated,
+});
+export default connect(mapStateToProps, { logout })(LandingPage);

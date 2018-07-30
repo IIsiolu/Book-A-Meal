@@ -42,6 +42,9 @@ export const todayMenuState = {
 
 export const orderState = {
   orders: [],
+  loading: false,
+  success: false,
+  isError: false,
   createdOrders: [],
   myOrders: [],
   error: null,

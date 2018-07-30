@@ -37,9 +37,23 @@ export const clearOrder = () => (dispatch) => {
   });
 };
 export const increaseQuantity = (mealId, quantity) => dispatch => (
+  quantity > 0 ?
+    dispatch({
+      type: actionTypes.INCREASE_MEAL_QUANTITY,
+      payload: { mealId, quantity },
+    }) : ''
+);
+export const successState = bool => dispatch => (
   dispatch({
-    type: actionTypes.INCREASE_MEAL_QUANTITY,
-    payload: { mealId, quantity },
+    type: actionTypes.CHANGE_ORDER_SUC_STATE,
+    payload: bool,
+  })
+);
+
+export const errState = bool => dispatch => (
+  dispatch({
+    type: actionTypes.CHANGE_ORDER_ERR_STATE,
+    payload: bool,
   })
 );
 

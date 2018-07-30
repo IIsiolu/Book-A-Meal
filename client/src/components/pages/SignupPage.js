@@ -3,13 +3,34 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { SignupForm } from '../forms';
-import { signup } from '../../actions';
+import { signup, logIn, signupState } from '../../actions';
 import img from '../../static/images/gbeans.jpg';
 
 class SignupPage extends Component {
-    submit = (data) => (
-     this.props.signup(data, this.props.history)
-    )
+
+  constructor(){
+    super();
+    this.state={
+      email: '',
+      password: ''
+    }
+  }
+    submit = (data) => {
+      this.setState({
+        email: data.email,
+        password: data.password
+      })
+      this.props.signup(data, this.props.history)
+    }
+     
+    
+    componentDidUpdate(){
+      if(this.props.signedUp === true) {
+        this.props.logIn(this.state, this.props.history);
+        this.props.signupState(false);
+
+      }
+    }
   render() {
 
     return (
@@ -42,7 +63,8 @@ SignupPage.propTypes = {
 }
 const mapStateToProps = state => ({
     error: state.user.error,
-    loading: state.user.loading
+    loading: state.user.loading,
+    signedUp: state.user.signedUp
 })
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, {signup})(SignupPage);
+export default connect(mapStateToProps, {signup, logIn, signupState})(SignupPage);

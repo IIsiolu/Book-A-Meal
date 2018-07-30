@@ -14,6 +14,7 @@ import Navigate from './utils/Navigate';
 const App = ({ location }) => (
      <div>
          <Route location={location} path='/' exact component={Navigate(LandingPage)} />
+         <Route path='/index' exact component={LandingPage} />
          <Route path='/login' exact component={LoginPage} />
          <Route path='/signup' exact component={SignupPage} />
          <Route path='/dashboard' exact component={Authenticate(DashboardPage)} />

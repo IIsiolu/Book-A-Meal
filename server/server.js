@@ -25,7 +25,11 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(cors());
-app.use('/', express.static(path.join(__dirname, '../dist')));
+
+app.use('/', express.static(path.resolve(__dirname, '/dist')));
+app.use('*', express.static(path.resolve(__dirname, '/dist')));
+
+
 // app.use(express.static(path.join(__dirname, 'client/public')));
 // app.use(express.static(('client/src')));
 

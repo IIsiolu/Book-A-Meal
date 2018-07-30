@@ -7,8 +7,8 @@ const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) => {
     <div className="mealoption-container">
       <div className="cardt">
         <img className="food-img" src={meal.image} alt="my food" />
-        <div className="meal-overlay">
-          <h2 onClick={() => isOverlayOpened(true, meal.id)} className="f-detail">Food Details</h2>
+        <div onClick={() => isOverlayOpened(true, meal.id)} className="meal-overlay mous">
+          <h2 className="f-detail">Food Details</h2>
         </div>
       </div>
       <div className="meal-info">
@@ -18,7 +18,7 @@ const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) => {
       </div>
       <div className='buy'>
         <span className='price'><sup>$</sup>{meal.price}</span>
-        <button onClick={() => addMealToOrder(meal)} className="order-now" > Add to Cart </button>
+        <button onClick={() => addMealToOrder(meal)} className="order-now mous" > Add to Cart </button>
       </div>
     </div>
   )

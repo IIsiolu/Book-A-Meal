@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
 import { Footer, MenuCard, OrderItem, FoodModal } from '../common/';
-import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder } from '../../actions';
+import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder, successState, errState } from '../../actions';
 import img from '../../static/images/spice1.jpg';
 import best from '../../static/images/best-now.png';
 
@@ -38,6 +39,18 @@ class HomePage extends Component {
       this.props.history.push('/');
     }
   }
+  componentDidUpdate(){
+    if (this.props.orderSuccessful === true) {
+      swal("Meal Ordered", 'Your meal has been ordered successfully' , "success");
+      this.props.successState(false);
+      this.props.clearOrder()
+    }
+    if (this.props.isOrderError === true) {
+      swal("Order error", 'error ordering meal' , "error");
+      this.props.errState(false);
+    }
+     
+  }
   addMealToOrder = (meal) => {
     if(this.props.placedOrders.length){
       let alreadyExist = this.props.placedOrders.some((item) => meal.id === item.mealId);
@@ -65,8 +78,8 @@ class HomePage extends Component {
      {this.props.removeOrder} /> )
   )
   noMenu = () => (
-    <div>
-      <h1>NO MENU FOR TODAY</h1>
+    <div className='no-menu-container'>
+      MENU HAS NOT BEEN SET FOR TODAY
     </div>
   )
   openModal = () => {
@@ -80,8 +93,8 @@ class HomePage extends Component {
     </div>
   )
   submit = () => {
-    // this.props.requestForOrder(this.props.placedOrders)
-    console.log(document.getElementById('lolo').innerHTML)
+    this.props.requestForOrder(this.props.placedOrders)
+    console.log('clicked sub')
   }
   subTotal = () => {
     let total = 0;
@@ -107,6 +120,23 @@ class HomePage extends Component {
       isToggled: !this.state.isToggled
     })
   }
+  deleteMeal = () => {
+    swal({
+      title: "Are you sure?",
+      text: "Once Cleared, you will not be able to recover this orders!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.props.clearOrder();
+        swal("Meal cleared successfully");
+      } else {
+        swal("Your meal is safe!");
+      }
+    });
+  }
 
   render() {
     return (
@@ -119,9 +149,9 @@ class HomePage extends Component {
         </div>
         <nav>
           <div className="top-nav">
-            <h2 className="logo">Book-A-Meal</h2>
+            <Link className="logo" to="/">Book-A-Meal</Link>
             <div className="right-nav">
-              <Link className="nav-text" to="/meal">Home</Link>
+              <Link className="nav-text" to="/">Home</Link>
               <Link className="nav-text" to="/">About-Us</Link>
               <h5 className="nav-text-h" onClick={this.props.logout}>Log-out</h5>
             </div>
@@ -168,7 +198,7 @@ class HomePage extends Component {
                     </div>
                   </div>
                   <div className="cat">
-                    <h4 onClick={this.props.clearOrder}>Clear Cart</h4>
+                    <button className='clear-cart' onClick={this.deleteMeal}>Clear Cart</button>
                     <button onClick={this.submit}>Check out</button>
                   </div>
                 </div>
@@ -205,6 +235,10 @@ const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
   placedOrders: order.orders,
   isOpened: isOverlayOpened.open,
   overlayId: isOverlayOpened.id,
+  isOrdering: order.loading,
+  isOrderError: order.isError,
+  orderError: order.error,
+  orderSuccessful: order.success,
 });
 
-export default connect(mapStateToProps, { logout, menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder })(HomePage);
+export default connect(mapStateToProps, { logout, menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder, successState, errState })(HomePage);

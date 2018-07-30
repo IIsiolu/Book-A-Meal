@@ -20,7 +20,7 @@ export default function (ComposedComponent) {
       if (this.props.user.role === 'admin') {
         this.props.history.push('/dashboard');
       } else if (this.props.user.role === 'user') {
-        this.props.history.push('/home');
+        this.props.history.push('/index');
       }
     }
 
@@ -28,7 +28,7 @@ export default function (ComposedComponent) {
       if (nextProps.user.role === 'admin') {
         this.props.history.push('/dashboard');
       } else if (nextProps.user.role === 'user') {
-        this.props.history.push('/home');
+        this.props.history.push('/index');
       }
     }
 

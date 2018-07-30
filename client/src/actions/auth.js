@@ -6,7 +6,7 @@ import instance from '../utils/instance';
 export const userSignup = user => ({
   type: actionTypes.USER_SIGN_UP,
   payload: user,
-}); 
+});
 export const userLoggedIn = user => ({
   type: actionTypes.USER_LOGGED_IN,
   payload: user,
@@ -23,31 +23,7 @@ export const userError = error => ({
 export const connectin = loading => ({
   type: actionTypes.LOADING,
 });
-export const signup = (credentials, history) => (dispatch) => {
-  console.log({
-    credentials,
-  });
-  dispatch(connectin(true));
-  instance.post('auth/signup', credentials)
-    .then((res) => {
-      const { data } = res;
-      dispatch(userSignup(data));
-      history.push('/login');
-    })
-    .catch((error) => {
-      if (error.response) {
-        console.log({
-          err: 'error in signup',
-          error: error.response,
-        });
-        const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(userError(myError));
-      } else {
-        const myError = 'poor internet connection';
-        dispatch(userError(myError));
-      }
-    });
-};
+
 export const logIn = (credentials, history) => (dispatch) => {
   // console.log({
   //   credentials,
@@ -85,6 +61,46 @@ export const logIn = (credentials, history) => (dispatch) => {
       }
     });
 };
+
+export const signupState = bool => (dispatch) => {
+  dispatch({
+    type: actionTypes.CHANGE_SIGN_UP,
+    payload: bool,
+  });
+};
+
+export const signup = (credentials, history) => (dispatch) => {
+  console.log({
+    credentials,
+  });
+  dispatch(connectin(true));
+  instance.post('auth/signup', credentials)
+    .then((res) => {
+      const { data } = res;
+      const newData = {
+        email: credentials.email,
+        password: credentials.password,
+      };
+      logIn(newData, history);
+      console.log(newData);
+      dispatch(userSignup(data));
+      // history.push('/login');
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log({
+          err: 'error in signup',
+          error: error.response,
+        });
+        const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
+        dispatch(userError(myError));
+      } else {
+        const myError = 'poor internet connection';
+        dispatch(userError(myError));
+      }
+    });
+};
+
 
 export const logout = () => (dispatch) => {
   localStorage.clear();

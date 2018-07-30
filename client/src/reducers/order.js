@@ -29,11 +29,27 @@ const order = (state = orderState, action) => {
     case actionsTypes.ORDER_CREATED:
       return {
         ...state,
+        loading: false,
+        isError: false,
+        success: true,
         myOrders: [...state.myOrders, action.payload],
+      };
+    case actionsTypes.CHANGE_ORDER_SUC_STATE:
+      return {
+        ...state,
+        success: action.payload,
+      };
+    case actionsTypes.CHANGE_ORDER_ERR_STATE:
+      return {
+        ...state,
+        isError: action.payload,
       };
     case actionsTypes.ORDER_ERROR:
       return {
         ...state,
+        loading: false,
+        isError: true,
+        success: false,
         error: action.payload,
       };
     default:

@@ -9,6 +9,7 @@ const initialState = {
   success: false,
   error: null,
   isAuthenticated: false,
+  signedUp: false,
   user: {
     role: null,
   },
@@ -24,8 +25,14 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        signedUp: true,
         error: null,
         user: action.payload,
+      };
+    case actionsTypes.CHANGE_SIGN_UP:
+      return {
+        ...state,
+        signedUp: action.payload,
       };
     case actionsTypes.USER_LOGGED_IN:
       return {

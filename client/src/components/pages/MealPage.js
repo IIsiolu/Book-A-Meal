@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { ToastContainer } from "react-toastr";
 import { TopNav, MealOptions } from '../common/';
 import {AddMeal, UpdateMeal}  from '../forms';
-import { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState } from '../../actions';
+import { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState, mealSuccessState, DeleteErrorState } from '../../actions';
 
 class MealPage extends Component {
 
@@ -123,6 +123,7 @@ const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpe
   addMealError: createMeal.error,
   mealCreated: createMeal.success,
   creatingMeal: createMeal.loading,
+  isMealAdded: createMeal.mealsuccessful,
   imageUrl: imageUpload.imageUrl,
   imageId: imageUpload.id,
   isLoading: imageUpload.loading,
@@ -140,4 +141,4 @@ const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpe
   isMealDeleteError: deleteMeal.isMealDeleteError,
   deleteMealError: deleteMeal.error
 });
-export default connect(mapstatetoProps, { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState })(MealPage);
+export default connect(mapstatetoProps, { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState, mealSuccessState, DeleteErrorState })(MealPage);

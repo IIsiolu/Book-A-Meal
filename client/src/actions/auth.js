@@ -101,7 +101,6 @@ export const signup = (credentials, history) => (dispatch) => {
     });
 };
 
-
 export const logout = () => (dispatch) => {
   localStorage.clear();
   dispatch(userLoggedIn({}));

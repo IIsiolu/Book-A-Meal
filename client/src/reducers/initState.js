@@ -3,6 +3,7 @@ export const createMealState = {
   success: false,
   error: null,
   meal: null,
+  mealsuccessful: false,
 };
 
 export const fetchMealState = {

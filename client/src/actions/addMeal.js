@@ -18,6 +18,12 @@ export const mealError = error => ({
   type: actionTypes.CREATE_MEAL_ERROR,
   payload: error,
 });
+export const mealSuccessState = bool => (dispatch) => {
+  dispatch({
+    type: actionTypes.ADD_MEAL_SUCCESS_STATE,
+    payload: bool,
+  });
+};
 export const createMeal = meal => (dispatch) => {
   dispatch(isLoading(true));
   return instance.post('meals', meal).then((res) => {

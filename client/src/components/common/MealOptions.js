@@ -51,9 +51,11 @@ class MealOptions extends Component {
     }
     if ( this.props.isUpdateMealError === true) {
       swal("Meal error", 'error updating meal' , "error");
+      this.props.changeMealError(false);
     }
     if(this.props.isMealDeleteError === true) {
       swal("Meal error", 'error deleting meal' , "error")
+      this.props.DeleteErrorState(false);
     }
     if(this.props.mealDeleted === true) {
       swal("Meal Deleted", 'Your meal has been deleted successfully' , "success");

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 import InlineError from '../messages/inlineError';
+import swal from 'sweetalert';
+
 import { isLoading } from '../../actions/imageUpload';
 // import ImageUpload from './ImageUpload';
 
@@ -27,6 +29,20 @@ class AddMeal extends Component {
         image: this.props.imageUrl
         }
         
+      })
+    }
+    if(this.props.isMealAdded === true ){
+      console.log('meal added ')
+      swal("Meal Added", "Your meal has been added successfully!", "success")
+      this.props.mealSuccessState(false);
+      this.setState({
+        data: {
+          ...this.state.data,
+          name: '',
+          price: '',
+          description: '',
+          image: ''
+        }
       })
     }
     console.log('prevProps>>>>', prevProps)
@@ -82,7 +98,7 @@ class AddMeal extends Component {
           <input
             type='text'
             id='name' name='name'
-            // value={data.name}
+            value={data.name}
             onChange={this.onChange}
             placeholder='meal name' />
             {errors.name && <InlineError text={errors.name} /> }
@@ -92,6 +108,7 @@ class AddMeal extends Component {
           <Form.TextArea label='description'
           placeholder='Input meal description...'
           name='description'
+          value={data.description}
           maxLength="120"
           onChange={this.onChange} />
           {errors.description && <InlineError text={errors.description} /> }
@@ -119,7 +136,7 @@ class AddMeal extends Component {
         </Form.Field>
         {this.props.imageUrl ? 
         <div className="postedImg">
-          <img className="imgup" src={this.props.imageUrl} alt="image" />
+          <img className="imgup" src={this.state.data.image} alt="image" />
         </div> : ''}
         <Button
           type="submit"

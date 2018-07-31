@@ -1,6 +1,6 @@
 import { logIn, signup, logout, signupState } from './auth';
 import { imageUpload, imageUploaded } from './imageUpload';
-import { createMeal } from './addMeal';
+import { createMeal, mealSuccessState } from './addMeal';
 import isModalOpened from './isModalOpened';
 import isOverlayOpened from './detailModal';
 
@@ -12,5 +12,5 @@ export { menuForToday } from './menuForToday';
 export { addToMenu, removeMeal, createMenu } from './menu';
 export { fetchMeals } from './fetchMeals';
 export { isModalOpened, isOverlayOpened };
-export { logIn, signup, logout, imageUpload, imageUploaded, createMeal, signupState };
+export { logIn, signup, logout, imageUpload, imageUploaded, createMeal, signupState, mealSuccessState };
 

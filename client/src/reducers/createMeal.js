@@ -13,14 +13,21 @@ const createMeal = (state = createMealState, action) => {
         ...state,
         meal: action.payload,
         loading: false,
+        mealsuccessful: true,
         success: true,
         error: null,
+      };
+    case actionsTypes.ADD_MEAL_SUCCESS_STATE:
+      return {
+        ...state,
+        mealsuccessful: action.payload,
       };
     case actionsTypes.CREATE_MEAL_ERROR:
       return {
         ...state,
         meal: null,
         success: false,
+        mealsuccessful: false,
         error: action.payload,
         loading: false,
 

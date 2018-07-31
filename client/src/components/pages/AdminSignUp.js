@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { SignupForm } from '../forms';
-import { signup } from '../../actions';
+import { signup, signupState } from '../../actions';
 import { TopNav } from '../common'
 
 class AdminSignUp extends Component {
+  componentDidUpdate(){
+    if(this.props.isSuccess === true) {
+      swal("Admin Created", 'Admin has been created successfully' , "success");
+      this.props.signupState(false);
+    }
+  }
   submit = (data) => (
     this.props.signup(data, this.props.history)
    )
@@ -46,6 +53,7 @@ AdminSignUp.propTypes = {
 const mapStateToProps = state => ({
   error: state.user.error,
   loading: state.user.loading,
+  isSuccess: state.user.signedUp
 });
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, { signup })(AdminSignUp);
+export default connect(mapStateToProps, { signup, signupState })(AdminSignUp);

@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import Link from 'react-router-dom';
 
 const MealCard = ({ meal, addedMenus }) => (
-  <div className="mealoption-container">
-      
-      <img className="food-img" src={meal.image} alt="my food" />
-      <div className="meal-info">
-        <h3>{meal.name} (#{meal.price})</h3>
+  <div className="m-c-container">
+      <div className="m-c-imgcontainer">
+        <img src={meal.image} alt="my food" />
+      </div>
+      <div className="meal-input-info meal-card-style">
+        <div className="meal-name-price">
+          <h3>{meal.name}</h3>
+          <h3>${meal.price}</h3>
+        </div>
         <p>{meal.description}</p>
       </div>
-      <div>
-        <button onClick={() => addedMenus(meal)} className="order-now" > <i id="f-awe" className="far fa-plus fa-2x"></i></button>
+      <div className='add-menu'>
+        <button onClick={() => addedMenus(meal)} > Add To Menu </button>
       </div>
   </div>
 );

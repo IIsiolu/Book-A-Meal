@@ -175,7 +175,7 @@ class MealOptions extends Component {
           <ToastContainer
             ref={ref => container = ref}
           />
-        <div className="meal-info">
+        <div className="meal-input-info">
           <div className="meal-i-p">
             <input className={this.state.edit? 'myInputs card-input meal-name-input' : 'meal-name-input clear-default'} onChange={this.onChange} name="name" type="text" value={this.state.data.name} disabled={!this.state.edit} />
             <div className="meal-currency">
@@ -192,13 +192,13 @@ class MealOptions extends Component {
         </textarea>
         </div>
         <div className={this.state.edit ? 'hide' : 'down-btn'} >
-          <button onClick={this.edit}>Edit</button>
-          <button onClick={() => this.deleteMeal()} className=""> Delete</button>
+          <button className='btn-style left-area' onClick={this.edit}>Edit</button>
+          <button onClick={() => this.deleteMeal()} className="btn-style right-area"> Delete</button>
           {/* <button onClick={() => this.props.isModalOpened(true, data.id)} id="myBtn2" className="order-now" > <i id="f-awe" className="fa fa-edit fa-2x"></i></button> */}
         </div>
         <div className={this.state.edit ? 'down-btn' : 'hide'}>
-          <button onClick={this.submit}>Save</button>
-          <button onClick={this.cancel}>Cancel</button>
+          <button className='btn-style left-area' onClick={this.submit}>Save</button>
+          <button className='btn-style right-area' onClick={this.cancel}>Cancel</button>
         </div>
       </div>
     );

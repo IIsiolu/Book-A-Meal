@@ -10,6 +10,7 @@ class MenuPage extends Component {
     super();
     this.state={
       date: '',
+      isOpened: false,
     }
   }
   componentWillMount() {
@@ -28,6 +29,11 @@ class MenuPage extends Component {
       this.props.history.push('/');
     }
   }
+  openMenu = () => (
+    this.setState({
+      isOpened: !this.state.isOpened
+    })
+  )
   noMeal = () => (
     <div>
       <h1>No meals Yet</h1> 
@@ -72,13 +78,26 @@ class MenuPage extends Component {
       <div>
         <TopNav />
         <div className = "main-container">
-          <div className = "main-bar">
+          <div className = "menupage-meals">
             {myMeals}
           </div>
-          <div className = "sidebar">
-            {myMenus}
-            {this.props.menus.length ? this.dateBtn() : '' }
-          </div>
+          {
+            this.props.menus.length? 
+            <div className = "drawer-layout">
+            <div className={this.state.isOpened ? "sidebar-container is-up": "sidebar-container is-down"}>
+              <div onClick={this.openMenu} className="order-header">
+                <h1><span className="meal-notific">{this.props.menus.length}</span> {this.props.menus.length>1 ? 'Meals' : 'Meal'} Selected</h1>
+                {this.state.isOpened ? <i className="fa fa-chevron-down"></i>: <i className="fa fa-chevron-up"></i>}
+              </div>
+              
+              <div className="set-menu-content">
+                {myMenus}
+                {this.props.menus.length ? this.dateBtn() : '' }
+              </div>
+            </div>
+          </div> : ''
+          }
+          
         </div>
       </div>
     );

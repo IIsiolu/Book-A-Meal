@@ -43,7 +43,6 @@ class MenuController {
           date,
         },
       }).then((menu) => {
-        console.log(date);
         if (menu.length === 0) {
           return res.status(404).send({
             success: false,

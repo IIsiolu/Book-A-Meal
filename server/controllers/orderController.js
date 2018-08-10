@@ -19,9 +19,8 @@ class OrderController {
         });
       }).catch(err => res.status(500).send({
         success: false,
-        error: err, 
+        error: err,
       }));
-
   }
 
   static modifyOrder(req, res) {
@@ -58,6 +57,32 @@ class OrderController {
         result: 'success',
         message: orders,
       })).catch(error => res.status(400).json('failed to get all orders'));
+  }
+
+  static cusOrder(req, res) {
+    Order.findAll({
+      include: [
+        Meal, User,
+      ],
+      where: {
+        userId: req.user.id,
+      },
+    }).then((userOrders) => {
+      if (userOrders.length === 0) {
+        return res.status(404).send({
+          success: false,
+          data: userOrders,
+          message: 'Customer order is empty',
+        });
+      }
+      return res.status(200).send({
+        success: true,
+        data: userOrders,
+      });
+    }).catch(err => res.status(500).send({
+      success: false,
+      message: 'cannot get customer orders',
+    }));
   }
 }
 export default OrderController;

@@ -33,7 +33,7 @@ class Auth {
     if (token) {
       const secret = process.env.SECRET;
       jwt.verify(token, secret, (err, data) => {
-        if (err || data.role !== 'admin') {
+        if (err || !(data.role === 'admin' || data.role === 'super-admin')) {
           return res.status(401).json({
             message: 'You have to be an admin',
           });

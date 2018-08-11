@@ -9,5 +9,10 @@ import MenuCard from './MenuCard';
 import OrderItem from './OrderItem';
 import FoodModal from './FoodModal';
 import Orders from './Orders';
+import { OrderNav, LandingNav, MenuNav } from './navigations';
 
-export { Footer, SideNav, TopNav, ImageUpload, MealOptions, MealCard, MenuItems, MenuCard, OrderItem, FoodModal, Orders };
+export {
+  Footer, SideNav, TopNav, ImageUpload, MealOptions, MealCard,
+  MenuItems, MenuCard, OrderItem, FoodModal, Orders,
+  OrderNav, LandingNav, MenuNav,
+};

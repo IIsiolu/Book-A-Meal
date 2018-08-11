@@ -45,7 +45,6 @@ class AddMeal extends Component {
         }
       })
     }
-    console.log('prevProps>>>>', prevProps)
   }
   onChange =(e) => {
     this.setState({
@@ -88,7 +87,10 @@ class AddMeal extends Component {
     const { data, errors } = this.state;
     return (
       <Form onSubmit={this.onSubmit} loading={this.props.creatingMeal} >
-        <h1>Create Meal</h1>
+      <div className="add-m-header">
+        <h1>Create Meal</h1><i onClick={this.props.open} className="fa fa-times"></i>
+      </div>
+        
       { this.props.addMealError && <Message negative>
                 <Message.Header> Something went wrong </Message.Header>
                 <p>{this.props.addMealError} </p>
@@ -134,7 +136,7 @@ class AddMeal extends Component {
              />
             {errors.image && <InlineError text={errors.image} /> }
         </Form.Field>
-        {this.props.imageUrl ? 
+        {this.state.data.image ? 
         <div className="postedImg">
           <img className="imgup" src={this.state.data.image} alt="image" />
         </div> : ''}

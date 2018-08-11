@@ -610,6 +610,11 @@ line-height: 21px;
   align-items: center;
 }
 
+.user-order {
+  background-color: #F6F9FC;
+  min-height: 100vh;
+}
+
 @media only screen and (max-width: 800px) {
   .top-content-h {
     font-size: 48px;

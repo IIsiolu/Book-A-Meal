@@ -34,7 +34,7 @@ class AdminSignUp extends Component {
             </div>
             <div className="form-info-body">
               <h1 className="form-info-h">Required Fields</h1>
-              <SignupForm submit = {this.submit} role={'admin'} {...this.props} />
+              <SignupForm submit = {this.submit} role={this.props.role} {...this.props} />
             </div>
           </div>
         </div>
@@ -53,7 +53,8 @@ AdminSignUp.propTypes = {
 const mapStateToProps = state => ({
   error: state.user.error,
   loading: state.user.loading,
-  isSuccess: state.user.signedUp
+  isSuccess: state.user.signedUp,
+  role: state.user.user.role
 });
 // mapstate for states, dispatch functions
 export default connect(mapStateToProps, { signup, signupState })(AdminSignUp);

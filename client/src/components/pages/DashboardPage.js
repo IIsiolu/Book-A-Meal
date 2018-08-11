@@ -8,8 +8,8 @@ class DashboardPage extends Component {
   componentWillMount() {
     // const newLocal = this.props.role === 'admin';
     const { role } = this.props;
-    if (role !== 'admin') {
-      console.log('Going back because phemmy is a stubborn boy');
+    console.log('role>>>>>>>>>>>', role);
+    if (!(role === 'admin' || role === 'super-admin')) {
       this.props.history.push('/login');
     }
   }
@@ -27,7 +27,7 @@ class DashboardPage extends Component {
       <div className='admin-form-container'>
         <TopNav logout={this.props.logout} />
         <div className = "form-con-bg">
-          <SideNav />
+          <SideNav role={this.props.role} />
           <div className = "order-bar" >
             <Orders {...this.props} />
           </div>
@@ -36,6 +36,7 @@ class DashboardPage extends Component {
     );
   }
 }
+
 DashboardPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

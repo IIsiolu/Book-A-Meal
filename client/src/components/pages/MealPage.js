@@ -31,11 +31,9 @@ class MealPage extends Component {
   }
   componentWillMount() {
     const { role } = this.props;
-    if (role !== 'admin') {
-      console.log('Going back because phemmy is a smart boy');
+    if (!(role === 'admin' || role === 'super-admin')) {
       this.props.history.push('/login');
     }
-    // this.props.fetchMeals;
   }
   componentWillUpdate(nextProps) {
     if (!nextProps.isAuthenticated) {
@@ -71,7 +69,6 @@ class MealPage extends Component {
   )
 
   render() {
-   console.log('Meal Updated >>>>>>>>', this.props.mealUpdated)
     return (
       <div className="m-o-Container">
         <TopNav logout={this.props.logout} />
@@ -93,7 +90,7 @@ class MealPage extends Component {
           
           <div className = {this.state.isNavOpened? 'add-meal-c go-left': 'add-meal-c'}>
             {this.props.openModal ? <UpdateMeal {...this.props}  /> : ''} 
-            <AddMeal {...this.props} isNavOpened={this.state.isNavOpened}  />
+            <AddMeal {...this.props} open={this.openNav} isNavOpened={this.state.isNavOpened}  />
           </div>
         </div>
       </div>

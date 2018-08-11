@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) => {
-  console.log(meal);
-  return(
+const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) =>
+  (
     <div className="mealoption-container">
       <div className="cardt">
         <img className="food-img" src={meal.image} alt="my food" />
@@ -17,12 +16,11 @@ const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) => {
         {/* <p>{meal.description}</p> */}
       </div>
       <div className='buy'>
-        <span className='price'><sup>$</sup>{meal.price}</span>
+        <span className='price'><sup>&#8358;</sup>{meal.price}</span>
         <button onClick={() => addMealToOrder(meal)} className="order-now mous" > Add to Cart </button>
       </div>
     </div>
-  )
-}
+  );
 MenuCard.propTypes = {
   meal: PropTypes.object.isRequired,
   addMealToOrder: PropTypes.func.isRequired,

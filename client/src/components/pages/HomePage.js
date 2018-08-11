@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
-import { Footer, MenuCard, OrderItem, FoodModal } from '../common/';
+import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common/';
 import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder, successState, errState } from '../../actions';
 import img from '../../static/images/spice1.jpg';
 import best from '../../static/images/best-now.png';
@@ -43,6 +43,7 @@ class HomePage extends Component {
     if (this.props.orderSuccessful === true) {
       swal("Meal Ordered", 'Your meal has been ordered successfully' , "success");
       this.props.successState(false);
+      this.toggle();
       this.props.clearOrder()
     }
     if (this.props.isOrderError === true) {
@@ -130,6 +131,7 @@ class HomePage extends Component {
     })
     .then((willDelete) => {
       if (willDelete) {
+        this.toggle();
         this.props.clearOrder();
         swal("Meal cleared successfully");
       } else {
@@ -148,14 +150,7 @@ class HomePage extends Component {
           </div>
         </div>
         <nav>
-          <div className="top-nav">
-            <Link className="logo" to="/">Book-A-Meal</Link>
-            <div className="right-nav">
-              <Link className="nav-text" to="/">Home</Link>
-              <Link className="nav-text" to="/">About-Us</Link>
-              <h5 className="nav-text-h" onClick={this.props.logout}>Log-out</h5>
-            </div>
-          </div>
+          <MenuNav logout={this.props.logout} />
         </nav>
         <div className = "main-container">
           <h2>Menu For Today</h2>
@@ -171,7 +166,7 @@ class HomePage extends Component {
                   <h1><span className='meal-notific'>{this.props.placedOrders.length}</span> {this.props.placedOrders.length >1 ? 'meals' : 'meal'} selected</h1>
                   <i className={!this.state.isToggled ? 'fa fa-chevron-up': 'fa fa-chevron-down'}></i>
                 </div>
-                <div class="rect-title">
+                <div className="rect-title">
                   <h1>My Orders</h1>
                   <div className="rect"></div>
                 </div>
@@ -186,15 +181,15 @@ class HomePage extends Component {
                     </div>
                     <div className="mySubtotal border-text">
                       <h4>Sub-total</h4>
-                      <h4>${this.subTotal()}</h4>
+                      <h4>&#8358;{this.subTotal()}</h4>
                     </div>
                     <div className="vat border-text">
                       <h4>VAT (5%)</h4>
-                      <h4>${this.vat()}</h4>
+                      <h4>&#8358;{this.vat()}</h4>
                     </div>
                     <div className="total-orders border-text">
                       <h4>Total</h4>
-                      <h4>${this.subTotal() - this.vat()}</h4>
+                      <h4>&#8358;{this.subTotal() - this.vat()}</h4>
                     </div>
                   </div>
                   <div className="cat">

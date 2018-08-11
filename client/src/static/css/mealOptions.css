@@ -252,3 +252,12 @@ textarea {
 .men-i-c {
   width: 94% !important;
 }
+.add-m-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+.add-m-header h1{
+  margin: 0;
+}

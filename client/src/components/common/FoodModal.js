@@ -118,7 +118,7 @@ class FoodModal extends React.Component {
 
                 </div>
                 <div className="o-price">
-                  <sup>$</sup>
+                  <sup>&#8358;</sup>
                   <h4>{info.price}</h4>
                 </div>
                 <div onClick={()=> this.props.addMealToOrder(info)} className="order-btn">

@@ -58,11 +58,11 @@ export const errState = bool => dispatch => (
 );
 
 export const requestForOrder = orders => (dispatch) => {
-  console.log(orders);
+  console.log('>>>>>>> orders', orders);
   return (
     instance.post('orders', { orders }).then((res) => {
-      dispatch(createdOrder(res.data.data));
       console.log(res.data);
+      dispatch(createdOrder(res.data.data));
     }).catch((error) => {
       let myError = null;
       console.log(error.response);

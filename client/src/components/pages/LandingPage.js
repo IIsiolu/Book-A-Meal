@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import { FoodForkDrinkIcon } from 'mdi-react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
-import { Footer } from '../common/';
+import { Footer, LandingNav } from '../common/';
 import food1 from '../../static/images/food1.jpg';
 import food2 from '../../static/images/food2.jpg';
 import food3 from '../../static/images/food3.jpg';
@@ -11,25 +11,7 @@ import food4 from '../../static/images/food4.jpg';
 
 const LandingPage = ({ isAuthenticated, logout }) => (
     <div className="container">
-            <div className="top-nav landing-nav">
-                <h2 className="logo">Book-A-Meal</h2>
-
-                {
-                  isAuthenticated ? (
-                    <div className="right-nav">
-                      <Link className="nav-text" to="/home">Menu</Link>
-                      {/* <Link className="nav-text" to="/signup">Logout</Link> */}
-                      <h5 className="nav-text-h" onClick={logout}>Log-out</h5>
-                    </div>
-                  ) :
-                  (
-                  <div className="right-nav">
-                      <Link className="nav-text" to="/login">Login</Link>
-                      <Link className="nav-text" to="/signup">signup</Link>
-                  </div>
-                  )
-                }
-            </div>
+            <LandingNav isAuthenticated={isAuthenticated} logout={logout} />
             <div className="coverContainer">
 
               <div className="top-content">
@@ -78,7 +60,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
                     <div className="foodies-info">
                       <h1>Wheat</h1>
                       <p>Enjoy your food. This is the part where you get to eat your food while </p>
-                      <h3>Wednessday</h3>
+                      <h3>Wednessdays</h3>
                     </div>
                   </Link>
                 </div>
@@ -101,8 +83,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
               <div className="services">
                 <div className="service1 service-card">
                   <h3><i className="fa fa-calendar"></i> Menu</h3>
-                  <p>We have delicious sets of foods prepared by professional cooks,
-                    For each day of the week</p>
+                  <p>Click on order now or menu button to navigate to the sets of menu for today</p>
                 </div>
                 <div className="service2 service-card">
                   <h3><i className="fa fa-check-square"></i> Select</h3>
@@ -126,7 +107,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
                     nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
                     convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
                     sapien molestie nec...” </p>
-                    <h4>Oluwa Mark,</h4>
+                    <h4>Olisa nayo,</h4>
                     <h4>Client</h4>
                   </div>
                   <div className="test-item">
@@ -142,7 +123,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
                     nemo volernatur aut oditaut. Suspendisse potenti. Sed fermentum, libero eget euismod
                     convallis, justo lectus egestas dui, eu tempor lectus risus a dolor. Suspendisse tempor quam
                     sapien molestie nec...” </p>
-                    <h4>Oluwa Mark,</h4>
+                    <h4>Keith Buttler,</h4>
                     <h4>Client</h4>
                   </div>
 

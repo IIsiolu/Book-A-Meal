@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // url loader solved issue with semantic
 import { UserRoute, AdminRoute } from './components/routes';
-import { NotFoundPage, SignupPage, LoginPage, HomePage, DashboardPage, LandingPage, MealPage, MenuPage, AdminSignUp } from './components/pages';
+import { NotFoundPage, SignupPage, LoginPage, HomePage, DashboardPage, LandingPage, MealPage, MenuPage, AdminSignUp, UserOrders } from './components/pages';
 import Authenticate from './utils/Authenticate';
 import Navigate from './utils/Navigate';
 /**
@@ -12,7 +12,7 @@ import Navigate from './utils/Navigate';
  */
 
 const App = ({ location }) => (
-     <div>
+     <Switch>
          <Route location={location} path='/' exact component={Navigate(LandingPage)} />
          <Route path='/index' exact component={LandingPage} />
          <Route path='/login' exact component={LoginPage} />
@@ -23,7 +23,9 @@ const App = ({ location }) => (
          <Route path='/home' exact component={Authenticate(HomePage)} />
          <Route path='/menu' exact component={Authenticate(MenuPage)} />
          <Route path='/adminSignup' exact component={Authenticate(AdminSignUp)} />
-     </div>
+         <Route path='/orders' exact component={Authenticate(UserOrders)} />
+         <Route exact path='*' component={NotFoundPage} />
+     </Switch>
 );
 App.propTypes = {
   location: PropTypes.shape({

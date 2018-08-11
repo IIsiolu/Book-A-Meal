@@ -39,7 +39,7 @@ class MealController {
         success: true,
         data: meal,
       }))
-      .catch(error => res.status(400).json(error));
+      .catch(error => res.status(400).json('unexpected error'));
   }
 
   static editMeal(req, res) {

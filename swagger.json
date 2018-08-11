@@ -42,7 +42,7 @@
           "Auth"
         ],
         "summary": "Create a new user in the database",
-        "description": "",
+        "description": "By filling in valid form inputs, a new user can create an account",
         "operationId": "adduser",
         "consumes": [
           "application/json"
@@ -68,8 +68,14 @@
           "400": {
             "description": "Signup errors"
           },
+          "409": {
+            "description": "User already exist"
+          },
           "500": {
             "description": "user cannot be created"
+          },
+          "default": {
+            "description": "Unexpected Error"
           }
         }
       }
@@ -111,6 +117,9 @@
           },
           "500": {
             "description": "user cannot be signed in"
+          },
+          "default": {
+            "description": "Unexpected Error"
           }
         }
       }
@@ -121,7 +130,7 @@
           "Meals"
         ],
         "summary": "Creates new meal",
-        "description": "",
+        "description": "This method is called to add a new meal",
         "operationId": "createmeal",
         "consumes": [
           "application/json"
@@ -130,6 +139,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "body",
@@ -161,6 +177,9 @@
             "schema": {
               "$ref": "#/definitions/ResponseMessage"
             }
+          },
+          "default": {
+            "description": "Unexpected Error"
           }
         }
       },
@@ -176,10 +195,10 @@
         ],
         "parameters": [
           {
-            "name": "api_key",
+            "name": "x-access-token",
             "in": "header",
-            "description": "Authorization key",
-            "required": false,
+            "description": "Authentication Token",
+            "required": true,
             "type": "string"
           }
         ],
@@ -198,6 +217,9 @@
             "schema": {
               "$ref": "#/definitions/ResponseMessage"
             }
+          },
+          "default": {
+            "description": "Unexpected Error"
           }
         }
       }
@@ -218,10 +240,23 @@
         ],
         "parameters": [
           {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "mealId",
+            "required": true,
+            "description": "ID of meal to be modified",
+            "type": "integer"
+          },
+          {
             "in": "body",
             "name": "body",
-            "description": "edit an existing meal",
-            "required": true,
+            "description": "food form model",
             "schema": {
               "$ref": "#/definitions/Meals"
             }
@@ -257,13 +292,18 @@
         ],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "deletes an existing meal",
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Meals"
-            }
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "mealId",
+            "required": true,
+            "description": "ID of meal to be deleted",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -306,6 +346,13 @@
         ],
         "parameters": [
           {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Ordering a meal from a menu",
@@ -339,21 +386,11 @@
         ],
         "parameters": [
           {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ],
-              "default": "available"
-            },
-            "collectionFormat": "multi"
+            "type": "string"
           }
         ],
         "responses": {
@@ -388,10 +425,23 @@
         ],
         "parameters": [
           {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "description": "ID of order to be modified",
+            "type": "integer"
+          },
+          {
             "in": "body",
             "name": "body",
-            "description": "edit an existing order",
-            "required": true,
+            "description": "food form model",
             "schema": {
               "$ref": "#/definitions/Orders"
             }
@@ -418,7 +468,7 @@
         "tags": [
           "Menu"
         ],
-        "summary": "Login a user with an account to the application",
+        "summary": "menu for the day",
         "description": "",
         "operationId": "postMenu",
         "consumes": [
@@ -428,6 +478,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "body",
@@ -461,6 +518,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "status",
             "in": "query",
@@ -520,22 +584,14 @@
     "Orders": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "mealId": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Meals"
           }
         },
         "quantity": {
           "type": "integer",
-          "format": "int32"
-        },
-        "userId": {
-          "type": "integer",
+          "example": 20,
           "format": "int32"
         }
       }
@@ -543,42 +599,52 @@
     "Meals": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "rice"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": "a very delicious meal"
         },
         "price": {
-          "type": "number"
+          "type": "number",
+          "example": 500
         },
         "image": {
-          "type": "string"
+          "type": "string",
+          "example": "https://cdn-images-1.medium.com/max/1600/1*CZ3OBsPfLV8XqKKn7Aii5Q.png"
         }
       }
     },
     "UserSignup": {
       "type": "object",
+      "required": [
+        "firstname",
+        "email",
+        "password",
+        "lastname"
+      ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+        "firstname": {
+          "type": "string",
+          "example": "phemy"
         },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
+        "lastname": {
+          "type": "string",
+          "example": "phemosy"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "phemy@gmail.com"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "example": "phemy123"
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
         }
       }
     },
@@ -586,10 +652,12 @@
       "type": "object",
       "properties": {
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "phemy@gmail.com"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "example": "phemy123"
         }
       }
     },

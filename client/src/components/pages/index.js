@@ -8,6 +8,7 @@ import LandingPage from './LandingPage';
 import MealPage from './MealPage';
 import MenuPage from './MenuPage';
 import AdminSignUp from './AdminSignUp';
+import UserOrders from './UserOrders';
 
 export {
   HomePage,
@@ -19,5 +20,6 @@ export {
   MealPage,
   MenuPage,
   AdminSignUp,
+  UserOrders,
 };
 

@@ -33,6 +33,12 @@ class SignupForm extends Component {
   }
   onSubmit =(e) => {
     e.preventDefault();
+    if(this.state.data.role === 'admin'){
+      console.log('can be signed in')
+      return this.setState({
+       errors: {...this.state.errors, right: 'you have to be a super admin'}
+      })
+    }
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if(Object.keys(errors).length==0){
@@ -60,6 +66,7 @@ class SignupForm extends Component {
                 <Message.Header> Something went wrong </Message.Header>
                 <p>{this.props.error} </p>
             </Message>}
+
               <Form.Field error={!!errors.email}>
                 <label htmlFor='email'> Email </label>
                 <input
@@ -103,7 +110,10 @@ class SignupForm extends Component {
                   placeholder='example@example.com' />
                   {errors.lastname && <InlineError text={errors.lastname} /> }
               </Form.Field>
-              {/* {this.props.error && <InlineError text={this.props.error} /> } */}
+              { errors.right && <Message negative>
+                <Message.Header> Something went wrong </Message.Header>
+                <p>{errors.right} </p>
+            </Message>}
               <Button
                 type="submit"
                 primary

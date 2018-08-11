@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TopNav, MealCard, MenuItems } from '../common/';
-import { addToMenu, fetchMeals, removeMeal, createMenu } from '../../actions';
+import { addToMenu, fetchMeals, removeMeal, createMenu, logout } from '../../actions';
 
 
 class MenuPage extends Component {
@@ -15,8 +15,7 @@ class MenuPage extends Component {
   }
   componentWillMount() {
     const { role } = this.props;
-    if (role !== 'admin') {
-      console.log('Going back because phemmy is a smart boy');
+    if (!(role === 'admin' || role === 'super-admin')) {
       this.props.history.push('/login');
     }
     // this.props.fetchMeals;
@@ -76,7 +75,7 @@ class MenuPage extends Component {
     const myMenus = menus.length ? (menus.map((menu, key) => <MenuItems removeMeal={this.props.removeMeal} menu={menu} key={key} /> )) : (this.noMeal())
     return (
       <div>
-        <TopNav />
+        <TopNav logout={this.props.logout} />
         <div className = "main-container">
           <div className = "menupage-meals">
             {myMeals}
@@ -122,4 +121,4 @@ const mapstatetoProps = ({ user, fetchMeals, menu }) => ({
   fetchedMeals: fetchMeals.success,
   menus: menu.menus
 });
-export default connect(mapstatetoProps, { addToMenu, fetchMeals, removeMeal, createMenu })(MenuPage);
+export default connect(mapstatetoProps, { addToMenu, fetchMeals, removeMeal, createMenu, logout })(MenuPage);

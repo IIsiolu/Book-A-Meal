@@ -17,7 +17,7 @@ export default function (ComposedComponent) {
  */
   class Navigate extends Component {
     componentWillMount() {
-      if (this.props.user.role === 'admin') {
+      if (this.props.user.role === 'admin' || this.props.user.role === 'super-admin') {
         this.props.history.push('/dashboard');
       } else if (this.props.user.role === 'user') {
         this.props.history.push('/index');

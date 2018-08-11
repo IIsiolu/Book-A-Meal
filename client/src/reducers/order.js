@@ -32,7 +32,7 @@ const order = (state = orderState, action) => {
         loading: false,
         isError: false,
         success: true,
-        myOrders: [...state.myOrders, action.payload],
+        myOrders: action.payload,
       };
     case actionsTypes.CHANGE_ORDER_SUC_STATE:
       return {

@@ -4,6 +4,7 @@ import { createMeal, mealSuccessState } from './addMeal';
 import isModalOpened from './isModalOpened';
 import isOverlayOpened from './detailModal';
 
+export { userOrders } from './userOrders';
 export { orderHistory } from './OrderHistory';
 export { changeSuccessState, deleteMeal, DeleteErrorState } from './deleteMeal';
 export { updateMeal, changeMealError, changeMealSuccess } from './updateMeal';

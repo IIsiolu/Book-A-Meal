@@ -41,7 +41,7 @@ class OrderItem extends Component {
           <div className="meal-qty">
             <div className="order-nc">
               <span className='order-name'>{order.name}</span>
-              <span className='order-cost'>(${order.mealCost})</span>
+              <span className='order-cost'>(&#8358;{order.mealCost})</span>
             </div>
             <div className="order-qtyIncre">
               <h4>Qty</h4>
@@ -52,7 +52,7 @@ class OrderItem extends Component {
                 min={1}
                 onChange={this.onChange}
                 />
-              <h4>${(order.mealCost * order.quantity)}</h4>
+              <h4>&#8358;{(order.mealCost * order.quantity)}</h4>
             </div>           
           </div>
           <div className="incre-decre mous">

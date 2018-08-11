@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loader from 'react-loader-spinner';
+import Loader from 'react-loader';
 import swal from 'sweetalert';
 import { ToastContainer } from "react-toastr";
 
@@ -40,7 +40,7 @@ class MealOptions extends Component {
       for(let err in this.state.errors){
         error+= this.state.errors[err] + ','
       }
-      console.log('error in didUpdate>>>>>>>>')
+      // console.log('error in didUpdate>>>>>>>>')
       swal("Meal error", error , "error")
       this.state.errors = {};
 
@@ -69,29 +69,32 @@ class MealOptions extends Component {
     // input.replace(/[^a-zA-Z ]/g, '') 
     if (!nameRegex.test(data.name) || !data.name) errors.name = 'Invalid name';
     if (!Number.isInteger(data.price)) errors.price = 'invalid number';
-    if(!nameRegex.test(Date.description)) errors.description = 'invalid description';
+    if(!nameRegex.test(data.description)) errors.description = 'invalid description';
     return errors
   }
 
   submit = () => {
     const errors = this.validate(this.state.data);
-    console.log('returned error', errors)
     this.setState({ 
       errors: errors,
      });
-    //  data: { ...this.state.data, [e.target.name]: e.target.value },
-     
     if(Object.keys(errors).length==0){
       this.setState({ 
         edit: !this.state.edit,
        });
-      this.props.updateMeal(this.state.data)
+       console.log('former >>>>>',formerState)
+       console.log('newState >>>>>',this.state.data)
+      let stateArr = Object.keys(formerState.data);
+      let notUpdated = stateArr.every((key) =>
+       Object.is(formerState.data[key], this.state.data[key]) === true)
+       console.log('>>>>> notUpdated', notUpdated);
+       return notUpdated ? '' : this.props.updateMeal(this.state.data)
     }
     console.log('new errors:', this.state.errors, this.state.edit);
   }
   upload = (e) => {
     this.props.imageUpload(e.target.files[0], (secure_url) => {
-      console.log(secure_url);
+      // console.log(secure_url);
       // this.setState({
       //   image: secure_url
       // });
@@ -126,7 +129,7 @@ class MealOptions extends Component {
     })
   }
   cancel = () => {
-    console.log('cancelled')
+    // console.log('cancelled')
     this.setState({
       ...formerState
     })
@@ -150,7 +153,6 @@ class MealOptions extends Component {
   render() {
     const { errors } = this.state;
     const data = this.props.meal;
-    console.log(this.state.errors, this.state.edit)
     return (
       <div className="m-c-container">
         <div className="m-c-imgcontainer">
@@ -168,12 +170,12 @@ class MealOptions extends Component {
             </div>
         </div>
       
-        {this.props.isLoading || this.props.updatingMeal && <Loader 
+        {/* {this.props.isLoading || this.props.updatingMeal && <Loader 
             type="Puff"
             color="#00BFFF"
             height="100"	
             width="100"
-          />   }
+          />   } */}
           <ToastContainer
             ref={ref => container = ref}
           />
@@ -181,7 +183,7 @@ class MealOptions extends Component {
           <div className="meal-i-p">
             <input className={this.state.edit? 'myInputs card-input meal-name-input' : 'meal-name-input clear-default'} onChange={this.onChange} name="name" type="text" value={this.state.data.name} disabled={!this.state.edit} />
             <div className="meal-currency">
-              <h5>$</h5>
+              <h5>&#8358;</h5>
               <input className={this.state.edit?'myInputs card-input meal-currency-input': 'clear-default meal-currency-input' } onChange={this.onChange} name='price' type="text" value={this.state.data.price} disabled={!this.state.edit} />
             </div>
           </div>

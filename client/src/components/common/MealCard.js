@@ -10,7 +10,7 @@ const MealCard = ({ meal, addedMenus }) => (
       <div className="meal-input-info meal-card-style">
         <div className="meal-name-price">
           <h3>{meal.name}</h3>
-          <h3>${meal.price}</h3>
+          <h3>&#8358;{meal.price}</h3>
         </div>
         <p>{meal.description}</p>
       </div>

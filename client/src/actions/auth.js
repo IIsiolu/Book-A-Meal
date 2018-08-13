@@ -70,28 +70,19 @@ export const signupState = bool => (dispatch) => {
 };
 
 export const signup = (credentials, history) => (dispatch) => {
-  console.log({
-    credentials,
-  });
   dispatch(connectin(true));
-  instance.post('auth/signup', credentials)
+  return instance.post('auth/signup', credentials)
     .then((res) => {
       const { data } = res;
       const newData = {
         email: credentials.email,
         password: credentials.password,
       };
-      logIn(newData, history);
-      console.log(newData);
       dispatch(userSignup(data));
       // history.push('/login');
     })
     .catch((error) => {
       if (error.response) {
-        console.log({
-          err: 'error in signup',
-          error: error.response,
-        });
         const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
         dispatch(userError(myError));
       } else {

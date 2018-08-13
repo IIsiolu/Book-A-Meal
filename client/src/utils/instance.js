@@ -1,5 +1,4 @@
 import axios from 'axios';
-import jwt from 'jwt-decode';
 
 const instance = axios.create({
   baseURL: '/api/v1/'

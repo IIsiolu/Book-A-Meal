@@ -17,6 +17,7 @@ export default function (ComposedComponent) {
  */
   class Authenticate extends Component {
     componentWillMount() {
+      // !(role === 'admin' || role === 'super-admin')
       if (!this.props.isAuthenticated) {
         this.props.history.push('/login');
       }

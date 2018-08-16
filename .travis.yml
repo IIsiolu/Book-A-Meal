@@ -8,8 +8,8 @@ env:
  - SECRET=secrett  
 
 before_script:
- - psql -c 'create database book_a_meal;' -U adekunleoluwafemi
- - psql -c "CREATE USER adekunleoluwafemi WITH PASSWORD 'phemonick';" -U adekunleoluwafemi
+ - psql -c 'create database book_a_meal;' -U postgres
+ - psql -c "CREATE USER adekunleoluwafemi WITH PASSWORD 'phemonick';" -U postgres
 script:
  - npm test
 

@@ -74,12 +74,10 @@ class MenuPage extends Component {
   addedMenus = (meal) => {
     if(this.props.menus.length){
       let alreadyExist = this.props.menus.some((item) => meal.id === item.id);
-      console.log(this.props.menus.some((item) => meal.id == item.id))
       return (
         alreadyExist? '' : this.props.addToMenu(meal)
       )
     }else{
-      console.log(meal)
       return this.props.addToMenu(meal)
     }
     

@@ -4,6 +4,9 @@
  an application that allows customers to make food orders and helps the food
 vendor know what the customers want to eat.
 
+<img width="1440" alt="Hellobooks-screenshot" src="/screenshot/screen.png">
+<br />
+
 # Technologies Used
 - Front-end: Html and css
 - Backend: Node/Express/postgresql using sequelize as ORM

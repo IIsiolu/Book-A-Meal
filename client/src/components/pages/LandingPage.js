@@ -12,6 +12,7 @@ import food4 from '../../static/images/food4.jpg';
 const LandingPage = ({ isAuthenticated, logout }) => (
     <div className="container">
             <LandingNav isAuthenticated={isAuthenticated} logout={logout} />
+            {window.scrollTo(0, 0)}
             <div className="coverContainer">
 
               <div className="top-content">

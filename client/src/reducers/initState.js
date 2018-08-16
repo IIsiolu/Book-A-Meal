@@ -10,7 +10,13 @@ export const fetchMealState = {
   loading: false,
   success: false,
   error: null,
-  meals: null,
+  meals: [],
+  pagination: {
+    page: 0,
+    pageCount: 0,
+    pageSize: 0,
+    totalCount: 0,
+  },
 };
 
 export const updateMealState = {
@@ -31,6 +37,9 @@ export const deleteMealState = {
 export const menuState = {
   menus: [],
   createdMenus: [],
+  success: false,
+  isError: false,
+  createMenuError: null,
   error: null,
 };
 

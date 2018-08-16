@@ -14,16 +14,14 @@ export const mealFetchError = error => ({
   type: actionTypes.FETCH_MEAL_ERROR,
   payload: error,
 });
-export const fetchMeals = meal => (dispatch) => {
+export const fetchMeals = (page, limit, offset) => (dispatch) => {
   dispatch(isLoading(true));
-  return instance.get('meals', meal).then((res) => {
-    let {data} = res.data;
-    console.log(data);
+  return instance.get(`meals?page=${page}&limit=${limit}&offset=${offset}`).then((res) => {
+    const { data } = res;
     dispatch(mealFetched(data));
   }).catch((error) => {
     let myError = null;
     if (error.response) {
-      console.log(mealFetchError.response);
       myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(mealFetchError(myError));
     } else {

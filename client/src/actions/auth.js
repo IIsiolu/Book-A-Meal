@@ -7,6 +7,10 @@ export const userSignup = user => ({
   type: actionTypes.USER_SIGN_UP,
   payload: user,
 });
+export const loginError = error => ({
+  type: actionTypes.LOGIN_ERROR,
+  payload: error,
+});
 export const userLoggedIn = user => ({
   type: actionTypes.USER_LOGGED_IN,
   payload: user,
@@ -22,6 +26,7 @@ export const userError = error => ({
 
 export const connectin = loading => ({
   type: actionTypes.LOADING,
+  payload: loading,
 });
 
 export const logIn = (credentials, history) => (dispatch) => {
@@ -54,10 +59,10 @@ export const logIn = (credentials, history) => (dispatch) => {
           error: error.response,
         });
         const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(userError(myError));
+        dispatch(loginError(myError));
       } else {
         const myError = 'poor internet connection';
-        dispatch(userError(myError));
+        dispatch(loginError(myError));
       }
     });
 };

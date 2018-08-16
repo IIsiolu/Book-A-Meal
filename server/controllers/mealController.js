@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import { Meal } from '../models';
+import { checkPagination, paginatedData } from '../helpers/paginate';
 
 class MealController {
   static createMeal(req, res) {
@@ -33,12 +34,26 @@ class MealController {
   }
 
   static allMeals(req, res) {
+    const { page, limit, offset } = checkPagination(req);
     Meal
-      .all()
-      .then(meal => res.status(200).json({
-        success: true,
-        data: meal,
-      }))
+      .findAndCountAll({
+        limit,
+        offset,
+        order: [['id', 'DESC']],
+      })
+      .then((meal) => {
+        if (meal.count === 0) {
+          return res.status(404).send({
+            success: false,
+            message: 'Meal is empty',
+          });
+        }
+        res.status(200).json({
+          success: true,
+          pagination: paginatedData(page, limit, meal),
+          data: meal.rows,
+        });
+      })
       .catch(error => res.status(400).json('unexpected error'));
   }
 

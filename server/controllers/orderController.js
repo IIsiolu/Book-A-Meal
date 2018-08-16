@@ -1,4 +1,5 @@
 import { Order, User, Meal } from '../models';
+import { checkPagination, paginatedData } from '../helpers/paginate';
 
 class OrderController {
   static createOrder(req, res) {
@@ -31,7 +32,6 @@ class OrderController {
         },
       }).then((order) => {
         const userInfo = Object.assign({}, order);
-        // console.log({ userInfoInDb: userInfo });
         order.update({ ...userInfo, ...req.body }).then((newOrder) => {
           res.status(200).json({
             result: 'updated',
@@ -48,22 +48,42 @@ class OrderController {
   }
 
   static allOrders(req, res) {
-    Order.all({
+    const { page, limit, offset } = checkPagination(req);
+    Order.findAndCountAll({
       include: [
         Meal, User,
       ],
+      limit,
+      offset,
+      order: [['id', 'DESC']],
     })
-      .then(orders => res.status(200).json({
-        result: 'success',
-        message: orders,
-      })).catch(error => res.status(400).json('failed to get all orders'));
+      .then((orders) => {
+        if (orders.count === 0) {
+          return res.status(404).send({
+            success: false,
+            message: 'Order is empty',
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          pagination: paginatedData(page, limit, orders),
+          data: orders.rows,
+        });
+      }).catch(error => res.status(500).send({
+        success: false,
+        message: 'failed to get all orders',
+      }));
   }
 
   static cusOrder(req, res) {
-    Order.findAll({
+    const { page, limit, offset } = checkPagination(req);
+    Order.findAndCountAll({
       include: [
         Meal, User,
       ],
+      limit,
+      offset,
+      order: [['id', 'DESC']],
       where: {
         userId: req.user.id,
       },
@@ -71,13 +91,13 @@ class OrderController {
       if (userOrders.length === 0) {
         return res.status(404).send({
           success: false,
-          data: userOrders,
           message: 'Customer order is empty',
         });
       }
       return res.status(200).send({
         success: true,
-        data: userOrders,
+        pagination: paginatedData(page, limit, userOrders),
+        data: userOrders.rows,
       });
     }).catch(err => res.status(500).send({
       success: false,

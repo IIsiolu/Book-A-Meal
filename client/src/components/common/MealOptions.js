@@ -45,6 +45,7 @@ class MealOptions extends Component {
       this.state.errors = {};
 
     }
+    
     if (this.props.mealUpdated === true ) {
       this.alert();
       this.props.changeMealSuccess(false);
@@ -61,6 +62,12 @@ class MealOptions extends Component {
       swal("Meal Deleted", 'Your meal has been deleted successfully' , "success");
       this.props.changeSuccessState(false);
     }
+    let newVal = Object.keys(this.props.meal).every((meal) =>
+    Object.is(this.props.meal[meal], prevProps.meal[meal]) === true
+  )
+    !newVal ? this.setState({
+      data: {...this.state.data, ...this.props.meal}
+    }) : ''
   }
   
   validate(data) {
@@ -87,7 +94,6 @@ class MealOptions extends Component {
       let stateArr = Object.keys(formerState.data);
       let notUpdated = stateArr.every((key) =>
        Object.is(formerState.data[key], this.state.data[key]) === true)
-       console.log('>>>>> notUpdated', notUpdated);
        return notUpdated ? '' : this.props.updateMeal(this.state.data)
     }
     console.log('new errors:', this.state.errors, this.state.edit);
@@ -153,6 +159,7 @@ class MealOptions extends Component {
   render() {
     const { errors } = this.state;
     const data = this.props.meal;
+    console.log('>>>>>>>>>>>>>> meal options', this.props.meal)
     return (
       <div className="m-c-container">
         <div className="m-c-imgcontainer">
@@ -169,13 +176,6 @@ class MealOptions extends Component {
                       
             </div>
         </div>
-      
-        {/* {this.props.isLoading || this.props.updatingMeal && <Loader 
-            type="Puff"
-            color="#00BFFF"
-            height="100"	
-            width="100"
-          />   } */}
           <ToastContainer
             ref={ref => container = ref}
           />

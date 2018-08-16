@@ -77,13 +77,11 @@ class LoginForm extends Component {
                  {errors.password && <InlineError text={errors.password} /> }
 
               </Form.Field>
-              {/* {this.props.error && <InlineError text={this.props.error} /> } */}
-              <Button
-                
-                type="submit"
-                primary
-              >Login
-              </Button>
+              <div className="log-sign">
+                <Button type="submit" primary>Login</Button>
+                <Link to="/signup">don't have an account? SIGNUP</Link>
+              </div>
+              
             </Form>
     );
   }

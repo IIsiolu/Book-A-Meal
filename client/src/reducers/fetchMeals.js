@@ -11,15 +11,19 @@ const fetchMeal = (state = fetchMealState, action) => {
     case actionsTypes.MEAL_FETCHED:
       return {
         ...state,
-        meals: action.payload,
+        meals: action.payload.data,
         loading: false,
         success: true,
         error: null,
+        pagination: {
+          ...state.pagination,
+          ...action.payload.pagination.pagination,
+        },
       };
     case actionsTypes.FETCH_MEAL_ERROR:
       return {
         ...state,
-        meals: null,
+        meals: [],
         success: false,
         error: action.payload,
         loading: false,

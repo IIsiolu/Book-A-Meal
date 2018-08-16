@@ -18,15 +18,35 @@ const menu = (state = menuState, action) => {
         ...state,
         menus: [...state.menus.filter(meal => meal.id !== action.payload)],
       };
+    case actionsTypes.CLEAR_MENUS:
+      return {
+        ...state,
+        menus: [],
+      };
     case actionsTypes.MENU_CREATED:
       return {
         ...state,
+        success: true,
+        isError: false,
+        createMenuError: null,
         createdMenus: [...state.createdMenus, action.payload],
       };
     case actionsTypes.MENU_ERROR:
       return {
         ...state,
-        error: action.payload,
+        isError: true,
+        success: false,
+        createMenuError: action.payload,
+      };
+    case actionsTypes.CHANGE_MENU_SUCCESS:
+      return {
+        ...state,
+        success: action.payload,
+      };
+    case actionsTypes.CHANGE_MENU_ERROR:
+      return {
+        ...state,
+        isError: action.payload,
       };
     default:
       return state;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import { SideNav, TopNav, Orders } from '../common/';
 import { logout, orderHistory } from '../../actions/';
 
@@ -22,6 +23,31 @@ class DashboardPage extends Component {
     this.props.orderHistory();
   }
 
+  handlePageChange = ({selected}) => {
+    const page = selected + 1;
+    localStorage.setItem('currentOrderPage', page);
+    const currentPage = localStorage.getItem('currentOrderPage');
+    this.props.orderHistory(currentPage);
+  }
+
+  renderPagination = () => (
+    <ReactPaginate 
+      previousLabel={<i className="fa fa-chevron-left" />}
+      nextLabel={<i className="fa fa-chevron-right" />}
+      breakLabel={<a href="">...</a>}
+      breakClassName={'break-me'}
+      pageCount={this.props.pageCount}
+      initialPage={this.props.page - 1}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={this.handlePageChange}
+      disableInitialCallback
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
+  )
+
   render() {
     return (
       <div className='admin-form-container'>
@@ -30,6 +56,7 @@ class DashboardPage extends Component {
           <SideNav role={this.props.role} />
           <div className = "order-bar" >
             <Orders {...this.props} />
+            {this.props.orders.length && this.renderPagination()}
           </div>
         </div>
       </div>
@@ -48,5 +75,9 @@ const mapstatetoProps = ({ user, orderHistories }) => ({
   isAuthenticated: user.isAuthenticated,
   role: user.user.role,
   orders: orderHistories.orderHistory,
+  page: orderHistories.pagination.page,
+  pageCount: orderHistories.pagination.pageCount,
+  pageSize: orderHistories.pagination.pageSize,
+  totalCount: orderHistories.pagination.totalCount,
 });
 export default connect(mapstatetoProps, { logout, orderHistory })(DashboardPage);

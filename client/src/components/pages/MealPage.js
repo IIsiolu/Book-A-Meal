@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import swal from 'sweetalert';
 import { ToastContainer } from "react-toastr";
 import { TopNav, MealOptions } from '../common/';
@@ -17,13 +18,18 @@ class MealPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    // {this.props.mealUpdated && this.alert()}
-    
-    // if (prevProps.mealUpdated === this.props.mealCreated && this.props.mealUpdated === true ) {
-    //   this.alert();
-    // }
-    // if (this.state.mealUpdated === )
+    const {allMeals} = this.props
+    const prevPageSize = prevProps.pageSize
+    const nextPageSize = this.props.pageSize
+    if ( prevPageSize !== nextPageSize){
+      const currentPage = localStorage.getItem('currentMealPage'); 
+      const nextMeal = this.isMeal() && allMeals || false;
+      if (nextMeal === true && prevPageSize > 1) {
+        localStorage.setItem('currentMealPage', currentPage -1);
+        return this.props.fetchMeals(currentPage-1);
+      } 
+      this.props.fetchMeals(currentPage); 
+    }
   }
   
   componentDidMount(){
@@ -41,6 +47,7 @@ class MealPage extends Component {
     }
   }
 
+
   imageUpload = (data) => (
     this.props.imageUpload(data)
    )
@@ -51,7 +58,7 @@ class MealPage extends Component {
     this.props.isModalOpened(bool)
   )
   noMeal = () => (
-    <div>
+    <div className="no-meal">
       <h1>No meals Yet</h1> 
     </div>
   )
@@ -64,8 +71,36 @@ class MealPage extends Component {
     swal("Meal Updated", "Your meal has been updated successfully!", "success")
   )
   myMeals = () => (
-     this.props.fetchedMeals ? (this.props.allMeals.length ? 
-      this.props.allMeals.map((meal, i) => <MealOptions {...this.props} key={i} meal={meal} />) : this.noMeal() ) : this.noMeal()
+     this.props.allMeals.length ? 
+      this.props.allMeals.map((meal, i) => <MealOptions {...this.props} key={i} meal={meal} />) : this.noMeal() 
+    )
+  isMeal = () => (
+    this.props.allMeals.length? true : false
+  )
+  handlePageChange = ({selected}) => {
+    console.log('page selected>>>>>>>>>>', selected);
+    const page = selected + 1;
+    localStorage.setItem('currentMealPage', page);
+    const currentPage = localStorage.getItem('currentMealPage');
+    this.props.fetchMeals(currentPage);
+  }
+
+  renderPagination = () => (
+    <ReactPaginate 
+      previousLabel={<i className="fa fa-chevron-left" />}
+      nextLabel={<i className="fa fa-chevron-right" />}
+      breakLabel={<a href="">...</a>}
+      breakClassName={'break-me'}
+      pageCount={this.props.pageCount}
+      initialPage={this.props.page - 1}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={this.handlePageChange}
+      disableInitialCallback
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
   )
 
   render() {
@@ -87,7 +122,7 @@ class MealPage extends Component {
 
             </div>
           </div>
-          
+          {this.props.allMeals.length && this.renderPagination()}
           <div className = {this.state.isNavOpened? 'add-meal-c go-left': 'add-meal-c'}>
             {this.props.openModal ? <UpdateMeal {...this.props}  /> : ''} 
             <AddMeal {...this.props} open={this.openNav} isNavOpened={this.state.isNavOpened}  />
@@ -136,6 +171,11 @@ const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpe
   mealDeleted: deleteMeal.success,
   deletingMeal: deleteMeal.loading,
   isMealDeleteError: deleteMeal.isMealDeleteError,
-  deleteMealError: deleteMeal.error
+  deleteMealError: deleteMeal.error,
+  page: fetchMeals.pagination.page,
+  pageCount: fetchMeals.pagination.pageCount,
+  pageSize: fetchMeals.pagination.pageSize,
+  totalCount: fetchMeals.pagination.totalCount,
+  
 });
 export default connect(mapstatetoProps, { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState, mealSuccessState, DeleteErrorState })(MealPage);

@@ -9,6 +9,9 @@
 }
 .order-bar {
   display: flex;
+  min-height: 80vh;
+  flex-direction: column;
+  justify-content: space-between;
   width: 80%;
 }
 .sidebar-c {

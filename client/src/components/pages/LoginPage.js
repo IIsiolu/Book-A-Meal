@@ -41,7 +41,7 @@ LoginPage.propTypes = {
     logIn: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
-    error: state.user.error,
+    error: state.user.loginError,
     loading: state.user.loading
 })
 // mapstate for states, dispatch functions

@@ -10,7 +10,22 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'quantity must be a valid number'
+          msg: 'quantity must be a valid number',
+        },
+      },
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'pending',
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input meal status',
+        },
+        isIn: {
+          args: [['pending', 'cancelled', 'delivered']],
+          msg: "status must be 'pending', 'cancelled', 'delivered'",
         },
       },
     },
@@ -24,7 +39,7 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'mealId must be a valid number'
+          msg: 'mealId must be a valid number',
         },
       },
     },
@@ -38,17 +53,17 @@ export default (sequelize, DataTypes) => {
         },
         isInt: {
           args: true,
-          msg: 'userId must be a valid number'
+          msg: 'userId must be a valid number',
         },
       },
-    }
+    },
   }, {});
   Order.associate = (models) => {
     Order.belongsTo(models.Meal, {
-      foreignKey: 'mealId'
+      foreignKey: 'mealId',
     });
     Order.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     // associations can be defined here
   };

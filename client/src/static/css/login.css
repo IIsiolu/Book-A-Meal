@@ -47,6 +47,14 @@
 #signupPage .ui.form .field>label {
   color: #fff;
 }
+.log-sign {
+  display: flex;
+  color: #fff;
+  align-items: center
+}
+.log-sign a {
+  margin-left: 2rem;
+}
 
 @media only screen and (max-width: 800px) {
 

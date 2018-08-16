@@ -26,6 +26,7 @@ class HomePage extends Component {
     }
   }
   componentDidMount() {
+    window.scrollTo(0, 0);
     const today = new Date();
     console.log(today)
     const day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();

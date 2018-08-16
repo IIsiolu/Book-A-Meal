@@ -1,5 +1,3 @@
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Orders', {
     id: {
@@ -10,6 +8,10 @@ module.exports = {
     },
     quantity: {
       type: Sequelize.INTEGER
+    },
+    status: {
+      type: Sequelize.STRING,
+      defaultValue: 'pending',
     },
     createdAt: {
       allowNull: false,

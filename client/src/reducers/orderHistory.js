@@ -6,6 +6,12 @@ const initialState = {
   error: null,
   orderHistory: {},
   isError: false,
+  pagination: {
+    page: 0,
+    pageCount: 0,
+    pageSize: 0,
+    totalCount: 0,
+  },
 };
 const orderHistories = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +25,11 @@ const orderHistories = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        orderHistory: action.payload,
+        orderHistory: action.payload.data,
+        pagination: {
+          ...state.pagination,
+          ...action.payload.pagination.pagination,
+        },
       };
     case actionsTypes.ORDER_HISTORY_ERROR:
       return {

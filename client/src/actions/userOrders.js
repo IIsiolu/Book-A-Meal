@@ -6,11 +6,11 @@ const orderError = data => ({
   payload: data,
 });
 
-export const userOrders = () => dispatch => (
-  instance.get('orders/userOrder').then((res) => {
+export const userOrders = (page, limit, offset) => dispatch => (
+  instance.get(`orders/userOrder?page=${page}&limit=${limit}&offset=${offset}`).then((res) => {
     dispatch({
       type: actionTypes.USER_ORDERS,
-      payload: res.data.data,
+      payload: res.data,
     });
     console.log(res.data);
   }).catch((error) => {

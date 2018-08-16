@@ -8,6 +8,8 @@ const initialState = {
   loading: false,
   success: false,
   error: null,
+  loginError: null,
+  loginSuccess: false,
   isAuthenticated: false,
   signedUp: false,
   user: {
@@ -37,10 +39,10 @@ const user = (state = initialState, action) => {
     case actionsTypes.USER_LOGGED_IN:
       return {
         ...state,
-        success: !isEmpty(action.payload),
+        loginSuccess: !isEmpty(action.payload),
         user: action.payload,
         isAuthenticated: !isEmpty(action.payload),
-        error: null,
+        loginError: null,
         loading: false,
       };
     case actionsTypes.SET_CURRENT_USER:
@@ -54,6 +56,13 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+        loading: false,
+      };
+    case actionsTypes.LOGIN_ERROR:
+      return {
+        ...state,
+        loginSuccess: false,
+        loginError: action.payload,
         loading: false,
       };
     default:

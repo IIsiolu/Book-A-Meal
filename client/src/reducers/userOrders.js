@@ -6,6 +6,12 @@ const initialState = {
   isError: false,
   error: null,
   orders: {},
+  pagination: {
+    page: 0,
+    pageCount: 0,
+    pageSize: 0,
+    totalCount: 0,
+  },
 };
 const userOrders = (state = initialState, action) => {
   switch (action.type) {
@@ -20,7 +26,11 @@ const userOrders = (state = initialState, action) => {
         isloading: false,
         error: null,
         isError: false,
-        orders: action.payload,
+        orders: action.payload.data,
+        pagination: {
+          ...state.pagination,
+          ...action.payload.pagination.pagination,
+        },
       };
     case actionsTypes.USER_ORDER_ERRORR:
       return {

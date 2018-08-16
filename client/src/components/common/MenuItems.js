@@ -7,8 +7,7 @@ const MenuItems = ({ menu, removeMeal }) => (
         <img src={menu.image} alt="menu item" />
       </div>
       <div className='order-img'>{menu.name}</div>
-      <i onClick={() => removeMeal(menu.id) } className="fa fa-trash delete-orItem mous"></i>
-      {/* <button >remove</button> */}
+      <i onClick={() => removeMeal(menu.id) } className="fa fa-trash delete-orItem mous remove-menu"></i>
     </div>
   </div>
 );

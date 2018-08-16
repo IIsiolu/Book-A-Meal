@@ -114,11 +114,15 @@ class SignupForm extends Component {
                 <Message.Header> Something went wrong </Message.Header>
                 <p>{errors.right} </p>
             </Message>}
-              <Button
-                type="submit"
-                primary
-              >Signup
+              <div className="log-sign">
+                <Button
+                  type="submit"
+                  primary
+                >Signup
               </Button>
+              <Link to="/login">Already have an Account? SIGN IN</Link>
+              </div>
+              
             </Form>
     );
   }

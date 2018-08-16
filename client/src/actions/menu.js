@@ -20,9 +20,28 @@ const remove = meal => ({
 export const addToMenu = meal => (dispatch) => {
   dispatch(menuAdded(meal));
 };
+export const clearMenu = () => dispatch => (
+  dispatch({
+    type: actionTypes.CLEAR_MENUS,
+  })
+);
 export const removeMeal = mealId => (dispatch) => {
   dispatch(remove(mealId));
 };
+
+export const changeMErrorState = bool => dispatch => (
+  dispatch({
+    type: actionTypes.CHANGE_MENU_ERROR,
+    payload: bool,
+  })
+);
+
+export const changeMSuccessState = bool => dispatch => (
+  dispatch({
+    type: actionTypes.CHANGE_MENU_SUCCESS,
+    payload: bool,
+  })
+);
 
 
 export const createMenu = (menus, date) => (dispatch) => {
@@ -33,10 +52,8 @@ export const createMenu = (menus, date) => (dispatch) => {
   };
   return instance.post('menu', params).then((res) => {
     dispatch(createdMenu(res.data.data));
-    console.log(res.data);
   }).catch((error) => {
     let myError = null;
-    console.log(error.response);
     if (error.response) {
       myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(menuError(myError));

@@ -1,19 +1,19 @@
 import instance from '../utils/instance';
 import * as actionTypes from './actionsTypes';
 
-const orderError = data => ({
+export const orderError = data => ({
   type: actionTypes.ORDER_HISTORY_ERROR,
   payload: data,
 });
 
-export const orderHistory = () => (dispatch) => {
+export const orderHistory = (page, limit, offset) => (dispatch) => {
   return (
-    instance.get('orders').then((res) => {
+    instance.get(`orders?page=${page}&limit=${limit}&offset=${offset}`).then((res) => {
       dispatch({
         type: actionTypes.GET_ORDER_HISTORY,
-        payload: res.data.message,
+        payload: res.data,
       });
-      console.log(res.data);
+      
     }).catch((error) => {
       let myError = null;
       console.log(error.response);

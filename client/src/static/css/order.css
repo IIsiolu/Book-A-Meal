@@ -26,3 +26,8 @@
 .o-row-item {
   flex: 1
 }
+.user-orders-c {
+  display: flex;
+  margin: auto;
+  width: 80%;
+}

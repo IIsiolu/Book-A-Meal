@@ -27,14 +27,11 @@ export const mealSuccessState = bool => (dispatch) => {
 export const createMeal = meal => (dispatch) => {
   dispatch(isLoading(true));
   return instance.post('meals', meal).then((res) => {
-    console.log(res);
     const { data } = res.data;
     dispatch(mealAdded(data));
-    // dispatch(updateMealFetched(data));
   }).catch((error) => {
     let myError = null;
     if (error.response) {
-      console.log(mealError.response);
       myError = (error.response.data.errorMessage) ?
         error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(mealError(myError));

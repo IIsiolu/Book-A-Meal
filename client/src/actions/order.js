@@ -58,14 +58,11 @@ export const errState = bool => dispatch => (
 );
 
 export const requestForOrder = orders => (dispatch) => {
-  console.log('>>>>>>> orders', orders);
   return (
     instance.post('orders', { orders }).then((res) => {
-      console.log(res.data);
       dispatch(createdOrder(res.data.data));
     }).catch((error) => {
       let myError = null;
-      console.log(error.response);
       if (error.response) {
         myError = (error.response.data.errorMessage) ?
           error.response.data.errorMessage[0] : error.response.data;

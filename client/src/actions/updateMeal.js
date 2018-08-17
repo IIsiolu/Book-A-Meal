@@ -39,21 +39,14 @@ export const changeMealError = bool => (dispatch) => {
   });
 };
 export const updateMeal = meal => (dispatch) => {
-  console.log(meal);
   dispatch(isLoading(true));
   return instance.put(`meals/${meal.id}`, meal).then((res) => {
-    console.log(res);
-    // const { data } = res.data;
     dispatch(updateMealFetched(meal));
     dispatch(mealUpdated(meal));
     dispatch({
       type: actionTypes.IS_MODAL_OPENED,
       payload: false,
     });
-    // dispatch({
-    //   type: actionTypes.CHANGE_SUCCESS,
-    //   payload: false,
-    // });
   }).catch((error) => {
     let myError = null;
     dispatch({
@@ -61,7 +54,6 @@ export const updateMeal = meal => (dispatch) => {
       payload: true,
     });
     if (error.response) {
-      console.log(mealError.response);
       myError = (error.response.data.errorMessage) ?
         error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(mealError(myError));

@@ -16,7 +16,6 @@ export const orderHistory = (page, limit, offset) => (dispatch) => {
       
     }).catch((error) => {
       let myError = null;
-      console.log(error.response);
       if (error.response) {
         myError = (error.response.data.errorMessage) ?
           error.response.data.errorMessage[0] : error.response.data;

@@ -37,8 +37,6 @@ export const changeSuccessState = bool => (dispatch) => {
 export const deleteMeal = id => (dispatch) => {
   dispatch(isLoading(true));
   return instance.delete(`meals/${id}`).then((res) => {
-    console.log(res);
-    // const { data } = res.data;
     dispatch(deleteMealFetched(id));
     dispatch(mealDeleted(id));
   }).catch((error) => {

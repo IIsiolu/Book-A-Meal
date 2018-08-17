@@ -27,5 +27,4 @@ export const userOrders = (page, limit, offset) => dispatch => (
 );
 
 export const userOrderError = () => (dispatch) => {
-  // console.log(dispatch);
 };

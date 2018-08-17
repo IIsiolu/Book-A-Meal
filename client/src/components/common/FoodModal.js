@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 const customStyles = {
   overlay: {
-    // position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
@@ -12,12 +11,6 @@ const customStyles = {
     background: 'rgba(0,0,0,0.4)'
   },
   content: {
-    // top: '50%',
-    // left: '50%',
-    // right: 'auto',
-    // bottom: 'auto',
-    // marginRight: '-50%',
-    // transform: 'translate(-50%, -50%)',
     position: 'relative',
     background: '#f9f9f9',
     color: '#444',
@@ -50,16 +43,6 @@ class FoodModal extends React.Component {
     return {
       data: selectedMeal
     }
-  }
-  componentDidMount() {
-  console.log(this.props.overlayId)
-  //  const modalMeal = this.props.allMeals.find(this.findMeal)
-
-  //  this.setState({
-  //    ...this.state.data,
-  //    data: modalMeal
-  //  })
-  //  console.log(this.state)
   }
 
   openModal() {
@@ -99,13 +82,13 @@ class FoodModal extends React.Component {
           onRequestClose={() => this.props.isOverlayOpened(false)}
           ariaHideApp={false}
           overlayClassName='food-overlay'
-          // className={customStyles.overlay}
           className='modalStyle'
           contentLabel="Example Modal"
         >
           <div className='modal-box'>
             <div className="fancybox">
-              <img className='fancybox-img' src={this.state.data.Meal.image} alt="food image" />
+              <img className='fancybox-img'
+               src={this.state.data.Meal.image} alt="food image" />
             </div>
             <div className="modal-description">
               <div className="order-info">
@@ -121,7 +104,8 @@ class FoodModal extends React.Component {
                   <sup>&#8358;</sup>
                   <h4>{info.price}</h4>
                 </div>
-                <div onClick={()=> this.props.addMealToOrder(info)} className="order-btn">
+                <div onClick={()=> 
+                  this.props.addMealToOrder(info)} className="order-btn">
                   ADD TO CART
                 </div>
 
@@ -135,10 +119,6 @@ class FoodModal extends React.Component {
   }
 }
 FoodModal.propTypes = {
-  // allMeals: PropTypes.array.isRequired,
   isOpened: PropTypes.bool.isRequired,
-  
-
-  
 };
 export default FoodModal;

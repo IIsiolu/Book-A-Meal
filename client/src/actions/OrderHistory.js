@@ -18,7 +18,8 @@ export const orderHistory = (page, limit, offset) => (dispatch) => {
       let myError = null;
       console.log(error.response);
       if (error.response) {
-        myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data;
+        myError = (error.response.data.errorMessage) ?
+          error.response.data.errorMessage[0] : error.response.data;
         dispatch(orderError(myError));
       } else {
         myError = 'poor internet connection';

@@ -35,7 +35,8 @@ export const createMeal = meal => (dispatch) => {
     let myError = null;
     if (error.response) {
       console.log(mealError.response);
-      myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
+      myError = (error.response.data.errorMessage) ?
+        error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(mealError(myError));
     } else {
       myError = 'poor internet connection';

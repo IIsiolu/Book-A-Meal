@@ -67,8 +67,10 @@ class AddMeal extends Component {
     const errors = {};
     const nameRegex = /^([a-z']+(-| )?)+$/i
 
-    if (!nameRegex.test(data.name) || !data.name) errors.name = 'Invalid name input';
-    if (!data.description && !nameRegex.test(data.description)) errors.description = "invalid description";
+    if (!nameRegex.test(data.name) || !data.name)
+     errors.name = 'Invalid name input';
+    if (!data.description && !nameRegex.test(data.description))
+     errors.description = "invalid description";
     if (!data.image) errors.image = "upload a valid image"
     if (!data.price) errors.price = "Can't be blank"
     return errors;
@@ -88,7 +90,8 @@ class AddMeal extends Component {
     return (
       <Form onSubmit={this.onSubmit} loading={this.props.creatingMeal} >
       <div className="add-m-header">
-        <h1>Create Meal</h1><i onClick={this.props.open} className="fa fa-times"></i>
+        <h1>Create Meal</h1><i onClick={this.props.open}
+         className="fa fa-times"></i>
       </div>
         
       { this.props.addMealError && <Message negative>

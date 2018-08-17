@@ -18,12 +18,14 @@ class OrderItem extends Component {
   }
   increment = () => {
     console.log('incrementing')
-    this.props.increaseQuantity(this.props.order.mealId, parseInt(this.props.order.quantity)+1)
+    this.props.increaseQuantity(this.props.order.mealId,
+       parseInt(this.props.order.quantity)+1)
   }
   decrement = () => {
     let {quantity} = this.props.order;
     let {order} = this.props;
-    quantity>1 ? this.props.increaseQuantity(order.mealId, parseInt(order.quantity)-1) : '';
+    quantity>1 ? this.props.increaseQuantity(order.mealId,
+       parseInt(order.quantity)-1) : '';
   }
   onChange = (e) => {
     this.props.increaseQuantity(this.props.order.mealId, e.target.value)
@@ -31,7 +33,6 @@ class OrderItem extends Component {
   }
   render() {
     const { order, removeOrder } = this.props;
-    // console.log('orders created in int', order);
     return (
       <div className='orderItem'>
         <div className="order-mealInfo">
@@ -61,7 +62,8 @@ class OrderItem extends Component {
           </div>
           
           </div>
-          <i onClick={() => removeOrder(order.mealId) } className="fa fa-trash delete-orItem mous"></i>
+          <i onClick={() => removeOrder(order.mealId) }
+           className="fa fa-trash delete-orItem mous"></i>
       </div>
     );
   }

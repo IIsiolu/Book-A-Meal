@@ -58,7 +58,8 @@ export const logIn = (credentials, history) => (dispatch) => {
           err: 'error in login',
           error: error.response,
         });
-        const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
+        const myError = (error.response.data.errorMessage) ?
+          error.response.data.errorMessage[0] : error.response.data.message;
         dispatch(loginError(myError));
       } else {
         const myError = 'poor internet connection';

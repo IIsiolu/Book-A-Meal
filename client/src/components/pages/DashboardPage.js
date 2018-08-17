@@ -5,31 +5,38 @@ import ReactPaginate from 'react-paginate';
 import { SideNav, TopNav, Orders } from '../common/';
 import { logout, orderHistory } from '../../actions/';
 
+/**
+ * Caterer dashboard page
+ * @class DashboardPage
+ * @returns {jsx}
+ * @extends Component
+ */
 class DashboardPage extends Component {
-  componentWillMount() {
-    // const newLocal = this.props.role === 'admin';
-    const { role } = this.props;
-    console.log('role>>>>>>>>>>>', role);
-    if (!(role === 'admin' || role === 'super-admin')) {
-      this.props.history.push('/login');
-    }
-  }
-  componentWillUpdate(nextProps) {
-    if (!nextProps.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
+  /**
+   * @method componentDidMount
+   * @param {void} 
+   * @returns {undefined}
+   */
   componentDidMount() {
     this.props.orderHistory();
   }
-
+  /**
+   * handle pagination click events
+   * @method handlePageChange
+   * @param {selected} true or false
+   * @returns {undefined}
+   */
   handlePageChange = ({selected}) => {
     const page = selected + 1;
     localStorage.setItem('currentOrderPage', page);
     const currentPage = localStorage.getItem('currentOrderPage');
     this.props.orderHistory(currentPage);
   }
-
+  /**
+   * renders pagination button
+   * @method renderPagination
+   * @returns {jsx}
+   */
   renderPagination = () => (
     <ReactPaginate 
       previousLabel={<i className="fa fa-chevron-left" />}
@@ -72,7 +79,6 @@ DashboardPage.propTypes = {
   orderHistory: PropTypes.func.isRequired,
 };
 const mapstatetoProps = ({ user, orderHistories }) => ({
-  isAuthenticated: user.isAuthenticated,
   role: user.user.role,
   orders: orderHistories.orderHistory,
   page: orderHistories.pagination.page,
@@ -80,4 +86,5 @@ const mapstatetoProps = ({ user, orderHistories }) => ({
   pageSize: orderHistories.pagination.pageSize,
   totalCount: orderHistories.pagination.totalCount,
 });
-export default connect(mapstatetoProps, { logout, orderHistory })(DashboardPage);
+export default connect(mapstatetoProps,
+   { logout, orderHistory })(DashboardPage);

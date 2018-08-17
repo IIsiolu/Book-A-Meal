@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import swal from 'sweetalert';
-import { ToastContainer } from "react-toastr";
 import { TopNav, MealOptions } from '../common/';
 import {AddMeal, UpdateMeal}  from '../forms';
-import { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState, mealSuccessState, DeleteErrorState } from '../../actions';
+import { logout, imageUpload, createMeal, fetchMeals,
+   updateMeal, deleteMeal, changeMealSuccess, changeMealError,
+    changeSuccessState,
+     mealSuccessState, DeleteErrorState } from '../../actions';
 
+     /**
+      * Meal Page
+      * @class MealPage
+      * @constructor
+      */
 class MealPage extends Component {
 
   constructor(){
@@ -16,7 +23,20 @@ class MealPage extends Component {
       isNavOpened: false
     }
   }
-
+  /**
+   * @method componentWillMount
+   * @returns {undefined}
+   */
+  componentWillMount() {
+    const { role } = this.props;
+    if (!(role === 'admin' || role === 'super-admin')) {
+      this.props.history.push('/');
+    }
+  }
+  /**
+   * @method componentDidUpdate
+   * @param {prevProps} prevProps - previous state props
+   */
   componentDidUpdate(prevProps) {
     const {allMeals} = this.props
     const prevPageSize = prevProps.pageSize
@@ -32,59 +52,72 @@ class MealPage extends Component {
     }
   }
   
+  /**
+   * @method componentDidMount
+   * @returns {undefined}
+   */
   componentDidMount(){
     this.props.fetchMeals()
   }
-  componentWillMount() {
-    const { role } = this.props;
-    if (!(role === 'admin' || role === 'super-admin')) {
-      this.props.history.push('/login');
-    }
-  }
-  componentWillUpdate(nextProps) {
-    if (!nextProps.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
 
-
-  imageUpload = (data) => (
-    this.props.imageUpload(data)
+  // function to upload Image
+  imageUpload = (image) => (
+    this.props.imageUpload(image)
    )
-  submit = (data) => (
-    this.props.createMeal(data)
+  //  function to create a new meal
+  submit = (meals) => (
+    this.props.createMeal(meals)
   )
-  edit = (bool) => (
-    this.props.isModalOpened(bool)
-  )
+  /**
+   * Called if there is no meal in the page
+   * @function noMeal
+   * @returns jsx
+   */
   noMeal = () => (
     <div className="no-meal">
       <h1>No meals Yet</h1> 
     </div>
   )
+
+  // opens side navigation to add meal
   openNav = () => (
     this.setState({
       ...this.state, isNavOpened: !this.state.isNavOpened
     })
   )
+
+  // sweet alert
   alert = () => (
-    swal("Meal Updated", "Your meal has been updated successfully!", "success")
+    swal("Meal Updated",
+     "Your meal has been updated successfully!", "success")
   )
-  myMeals = () => (
+
+  // meal container
+  mealContainer = () => (
      this.props.allMeals.length ? 
-      this.props.allMeals.map((meal, i) => <MealOptions {...this.props} key={i} meal={meal} />) : this.noMeal() 
+      this.props.allMeals.map((meal, i) =>
+       <MealOptions {...this.props} key={i}
+        meal={meal} />) : this.noMeal() 
     )
+
+  //  check if meal exist in the page
   isMeal = () => (
     this.props.allMeals.length? true : false
   )
+
+  // handles pagination click event
   handlePageChange = ({selected}) => {
-    console.log('page selected>>>>>>>>>>', selected);
     const page = selected + 1;
     localStorage.setItem('currentMealPage', page);
     const currentPage = localStorage.getItem('currentMealPage');
     this.props.fetchMeals(currentPage);
   }
 
+  /**
+   * render pagination button
+   * @function renderPagination 
+   * @returns {jsx} jsx
+   */
   renderPagination = () => (
     <ReactPaginate 
       previousLabel={<i className="fa fa-chevron-left" />}
@@ -108,24 +141,30 @@ class MealPage extends Component {
       <div className="m-o-Container">
         <TopNav logout={this.props.logout} />
         <div className = "m-o-Content space-content" >
-          <div className={this.state.isNavOpened? 'meals-options-open' : 'meal-options'}>
+          <div className={this.state.isNavOpened ?
+             'meals-options-open' : 'meal-options'}>
             <div className="m-o-header">
                 <div className="m-o-meals">
                   <h2 className="c-meals-h">Created Meals</h2>
                 </div>
-                <button onClick={this.openNav} className={this.state.isNavOpened? 'm-o-btn btn-open' : 'm-o-btn btn-default'}>Add Meal</button>
+                <button onClick={this.openNav} 
+                className={this.state.isNavOpened? 
+                'm-o-btn btn-open' : 'm-o-btn btn-default'}>
+                Add Meal</button>
             </div>
-            <div className = {this.state.isNavOpened? 'm-main-bar': 'm-main-bar'} >
+            <div className = {this.state.isNavOpened ? 
+              'm-main-bar': 'm-main-bar'} >
               <div className="m-mealoptions">
-                { this.myMeals() }
+                { this.mealContainer() }
               </div>
 
             </div>
           </div>
           {this.props.allMeals.length && this.renderPagination()}
-          <div className = {this.state.isNavOpened? 'add-meal-c go-left': 'add-meal-c'}>
-            {this.props.openModal ? <UpdateMeal {...this.props}  /> : ''} 
-            <AddMeal {...this.props} open={this.openNav} isNavOpened={this.state.isNavOpened}  />
+          <div className = {this.state.isNavOpened?
+             'add-meal-c go-left': 'add-meal-c'}>
+            <AddMeal {...this.props} open={this.openNav}
+             isNavOpened={this.state.isNavOpened}  />
           </div>
         </div>
       </div>
@@ -139,15 +178,14 @@ MealPage.propTypes = {
   logout: PropTypes.func.isRequired,
   fetchMeals: PropTypes.func.isRequired,
   imageUpload: PropTypes.func.isRequired,
-  openModal: PropTypes.bool.isRequired,
-  isModalOpened: PropTypes.func.isRequired,
   updateMeal: PropTypes.func.isRequired,
   createMeal: PropTypes.func.isRequired,
   changeMealSuccess: PropTypes.func.isRequired,
   changeMealError: PropTypes.func.isRequired,
   
 };
-const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeals, deleteMeal }) => ({
+const mapstatetoProps = ({ user, imageUpload, createMeal,
+   fetchMeals, updateMeals, deleteMeal }) => ({
   isAuthenticated: user.isAuthenticated,
   role: user.user.role,
   success: imageUpload.success,
@@ -161,8 +199,6 @@ const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpe
   isLoading: imageUpload.loading,
   allMeals: fetchMeals.meals,
   fetchedMeals: fetchMeals.success,
-  openModal: isModalOpened.open,
-  modalId: isModalOpened.id,
   updatingMeal: updateMeals.loading,
   mealUpdated: updateMeals.success,
   mealUpdatedId: updateMeal.meal,
@@ -178,4 +214,7 @@ const mapstatetoProps = ({ user, imageUpload, createMeal, fetchMeals, isModalOpe
   totalCount: fetchMeals.pagination.totalCount,
   
 });
-export default connect(mapstatetoProps, { logout, imageUpload, createMeal, fetchMeals, isModalOpened, updateMeal, deleteMeal, changeMealSuccess, changeMealError, changeSuccessState, mealSuccessState, DeleteErrorState })(MealPage);
+export default connect(mapstatetoProps, { logout, imageUpload, createMeal,
+   fetchMeals, updateMeal, deleteMeal,
+    changeMealSuccess, changeMealError, changeSuccessState,
+     mealSuccessState, DeleteErrorState })(MealPage);

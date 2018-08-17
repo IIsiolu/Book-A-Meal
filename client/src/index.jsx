@@ -5,7 +5,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import jwt from 'jwt-decode';
 import App from './App';
 import configureStore from './store';
-import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setUser } from './actions/auth';
 import verifyToken from './utils/verifyToken';
 
@@ -17,17 +16,14 @@ const store = configureStore();
 if (verifyToken(localStorage.myUserT)) {
   const user = localStorage.getItem('myUserT');
   const decode = jwt(user);
-  const pass = { ...decode, token: user };
   store.dispatch(setUser(decode));
-  // setAuthorizationToken(user);
-  console.log(pass);
 }
 
 ReactDOM.render(
-    <Provider store={store} >
-      <BrowserRouter>
-        <Route component={App} />
-      </BrowserRouter>
-    </Provider>
+  <Provider store={store} >
+    <BrowserRouter>
+      <Route component={App} />
+    </BrowserRouter>
+  </Provider>
   , document.getElementById('root'),
 );

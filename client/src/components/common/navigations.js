@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+/**
+ *  User order top navigation
+ * @function OrderNav
+ * @param {logout} logout - logout function
+ * @returns {jsx} jsx
+ */
 export const OrderNav = ({ logout }) => (
   <div className="top-nav stay-top">
     <h2 className="logo">Book-A-Meal</h2>
@@ -11,6 +18,14 @@ export const OrderNav = ({ logout }) => (
     </div>
   </div>
 );
+
+/**
+ *  Landing page top navigation
+ * @function LandingNav
+ * @param {logout} logout - logout function
+ * @param {isAuthenticated} isAuthenticated - checks token validation
+ * @returns {jsx} jsx
+ */
 
 export const LandingNav = ({ isAuthenticated, logout }) => (
   <div className="top-nav landing-nav">
@@ -24,14 +39,21 @@ export const LandingNav = ({ isAuthenticated, logout }) => (
         </div>
       ) :
       (
-      <div className="right-nav">
+        <div className="right-nav">
           <Link className="nav-text" to="/login">Login</Link>
           <Link className="nav-text" to="/signup">signup</Link>
-      </div>
+        </div>
       )
     }
-</div>
+  </div>
 );
+
+/**
+ *  Menu top navigation
+ * @function MenuNav
+ * @param {logout} logout - logout function
+ * @returns {jsx} jsx
+ */
 
 export const MenuNav = ({ logout }) => (
   <div className="top-nav">
@@ -44,3 +66,15 @@ export const MenuNav = ({ logout }) => (
   </div>
 );
 
+LandingNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+OrderNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
+MenuNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+};

@@ -7,7 +7,6 @@ class Orders extends Component {
     this.props.orders.map((order, key) => <OrderRow key={key} order={order} /> )
   )
   render() {
-    console.log(this.props.orders)
     return (
       <div className="order-h-c">
         <h2>Order Histories</h2>

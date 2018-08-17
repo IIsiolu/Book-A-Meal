@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
 import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common/';
-import { menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder, successState, errState } from '../../actions';
-import img from '../../static/images/spice1.jpg';
-import best from '../../static/images/best-now.png';
+import { menuForToday, addMealToOrder,
+   removeOrder, increaseQuantity,
+   requestForOrder, isOverlayOpened,
+    clearOrder, successState, errState } from '../../actions';
 
-class HomePage extends Component {
+/**
+ *Page to view Menu for Today
+ * @class
+ * @constructor
+ */
+class TodayMenuPage extends Component {
 
   constructor(){
     super();
@@ -17,32 +22,32 @@ class HomePage extends Component {
       isToggled: false
     }
   }
-  componentWillMount() {
-    console.log(this.props.isAuthenticated);
-    const newLocal = this.props.role === 'user';
-    if (!(newLocal)) {
-      console.log('Going back because phemmy is a smart learner');
-      this.props.history.push('/login');
-    }
-  }
+  /**
+   * A component life cycle
+   * Makes an api call for Today's menu
+   * @method componentDidMount
+   * @param {void}
+   * @returns {undefined}
+   */
   componentDidMount() {
     window.scrollTo(0, 0);
     const today = new Date();
-    console.log(today)
-    const day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
-    const month = today.getMonth()+1 < 10 ? `0${today.getMonth()+1}` : today.getMonth()+1;
+    const day = today.getDate() < 10 ? 
+    `0${today.getDate()}` : today.getDate();
+    const month = today.getMonth()+1 < 10 ? 
+    `0${today.getMonth()+1}` : today.getMonth()+1;
     const todaysDate = `${today.getFullYear()}-${month}-${day}`;
-    console.log( day, month)
     this.props.menuForToday(todaysDate);
   }
-  componentWillUpdate(nextProps) {
-    if (!nextProps.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
+  /**
+   * Component life cycle triggered on every state update
+   * @method componentDidUpdate
+   * @returns {undefined}
+   */
   componentDidUpdate(){
     if (this.props.orderSuccessful === true) {
-      swal("Meal Ordered", 'Your meal has been ordered successfully' , "success");
+      swal("Meal Ordered",
+       'Your meal has been ordered successfully' , "success");
       this.props.successState(false);
       this.toggle();
       this.props.clearOrder()
@@ -51,12 +56,17 @@ class HomePage extends Component {
       swal("Order error", 'error ordering meal' , "error");
       this.props.errState(false);
     }
-     
   }
+  /**
+   * Funtion called to add a meal to customer order Item
+   * @function addMealToOrder
+   * @param {meal} meal - meal to be ordered
+   * @returns {object} object
+   */
   addMealToOrder = (meal) => {
     if(this.props.placedOrders.length){
-      let alreadyExist = this.props.placedOrders.some((item) => meal.id === item.mealId);
-      console.log(this.props.placedOrders.some((item) => meal.id === item.id))
+      let alreadyExist =
+       this.props.placedOrders.some((item) => meal.id === item.mealId);
       return (
         alreadyExist? '' : this.props.addMealToOrder(meal)
       )
@@ -64,64 +74,135 @@ class HomePage extends Component {
       console.log(meal)
       return this.props.addMealToOrder(meal)
     }
-    
-    // this.props.addMealToOrder(meal) 
   }
+  /**
+   * display menu cards
+   * @function menuCards
+   * @param {undefined}
+   * @returns {jsx}
+   */
   menuCards = () => (
     this.props.menus.map((meal, key) => (
-      meal.Meal !== null ? <MenuCard key={key} meal={meal.Meal} addMealToOrder=
-      {this.addMealToOrder} isOverlayOpened={this.props.isOverlayOpened} /> : ''
+      meal.Meal !== null ? <MenuCard key={key}
+       meal={meal.Meal} addMealToOrder=
+      {this.addMealToOrder} isOverlayOpened=
+      {this.props.isOverlayOpened} /> : ''
     )
   )
   )
+
+  /**
+   * display order card
+   * @function orderCard
+   * @param {undefined}
+   * @returns {jsx}
+   */
   orderCard = () => (
     this.props.placedOrders.map((order, key) => <OrderItem key={key}
      increaseQuantity={this.props.increaseQuantity} order={order} removeOrder=
      {this.props.removeOrder} /> )
   )
+
+  /**
+   * display no menu for the day
+   * @function noMenu
+   * @param {undefined}
+   * @returns {jsx}
+   */
   noMenu = () => (
     <div className='no-menu-container'>
       MENU HAS NOT BEEN SET FOR TODAY
     </div>
   )
-  openModal = () => {
-    console.log('modal opened');
-    this.myVal.setAttribute()
-    
-  }
+  //   called when there is no order
   noOrder = () => (
     <div>
       <h1>NO ORDER PLACED</h1>
     </div>
   )
-  submit = () => {
-    this.props.requestForOrder(this.props.placedOrders)
-    console.log('clicked sub')
-  }
+
+  // called when order button is clicked
+  submit = () => this.props.requestForOrder(this.props.placedOrders)
+
+  // calculate total meal costs
   subTotal = () => {
     let total = 0;
     this.props.placedOrders.map(cost => {
       let newCost = cost.quantity * cost.mealCost
       total += newCost;
-      // console.log(total)
     })
     return total
   }
+
+  // calculates value added tax
   vat = () => {
-    // (5/100 * (this.subTotal())).toFixed(2)
     let tax = 5/100
     let myTax = tax * this.subTotal();
     return myTax.toFixed(2)
   }
-  // clearCat = () => {
-  //   this.props.clearOrder()
-  // }
+  
+  // toggles order slider
   toggle = () => {
-    console.log(this.state.isToggled)
     this.setState({
       isToggled: !this.state.isToggled
     })
   }
+/**
+ * Order drawer layout
+ * @function drawerLayout
+ * @param {void}
+ * @returns {jsx} jsx
+ */
+  drawerLayout = () => (
+    <div className = "drawer-layout">
+      <div className={this.state.isToggled?"sidebar-container is-up"
+       :"sidebar-container is-down"}>
+        <div onClick={this.toggle} className='order-header'>
+          <h1><span className='meal-notific'>
+          {this.props.placedOrders.length}</span>
+           {this.props.placedOrders.length >1 ? 'meals' : 'meal'}
+            selected</h1>
+          <i className={!this.state.isToggled ? 
+            'fa fa-chevron-up': 'fa fa-chevron-down'}></i>
+        </div>
+        <div className="rect-title">
+          <h1>My Orders</h1>
+          <div className="rect"></div>
+        </div>
+        <div className="orders-budg">
+          <div className="cus-orders">
+            {this.props.placedOrders.length ? 
+              this.orderCard() : this.noOrder()}
+          </div>
+          <div className="order-charge">
+            <div className="myOrders border-text">
+              <h4>Orders</h4>
+              <h4>{this.props.placedOrders.length}</h4>
+            </div>
+            <div className="mySubtotal border-text">
+              <h4>Sub-total</h4>
+              <h4>&#8358;{this.subTotal()}</h4>
+            </div>
+            <div className="vat border-text">
+              <h4>VAT (5%)</h4>
+              <h4>&#8358;{this.vat()}</h4>
+            </div>
+            <div className="total-orders border-text">
+              <h4>Total</h4>
+              <h4>&#8358;{this.subTotal() - this.vat()}</h4>
+            </div>
+          </div>
+          <div className="cat">
+            <button className='clear-cart' 
+            onClick={this.deleteMeal}>Clear Cart</button>
+            <button onClick={this.submit}>Check out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  // function called to clear meal order
   deleteMeal = () => {
     swal({
       title: "Are you sure?",
@@ -159,55 +240,13 @@ class HomePage extends Component {
             <div className = "main-bar">
               {this.props.isMenu ? this.menuCards() : this.noMenu()}
             </div>
-            {this.props.placedOrders.length ? 
-            (<div className = "drawer-layout">
-              {/* <div  className="order-cart"> <i className="fa fa-cart-plus order-cart-btn"></i></div> */}
-              <div className={this.state.isToggled?"sidebar-container is-up" :"sidebar-container is-down"}>
-                <div onClick={this.toggle} className='order-header'>
-                  <h1><span className='meal-notific'>{this.props.placedOrders.length}</span> {this.props.placedOrders.length >1 ? 'meals' : 'meal'} selected</h1>
-                  <i className={!this.state.isToggled ? 'fa fa-chevron-up': 'fa fa-chevron-down'}></i>
-                </div>
-                <div className="rect-title">
-                  <h1>My Orders</h1>
-                  <div className="rect"></div>
-                </div>
-                <div className="orders-budg">
-                  <div className="cus-orders">
-                    {this.props.placedOrders.length ? this.orderCard() : this.noOrder()}
-                  </div>
-                  <div className="order-charge">
-                    <div className="myOrders border-text">
-                      <h4>Orders</h4>
-                      <h4>{this.props.placedOrders.length}</h4>
-                    </div>
-                    <div className="mySubtotal border-text">
-                      <h4>Sub-total</h4>
-                      <h4>&#8358;{this.subTotal()}</h4>
-                    </div>
-                    <div className="vat border-text">
-                      <h4>VAT (5%)</h4>
-                      <h4>&#8358;{this.vat()}</h4>
-                    </div>
-                    <div className="total-orders border-text">
-                      <h4>Total</h4>
-                      <h4>&#8358;{this.subTotal() - this.vat()}</h4>
-                    </div>
-                  </div>
-                  <div className="cat">
-                    <button className='clear-cart' onClick={this.deleteMeal}>Clear Cart</button>
-                    <button onClick={this.submit}>Check out</button>
-                  </div>
-                </div>
-                {/* u dont invoke it, you allow react do that. this.submit arrow function automatically binds */}
-              </div>
-            </div>) : ''
-            }
+            {this.props.placedOrders.length && this.drawerLayout()}
           </div>
         </div>
         <div id="myModal" className="modal">
         {
-          this.props.isOpened ? <FoodModal addMealToOrder={this.addMealToOrder} isOpened={this.props.isOpened} menus={this.props.menus} overlayId={this.props.overlayId} isOverlayOpened={this.props.isOverlayOpened} /> :
-          ''
+          this.props.isOpened && <FoodModal {...this.props}
+          addMealToOrder={this.addMealToOrder}  />
         }
         </div>
         <Footer />
@@ -216,16 +255,13 @@ class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+TodayMenuPage.propTypes = {
   logout: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
-  isAuthenticated: user.isAuthenticated,
-  role: user.user.role,
   menus: menuForToday.menus,
   isMenu: menuForToday.success,
   placedOrders: order.orders,
@@ -237,4 +273,6 @@ const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
   orderSuccessful: order.success,
 });
 
-export default connect(mapStateToProps, { logout, menuForToday, addMealToOrder, removeOrder, increaseQuantity, requestForOrder, isOverlayOpened, clearOrder, successState, errState })(HomePage);
+export default connect(mapStateToProps, { logout, menuForToday,
+   addMealToOrder, removeOrder, increaseQuantity, requestForOrder,
+    isOverlayOpened, clearOrder, successState, errState })(TodayMenuPage);

@@ -14,7 +14,6 @@ class LoginPage extends Component {
     return (
             <div id="loginPage">
                 <div className="top-nav landing-nav">
-                  {/* <h2 className="logo">Book-A-Meal</h2> */}
                   <Link className="logo" to="/">Book-A-Meal</Link>
                   <div className="right-nav">
                       <Link className="nav-text" to="/signup">SignUp</Link>

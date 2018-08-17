@@ -55,7 +55,8 @@ export const createMenu = (menus, date) => (dispatch) => {
   }).catch((error) => {
     let myError = null;
     if (error.response) {
-      myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
+      myError = (error.response.data.errorMessage) ?
+        error.response.data.errorMessage[0] : error.response.data.message;
       dispatch(menuError(myError));
     } else {
       myError = 'poor internet connection';

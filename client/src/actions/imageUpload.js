@@ -27,7 +27,8 @@ export const imageUpload = (file, cb) => (dispatch) => {
   formData.append('timestamp', (Date.now() / 1000) | 0);
 
   // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-  return axios.post('https://api.cloudinary.com/v1_1/dtioo2hf0/image/upload', formData, {
+  return axios.post('https://api.cloudinary.com/v1_1/dtioo2hf0/image/upload',
+   formData, {
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
   }).then((response) => {
     const { data } = response;

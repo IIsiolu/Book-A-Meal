@@ -11,20 +11,20 @@ const order = (state = orderState, action) => {
     case actionsTypes.REMOVE_AN_ORDER:
       return {
         ...state,
-        orders: [...state.orders.filter(meal => meal.mealId !== action.payload)],
+        orders: [...state.orders.filter(meal =>
+          meal.mealId !== action.payload)],
       };
     case actionsTypes.CLEAR_ORDER:
       return {
         orders: [],
       };
     case actionsTypes.INCREASE_MEAL_QUANTITY:
-      const meal = state.orders.map(meal => (
-        meal.mealId === action.payload.mealId ?
-          { ...meal, quantity: action.payload.quantity } : meal
-      ));
       return {
         ...state,
-        orders: meal,
+        orders: state.orders.map(meal => (
+          meal.mealId === action.payload.mealId ?
+            { ...meal, quantity: action.payload.quantity } : meal
+        )),
       };
     case actionsTypes.ORDER_CREATED:
       return {

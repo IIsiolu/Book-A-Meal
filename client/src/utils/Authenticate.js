@@ -16,19 +16,34 @@ export default function (ComposedComponent) {
  * @extends {Component}
  */
   class Authenticate extends Component {
+    /**
+     * Check if user has a valid token
+     * @method componentWillMount
+     * @returns {undefined}
+     *
+     */
     componentWillMount() {
-      // !(role === 'admin' || role === 'super-admin')
       if (!this.props.isAuthenticated) {
         this.props.history.push('/login');
       }
     }
-
+    /**
+     * Check if user has a valid token
+     * @method componentWillUpdate
+     * @param {nextProps} nextProps - the props before update
+     * @returns {undefined}
+     *
+     */
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
         this.props.history.push('/');
       }
     }
-
+    /**
+     * renders page as jsx
+     * @method render
+     * @returns {JSX} jsx
+     */
     render() {
       return (
         <ComposedComponent {...this.props} />

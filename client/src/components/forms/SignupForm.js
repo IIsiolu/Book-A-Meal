@@ -51,10 +51,14 @@ class SignupForm extends Component {
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     let letterRegex =  /^[a-zA-Z]+$/;
 
-    if (!emailRegex.test(data.email) || !data.email) errors.email = 'Invalid email';
-    if (!data.password || data.password.length<6) errors.password = "Can't be blank and must be minimum 6";
-    if(!data.firstname || !letterRegex.test(data.firstname)) errors.firstname = 'firstname must be a valid letter'
-    if(!data.lastname || !letterRegex.test(data.lastname)) errors.lastname = 'name must be a valid letter'
+    if (!emailRegex.test(data.email)
+     || !data.email) errors.email = 'Invalid email';
+    if (!data.password || data.password.length<6)
+     errors.password = "Can't be blank and must be minimum 6";
+    if(!data.firstname || !letterRegex.test(data.firstname))
+     errors.firstname = 'firstname must be a valid letter'
+    if(!data.lastname || !letterRegex.test(data.lastname))
+     errors.lastname = 'name must be a valid letter'
     return errors;
   }
 

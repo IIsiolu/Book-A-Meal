@@ -1,5 +1,4 @@
-import React from 'react';
-import HomePage from './HomePage';
+import TodayMenuPage from './HomePage';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import NotFoundPage from './NotFoundPage';
@@ -11,7 +10,7 @@ import AdminSignUp from './AdminSignUp';
 import UserOrders from './UserOrders';
 
 export {
-  HomePage,
+  TodayMenuPage,
   LoginPage,
   NotFoundPage,
   DashboardPage,

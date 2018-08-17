@@ -41,7 +41,8 @@ class LoginForm extends Component {
     const errors = {};
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
-    if (!emailRegex.test(data.email) || !data.email) errors.email = 'Invalid email';
+    if (!emailRegex.test(data.email) || !data.email)
+     errors.email = 'Invalid email';
     if (!data.password) errors.password = "Can't be blank";
     return errors;
   }

@@ -5,9 +5,15 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { TopNav, MealCard, MenuItems } from '../common/';
 import InlineError from '../messages/inlineError';
-import { addToMenu, fetchMeals, removeMeal, createMenu, logout, changeMErrorState, changeMSuccessState, clearMenu } from '../../actions';
+import { addToMenu, fetchMeals, removeMeal, createMenu,
+   logout, changeMErrorState, changeMSuccessState,
+    clearMenu } from '../../actions';
 
-
+/**
+ * Menu Page
+ * @class MenuPage
+ * @constructor
+ */
 class MenuPage extends Component {
   constructor(){
     super();
@@ -16,21 +22,33 @@ class MenuPage extends Component {
       isOpened: false,
     }
   }
+
+  /**
+   * React life cycle
+   * @method componentWillMount
+   * @returns {undefined}
+   */
   componentWillMount() {
     const { role } = this.props;
     if (!(role === 'admin' || role === 'super-admin')) {
-      this.props.history.push('/login');
-    }
-    // this.props.fetchMeals;
-  }
-  componentDidMount() {
-    this.props.fetchMeals();
-  }
-  componentWillUpdate(nextProps) {
-    if (!nextProps.isAuthenticated) {
       this.props.history.push('/');
     }
   }
+
+  /**
+   * React life cycle to fetch meal on component mount
+   * @method componentDidMount
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    this.props.fetchMeals();
+  }
+  
+  /**
+   * React life cycle
+   * @method componentDidUpdate
+   * @returns {undefined}
+   */
   componentDidUpdate(prevProps) {
     if(this.props.success) {
       this.alert();
@@ -39,28 +57,38 @@ class MenuPage extends Component {
       this.props.clearMenu();
     }
   }
+
+  // opens menu
   openMenu = () => (
     this.setState({
       isOpened: !this.state.isOpened
     })
   )
+
+  // display no menu if meal is empty
   noMeal = () => (
     <div className="no-meal">
       <h1>No meals Yet</h1> 
     </div>
   );
+
+  // event change
   onChange = (e) => ( 
     this.setState({
       date: { ...this.state.date, [e.target.name]: e.target.value }
     })
   )
+
+  // function to create Menu for today
   submit = () => {
-    // console.log(this.state.date)
     this.props.createMenu(this.props.menus, this.state.date.date)
   }
+  // sweet alert
   alert = () => (
     swal("Menu Created", "Your menu has been created successfully!", "success")
   )
+
+  // ate button
   dateBtn = () => (
     <div className="date-btn">
       <div className="input-date">
@@ -68,9 +96,12 @@ class MenuPage extends Component {
         <input name='date' onChange={this.onChange} type="date" />
       </div>
       
-      <button className="create-m-btn" onClick={() => this.submit()}>Create Menu</button>
+      <button className="create-m-btn" 
+      onClick={() => this.submit()}>Create Menu</button>
     </div>
   )
+
+  // add menu to menu slider
   addedMenus = (meal) => {
     if(this.props.menus.length){
       let alreadyExist = this.props.menus.some((item) => meal.id === item.id);
@@ -83,18 +114,30 @@ class MenuPage extends Component {
     
   }
 
-  myMenus = () => this.props.menus.length ? (this.props.menus.map((menu, key) => <MenuItems removeMeal={this.props.removeMeal} menu={menu} key={key} /> )) : (this.noMeal())
+  /**
+   * Selected menu for the day
+   * @function selectedMenu
+   * @returns {jsx} jsx
+   */
+  selectedMenu = () => this.props.menus.length ?
+   (this.props.menus.map((menu, key) => 
+   <MenuItems removeMeal={this.props.removeMeal} 
+   menu={menu} key={key} /> )) : (this.noMeal())
 
+  //  menu slider
   menuSlider = () =>
     (
     <div className = "drawer-layout">
-      <div className={this.state.isOpened ? "sidebar-container is-up": "sidebar-container is-down"}>
+      <div className={this.state.isOpened ?
+         "sidebar-container is-up": "sidebar-container is-down"}>
         <div onClick={this.openMenu} className="order-header">
-          <h1><span className="meal-notific">{this.props.menus.length}</span> {this.props.menus.length>1 ? 'Meals' : 'Meal'} Selected</h1>
-          {this.state.isOpened ? <i className="fa fa-chevron-down"></i>: <i className="fa fa-chevron-up"></i>}
+          <h1><span className="meal-notific">{this.props.menus.length}</span>
+           {this.props.menus.length>1 ? 'Meals' : 'Meal'} Selected</h1>
+          {this.state.isOpened ? <i className="fa fa-chevron-down"></i> :
+           <i className="fa fa-chevron-up"></i>}
         </div>
         <div className="set-menu-content">
-          {this.myMenus()}
+          {this.selectedMenu()}
           {this.props.menus.length ? this.dateBtn() : '' }
           {this.props.createdMenuError && <div className="center-text">
               <InlineError text={this.props.createdMenuError} />
@@ -103,7 +146,7 @@ class MenuPage extends Component {
       </div>
     </div>
     )
-
+    //  handles pagination click events
   handlePageChange = ({selected}) => {
     console.log('page selected>>>>>>>>>>', selected);
     const page = selected + 1;
@@ -112,6 +155,7 @@ class MenuPage extends Component {
     this.props.fetchMeals(currentPage);
   }
 
+  // renders pagination button
   renderPagination = () => (
     <ReactPaginate 
       previousLabel={<i className="fa fa-chevron-left" />}
@@ -129,8 +173,11 @@ class MenuPage extends Component {
       activeClassName={'active'}
     />
   )
- myMeals = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
-    (this.props.allMeals.map((meal, key) => <MealCard addedMenus={this.addedMenus} meal={meal} key={key} /> ))
+
+// meal cards
+ mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
+    (this.props.allMeals.map((meal, key) =>
+     <MealCard addedMenus={this.addedMenus} meal={meal} key={key} /> ))
     :(this.noMeal())) : (this.noMeal());
 
   render() {
@@ -139,7 +186,7 @@ class MenuPage extends Component {
         <TopNav logout={this.props.logout} />
         <div className = "main-container">
           <div className = "menupage-meals">
-            {this.myMeals()}
+            {this.mealCards()}
           </div>
           {this.props.allMeals.length && this.renderPagination()}
           {this.props.menus.length>0 && this.menuSlider()}
@@ -174,4 +221,6 @@ const mapstatetoProps = ({ user, fetchMeals, menu }) => ({
   pageSize: fetchMeals.pagination.pageSize,
   totalCount: fetchMeals.pagination.totalCount,
 });
-export default connect(mapstatetoProps, { addToMenu, fetchMeals, removeMeal, createMenu, logout, changeMErrorState, changeMSuccessState, clearMenu })(MenuPage);
+export default connect(mapstatetoProps, { addToMenu, fetchMeals,
+   removeMeal, createMenu, logout, changeMErrorState,
+    changeMSuccessState, clearMenu })(MenuPage);

@@ -30,7 +30,7 @@ class AdminSignUp extends Component {
           </div>
           <div className="form-info-con">
             <div className="form-info-title">
-              <h2>Create an Admin Account</h2>
+              <h2>Create A Caterer</h2>
             </div>
             <div className="form-info-body">
               <h1 className="form-info-h">Required Fields</h1>

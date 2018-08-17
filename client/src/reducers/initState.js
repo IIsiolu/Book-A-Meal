@@ -1,3 +1,17 @@
+export const userState = {
+  loading: false,
+  success: false,
+  error: null,
+  loginError: null,
+  loginSuccess: false,
+  isAuthenticated: false,
+  signedUp: false,
+  signUpError: false,
+  user: {
+    role: null,
+  },
+};
+
 export const createMealState = {
   loading: false,
   success: false,

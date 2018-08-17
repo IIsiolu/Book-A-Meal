@@ -61,6 +61,19 @@ const orderFaker = {
       },
     ],
   },
+
+  newUpdate2: {
+    orders: [
+      {
+        mealId: 2,
+        quantity: 9,
+      },
+      {
+        mealId: 2,
+        quantity: 3,
+      },
+    ],
+  },
   newOrder6: {
     orders: [
       {

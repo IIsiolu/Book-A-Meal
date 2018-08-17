@@ -9,7 +9,7 @@ const userfake = {
     password: '1234567',
   },
   singupUser1: {
-    firstname: 'Test', 
+    firstname: 'Test',
     lastname: 'lastnames',
     email: 'testuser@example.com',
     password: '1234567',
@@ -72,12 +72,12 @@ const userfake = {
     lastname: 'admin',
     email: 'admin123@gmail.com',
     password: 'adminqwe1234',
-    role: 'admin'
+    role: 'admin',
   },
   adminLogin: {
     email: 'admin123@gmail.com',
     password: 'adminqwe1234',
-  }
+  },
 };
 
 export default userfake;

@@ -1,22 +1,19 @@
 import isEmpty from 'lodash/isEmpty';
 import * as actionsTypes from '../actions/actionsTypes';
+import { userState } from './initState';
 // loading state
 // most suitable things to have in a token
 // create a general initial state
 // change loading to isloading
-const initialState = {
-  loading: false,
-  success: false,
-  error: null,
-  loginError: null,
-  loginSuccess: false,
-  isAuthenticated: false,
-  signedUp: false,
-  user: {
-    role: null,
-  },
-};
-const user = (state = initialState, action) => {
+
+/**
+ * Authentication reducer
+ * @function user
+ * @param {object} state - reducer state
+ * @param {object} action
+ */
+
+const user = (state = userState, action) => {
   switch (action.type) {
     case actionsTypes.LOADING:
       return {
@@ -28,6 +25,7 @@ const user = (state = initialState, action) => {
         ...state,
         loading: false,
         signedUp: true,
+        signUpError: false,
         error: null,
         user: action.payload,
       };
@@ -39,9 +37,9 @@ const user = (state = initialState, action) => {
     case actionsTypes.USER_LOGGED_IN:
       return {
         ...state,
-        loginSuccess: !isEmpty(action.payload),
+        loginSuccess: true,
         user: action.payload,
-        isAuthenticated: !isEmpty(action.payload),
+        isAuthenticated: true,
         loginError: null,
         loading: false,
       };
@@ -52,9 +50,11 @@ const user = (state = initialState, action) => {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload,
       };
-    case actionsTypes.USER_ERROR:
+    case actionsTypes.USER_SIGNUP_ERROR:
       return {
         ...state,
+        signUpError: true,
+        signedUp: false,
         error: action.error,
         loading: false,
       };

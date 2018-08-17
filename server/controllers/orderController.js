@@ -88,7 +88,7 @@ class OrderController {
         userId: req.user.id,
       },
     }).then((userOrders) => {
-      if (userOrders.length === 0) {
+      if (userOrders.rows.length === 0) {
         return res.status(404).send({
           success: false,
           message: 'Customer order is empty',

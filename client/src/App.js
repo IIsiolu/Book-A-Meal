@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// url loader solved issue with semantic
 import { UserRoute } from './components/routes';
 import {
   NotFoundPage, SignupPage, LoginPage,

@@ -49,33 +49,34 @@ class MenuPage extends Component {
    * @method componentDidUpdate
    * @returns {undefined}
    */
+  
   componentDidUpdate(prevProps) {
     if(this.props.success) {
       this.alert();
       this.props.changeMSuccessState(false);
-      this.openMenu();
+      this.openMenuSlider();
       this.props.clearMenu();
     }
   }
 
   // opens menu
-  openMenu = () => (
+  openMenuSlider = () => (
     this.setState({
       isOpened: !this.state.isOpened
     })
   )
 
   // display no menu if meal is empty
-  noMeal = () => (
+  renderNoMeal = () => (
     <div className="no-meal">
       <h1>No meals Yet</h1> 
     </div>
   );
 
-  // event change
-  onChange = (e) => ( 
+  // event change for date
+  onChange = (event) => ( 
     this.setState({
-      date: { ...this.state.date, [e.target.name]: e.target.value }
+      date: { ...this.state.date, [event.target.name]: event.target.value }
     })
   )
 
@@ -122,7 +123,7 @@ class MenuPage extends Component {
   selectedMenu = () => this.props.menus.length ?
    (this.props.menus.map((menu, key) => 
    <MenuItems removeMeal={this.props.removeMeal} 
-   menu={menu} key={key} /> )) : (this.noMeal())
+   menu={menu} key={key} /> )) : (this.renderNoMeal())
 
   //  menu slider
   menuSlider = () =>
@@ -130,7 +131,7 @@ class MenuPage extends Component {
     <div className = "drawer-layout">
       <div className={this.state.isOpened ?
          "sidebar-container is-up": "sidebar-container is-down"}>
-        <div onClick={this.openMenu} className="order-header">
+        <div onClick={this.openMenuSlider} className="order-header">
           <h1><span className="meal-notific">{this.props.menus.length}</span>
            {this.props.menus.length>1 ? 'Meals' : 'Meal'} Selected</h1>
           {this.state.isOpened ? <i className="fa fa-chevron-down"></i> :
@@ -178,7 +179,7 @@ class MenuPage extends Component {
  mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
     (this.props.allMeals.map((meal, key) =>
      <MealCard addedMenus={this.addedMenus} meal={meal} key={key} /> ))
-    :(this.noMeal())) : (this.noMeal());
+    :(this.renderNoMeal())) : (this.renderNoMeal());
 
   render() {
     return (

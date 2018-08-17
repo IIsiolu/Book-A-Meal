@@ -68,4 +68,5 @@ const mapStateToProps = state => ({
     signedUp: state.user.signedUp
 })
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, {signup, logIn, signupState})(SignupPage);
+export default connect(mapStateToProps, {signup,
+   logIn, signupState})(SignupPage);

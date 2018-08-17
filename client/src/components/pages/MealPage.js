@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import swal from 'sweetalert';
 import { TopNav, MealOptions } from '../common/';
-import {AddMeal, UpdateMeal}  from '../forms';
+import {AddMeal}  from '../forms';
 import { logout, imageUpload, createMeal, fetchMeals,
    updateMeal, deleteMeal, changeMealSuccess, changeMealError,
     changeSuccessState,
@@ -27,28 +27,11 @@ class MealPage extends Component {
    * @method componentWillMount
    * @returns {undefined}
    */
+  
   componentWillMount() {
     const { role } = this.props;
     if (!(role === 'admin' || role === 'super-admin')) {
       this.props.history.push('/');
-    }
-  }
-  /**
-   * @method componentDidUpdate
-   * @param {prevProps} prevProps - previous state props
-   */
-  componentDidUpdate(prevProps) {
-    const {allMeals} = this.props
-    const prevPageSize = prevProps.pageSize
-    const nextPageSize = this.props.pageSize
-    if ( prevPageSize !== nextPageSize){
-      const currentPage = localStorage.getItem('currentMealPage'); 
-      const nextMeal = this.isMeal() && allMeals || false;
-      if (nextMeal === true && prevPageSize > 1) {
-        localStorage.setItem('currentMealPage', currentPage -1);
-        return this.props.fetchMeals(currentPage-1);
-      } 
-      this.props.fetchMeals(currentPage); 
     }
   }
   
@@ -70,17 +53,17 @@ class MealPage extends Component {
   )
   /**
    * Called if there is no meal in the page
-   * @function noMeal
+   * @function renderNoMeal
    * @returns jsx
    */
-  noMeal = () => (
+  renderNoMeal = () => (
     <div className="no-meal">
       <h1>No meals Yet</h1> 
     </div>
   )
 
   // opens side navigation to add meal
-  openNav = () => (
+  openNavSlider = () => (
     this.setState({
       ...this.state, isNavOpened: !this.state.isNavOpened
     })
@@ -97,7 +80,7 @@ class MealPage extends Component {
      this.props.allMeals.length ? 
       this.props.allMeals.map((meal, i) =>
        <MealOptions {...this.props} key={i}
-        meal={meal} />) : this.noMeal() 
+        meal={meal} />) : this.renderNoMeal() 
     )
 
   //  check if meal exist in the page
@@ -147,7 +130,7 @@ class MealPage extends Component {
                 <div className="m-o-meals">
                   <h2 className="c-meals-h">Created Meals</h2>
                 </div>
-                <button onClick={this.openNav} 
+                <button onClick={this.openNavSlider} 
                 className={this.state.isNavOpened? 
                 'm-o-btn btn-open' : 'm-o-btn btn-default'}>
                 Add Meal</button>
@@ -163,7 +146,7 @@ class MealPage extends Component {
           {this.props.allMeals.length && this.renderPagination()}
           <div className = {this.state.isNavOpened?
              'add-meal-c go-left': 'add-meal-c'}>
-            <AddMeal {...this.props} open={this.openNav}
+            <AddMeal {...this.props} open={this.openNavSlider}
              isNavOpened={this.state.isNavOpened}  />
           </div>
         </div>

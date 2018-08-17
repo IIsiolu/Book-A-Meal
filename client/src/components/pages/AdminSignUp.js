@@ -4,23 +4,27 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { SignupForm } from '../forms';
-import { signup, signupState } from '../../actions';
+import { signup, signupState, logout } from '../../actions';
 import { TopNav } from '../common'
 
 class AdminSignUp extends Component {
+
   componentDidUpdate(){
     if(this.props.isSuccess === true) {
-      swal("Admin Created", 'Admin has been created successfully' , "success");
+      swal("Admin Created",
+       'Admin has been created successfully' , "success");
       this.props.signupState(false);
     }
   }
+
   submit = (data) => (
     this.props.signup(data, this.props.history)
    )
+
   render() {
     return (
       <div className='admin-form-container'>
-        <TopNav />
+        <TopNav logout={this.props.logout} />
         <div className="form-con-bg">
           <div className="form-nav">
             <Link className="main-m-nav" to="/adminSignup">Create Admin</Link>
@@ -34,7 +38,8 @@ class AdminSignUp extends Component {
             </div>
             <div className="form-info-body">
               <h1 className="form-info-h">Required Fields</h1>
-              <SignupForm submit = {this.submit} role={this.props.role} {...this.props} />
+              <SignupForm submit = {this.submit}
+               role={this.props.role} {...this.props} />
             </div>
           </div>
         </div>
@@ -57,4 +62,5 @@ const mapStateToProps = state => ({
   role: state.user.user.role
 });
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, { signup, signupState })(AdminSignUp);
+export default connect(mapStateToProps, { signup,
+   signupState, logout })(AdminSignUp);

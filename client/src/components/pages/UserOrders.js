@@ -6,10 +6,26 @@ import { connect } from 'react-redux';
 import { userOrders, logout } from '../../actions';
 import { Orders, OrderNav } from '../common';
 
+/**
+ * @class UserOrders
+ */
 class UserOrders extends Component {
+
+  /**
+   * React life cycle to fetch user Orders
+   * @method componentDidMount
+   * @returns {undefined}
+   */
+
   componentDidMount() {
     this.props.userOrders();
   }
+
+  /**
+   * handle pagination click event
+   * @function handlePageChange
+   * @returns {undefined}
+   */
 
   handlePageChange = ({selected}) => {
     const page = selected + 1;
@@ -17,6 +33,12 @@ class UserOrders extends Component {
     const currentPage = localStorage.getItem('currentUserOPage');
     this.props.userOrders(currentPage);
   }
+
+  /**
+   * displays pagination buttons
+   * @function renderPagination
+   * @returns {JSX} jsx
+   */
 
   renderPagination = () => (
     <ReactPaginate 
@@ -34,8 +56,9 @@ class UserOrders extends Component {
       subContainerClassName={'pages pagination'}
       activeClassName={'active'}
     />
-  )
+  );
 
+  // renders User Orders
   render() {
     return (
       <div className="user-order">

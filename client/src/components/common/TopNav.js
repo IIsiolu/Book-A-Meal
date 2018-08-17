@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * @function TopNav
+ * @param {logout} logout- logout action
+ * @returns {JSX} jsx
+ */
 
 const TopNav = ({ logout }) => (
   <div className="top-nav stay-top">
@@ -10,4 +17,9 @@ const TopNav = ({ logout }) => (
     </div>
   </div>
 );
+
+TopNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
 export default TopNav;

@@ -99,17 +99,17 @@ class TodayMenuPage extends Component {
    */
   orderCard = () => (
     this.props.placedOrders.map((order, key) => <OrderItem key={key}
-     increaseQuantity={this.props.increaseQuantity} order={order} removeOrder=
-     {this.props.removeOrder} /> )
+     increaseQuantity={this.props.increaseQuantity} order={order}
+      removeOrder={this.props.removeOrder} /> )
   )
 
   /**
    * display no menu for the day
-   * @function noMenu
+   * @function renderNoMenu
    * @param {undefined}
    * @returns {jsx}
    */
-  noMenu = () => (
+  renderNoMenu = () => (
     <div className='no-menu-container'>
       MENU HAS NOT BEEN SET FOR TODAY
     </div>
@@ -228,7 +228,9 @@ class TodayMenuPage extends Component {
         <div className="top-content2">
           <div className="topblur">
             <h1 className="top-content-h">THE MENU</h1>
-            <p className="top-content-line">_____________________________</p>
+            <p className="top-content-line">
+              _____________________________
+            </p>
           </div>
         </div>
         <nav>
@@ -238,7 +240,7 @@ class TodayMenuPage extends Component {
           <h2>Menu For Today</h2>
           <div className="l-menus">
             <div className = "main-bar">
-              {this.props.isMenu ? this.menuCards() : this.noMenu()}
+              {this.props.isMenu ? this.menuCards() : this.renderNoMenu()}
             </div>
             {this.props.placedOrders.length && this.drawerLayout()}
           </div>

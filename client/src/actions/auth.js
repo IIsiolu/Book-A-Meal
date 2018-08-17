@@ -30,22 +30,13 @@ export const connectin = loading => ({
 });
 
 export const logIn = (credentials, history) => (dispatch) => {
-  // console.log({
-  //   credentials,
-  // });
   dispatch(connectin(true));
 
   return instance.post('auth/login', credentials)
     .then((res) => {
-      console.log({
-        res,
-      });
       const { token } = res.data;
       // set key to token
       localStorage.setItem('myUserT', token);
-
-      // setAuthorizationToken(token);
-
       const userDecode = jwt(token);
       const pass = { ...userDecode, token };
       dispatch(userLoggedIn(pass));
@@ -54,10 +45,6 @@ export const logIn = (credentials, history) => (dispatch) => {
     })
     .catch((error) => {
       if (error.response) {
-        console.log({
-          err: 'error in login',
-          error: error.response,
-        });
         const myError = (error.response.data.errorMessage) ?
           error.response.data.errorMessage[0] : error.response.data.message;
         dispatch(loginError(myError));
@@ -80,12 +67,7 @@ export const signup = (credentials, history) => (dispatch) => {
   return instance.post('auth/signup', credentials)
     .then((res) => {
       const { data } = res;
-      const newData = {
-        email: credentials.email,
-        password: credentials.password,
-      };
       dispatch(userSignup(data));
-      // history.push('/login');
     })
     .catch((error) => {
       if (error.response) {

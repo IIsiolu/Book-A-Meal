@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import jwt from 'jwt-decode';
 import { signup, logIn } from '../../src/actions';
 
-import { USER_SIGN_UP, USER_ERROR, USER_LOGGED_IN } from '../../src/actions/actionsTypes';
+import { USER_SIGN_UP, USER_SIGNUP_ERROR, USER_LOGGED_IN }
+  from '../../src/actions/actionsTypes';
 import mockData from '../__mocks__/mockData';
 import mockLocalStorage from '../__mocks__/mockLocalStorage';
 
@@ -31,18 +32,17 @@ describe('Auth actions', () => {
       .onPost('auth/signup', signUpData)
       .reply(201, authResponse);
     store.dispatch(signup(signUpData)).then(() => {
-      console.log('>>>>>>>>>>>>>>>>>>>', store.getActions()[1]);
       expect(store.getActions()[1]).toEqual(expectedActions);
       done();
     });
   });
   it(
-    'should dispatch USER_ERROR action when a user ' +
+    'should dispatch USER_SIGNUP_ERROR action when a user ' +
   'provides a username that already exists on the application',
     (done) => {
       const { signupFailure, signUpData } = mockData;
       const expectedActions = {
-        type: USER_ERROR,
+        type: USER_SIGNUP_ERROR,
         error: signupFailure.message,
       };
       const store = mockStore({});

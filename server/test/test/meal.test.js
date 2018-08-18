@@ -113,12 +113,30 @@ describe('Book-a-meal MEAL Test', () => {
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.data)
+          expect(res.body.data);
           if (error) done(error);
           done();
         });
     },
   );
+
+  it(
+    `should save MEAL to database if login is 
+    admin and and body is filed correctly`,
+    (done) => {
+      request(server)
+        .post('/api/v1/meals')
+        .send(testData.newMeal2)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(201);
+          expect(res.body.data);
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+
   it('should fail to return all the MEALS in database, if user is not an admin', (done) => {
     request(server)
       .get('/api/v1/meals')
@@ -137,7 +155,7 @@ describe('Book-a-meal MEAL Test', () => {
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(200);
-        expect(res.body.data)
+        expect(res.body.data);
         if (error) done(error);
         done();
       });

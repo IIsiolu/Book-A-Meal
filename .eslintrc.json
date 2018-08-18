@@ -16,7 +16,8 @@
     "globals": {
       "window": false,
       "localStorage": false,
-      "document": false
+      "document": false,
+      "mock": false
     },
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

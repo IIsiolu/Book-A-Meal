@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/phemonick/Book-A-Meal.svg?branch=develop)](https://travis-ci.org/phemonick/Book-A-Meal)
 [![Coverage Status](https://coveralls.io/repos/github/phemonick/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/phemonick/Book-A-Meal?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/51707f1acb8258943557/maintainability)](https://codeclimate.com/github/phemonick/Book-A-Meal/maintainability)
 ## Book-A-Meal
  an application that allows customers to make food orders and helps the food
 vendor know what the customers want to eat.

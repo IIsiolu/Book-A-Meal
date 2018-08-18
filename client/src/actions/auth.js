@@ -1,4 +1,3 @@
-import axios from 'axios';
 import jwt from 'jwt-decode';
 import * as actionTypes from './actionsTypes';
 import instance from '../utils/instance';
@@ -19,8 +18,8 @@ export const setUser = user => ({
   type: actionTypes.SET_CURRENT_USER,
   payload: user,
 });
-export const userError = error => ({
-  type: actionTypes.USER_ERROR,
+export const signupError = error => ({
+  type: actionTypes.USER_SIGNUP_ERROR,
   error,
 });
 
@@ -72,10 +71,10 @@ export const signup = (credentials, history) => (dispatch) => {
     .catch((error) => {
       if (error.response) {
         const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(userError(myError));
+        dispatch(signupError(myError));
       } else {
         const myError = 'poor internet connection';
-        dispatch(userError(myError));
+        dispatch(signupError(myError));
       }
     });
 };

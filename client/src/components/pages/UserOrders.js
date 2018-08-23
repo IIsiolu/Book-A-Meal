@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userOrders, logout } from '../../actions';
 import { Orders, OrderNav } from '../common';
@@ -16,7 +15,6 @@ class UserOrders extends Component {
    * @method componentDidMount
    * @returns {undefined}
    */
-
   componentDidMount() {
     this.props.userOrders();
   }
@@ -26,7 +24,6 @@ class UserOrders extends Component {
    * @function handlePageChange
    * @returns {undefined}
    */
-
   handlePageChange = ({selected}) => {
     const page = selected + 1;
     localStorage.setItem('currentUserOPage', page);
@@ -39,7 +36,6 @@ class UserOrders extends Component {
    * @function renderPagination
    * @returns {JSX} jsx
    */
-
   renderPagination = () => (
     <ReactPaginate 
       previousLabel={<i className="fa fa-chevron-left" />}
@@ -58,7 +54,11 @@ class UserOrders extends Component {
     />
   );
 
-  // renders User Orders
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     return (
       <div className="user-order">

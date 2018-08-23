@@ -6,6 +6,7 @@ class OrderItem extends Component {
   static propTypes = {
     removeOrder: PropTypes.func.isRequired
   }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,21 +17,25 @@ class OrderItem extends Component {
       
     };
   }
+
   increment = () => {
     console.log('incrementing')
     this.props.increaseQuantity(this.props.order.mealId,
        parseInt(this.props.order.quantity)+1)
   }
+
   decrement = () => {
     let {quantity} = this.props.order;
     let {order} = this.props;
     quantity>1 ? this.props.increaseQuantity(order.mealId,
        parseInt(order.quantity)-1) : '';
   }
+
   onChange = (e) => {
     this.props.increaseQuantity(this.props.order.mealId, e.target.value)
     console.log(this.state)
   }
+
   render() {
     const { order, removeOrder } = this.props;
     return (
@@ -61,9 +66,9 @@ class OrderItem extends Component {
             <i onClick={ this.decrement} className="fa fa-minus arith"></i>
           </div>
           
-          </div>
-          <i onClick={() => removeOrder(order.mealId) }
-           className="fa fa-trash delete-orItem mous"></i>
+        </div>
+        <i onClick={() => removeOrder(order.mealId) }
+          className="fa fa-trash delete-orItem mous"></i>
       </div>
     );
   }

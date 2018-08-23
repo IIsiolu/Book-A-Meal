@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+/**
+ * Order history row
+ * @function OrderRow
+ * @param {object} order
+ * @returns {JSX} jsx
+ */
 const OrderRow = ({ order }) => (
   <div className="order-row-container order-row-cc">
     <div className="o-row-item">{order.id}</div>
@@ -11,4 +17,5 @@ const OrderRow = ({ order }) => (
     <div className="o-row-item">Delivered</div>
   </div>
 );
+
 export default OrderRow;

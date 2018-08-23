@@ -8,6 +8,27 @@ const createMeal = (state = createMealState, action) => {
         ...state,
         loading: action.payload,
       };
+    case actionsTypes.ADDED_MEAL_IMAGE:
+      return {
+        ...state,
+        isImageSuccess: true,
+        imageUrl: action.payload,
+        isImageError: false,
+      };
+    case actionsTypes.ADD_MEAL_IMAGE_ERR:
+      return {
+        ...state,
+        isImageSuccess: false,
+        isImageError: true,
+        ImageUploadError: action.payload,
+      };
+    case actionsTypes.CLEAR_MEAL_IMAGE:
+      return {
+        ...state,
+        imageUrl: '',
+        isImageSuccess: false,
+
+      };
     case actionsTypes.MEAL_ADDED:
       return {
         ...state,

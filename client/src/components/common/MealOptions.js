@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
+import uploadImage from '../../utils/uploadImage';
 
 let formerState = {}
 
@@ -37,7 +38,6 @@ class MealOptions extends Component {
    * @param {*} prevState - previous state
    */
   componentDidUpdate(prevProps, prevState) {
-
     if (Object.keys(this.state.errors).length ) {
       let error= '';
       for(let err in this.state.errors){
@@ -45,9 +45,7 @@ class MealOptions extends Component {
       }
       swal("Meal error", error , "error")
       this.state.errors = {};
-
     }
-    
     if (this.props.mealUpdated === true ) {
       this.alert();
       this.props.changeMealSuccess(false);
@@ -68,9 +66,9 @@ class MealOptions extends Component {
     let newVal = Object.keys(this.props.meal).every((meal) =>
     Object.is(this.props.meal[meal], prevProps.meal[meal]) === true
   )
-    !newVal ? this.setState({
+    !newVal && this.setState({
       data: {...this.state.data, ...this.props.meal}
-    }) : ''
+    })
   }
   
   // validates meal inputs
@@ -102,13 +100,22 @@ class MealOptions extends Component {
   }
 
   // function to upload meal to cloudinary
-  upload = (event) => {
-    this.props.imageUpload(event.target.files[0], (secure_url) => {
+  upload = async (event) => {
+    try {
+      let response =await uploadImage(event.target.files[0])
+      const { data } = response;
+      console.log(data)
+      const fileURL = data.secure_url;
+      console.log(fileURL);
       this.setState({
-         data: { ...this.state.data, image: secure_url}
-      });
-    });
+        data: { ...this.state.data, image: fileURL}
+     });
+    } catch(err) {
+      console.log(err)
+      return err
+    }
   }
+
   //  warning alert when meal is to be deleted
   deleteMeal = () => {
     swal({
@@ -126,6 +133,7 @@ class MealOptions extends Component {
       }
     });
   }
+
   // edit meal function
   edit = () => {
     formerState = this.state;
@@ -148,6 +156,11 @@ class MealOptions extends Component {
     });
   }
   
+  /**
+   * @description renders a view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     const { errors } = this.state;
     const data = this.props.meal;

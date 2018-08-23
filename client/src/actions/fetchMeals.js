@@ -1,5 +1,5 @@
-import instance from '../utils/instance';
 import * as actionTypes from './actionsTypes';
+import api from '../utils/api';
 
 export const isLoading = state => ({
   type: actionTypes.FETCHING_MEAL,
@@ -10,25 +10,26 @@ export const mealFetched = data => ({
   type: actionTypes.MEAL_FETCHED,
   payload: data,
 });
+
 export const mealFetchError = error => ({
   type: actionTypes.FETCH_MEAL_ERROR,
   payload: error,
 });
-export const fetchMeals = (page, limit, offset) => (dispatch) => {
+
+/**
+ * @function fetchMeals
+ * @param {number} page
+ * @param {number} limit
+ * @param {number} offset
+ * @returns {void}
+ */
+export const fetchMeals = (page, limit, offset) => async (dispatch) => {
   dispatch(isLoading(true));
-  return instance.get(`meals?page=${page}&limit=${limit}&offset=${offset}`)
-    .then((res) => {
-      const { data } = res;
-      dispatch(mealFetched(data));
-    }).catch((error) => {
-      let myError = null;
-      if (error.response) {
-        myError = (error.response.data.errorMessage) ?
-          error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(mealFetchError(myError));
-      } else {
-        myError = 'poor internet connection';
-        dispatch(mealFetchError(myError));
-      }
-    });
+  try {
+    const response = await api(`meals?page=${page}
+    &limit=${limit}&offset=${offset}`);
+    dispatch(mealFetched(response));
+  } catch (err) {
+    dispatch(mealFetchError(err));
+  }
 };

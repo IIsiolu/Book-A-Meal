@@ -15,7 +15,7 @@ export {
 
 export { createMeal, mealSuccessState } from './addMeal';
 
-export { imageUpload, imageUploaded } from './imageUpload';
+export { imageUpload, clearMealImage } from './imageUpload';
 
 export {
   updateMeal, changeMealError,

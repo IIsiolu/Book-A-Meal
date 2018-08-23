@@ -1,7 +1,18 @@
 import { Order, User, Meal } from '../models';
 import { checkPagination, paginatedData } from '../helpers/paginate';
 
+/**
+ * @class
+ */
 class OrderController {
+
+  /**
+   * @description creates a user order
+   * @method createOrder
+   * @param {string} req 
+   * @param {object} res
+   * @returns {object} - response to be sent to the client 
+   */
   static createOrder(req, res) {
     const {
       orders,
@@ -24,6 +35,12 @@ class OrderController {
       }));
   }
 
+  /**
+   * @description modify user order
+   * @param {string} req 
+   * @param {object} res
+   * @returns {object} 
+   */
   static modifyOrder(req, res) {
     Order
       .findOne({
@@ -31,8 +48,8 @@ class OrderController {
           id: req.params.orderId,
         },
       }).then((order) => {
-        const userInfo = Object.assign({}, order);
-        order.update({ ...userInfo, ...req.body }).then((newOrder) => {
+        const orderInfo = Object.assign({}, order);
+        order.update({ ...orderInfo, ...req.body }).then((newOrder) => {
           res.status(200).json({
             result: 'updated',
             message: newOrder,
@@ -47,6 +64,13 @@ class OrderController {
       }));
   }
 
+  /**
+   * Get all Orders
+   * @description get all customer orders
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static allOrders(req, res) {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({
@@ -75,6 +99,13 @@ class OrderController {
       }));
   }
 
+  /**
+   * Get Order
+   * @description get a particular customer order
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static cusOrder(req, res) {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({

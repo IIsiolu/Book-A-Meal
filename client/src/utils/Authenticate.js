@@ -16,6 +16,7 @@ export default function (ComposedComponent) {
  * @extends {Component}
  */
   class Authenticate extends Component {
+
     /**
      * Check if user has a valid token
      * @method componentWillMount
@@ -27,6 +28,7 @@ export default function (ComposedComponent) {
         this.props.history.push('/login');
       }
     }
+
     /**
      * Check if user has a valid token
      * @method componentWillUpdate
@@ -39,6 +41,7 @@ export default function (ComposedComponent) {
         this.props.history.push('/');
       }
     }
+    
     /**
      * renders page as jsx
      * @method render

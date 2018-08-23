@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import InlineError from '../messages/inlineError';
 /**
- * @class Login
+ * @class SignupForm
  *
  * @extends {React.Component}
  */
@@ -65,69 +65,68 @@ class SignupForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-            <Form onSubmit={this.onSubmit} loading={this.props.loading} >
-            { this.props.error && <Message negative>
-                <Message.Header> Something went wrong </Message.Header>
-                <p>{this.props.error} </p>
-            </Message>}
+      <Form onSubmit={this.onSubmit} loading={this.props.loading} >
+        { this.props.error && <Message negative>
+            <Message.Header> Something went wrong </Message.Header>
+            <p>{this.props.error} </p>
+        </Message>}
+        <Form.Field error={!!errors.email}>
+          <label htmlFor='email'> Email </label>
+          <input
+            type='email'
+            id='email' name='email'
+            value={data.email}
+            onChange={this.onChange}
+            placeholder='example@example.com' />
+            {errors.email && <InlineError text={errors.email} /> }
+        </Form.Field>
+        <Form.Field error={!!errors.password}>
+          <label htmlFor='password'> Password </label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Make it secure'
+            value={data.password}
+            onChange={this.onChange}
+            />
+            {errors.password && <InlineError text={errors.password} /> }
 
-              <Form.Field error={!!errors.email}>
-                <label htmlFor='email'> Email </label>
-                <input
-                  type='email'
-                  id='email' name='email'
-                  value={data.email}
-                  onChange={this.onChange}
-                  placeholder='example@example.com' />
-                  {errors.email && <InlineError text={errors.email} /> }
-              </Form.Field>
-              <Form.Field error={!!errors.password}>
-                <label htmlFor='password'> Password </label>
-                <input
-                  type='password'
-                  id='password'
-                  name='password'
-                  placeholder='Make it secure'
-                  value={data.password}
-                  onChange={this.onChange}
-                  />
-                 {errors.password && <InlineError text={errors.password} /> }
-
-              </Form.Field>
-              <Form.Field error={!!errors.firstname}>
-                <label htmlFor='firstname'> First Name </label>
-                <input
-                  type='text'
-                  id='firstname' name='firstname'
-                  value={data.firstname}
-                  onChange={this.onChange}
-                  placeholder='example@example.com' />
-                  {errors.firstname && <InlineError text={errors.firstname} /> }
-              </Form.Field>
-              <Form.Field error={!!errors.lastname}>
-                <label htmlFor='lastname'> Last Name </label>
-                <input
-                  type='text'
-                  id='lastname' name='lastname'
-                  value={data.lastname}
-                  onChange={this.onChange}
-                  placeholder='example@example.com' />
-                  {errors.lastname && <InlineError text={errors.lastname} /> }
-              </Form.Field>
-              { errors.right && <Message negative>
-                <Message.Header> Something went wrong </Message.Header>
-                <p>{errors.right} </p>
-            </Message>}
-              <div className="log-sign">
-                <Button
-                  type="submit"
-                  primary
-                >Signup
-              </Button>
-              <Link to="/login">Already have an Account? SIGN IN</Link>
-              </div>
-              
-            </Form>
+        </Form.Field>
+        <Form.Field error={!!errors.firstname}>
+          <label htmlFor='firstname'> First Name </label>
+          <input
+            type='text'
+            id='firstname' name='firstname'
+            value={data.firstname}
+            onChange={this.onChange}
+            placeholder='example@example.com' />
+            {errors.firstname && <InlineError text={errors.firstname} /> }
+        </Form.Field>
+        <Form.Field error={!!errors.lastname}>
+          <label htmlFor='lastname'> Last Name </label>
+          <input
+            type='text'
+            id='lastname' name='lastname'
+            value={data.lastname}
+            onChange={this.onChange}
+            placeholder='example@example.com' />
+            {errors.lastname && <InlineError text={errors.lastname} /> }
+        </Form.Field>
+        { errors.right && <Message negative>
+          <Message.Header> Something went wrong </Message.Header>
+          <p>{errors.right} </p>
+      </Message>}
+        <div className="log-sign">
+          <Button
+            type="submit"
+            primary
+          >Signup
+        </Button>
+        <Link to="/login">Already have an Account? SIGN IN</Link>
+        </div>
+        
+      </Form>
     );
   }
 }

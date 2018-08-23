@@ -8,6 +8,7 @@ import MealPage from './MealPage';
 import MenuPage from './MenuPage';
 import AdminSignUp from './AdminSignUp';
 import UserOrders from './UserOrders';
+import Profile from './Profile';
 
 export {
   TodayMenuPage,
@@ -20,5 +21,5 @@ export {
   MenuPage,
   AdminSignUp,
   UserOrders,
+  Profile,
 };
-

@@ -16,7 +16,6 @@ import food4 from '../../static/images/food4.jpg';
  * @param {logout} logout - logout function
  * @return {jsx} jsx
  */
-
 const LandingPage = ({ isAuthenticated, logout }) => (
   <div className="container">
     <LandingNav
@@ -56,7 +55,6 @@ const LandingPage = ({ isAuthenticated, logout }) => (
         </p>
       </div>
     </div>
-    {/* <hr /> */}
     <div className="popular">
       <h1 className="titles">What Customers Love</h1>
       <div className="ourFoods">
@@ -206,12 +204,15 @@ const LandingPage = ({ isAuthenticated, logout }) => (
     <Footer />
   </div>
 );
+
 // props validation
 const mapStateToProps = ({ user }) => ({
   isAuthenticated: user.isAuthenticated,
 });
+
 LandingPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
 };
+
 export default connect(mapStateToProps, { logout })(LandingPage);

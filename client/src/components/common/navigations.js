@@ -26,7 +26,6 @@ export const OrderNav = ({ logout }) => (
  * @param {isAuthenticated} isAuthenticated - checks token validation
  * @returns {jsx} jsx
  */
-
 export const LandingNav = ({ isAuthenticated, logout }) => (
   <div className="top-nav landing-nav">
     <h2 className="logo">Book-A-Meal</h2>
@@ -54,7 +53,6 @@ export const LandingNav = ({ isAuthenticated, logout }) => (
  * @param {logout} logout - logout function
  * @returns {jsx} jsx
  */
-
 export const MenuNav = ({ logout }) => (
   <div className="top-nav">
     <Link className="logo" to="/">Book-A-Meal</Link>

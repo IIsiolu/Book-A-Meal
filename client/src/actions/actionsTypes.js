@@ -1,4 +1,7 @@
 
+/**
+ * @description action type dispatched by an action
+ */
 export const USER_SIGNUP_ERROR = 'USER_SIGNUP_ERROR';
 export const USER_SIGN_UP = 'USER_SIGN_UP';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
@@ -57,3 +60,6 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const CHANGE_MENU_ERROR = 'CHANGE_MENU_ERROR';
 export const CHANGE_MENU_SUCCESS = 'CHANGE_MENU_SUCCESS';
 export const CLEAR_MENUS = 'CLEAR_MENUS';
+export const ADDED_MEAL_IMAGE = 'ADDED_MEAL_IMAGE';
+export const CLEAR_MEAL_IMAGE = 'CLEAR_MEAL_IMAGE';
+export const ADD_MEAL_IMAGE_ERR = 'ADD_MEAL_IMAGE_ERR';

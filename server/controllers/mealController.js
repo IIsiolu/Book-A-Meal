@@ -2,7 +2,18 @@ import 'babel-polyfill';
 import { Meal } from '../models';
 import { checkPagination, paginatedData } from '../helpers/paginate';
 
+/**
+ * @class
+ */
 class MealController {
+
+  /**
+   * Create Meal
+   * @description allows caterers to create a meal
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static createMeal(req, res) {
     const {
       name, description, price, image,
@@ -33,6 +44,13 @@ class MealController {
       });
   }
 
+  /**
+   * All Meals
+   * @description allows caterers to get all meals in Database
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static allMeals(req, res) {
     const { page, limit, offset } = checkPagination(req);
     Meal
@@ -57,6 +75,13 @@ class MealController {
       .catch(error => res.status(400).json('unexpected error'));
   }
 
+  /**
+   * Edit Meal
+   * @description allows caterers to edit a meal
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static editMeal(req, res) {
     const { mealId } = req.params;
 
@@ -81,6 +106,14 @@ class MealController {
         message: ' No meal with that ID',
       }));
   }
+
+  /**
+   * Aldelete Meal
+   * @description allows caterers to delete a meals in Database
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static deleteMeal(req, res) {
     Meal.findOne({
       where: {

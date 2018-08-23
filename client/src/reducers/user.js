@@ -39,7 +39,7 @@ const user = (state = userState, action) => {
         ...state,
         loginSuccess: true,
         user: action.payload,
-        isAuthenticated: true,
+        isAuthenticated: !isEmpty(action.payload),
         loginError: null,
         loading: false,
       };

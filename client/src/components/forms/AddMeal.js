@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import InlineError from '../messages/inlineError';
 import swal from 'sweetalert';
-
-import { isLoading } from '../../actions/imageUpload';
-// import ImageUpload from './ImageUpload';
 
 class AddMeal extends Component {
   constructor(props) {
@@ -15,24 +12,24 @@ class AddMeal extends Component {
         name: '',
         price: '',
         description: '',
-        image: null
+        image: ''
       },
       loading: false,
       errors: {},
     };
   }
-  componentDidUpdate(prevProps){
-    if(this.props.imageUrl !== prevProps.imageUrl){
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.isImageSuccess == true) {
       this.setState({
         data: {
           ...this.state.data,
-        image: this.props.imageUrl
+          image: this.props.mealImageUrl
         }
-        
-      })
+      });
+      this.props.clearMealImage();
     }
     if(this.props.isMealAdded === true ){
-      console.log('meal added ')
       swal("Meal Added", "Your meal has been added successfully!", "success")
       this.props.mealSuccessState(false);
       this.setState({
@@ -41,12 +38,14 @@ class AddMeal extends Component {
           name: '',
           price: '',
           description: '',
-          image: ''
+          image: '',
+          file: ''
         }
       })
     }
   }
-  onChange =(e) => {
+
+  onChange = (e) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
@@ -63,6 +62,7 @@ class AddMeal extends Component {
       this.props.createMeal(this.state.data)
     }
   }
+
   validate(data) {
     const errors = {};
     const nameRegex = /^([a-z']+(-| )?)+$/i
@@ -75,14 +75,9 @@ class AddMeal extends Component {
     if (!data.price) errors.price = "Can't be blank"
     return errors;
   }
+  
   upload =(e) => {
-    console.log(e.target.files[0])
-    this.props.imageUpload(e.target.files[0], (secure_url) => {
-      this.setState({
-        data: {...this.state.data, image: secure_url}
-      })
-    })
-    
+    this.props.imageUpload(e.target.files[0], 'addMeal')
   }
 
   render() {
@@ -139,10 +134,11 @@ class AddMeal extends Component {
              />
             {errors.image && <InlineError text={errors.image} /> }
         </Form.Field>
-        {this.state.data.image ? 
-        <div className="postedImg">
-          <img className="imgup" src={this.state.data.image} alt="image" />
-        </div> : ''}
+        { this.state.data.image !== '' &&
+          <div className="postedImg">
+            <img className="imgup" src={this.state.data.image} alt="image" />
+          </div>
+        }
         <Button
           type="submit"
           primary

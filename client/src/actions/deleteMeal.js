@@ -1,5 +1,5 @@
 import * as actionTypes from './actionsTypes';
-import instance from '../utils/instance';
+import api from '../utils/api';
 
 const isLoading = bool => ({
   type: actionTypes.DELETING_MEAL,
@@ -10,6 +10,7 @@ const mealDeleted = id => ({
   type: actionTypes.MEAL_DELETED,
   payload: id,
 });
+
 const deleteMealFetched = id => ({
   type: actionTypes.DELETE_FETCH_MEAL,
   payload: id,
@@ -34,20 +35,19 @@ export const changeSuccessState = bool => (dispatch) => {
   });
 };
 
-export const deleteMeal = id => (dispatch) => {
+/**
+ * @function deleteMeal
+ * @description deletes a meal in the application
+ * @param {number} id - meal Id
+ * @returns {object} response
+ */
+export const deleteMeal = id => async (dispatch) => {
   dispatch(isLoading(true));
-  return instance.delete(`meals/${id}`).then((res) => {
+  try {
+    await api(`meals/${id}`, 'delete');
     dispatch(deleteMealFetched(id));
     dispatch(mealDeleted(id));
-  }).catch((error) => {
-    let myError = null;
-    if (error.response) {
-      myError = (error.response.data.errorMessage) ? 
-        error.response.data.errorMessage[0] : error.response.data.message;
-      dispatch(deleteMealError(myError));
-    } else {
-      myError = 'poor internet connection';
-      dispatch(deleteMealError(myError));
-    }
-  });
+  } catch (err) {
+    dispatch(deleteMealError(err));
+  }
 };

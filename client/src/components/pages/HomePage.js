@@ -16,12 +16,13 @@ import { menuForToday, addMealToOrder,
  */
 class TodayMenuPage extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       isToggled: false
     }
   }
+
   /**
    * A component life cycle
    * Makes an api call for Today's menu
@@ -39,12 +40,13 @@ class TodayMenuPage extends Component {
     const todaysDate = `${today.getFullYear()}-${month}-${day}`;
     this.props.menuForToday(todaysDate);
   }
+
   /**
    * Component life cycle triggered on every state update
    * @method componentDidUpdate
    * @returns {undefined}
    */
-  componentDidUpdate(){
+  componentDidUpdate() {
     if (this.props.orderSuccessful === true) {
       swal("Meal Ordered",
        'Your meal has been ordered successfully' , "success");
@@ -57,6 +59,7 @@ class TodayMenuPage extends Component {
       this.props.errState(false);
     }
   }
+
   /**
    * Funtion called to add a meal to customer order Item
    * @function addMealToOrder
@@ -75,6 +78,7 @@ class TodayMenuPage extends Component {
       return this.props.addMealToOrder(meal)
     }
   }
+
   /**
    * display menu cards
    * @function menuCards
@@ -87,15 +91,16 @@ class TodayMenuPage extends Component {
        meal={meal.Meal} addMealToOrder=
       {this.addMealToOrder} isOverlayOpened=
       {this.props.isOverlayOpened} /> : ''
+      )
     )
-  )
-  )
+  );
 
   /**
+   * @description
    * display order card
    * @function orderCard
    * @param {undefined}
-   * @returns {jsx}
+   * @returns {jsx} jsx
    */
   orderCard = () => (
     this.props.placedOrders.map((order, key) => <OrderItem key={key}
@@ -114,6 +119,7 @@ class TodayMenuPage extends Component {
       MENU HAS NOT BEEN SET FOR TODAY
     </div>
   )
+
   //   called when there is no order
   noOrder = () => (
     <div>
@@ -147,12 +153,13 @@ class TodayMenuPage extends Component {
       isToggled: !this.state.isToggled
     })
   }
-/**
- * Order drawer layout
- * @function drawerLayout
- * @param {void}
- * @returns {jsx} jsx
- */
+
+  /**
+   * Order drawer layout
+   * @function drawerLayout
+   * @param {void}
+   * @returns {jsx} jsx
+   */
   drawerLayout = () => (
     <div className = "drawer-layout">
       <div className={this.state.isToggled?"sidebar-container is-up"
@@ -222,6 +229,11 @@ class TodayMenuPage extends Component {
     });
   }
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     return (
       <div className="container">
@@ -263,6 +275,7 @@ TodayMenuPage.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
+
 const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
   menus: menuForToday.menus,
   isMenu: menuForToday.success,

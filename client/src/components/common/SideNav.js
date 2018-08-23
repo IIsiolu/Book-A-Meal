@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Side navigation
+ * @description react stateless component
+ * @function SideNav
+ * @returns {JSX} jsx
+ */
 const SideNav = ({ role }) => (
   <div className="sidebar-info" >
     <div className="sidebar-c form-nav">
@@ -10,7 +16,7 @@ const SideNav = ({ role }) => (
       {role === 'super-admin' &&
         <Link className="" to="/adminSignup">Create Admin</Link>}
     </div>
-
   </div>
 );
+
 export default SideNav;

@@ -1,23 +1,27 @@
 import jwt from 'jwt-decode';
 import * as actionTypes from './actionsTypes';
-import instance from '../utils/instance';
+import api from '../utils/api';
 
 export const userSignup = user => ({
   type: actionTypes.USER_SIGN_UP,
   payload: user,
 });
+
 export const loginError = error => ({
   type: actionTypes.LOGIN_ERROR,
   payload: error,
 });
+
 export const userLoggedIn = user => ({
   type: actionTypes.USER_LOGGED_IN,
   payload: user,
 });
+
 export const setUser = user => ({
   type: actionTypes.SET_CURRENT_USER,
   payload: user,
 });
+
 export const signupError = error => ({
   type: actionTypes.USER_SIGNUP_ERROR,
   error,
@@ -28,30 +32,27 @@ export const connectin = loading => ({
   payload: loading,
 });
 
-export const logIn = (credentials, history) => (dispatch) => {
+/**
+ * @description login user to the app
+ * @param {object} credentials - valid user details
+ * @param {object} history
+ * @returns {object} response
+ */
+export const logIn = (credentials, history) => async (dispatch) => {
   dispatch(connectin(true));
-
-  return instance.post('auth/login', credentials)
-    .then((res) => {
-      const { token } = res.data;
-      // set key to token
-      localStorage.setItem('myUserT', token);
-      const userDecode = jwt(token);
-      const pass = { ...userDecode, token };
-      dispatch(userLoggedIn(pass));
-      const navigate = userDecode.role === 'admin' ? '/dashboard' : '/';
-      history.push(navigate);
-    })
-    .catch((error) => {
-      if (error.response) {
-        const myError = (error.response.data.errorMessage) ?
-          error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(loginError(myError));
-      } else {
-        const myError = 'poor internet connection';
-        dispatch(loginError(myError));
-      }
-    });
+  try {
+    const response = await api('auth/login', 'post', credentials);
+    const { token } = response;
+    localStorage.setItem('myUserT', token);
+    const userDecode = jwt(token);
+    const pass = { ...userDecode, token };
+    dispatch(userLoggedIn(pass));
+    const navigate = userDecode.role === 'admin' ? '/dashboard' : '/';
+    history.push(navigate);
+    return response;
+  } catch (err) {
+    dispatch(loginError(err));
+  }
 };
 
 export const signupState = bool => (dispatch) => {
@@ -61,24 +62,28 @@ export const signupState = bool => (dispatch) => {
   });
 };
 
-export const signup = (credentials, history) => (dispatch) => {
+/**
+ * @function signup
+ * @description Signup user with valid credentials
+ * @param {object} credentials - valid user details
+ * @returns {object} response
+ */
+export const signup = credentials => async (dispatch) => {
   dispatch(connectin(true));
-  return instance.post('auth/signup', credentials)
-    .then((res) => {
-      const { data } = res;
-      dispatch(userSignup(data));
-    })
-    .catch((error) => {
-      if (error.response) {
-        const myError = (error.response.data.errorMessage) ? error.response.data.errorMessage[0] : error.response.data.message;
-        dispatch(signupError(myError));
-      } else {
-        const myError = 'poor internet connection';
-        dispatch(signupError(myError));
-      }
-    });
+  try {
+    const response = await api('auth/signup', 'post', credentials);
+    dispatch(userSignup(response));
+  } catch (err) {
+    dispatch(signupError(err));
+  }
 };
 
+/**
+ * @function logout
+ * @description logout user from the application
+ * @param {object} credentials - valid user details
+ * @returns {void}
+ */
 export const logout = () => (dispatch) => {
   localStorage.clear();
   dispatch(userLoggedIn({}));

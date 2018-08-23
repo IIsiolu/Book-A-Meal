@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import OrderRow from './OrderRow';
 
+/**
+ *@class
+ */
 class Orders extends Component {
 
   allOrders = () => (
     this.props.orders.map((order, key) => <OrderRow key={key} order={order} /> )
   )
+/**
+ * renders view
+ * @function render
+ * @returns {JSX} jsx
+ */
   render() {
     return (
       <div className="order-h-c">

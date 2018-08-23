@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * @description react functional component
+ * @function MealCard
+ * @param {object} menu
+ * @param {object} removeMeal
+ * @returns {JSX} jsx
+ */
 const MenuItems = ({ menu, removeMeal }) => (
   <div className="orderItem men-i-c">
     <div className="order-mealInfo">
@@ -14,5 +21,5 @@ const MenuItems = ({ menu, removeMeal }) => (
     </div>
   </div>
 );
-export default MenuItems;
 
+export default MenuItems;

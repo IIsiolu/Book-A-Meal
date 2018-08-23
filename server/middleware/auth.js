@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 require('dotenv').config();
 
 
-/** Class Auth a point. */
+/** Class Auth */
 class Auth {
 
   static verifyToken(req, res, next) {
@@ -38,7 +38,6 @@ class Auth {
             message: 'You have to be an admin',
           });
         }
-        // console.log({ data: data.role });
         req.user = data;
 
         next();

@@ -6,7 +6,7 @@ import {
   NotFoundPage, SignupPage, LoginPage,
   DashboardPage, LandingPage, MealPage,
   TodayMenuPage, AdminSignUp, MenuPage,
-  UserOrders,
+  UserOrders, Profile,
 } from './components/pages';
 import Authenticate from './utils/Authenticate';
 import Navigate from './utils/Navigate';
@@ -34,6 +34,7 @@ const App = ({ location }) => (
     <Route path="/menu" exact component={Authenticate(MenuPage)} />
     <Route path="/adminSignup" exact component={Authenticate(AdminSignUp)} />
     <Route path="/orders" exact component={Authenticate(UserOrders)} />
+    <Route path="/profile" exact component={Authenticate(Profile)} />
     <Route exact path="*" component={NotFoundPage} />
   </Switch>
 );

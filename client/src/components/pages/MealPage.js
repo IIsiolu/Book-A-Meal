@@ -5,29 +5,29 @@ import ReactPaginate from 'react-paginate';
 import swal from 'sweetalert';
 import { TopNav, MealOptions } from '../common/';
 import {AddMeal}  from '../forms';
-import { logout, imageUpload, createMeal, fetchMeals,
+import { logout, imageUpload, createMeal, fetchMeals, clearMealImage,
    updateMeal, deleteMeal, changeMealSuccess, changeMealError,
     changeSuccessState,
      mealSuccessState, DeleteErrorState } from '../../actions';
 
-     /**
-      * Meal Page
-      * @class MealPage
-      * @constructor
-      */
+/**
+* Meal Page
+* @class MealPage
+* @constructor
+*/
 class MealPage extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       isNavOpened: false
     }
   }
+
   /**
    * @method componentWillMount
    * @returns {undefined}
    */
-  
   componentWillMount() {
     const { role } = this.props;
     if (!(role === 'admin' || role === 'super-admin')) {
@@ -39,7 +39,7 @@ class MealPage extends Component {
    * @method componentDidMount
    * @returns {undefined}
    */
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchMeals()
   }
 
@@ -47,10 +47,12 @@ class MealPage extends Component {
   imageUpload = (image) => (
     this.props.imageUpload(image)
    )
+
   //  function to create a new meal
   submit = (meals) => (
     this.props.createMeal(meals)
   )
+
   /**
    * Called if there is no meal in the page
    * @function renderNoMeal
@@ -119,6 +121,11 @@ class MealPage extends Component {
     />
   )
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     return (
       <div className="m-o-Container">
@@ -154,6 +161,7 @@ class MealPage extends Component {
     );
   }
 }
+
 MealPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -165,8 +173,8 @@ MealPage.propTypes = {
   createMeal: PropTypes.func.isRequired,
   changeMealSuccess: PropTypes.func.isRequired,
   changeMealError: PropTypes.func.isRequired,
-  
 };
+
 const mapstatetoProps = ({ user, imageUpload, createMeal,
    fetchMeals, updateMeals, deleteMeal }) => ({
   isAuthenticated: user.isAuthenticated,
@@ -177,7 +185,8 @@ const mapstatetoProps = ({ user, imageUpload, createMeal,
   mealCreated: createMeal.success,
   creatingMeal: createMeal.loading,
   isMealAdded: createMeal.mealsuccessful,
-  imageUrl: imageUpload.imageUrl,
+  isImageSuccess: createMeal.isImageSuccess,
+  mealImageUrl: createMeal.imageUrl,
   imageId: imageUpload.id,
   isLoading: imageUpload.loading,
   allMeals: fetchMeals.meals,
@@ -195,9 +204,9 @@ const mapstatetoProps = ({ user, imageUpload, createMeal,
   pageCount: fetchMeals.pagination.pageCount,
   pageSize: fetchMeals.pagination.pageSize,
   totalCount: fetchMeals.pagination.totalCount,
-  
 });
+
 export default connect(mapstatetoProps, { logout, imageUpload, createMeal,
-   fetchMeals, updateMeal, deleteMeal,
+   fetchMeals, updateMeal, deleteMeal, clearMealImage,
     changeMealSuccess, changeMealError, changeSuccessState,
      mealSuccessState, DeleteErrorState })(MealPage);

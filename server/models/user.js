@@ -18,6 +18,17 @@ export default (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [6],
+          msg: 'password must be at least 6 characters',
+        },
+        set(value) {
+          const salt = bcrypt.genSaltSync(10);
+          const hash = bcrypt.hashSync(value, salt);
+          this.setDataValue('password', hash);
+        },
+      },
     },
     role: {
       type: DataTypes.STRING,
@@ -36,11 +47,13 @@ export default (sequelize, DataTypes) => {
     },
   }, {
 
-    hooks: {
-      afterValidate: (user, options) => {
-        user.password = bcrypt.hashSync(user.password, 10);
-      },
-    },
+    // hooks: {
+    //   afterValidate: (user, options) => {
+    //     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', typeof user.password, user.password);
+    //     user.password = bcrypt.hashSync(user.password, 10);
+    //     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', user.password);
+    //   },
+    // },
   });
   User.associate = (models) => {
     User.hasMany(models.Order, {

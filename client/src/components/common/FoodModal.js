@@ -2,41 +2,23 @@ import React, { component } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
-const customStyles = {
-  overlay: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0, 
-    background: 'rgba(0,0,0,0.4)'
-  },
-  content: {
-    position: 'relative',
-    background: '#f9f9f9',
-    color: '#444',
-    textShadow: 'none',
-    borderRadius: '4px',
-  },
-};
-
 class FoodModal extends React.Component {
   constructor() {
     super();
-
     this.state = {
       modalIsOpen: false,
       data: {}
     };
-
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
   findMeal = (menu, mealId) => (
     menu.id == mealId
   )
+
   static getDerivedStateFromProps(props, state){
-    console.log(props);
     const selectedMeal = props.menus.find((menu) => (
       menu.mealId == props.overlayId
     ))
@@ -53,6 +35,7 @@ class FoodModal extends React.Component {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
   }
+
   onSubmit = (e) => {
     e.preventDefault()
     this.props.updateMeal(this.state.data)
@@ -61,15 +44,16 @@ class FoodModal extends React.Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
+
   onChange =(e) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
   }
+
   upload = (e) => {
     this.props.imageUpload(e.target.files[0])
   }
-
 
   render() {
     const {data} = this.state
@@ -118,7 +102,9 @@ class FoodModal extends React.Component {
     );
   }
 }
+
 FoodModal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
 };
+
 export default FoodModal;

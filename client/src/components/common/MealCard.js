@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom';
 
+/**
+ * @description react functional component
+ * @function MealCard
+ * @param {object} meal
+ * @param {object} addedMenus
+ * @returns {JSX} jsx
+ */
 const MealCard = ({ meal, addedMenus }) => (
   <div className="m-c-container">
     <div className="m-c-imgcontainer">
@@ -19,8 +25,10 @@ const MealCard = ({ meal, addedMenus }) => (
     </div>
   </div>
 );
+
 MealCard.propTypes = {
   meal: PropTypes.object.isRequired,
   addedMenus: PropTypes.func.isRequired,
 };
+
 export default MealCard;

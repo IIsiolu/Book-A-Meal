@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SignupForm } from '../forms';
+
 import { signup, signupState, logout } from '../../actions';
 import { TopNav } from '../common'
 
-class AdminSignUp extends Component {
+class Profile extends Component {
 
   componentDidUpdate(){
     if(this.props.isSuccess === true) {
@@ -21,11 +21,6 @@ class AdminSignUp extends Component {
     this.props.signup(data, this.props.history)
    )
 
-  /**
-   * @description renders user view
-   * @method render
-   * @returns {JSX} jsx
-   */
   render() {
     return (
       <div className='admin-form-container'>
@@ -39,12 +34,11 @@ class AdminSignUp extends Component {
           </div>
           <div className="form-info-con">
             <div className="form-info-title">
-              <h2>Create A Caterer ACCOUNT</h2>
+              <h2>Edit profile</h2>
             </div>
             <div className="form-info-body">
-              <h1 className="form-info-h">Required Fields</h1>
-              <SignupForm submit = {this.submit}
-               role={this.props.role} {...this.props} />
+              
+            
             </div>
           </div>
         </div>
@@ -54,7 +48,7 @@ class AdminSignUp extends Component {
   }
 }
 
-AdminSignUp.propTypes = {
+Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -68,4 +62,4 @@ const mapStateToProps = state => ({
 });
 // mapstate for states, dispatch functions
 export default connect(mapStateToProps, { signup,
-   signupState, logout })(AdminSignUp);
+   signupState, logout })(Profile);

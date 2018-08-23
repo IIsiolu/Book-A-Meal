@@ -49,7 +49,6 @@ class MenuPage extends Component {
    * @method componentDidUpdate
    * @returns {undefined}
    */
-  
   componentDidUpdate(prevProps) {
     if(this.props.success) {
       this.alert();
@@ -112,7 +111,6 @@ class MenuPage extends Component {
     }else{
       return this.props.addToMenu(meal)
     }
-    
   }
 
   /**
@@ -147,16 +145,20 @@ class MenuPage extends Component {
       </div>
     </div>
     )
-    //  handles pagination click events
+
+  //  handles pagination click events
   handlePageChange = ({selected}) => {
-    console.log('page selected>>>>>>>>>>', selected);
     const page = selected + 1;
     localStorage.setItem('currentMenuPage', page);
     const currentPage = localStorage.getItem('currentMenuPage');
     this.props.fetchMeals(currentPage);
   }
 
-  // renders pagination button
+  /**
+   * @description renders pagination button
+   * @method renderPagination
+   * @returns {JSX} jsx
+   */
   renderPagination = () => (
     <ReactPaginate 
       previousLabel={<i className="fa fa-chevron-left" />}
@@ -176,11 +178,16 @@ class MenuPage extends Component {
   )
 
 // meal cards
- mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
+  mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
     (this.props.allMeals.map((meal, key) =>
      <MealCard addedMenus={this.addedMenus} meal={meal} key={key} /> ))
     :(this.renderNoMeal())) : (this.renderNoMeal());
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     return (
       <div>

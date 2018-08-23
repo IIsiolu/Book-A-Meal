@@ -18,6 +18,10 @@ export const createMealState = {
   error: null,
   meal: null,
   mealsuccessful: false,
+  isImageSuccess: false,
+  imageUrl: '',
+  isImageError: false,
+  ImageUploadError: null,
 };
 
 export const fetchMealState = {
@@ -38,6 +42,10 @@ export const updateMealState = {
   success: false,
   error: null,
   isError: false,
+  updatedImage: '',
+  imageUpdateSuccess: false,
+  isimageUpdateError: false,
+  imageUpdateError: null,
   meal: {},
 };
 

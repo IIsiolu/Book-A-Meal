@@ -1,20 +1,16 @@
 import * as actionTypes from './actionsTypes';
-import instance from '../utils/instance';
+import api from '../utils/api';
 
 const isLoading = bool => ({
   type: actionTypes.UPDATING_MEAL,
   payload: bool,
 });
 
-// const changeSuccess = bool => ({
-//   type: actionTypes.CHANGE_SUCCESS,
-//   payload:
-// })
-
 const mealUpdated = meal => ({
   type: actionTypes.MEAL_UPDATED,
   payload: meal,
 });
+
 const updateMealFetched = meal => ({
   type: actionTypes.UPDATE_FETCH_MEAL,
   payload: meal,
@@ -38,29 +34,23 @@ export const changeMealError = bool => (dispatch) => {
     payload: bool,
   });
 };
-export const updateMeal = meal => (dispatch) => {
+
+/**
+ * @description updates a meal
+ * @function updateMeal
+ * @param {object} meal
+ * @returns {object} response
+ */
+export const updateMeal = meal => async (dispatch) => {
   dispatch(isLoading(true));
-  return instance.put(`meals/${meal.id}`, meal).then((res) => {
+  try {
+    const response = await api(`meals/${meal.id}`, 'put', meal);
     dispatch(updateMealFetched(meal));
     dispatch(mealUpdated(meal));
-    dispatch({
-      type: actionTypes.IS_MODAL_OPENED,
-      payload: false,
-    });
-  }).catch((error) => {
-    let myError = null;
-    dispatch({
-      type: actionTypes.IS_MEAL_ERROR,
-      payload: true,
-    });
-    if (error.response) {
-      myError = (error.response.data.errorMessage) ?
-        error.response.data.errorMessage[0] : error.response.data.message;
-      dispatch(mealError(myError));
-    } else {
-      myError = 'poor internet connection';
-      dispatch(mealError(myError));
-    }
-  });
+    return response;
+  } catch (err) {
+    dispatch(mealError(err));
+    return err;
+  }
 };
 

@@ -12,6 +12,7 @@ import { logout, orderHistory } from '../../actions/';
  * @extends Component
  */
 class DashboardPage extends Component {
+
   /**
    * @method componentDidMount
    * @param {void} 
@@ -20,6 +21,7 @@ class DashboardPage extends Component {
   componentDidMount() {
     this.props.orderHistory();
   }
+
   /**
    * handle pagination click events
    * @method handlePageChange
@@ -32,6 +34,7 @@ class DashboardPage extends Component {
     const currentPage = localStorage.getItem('currentOrderPage');
     this.props.orderHistory(currentPage);
   }
+
   /**
    * renders pagination button
    * @method renderPagination
@@ -55,6 +58,11 @@ class DashboardPage extends Component {
     />
   )
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     return (
       <div className='admin-form-container'>
@@ -78,6 +86,7 @@ DashboardPage.propTypes = {
   logout: PropTypes.func.isRequired,
   orderHistory: PropTypes.func.isRequired,
 };
+
 const mapstatetoProps = ({ user, orderHistories }) => ({
   role: user.user.role,
   orders: orderHistories.orderHistory,
@@ -86,5 +95,6 @@ const mapstatetoProps = ({ user, orderHistories }) => ({
   pageSize: orderHistories.pagination.pageSize,
   totalCount: orderHistories.pagination.totalCount,
 });
+
 export default connect(mapstatetoProps,
    { logout, orderHistory })(DashboardPage);

@@ -1,7 +1,17 @@
 import { Menu, Meal } from '../models';
 
+/**
+ * @class
+ */
 class MenuController {
 
+  /**
+   * Create Menu
+   * @description allows caterers to create a menu
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static createMenu(req, res) {
     const { mealId, date } = req.body;
     const data = new Date(date);
@@ -32,6 +42,14 @@ class MenuController {
       }
     });
   }
+
+  /**
+   * Get a Menu
+   * @description get a menu
+   * @param {string} req - request
+   * @param {object} res - object response
+   * @returns {object} - response to be sent to client
+   */
   static getMenu(req, res) {
     const date = req.query.date || new Date().setHours(0, 0, 0, 0);
     Menu

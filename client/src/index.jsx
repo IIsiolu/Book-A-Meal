@@ -13,12 +13,19 @@ import './static/css/index.css';
 
 const store = configureStore();
 
+// verifies token in local storage
 if (verifyToken(localStorage.myUserT)) {
   const user = localStorage.getItem('myUserT');
   const decode = jwt(user);
   store.dispatch(setUser(decode));
 }
-
+/**
+ * @summary method to render a React element into the DOM in the
+ *  supplied container and return a reference to the component
+ * @param {JSX} BrowserRouter - uses html5 history api to keep UI in sync with
+ * URL
+ * @param {function}
+ */
 ReactDOM.render(
   <Provider store={store} >
     <BrowserRouter>

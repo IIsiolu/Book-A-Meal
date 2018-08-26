@@ -70,6 +70,12 @@ export const todayMenuState = {
   success: false,
   error: null,
   data: {},
+  pagination: {
+    page: 0,
+    pageCount: 0,
+    pageSize: 0,
+    totalCount: 0,
+  },
 };
 
 export const orderState = {
@@ -80,4 +86,8 @@ export const orderState = {
   createdOrders: [],
   myOrders: [],
   error: null,
+};
+
+export const profileState = {
+  userInfo: {},
 };

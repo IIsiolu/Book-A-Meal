@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  */
 const TopNav = ({ logout }) => (
   <div className="top-nav stay-top">
-    <h2 className="logo">Book-A-Meal</h2>
+    <h2 className="logo capitalize">book-a-meal</h2>
     <div className="right-nav">
       <Link className="nav-text" to="/profile">Profile</Link>
       <Link className="nav-text" to="/">Dashboard</Link>

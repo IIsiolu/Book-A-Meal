@@ -44,9 +44,9 @@ export const changeSuccessState = bool => (dispatch) => {
 export const deleteMeal = id => async (dispatch) => {
   dispatch(isLoading(true));
   try {
-    await api(`meals/${id}`, 'delete');
+    const response = await api(`meals/${id}`, 'delete');
     dispatch(deleteMealFetched(id));
-    dispatch(mealDeleted(id));
+    dispatch(mealDeleted(response));
   } catch (err) {
     dispatch(deleteMealError(err));
   }

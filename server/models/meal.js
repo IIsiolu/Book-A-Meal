@@ -29,13 +29,30 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  }, {});
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input User Id',
+        },
+        isInt: {
+          args: true,
+          msg: 'userId must be a valid number',
+        },
+      },
+    },
+  }, { paranoid: true });
   Meal.associate = (models) => {
     Meal.hasMany(models.Order, {
       foreignKey: 'mealId',
     });
     Meal.hasMany(models.Menu, {
       foreignKey: 'mealId',
+    });
+    Meal.belongsTo(models.User, {
+      foreignKey: 'userId',
     });
     // associations can be defined here
   };

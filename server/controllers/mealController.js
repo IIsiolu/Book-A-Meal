@@ -6,15 +6,14 @@ import { checkPagination, paginatedData } from '../helpers/paginate';
  * @class
  */
 class MealController {
-
   /**
-   * Create Meal
-   * @description allows caterers to create a meal
+   * @summary method to allows caterers to create a meal
    * @param {string} req - request
    * @param {object} res - object response
    * @returns {object} - response to be sent to client
    */
   static createMeal(req, res) {
+    const userId = req.user.id;
     const {
       name, description, price, image,
     } = req.body;
@@ -22,41 +21,46 @@ class MealController {
       .findOrCreate({
         where: { name },
         defaults: {
-          description, price, image,
+          description, price, image, userId,
         },
       })
       .spread((meal, created) => {
+        // created becomes null if meal is not created
         if (!created) {
           return res.status(409).json({
             success: false,
-            message: 'Meal already exist',
+            message: 'Meal name already exist',
           });
         }
         return res.status(201).json({
-          success: false,
+          success: true,
           data: meal,
         });
-      }).catch(() => {
+      }).catch((err) => {
         res.status(500).send({
           success: false,
           message: 'failed to create meal',
+          err,
         });
       });
   }
 
   /**
    * All Meals
-   * @description allows caterers to get all meals in Database
+   * @description method to allow caterers get all meals in Database
    * @param {string} req - request
    * @param {object} res - object response
    * @returns {object} - response to be sent to client
    */
   static allMeals(req, res) {
+    // err
     const { page, limit, offset } = checkPagination(req);
+    // find and count the total number of items in DB
     Meal
       .findAndCountAll({
         limit,
         offset,
+        paranoid: true,
         order: [['id', 'DESC']],
       })
       .then((meal) => {
@@ -72,7 +76,42 @@ class MealController {
           data: meal.rows,
         });
       })
-      .catch(error => res.status(400).json('unexpected error'));
+      .catch(() => res.status(500).json('unexpected error'));
+  }
+
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @returns {object} res
+   */
+  static catererMeals(req, res) {
+    const { page, limit, offset } = checkPagination(req);
+    // find and count the total number of items in DB
+    Meal
+      .findAndCountAll({
+        where: {
+          userId: req.user.id,
+        },
+        limit,
+        offset,
+        paranoid: true,
+        order: [['id', 'DESC']],
+      })
+      .then((meal) => {
+        if (meal.count === 0) {
+          return res.status(404).send({
+            success: false,
+            message: 'Meal is empty',
+          });
+        }
+        res.status(200).json({
+          success: true,
+          pagination: paginatedData(page, limit, meal),
+          data: meal.rows,
+        });
+      })
+      .catch(() => res.status(500).json('unexpected error'));
   }
 
   /**
@@ -91,24 +130,24 @@ class MealController {
       },
     }).then((meal) => {
       const userInfo = Object.assign({}, meal);
-      meal.update({ ...userInfo, ...req.body }).then((newMeal) => {
+      meal.update({ ...userInfo, ...req.body }).then(() => {
         res.status(200).json({
           success: true,
           message: 'updated',
         });
-      }).catch(err => res.status(400).json({
+      }).catch(() => res.status(400).json({
         success: false,
         message: 'fail to modify meal, Invalid input',
       }));
     })
-      .catch(error => res.status(404).json({
+      .catch(() => res.status(404).json({
         success: false,
-        message: ' No meal with that ID',
+        message: 'No meal with that ID',
       }));
   }
 
   /**
-   * Aldelete Meal
+   * Allow caterers delete Meal
    * @description allows caterers to delete a meals in Database
    * @param {string} req - request
    * @param {object} res - object response
@@ -122,11 +161,11 @@ class MealController {
     })
       .then((meal) => {
         if (meal) {
-          meal.destroy().then(meal =>
+          meal.destroy().then(() =>
             res.status(200).json({
               success: true,
               message: 'meal successfully deleted!',
-            })).catch((err) => {
+            })).catch(() => {
             res.status(500).send({
               success: false,
               message: 'fail to delete meal',
@@ -139,10 +178,11 @@ class MealController {
           });
         }
       })
-      .catch(err => res.status(400).json({
+      .catch(() => res.status(400).json({
         success: false,
         message: 'Invalid Parameter In Url',
       }));
   }
 }
+
 export default MealController;

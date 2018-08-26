@@ -5,10 +5,16 @@ require('dotenv').config();
 
 /** Class Auth */
 class Auth {
-
+  /**
+   * @description verifies token
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static verifyToken(req, res, next) {
-    //  token
-    const token = req.body.token || req.query.token || req.headers.authorization;
+    const token = req.body.token || req.query.token
+     || req.headers.authorization;
     if (token) {
       const secret = process.env.SECRET;
       jwt.verify(token, secret, (err, data) => {
@@ -17,7 +23,6 @@ class Auth {
             message: 'Authentication failed',
           });
         }
-        console.log({ data });
         req.user = data;
         next();
       });
@@ -28,8 +33,18 @@ class Auth {
       });
     }
   }
+
+  /**
+   * @description verifies token
+   * @function verifyAdmin
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static verifyAdmin(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers.authorization;
+    const token = req.body.token || req.query.token ||
+     req.headers.authorization;
     if (token) {
       const secret = process.env.SECRET;
       jwt.verify(token, secret, (err, data) => {
@@ -50,6 +65,5 @@ class Auth {
     }
   }
 }
-
 
 export default Auth;

@@ -41,7 +41,7 @@ export const createMeal = meal => async (dispatch) => {
     const response = await api('meals', 'post', meal);
     const { data } = response;
     dispatch(mealAdded(data));
-    return data;
+    return response;
   } catch (err) {
     dispatch(mealError(err));
     return err;

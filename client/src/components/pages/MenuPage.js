@@ -41,7 +41,7 @@ class MenuPage extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.props.fetchMeals();
+    this.props.fetchMeals(this.props.role);
   }
   
   /**
@@ -151,7 +151,7 @@ class MenuPage extends Component {
     const page = selected + 1;
     localStorage.setItem('currentMenuPage', page);
     const currentPage = localStorage.getItem('currentMenuPage');
-    this.props.fetchMeals(currentPage);
+    this.props.fetchMeals(this.props.role, currentPage);
   }
 
   /**
@@ -180,7 +180,7 @@ class MenuPage extends Component {
 // meal cards
   mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
     (this.props.allMeals.map((meal, key) =>
-     <MealCard addedMenus={this.addedMenus} meal={meal} key={key} /> ))
+     <MealCard addedMenus={this.addedMenus} menus={this.props.menus} meal={meal} key={key} /> ))
     :(this.renderNoMeal())) : (this.renderNoMeal());
 
   /**

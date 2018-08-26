@@ -32,6 +32,16 @@ export const connectin = loading => ({
   payload: loading,
 });
 
+export const editUserProfile = user => ({
+  type: actionTypes.EDIT_USER_PROFILE,
+  payload: user
+})
+
+export const editProfilErr = err => ({
+  type: actionTypes.EDIT_PROFILE_ERR,
+  payload: err
+})
+
 /**
  * @description login user to the app
  * @param {object} credentials - valid user details
@@ -87,4 +97,13 @@ export const signup = credentials => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.clear();
   dispatch(userLoggedIn({}));
+};
+
+export const editProfile = credentials => async (dispatch) => {
+  try {
+    const response = await api('profile', 'post', credentials);
+    dispatch(editUserProfile(response));
+  } catch (err) {
+    dispatch(editProfilErr(err));
+  }
 };

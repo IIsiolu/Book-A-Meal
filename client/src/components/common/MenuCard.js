@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * @param {isOverlayOpened} isOverlayOpened - bool
  * @returns {JSX} jsx
  */
-const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) =>
+const MenuCard = ({ addMealToOrder, meal, isOverlayOpened, placedOrders }) =>
   (
     <div className="mealoption-container">
       <div className="cardt">
@@ -28,8 +28,9 @@ const MenuCard = ({ addMealToOrder, meal, isOverlayOpened }) =>
         <span className="price"><sup>&#8358;</sup>{meal.price}</span>
         <button
           onClick={() => addMealToOrder(meal)}
-          className="order-now mous"
-        > Add to Cart
+          className="order-now mous capitalize"
+        >{placedOrders.some((item) => meal.id === item.mealId) === true ?
+           'added to cart' : 'add to cart'}
         </button>
       </div>
     </div>

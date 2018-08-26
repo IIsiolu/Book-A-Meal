@@ -10,7 +10,6 @@ const secret = process.env.SECRET;
  * @class
  */
 class UserController {
-
   /**
   * Sign up user
   * @description sign up user with valid details
@@ -46,7 +45,7 @@ class UserController {
           success: true,
           data: createdUser,
         });
-      }).catch((err) => {
+      }).catch(() => {
         res.status(500).send({
           success: false,
           message: 'User cannot be created',
@@ -76,7 +75,6 @@ class UserController {
             const token = jwt.sign({
               id: check.id,
               role: check.role,
-              firstname: check.firstname,
             }, secret, { expiresIn: '500h' });
             return res.status(200).json({
               success: true,
@@ -103,7 +101,44 @@ class UserController {
       });
     }
   }
-  
+
+  /**
+   * @function userProfile
+   * @param {string} req
+   * @param {object} res
+   * @returns {object} res
+   */
+  static async userProfile(req, res) {
+    try {
+      const profile = await User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      });
+      if (profile) {
+        const userData = {
+          firstname: profile.firstname,
+          lastname: profile.lastname,
+          email: profile.email,
+        };
+        res.status(200).send({
+          success: true,
+          data: userData,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: 'user does not exist',
+        });
+      }
+    } catch (err) {
+      return res.status(500).send({
+        success: false,
+        message: 'error updating user',
+      });
+    }
+  }
+
   /**
   * Edit user
   * @description Edit user
@@ -120,19 +155,16 @@ class UserController {
       });
       if (check) {
         const userInfo = Object.assign({}, check);
-        check.update({...userInfo, ...req.body}).then((update) => {
+        check.update({ ...userInfo, ...req.body }).then((update) => {
           res.status(200).send({
             success: true,
-            data: update
-          })
-        }).catch((err) => {
-          return res.status(400).send({
-            success: false,
-            error: err,
-            message: 'user update failed'
-          })
-        })
-
+            data: update,
+          });
+        }).catch(err => res.status(400).send({
+          success: false,
+          error: err,
+          message: 'user update failed',
+        }));
       } else {
         res.status(404).json({
           success: false,
@@ -142,8 +174,8 @@ class UserController {
     } catch (err) {
       return res.status(500).send({
         success: false,
-        message: err
-      })
+        message: 'error updating user',
+      });
     }
   }
 
@@ -174,4 +206,5 @@ class UserController {
     }
   }
 }
+
 export default UserController;

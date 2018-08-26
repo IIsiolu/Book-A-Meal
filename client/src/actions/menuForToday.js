@@ -15,13 +15,16 @@ export const getMenuError = menu => ({
  * @description gets menu for the day
  * @function menuForToday
  * @param {string} date
+ * @param {number} page
+ * @param {number} limit
+ * @param {number} offset
  * @returns {void}
  */
-export const menuForToday = date => async (dispatch) => {
+export const menuForToday = (date, page, limit, offset) => async (dispatch) => {
   try {
-    const response = await api(`menu?date=${date}`);
-    const { data } = response;
-    dispatch(getMenu(data));
+    const response = await api(`menu?date=${date}&page=${page}
+    &limit=${limit}&offset=${offset}`, 'get');
+    dispatch(getMenu(response));
   } catch (err) {
     dispatch(getMenuError(err));
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
@@ -32,13 +33,23 @@ class TodayMenuPage extends Component {
    */
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.props.menuForToday(this.todaysDate());
+  }
+
+  todaysDate = () => {
     const today = new Date();
     const day = today.getDate() < 10 ? 
     `0${today.getDate()}` : today.getDate();
     const month = today.getMonth()+1 < 10 ? 
     `0${today.getMonth()+1}` : today.getMonth()+1;
-    const todaysDate = `${today.getFullYear()}-${month}-${day}`;
-    this.props.menuForToday(todaysDate);
+    return `${today.getFullYear()}-${month}-${day}`;
+  }
+
+  handlePageChange = ({selected}) => {
+    const page = selected + 1;
+    localStorage.setItem('currentUserOPage', page);
+    const currentPage = localStorage.getItem('currentUserOPage');
+    this.props.menuForToday(this.todaysDate(), currentPage);
   }
 
   /**
@@ -74,7 +85,6 @@ class TodayMenuPage extends Component {
         alreadyExist? '' : this.props.addMealToOrder(meal)
       )
     }else{
-      console.log(meal)
       return this.props.addMealToOrder(meal)
     }
   }
@@ -88,9 +98,10 @@ class TodayMenuPage extends Component {
   menuCards = () => (
     this.props.menus.map((meal, key) => (
       meal.Meal !== null ? <MenuCard key={key}
-       meal={meal.Meal} addMealToOrder=
-      {this.addMealToOrder} isOverlayOpened=
-      {this.props.isOverlayOpened} /> : ''
+       meal={meal} addMealToOrder={this.addMealToOrder}
+        isOverlayOpened={this.props.isOverlayOpened}
+        placedOrders={this.props.placedOrders}
+         /> : ''
       )
     )
   );
@@ -115,15 +126,15 @@ class TodayMenuPage extends Component {
    * @returns {jsx}
    */
   renderNoMenu = () => (
-    <div className='no-menu-container'>
-      MENU HAS NOT BEEN SET FOR TODAY
+    <div className='no-menu-container capitalize'>
+      menu has not been set for today
     </div>
   )
 
   //   called when there is no order
   noOrder = () => (
     <div>
-      <h1>NO ORDER PLACED</h1>
+      <h1 className="capitalize">no order placed</h1>
     </div>
   )
 
@@ -153,6 +164,29 @@ class TodayMenuPage extends Component {
       isToggled: !this.state.isToggled
     })
   }
+
+  /**
+   * displays pagination buttons
+   * @function renderPagination
+   * @returns {JSX} jsx
+   */
+  renderPagination = () => (
+    <ReactPaginate 
+      previousLabel={<i className="fa fa-chevron-left" />}
+      nextLabel={<i className="fa fa-chevron-right" />}
+      breakLabel={<a href="">...</a>}
+      breakClassName={'break-me'}
+      pageCount={this.props.pageCount}
+      initialPage={this.props.page - 1}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={this.handlePageChange}
+      disableInitialCallback
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
+  );
 
   /**
    * Order drawer layout
@@ -191,7 +225,7 @@ class TodayMenuPage extends Component {
               <h4>&#8358;{this.subTotal()}</h4>
             </div>
             <div className="vat border-text">
-              <h4>VAT (5%)</h4>
+              <h4 className="capitalize">vat (5%)</h4>
               <h4>&#8358;{this.vat()}</h4>
             </div>
             <div className="total-orders border-text">
@@ -239,7 +273,7 @@ class TodayMenuPage extends Component {
       <div className="container">
         <div className="top-content2">
           <div className="topblur">
-            <h1 className="top-content-h">THE MENU</h1>
+            <h1 className="top-content-h capitalize">the menu</h1>
             <p className="top-content-line">
               _____________________________
             </p>
@@ -263,6 +297,7 @@ class TodayMenuPage extends Component {
           addMealToOrder={this.addMealToOrder}  />
         }
         </div>
+        {this.props.isMenu && this.renderPagination()}
         <Footer />
       </div>
     );
@@ -286,6 +321,10 @@ const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
   isOrderError: order.isError,
   orderError: order.error,
   orderSuccessful: order.success,
+  page: menuForToday.pagination.page,
+  pageCount: menuForToday.pagination.pageCount,
+  pageSize: menuForToday.pagination.pageSize,
+  totalCount: menuForToday.pagination.totalCount,
 });
 
 export default connect(mapStateToProps, { logout, menuForToday,

@@ -1,12 +1,12 @@
 
 import isModalOpened from './isModalOpened';
-import isOverlayOpened from './detailModal';
+import isOverlayOpened from './overlayModal';
 
 export { userOrders } from './userOrders';
 
 export { orderHistory } from './OrderHistory';
 
-export { logIn, signup, logout, signupState } from './auth';
+export { logIn, signup, logout, signupState, editProfile } from './auth';
 
 export {
   changeSuccessState, deleteMeal,

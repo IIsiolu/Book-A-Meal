@@ -40,7 +40,7 @@ class MealPage extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.props.fetchMeals()
+    this.props.fetchMeals(this.props.role);
   }
 
   // function to upload Image
@@ -95,7 +95,7 @@ class MealPage extends Component {
     const page = selected + 1;
     localStorage.setItem('currentMealPage', page);
     const currentPage = localStorage.getItem('currentMealPage');
-    this.props.fetchMeals(currentPage);
+    this.props.fetchMeals(this.props.role, currentPage);
   }
 
   /**

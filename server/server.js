@@ -4,13 +4,11 @@ import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
 import webpack from 'webpack';
-import io from 'socket.io';
 import cors from 'cors';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 import { userRouter, mealRouter, menuRouter, orderRouter } from './routes';
-import socket from './socket';
 
 const swaggerUi = require('swagger-ui-express');
 
@@ -18,9 +16,9 @@ const swaggerDocument = require('../swagger.json');
 
 // Instance of the express app
 const app = express();
-// const io = require('socket.io')(app);
 
 export default app;
+
 // Request logger
 app.use(morgan('dev'));
 
@@ -32,10 +30,6 @@ app.use(cors());
 
 app.use('/', express.static(path.resolve(__dirname, '/dist')));
 app.use('*', express.static(path.resolve(__dirname, '/dist')));
-
-
-// app.use(express.static(path.join(__dirname, 'client/public')));
-// app.use(express.static(('client/src')));
 
 app.use('/api/v1', userRouter);
 app.use('/api/v1', mealRouter);
@@ -71,6 +65,7 @@ app.delete('*', (req, res) => {
     message: 'That url does not exist on this server',
   });
 });
+
 app.put('*', (req, res) => {
   res.status(404).send({
     message: 'That url does not exist on this server',
@@ -79,8 +74,4 @@ app.put('*', (req, res) => {
 
 const port = process.env.PORT || 7000;
 
-const server = app.listen(port);
-const ioObj = io.listen(server);
-socket(ioObj);
-
-console.log(`Find me on http://localhost:${port}`);
+app.listen(port);

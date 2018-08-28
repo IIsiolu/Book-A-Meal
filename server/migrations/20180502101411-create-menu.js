@@ -6,24 +6,31 @@ module.exports = {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY                    
+      type: Sequelize.DATEONLY,
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     mealId: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
-    }
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Menus')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Menus'),
 };

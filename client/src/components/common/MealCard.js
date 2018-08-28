@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * @param {object} addedMenus
  * @returns {JSX} jsx
  */
-const MealCard = ({ meal, addedMenus }) => (
+const MealCard = ({ meal, addedMenus, menus }) => (
   <div className="m-c-container">
     <div className="m-c-imgcontainer">
       <img src={meal.image} alt="my food" />
@@ -21,7 +21,7 @@ const MealCard = ({ meal, addedMenus }) => (
       <p>{meal.description}</p>
     </div>
     <div className="add-menu">
-      <button onClick={() => addedMenus(meal)} > Add To Menu </button>
+      <button className="capitalize" onClick={() => addedMenus(meal)} > {menus.some((item) => meal.id === item.id) === true ? 'added to menu' : 'add to menu'}  </button>
     </div>
   </div>
 );

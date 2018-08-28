@@ -14,14 +14,11 @@ class FoodModal extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  findMeal = (menu, mealId) => (
-    menu.id == mealId
-  )
-
   static getDerivedStateFromProps(props, state){
     const selectedMeal = props.menus.find((menu) => (
-      menu.mealId == props.overlayId
+      menu.id == props.overlayId
     ))
+    console.log('>>>>>>>>>>>>>>',props.menus)
     return {
       data: selectedMeal
     }
@@ -57,8 +54,9 @@ class FoodModal extends React.Component {
 
   render() {
     const {data} = this.state
-    let info = this.state.data.Meal
     console.log(this.state)
+    let info = this.state.data
+   
     return (
       <div>
         <Modal
@@ -72,11 +70,11 @@ class FoodModal extends React.Component {
           <div className='modal-box'>
             <div className="fancybox">
               <img className='fancybox-img'
-               src={this.state.data.Meal.image} alt="food image" />
+               src={info.image} alt="food image" />
             </div>
             <div className="modal-description">
               <div className="order-info">
-                <h2>FOOD DETAILS</h2>
+                <h2 className="capitalize">food details</h2>
                 <h1>{info.name}</h1>
                 <div className="rect"></div>
                 <div className="description">
@@ -89,8 +87,9 @@ class FoodModal extends React.Component {
                   <h4>{info.price}</h4>
                 </div>
                 <div onClick={()=> 
-                  this.props.addMealToOrder(info)} className="order-btn">
-                  ADD TO CART
+                  this.props.addMealToOrder(info)} className="order-btn capitalize">
+                 {this.props.placedOrders.some((item) => info.id === item.mealId) === true ?
+                    'added to cart' : 'add to cart'}
                 </div>
 
               </div>

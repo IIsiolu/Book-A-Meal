@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  */
 export const OrderNav = ({ logout }) => (
   <div className="top-nav stay-top">
-    <h2 className="logo">Book-A-Meal</h2>
+    <h2 className="logo capitalize">book-a-meal</h2>
     <div className="right-nav">
       <Link className="nav-text" to="/">Home</Link>
       <Link className="nav-text" to="/home">Menu</Link>
@@ -28,7 +28,7 @@ export const OrderNav = ({ logout }) => (
  */
 export const LandingNav = ({ isAuthenticated, logout }) => (
   <div className="top-nav landing-nav">
-    <h2 className="logo">Book-A-Meal</h2>
+    <h2 className="logo capitalize">book-a-meal</h2>
 
     {
       isAuthenticated ? (
@@ -55,7 +55,7 @@ export const LandingNav = ({ isAuthenticated, logout }) => (
  */
 export const MenuNav = ({ logout }) => (
   <div className="top-nav">
-    <Link className="logo" to="/">Book-A-Meal</Link>
+    <Link className="logo capitalize" to="/">Book-a-meal</Link>
     <div className="right-nav">
       <Link className="nav-text" to="/">Home</Link>
       <Link className="nav-text" to="/orders">Orders</Link>

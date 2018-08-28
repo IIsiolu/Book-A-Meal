@@ -1,10 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import * as actionsTypes from '../actions/actionsTypes';
 import { userState } from './initState';
-// loading state
-// most suitable things to have in a token
-// create a general initial state
-// change loading to isloading
 
 /**
  * Authentication reducer

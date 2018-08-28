@@ -19,7 +19,7 @@ class DashboardPage extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.props.orderHistory();
+    this.props.orderHistory(this.props.role);
   }
 
   /**

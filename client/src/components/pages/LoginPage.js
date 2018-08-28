@@ -37,7 +37,7 @@ class LoginPage extends Component {
         <div className="bg-img">
           <div className="content contentBox">
             <div className="info">
-              <h2 className="info-h">ALREADY HAVE AN ACCOUNT?</h2>
+              <h2 className="info-h capitalize">already have an account?</h2>
               <p className="info-p">Use your email and
                 password to login below</p>
               <LoginForm submit={this.submit} {...this.props} />

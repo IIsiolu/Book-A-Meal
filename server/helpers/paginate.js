@@ -1,3 +1,12 @@
+/**
+ * @summary paginated result sent to the client
+ * pageCount = pages that can be displayed
+  * pagesize=total item in current page totalCount=total item in DB
+ * @param {number} page - current page,
+ * @param {number} limit - start from
+ * @param {object} result - paginated data
+ * @returns {object} pagination - paginated data
+ */
 const paginatedData = (page, limit, result) =>
   ({
     pagination: {
@@ -8,6 +17,12 @@ const paginatedData = (page, limit, result) =>
     },
   });
 
+  /**
+   * @summary method to validates pagination from query
+   * @param {string} req - http request
+   * @returns {object} pagination values
+   *
+   */
 const checkPagination = (req) => {
   // converts to decimal
   const page = Number.isInteger(parseInt(req.query.page, 10))

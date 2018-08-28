@@ -6,12 +6,12 @@ const menuAdded = mealId => ({
   payload: mealId,
 });
 
-const createdMenu = menu => ({
+export const createdMenu = menu => ({
   type: actionTypes.MENU_CREATED,
   payload: menu,
 });
 
-const menuError = error => ({
+export const menuError = error => ({
   type: actionTypes.MENU_ERROR,
   payload: error,
 });
@@ -65,8 +65,7 @@ export const createMenu = (menus, date) => async (dispatch) => {
 
   try {
     const response = await api('menu', 'post', params);
-    const { data } = response;
-    dispatch(createdMenu(data));
+    dispatch(createdMenu(response));
   } catch (err) {
     dispatch(menuError(err));
   }

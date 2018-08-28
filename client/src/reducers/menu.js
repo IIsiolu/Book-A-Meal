@@ -8,11 +8,6 @@ const menu = (state = menuState, action) => {
         ...state,
         menus: [...state.menus, action.payload],
       };
-    case actionsTypes.REMOVE_A_MEAL:
-      return {
-        ...state,
-        error: action.payload,
-      };
     case actionsTypes.REMOVE_A_MENU_ITEM:
       return {
         ...state,

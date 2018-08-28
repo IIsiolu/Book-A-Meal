@@ -26,19 +26,23 @@ class SignupForm extends Component {
   }
     
   
-  onChange =(e) => {
+  onChange = (e) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
   }
+
+  check = (check) => {
+    console.log(check.target.checked)
+    check.target.checked ? this.setState({
+      data: {...this.state.data, role: 'admin'}
+    }) : this.setState({
+      data: {...this.state.data, role: 'user'}
+    })
+  }
+  
   onSubmit =(e) => {
     e.preventDefault();
-    if(this.state.data.role === 'admin'){
-      console.log('can be signed in')
-      return this.setState({
-       errors: {...this.state.errors, right: 'you have to be a super admin'}
-      })
-    }
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if(Object.keys(errors).length==0){
@@ -113,10 +117,18 @@ class SignupForm extends Component {
             placeholder='example@example.com' />
             {errors.lastname && <InlineError text={errors.lastname} /> }
         </Form.Field>
+        <Form.Field>
+          <input
+            className="ui checkbox"
+            type="checkbox"
+            onChange={this.check}
+            name="role" />
+          <label>Signup As A Caterer</label>
+        </Form.Field>
         { errors.right && <Message negative>
           <Message.Header> Something went wrong </Message.Header>
           <p>{errors.right} </p>
-      </Message>}
+        </Message>}
         <div className="log-sign">
           <Button
             type="submit"

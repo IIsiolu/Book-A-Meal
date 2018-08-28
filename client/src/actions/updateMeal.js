@@ -16,7 +16,7 @@ const updateMealFetched = meal => ({
   payload: meal,
 });
 
-const mealError = error => ({
+const mealUpdateError = error => ({
   type: actionTypes.MEAL_UPDATE_ERROR,
   payload: error,
 });
@@ -46,10 +46,10 @@ export const updateMeal = meal => async (dispatch) => {
   try {
     const response = await api(`meals/${meal.id}`, 'put', meal);
     dispatch(updateMealFetched(meal));
-    dispatch(mealUpdated(meal));
+    dispatch(mealUpdated(response));
     return response;
   } catch (err) {
-    dispatch(mealError(err));
+    dispatch(mealUpdateError(err));
     return err;
   }
 };

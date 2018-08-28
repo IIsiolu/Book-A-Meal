@@ -6,12 +6,12 @@ const addToOrder = meal => ({
   payload: meal,
 });
 
-const createdOrder = menu => ({
+export const createdOrder = meal => ({
   type: actionTypes.ORDER_CREATED,
-  payload: menu,
+  payload: meal,
 });
 
-const orderError = error => ({
+export const orderError = error => ({
   type: actionTypes.ORDER_ERROR,
   payload: error,
 });
@@ -72,7 +72,7 @@ export const errState = bool => dispatch => (
  */
 export const requestForOrder = orders => async (dispatch) => {
   try {
-    const response = await api('orders', 'post', orders);
+    const response = await api('orders', 'post', { orders });
     const { data } = response;
     dispatch(createdOrder(data));
   } catch (err) {

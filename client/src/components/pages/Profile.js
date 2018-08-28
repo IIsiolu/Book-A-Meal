@@ -4,10 +4,16 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signup, signupState, logout } from '../../actions';
+import { editProfile, signupState, logout } from '../../actions';
 import { TopNav } from '../common'
 
 class Profile extends Component {
+
+  state = {
+    data: {
+      
+    }
+  }
 
   componentDidUpdate(){
     if(this.props.isSuccess === true) {
@@ -18,9 +24,14 @@ class Profile extends Component {
   }
 
   submit = (data) => (
-    this.props.signup(data, this.props.history)
+    this.props.editProfile(data, this.props.history)
    )
 
+  onChange =(e) => (
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    })
+  )
   render() {
     return (
       <div className='admin-form-container'>
@@ -37,8 +48,17 @@ class Profile extends Component {
               <h2>Edit profile</h2>
             </div>
             <div className="form-info-body">
-              
-            
+              <div className="user-profile-body">
+                <div className="profile-row">
+                  <h3>First Name</h3>
+                  <input type="text" />
+                </div>
+                <div className="profile-row">
+                  <h3>Last Name</h3>
+                  <input type="text" />
+                </div>
+                <button>Submit</button>
+              </div>
             </div>
           </div>
         </div>
@@ -61,5 +81,5 @@ const mapStateToProps = state => ({
   role: state.user.user.role
 });
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, { signup,
+export default connect(mapStateToProps, { editProfile,
    signupState, logout })(Profile);

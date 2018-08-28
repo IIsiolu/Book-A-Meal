@@ -54,7 +54,7 @@ class SignupPage extends Component {
     return (
       <div id="signupPage">
         <div className="top-nav landing-nav">
-          <Link className="logo" to="/">Book-A-Meal</Link>
+          <Link className="logo capitalize" to="/">book-a-meal</Link>
           <div className="right-nav">
             <Link className="nav-text" to="/login">Login</Link>
           </div>
@@ -62,7 +62,7 @@ class SignupPage extends Component {
         <div className="bg-img">
           <div className="content contentBox">
             <div className="info">
-              <h2 className="info-h">SIGN UP</h2>
+              <h2 className="info-h capitalize">sign up</h2>
               <p className="info-p">Sign up to your account</p>
               <SignupForm role={'user'} submit={this.submit}
                 {...this.props} />

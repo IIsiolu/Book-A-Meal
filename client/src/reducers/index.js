@@ -24,7 +24,7 @@ export default combineReducers({
   menu,
   menuForToday,
   order,
-  isOverlayOpened,
   orderHistories,
   userOrders,
+  isOverlayOpened,
 });

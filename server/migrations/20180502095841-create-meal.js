@@ -6,33 +6,44 @@ module.exports = {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
     name: {
       allowNull: false,
-      type: Sequelize.STRING
-      
+      type: Sequelize.STRING,
+
     },
     description: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     price: {
       type: Sequelize.DOUBLE,
-      allowNull: false
+      allowNull: false,
     },
     image: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
-    }
+      type: Sequelize.DATE,
+    },
+    deletedAt: {
+      allowNull: true,
+      type: Sequelize.DATE,
+    },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Meals')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Meals'),
 };

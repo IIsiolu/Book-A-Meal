@@ -36,7 +36,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
             <span>m</span>
             <span>e</span>
           </h1>
-          <h1>COOK WHAT ?</h1>
+          <h1 className="capitalize">cook what ?</h1>
           <p>why not order a home made meal</p>
         </div>
       </div>
@@ -44,7 +44,7 @@ const LandingPage = ({ isAuthenticated, logout }) => (
     </div>
     <div className="welcome">
       <div className="welcome-content">
-        <h1 className="best">WE ARE THE BEST!</h1>
+        <h1 className="best capitalize">we are the best!</h1>
         <p>We exclusively use sun ripened whole grains to
            provide you with a source of power, stamina and health! Spoil
             yourself with our breads natural flavor! We use only the finest

@@ -77,8 +77,6 @@ class MealOptions extends Component {
     const nameRegex = /^([a-z']+(-| )?)+$/i
     if (!nameRegex.test(data.name) || !data.name) errors.name = 'Invalid name';
     if (!Number.isInteger(data.price)) errors.price = 'invalid number';
-    if(!nameRegex.test(data.description)) 
-    errors.description = 'invalid description';
     return errors
   }
 

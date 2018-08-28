@@ -1,36 +1,50 @@
 const removeChar = input => (
   input.match(/\w/g).join('')
 );
+
 const testFullname = (input) => {
   const reg = /^([a-z']+(-| )?)+$/i;
   return reg.test(input);
 };
+
 const testString = (input) => {
   const reg = /^[a-z]+$/i;
   return reg.test(input);
 };
+
+// scrap, no need for validation
 const descriptive = input => (
   input.replace(/[^a-zA-Z ]/g, '')
 );
+
 const checkDate = (input) => {
   if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
     return true;
   }
   return false;
 };
+
 const checkInt = current => (
   Number.isInteger(current)
 );
+
 const checkObj = (current) => {
-  // if(Number.isInteger(current.mealId)  Number.isInteger(current.quantity)){
-  //   check = true;
-  // }
-  const check = !!(Number.isInteger(current.mealId) && Number.isInteger(current.quantity));
-  console.log(check);
+  const check = !!(Number.isInteger(current.mealId) &&
+   Number.isInteger(current.quantity));
   return check;
 };
 
+/**
+ * @class
+ */
 class Validate {
+  /**
+   * @description validates user signup
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validateSignUp(req, res, next) {
     req.checkBody('email', 'invalid email address')
       .isEmail();
@@ -82,6 +96,13 @@ class Validate {
     next();
   }
 
+  /**
+   * @description validates user signin
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validateSignin(req, res, next) {
     req.checkBody('email', 'invalid email address')
       .isEmail();
@@ -108,6 +129,14 @@ class Validate {
     }
     next();
   }
+
+  /**
+   * @description validates meal input
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validatemealInput(req, res, next) {
     req.checkBody('name', 'input meal name').notEmpty();
     req.checkBody('description', 'input meal description').notEmpty();
@@ -126,13 +155,13 @@ class Validate {
     }
     if (!testFullname(req.body.name)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'invalid meal name input',
       });
     }
     if (isNaN(req.body.price)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'invalid meal price',
       });
     }
@@ -140,15 +169,23 @@ class Validate {
     req.body.description = descriptive(req.body.description);
     next();
   }
+
+  /**
+   * @description validates meal update
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validatemealUpdate(req, res, next) {
     if (req.body.name && !testFullname(req.body.name)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'invalid meal name',
       });
     } else if (req.body.price && isNaN(req.body.price)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'invalid meal price',
       });
     } else if (req.body.description) {
@@ -157,6 +194,13 @@ class Validate {
     next();
   }
 
+  /**
+   * @description validates user menu inputs
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validateMenuInput(req, res, next) {
     req.checkBody('mealId', 'input menu Id').notEmpty();
     req.checkBody('date', 'input menu date').notEmpty();
@@ -170,9 +214,7 @@ class Validate {
         errorMessage,
       });
       return;
-      // stop the req from proceeding
     }
-    // console.log(isArray);
     if (!Array.isArray(meal) || meal.length === 0) {
       res.status(400).send({
         success: false,
@@ -194,6 +236,14 @@ class Validate {
     }
     next();
   }
+
+  /**
+   * @description validates date
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validateDate(req, res, next) {
     if (req.query.date && !checkDate(req.query.date)) {
       return (
@@ -204,6 +254,14 @@ class Validate {
     }
     next();
   }
+
+  /**
+   * @description validates order
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static validateOrder(req, res, next) {
     req.checkBody('orders', 'input meal Orders').notEmpty();
     const cusOrders = req.body.orders;
@@ -234,22 +292,31 @@ class Validate {
 
     next();
   }
+
+  /**
+   * @description validates order update
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
   static updateOrder(req, res, next) {
     // console.log({
     //   body: req.body,
     // });
     if (req.body.mealId && isNaN(req.body.mealId)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'mealId must be a number',
       });
     } else if (req.body.quantity && isNaN(req.body.quantity)) {
       return res.status(400).send({
-        result: 'failed',
+        success: false,
         message: 'quantity must be a number',
       });
     }
     next();
   }
 }
+
 export default Validate;

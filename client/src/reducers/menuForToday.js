@@ -6,8 +6,12 @@ const menuForToday = (state = todayMenuState, action) => {
     case actionsTypes.MENU_FOR_TODAY:
       return {
         ...state,
-        menus: action.payload,
+        menus: action.payload.data,
         success: true,
+        pagination: {
+          ...state.pagination,
+          ...action.payload.pagination.pagination,
+        },
       };
     case actionsTypes.GET_MENU_ERROR:
       return {

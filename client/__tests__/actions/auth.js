@@ -15,8 +15,6 @@ const mockStore = configureMockStore(middlewares);
 window.localStorage = mockLocalStorage;
 
 describe('Auth actions', () => {
-  // beforeEach(() => moxios.install(axios));
-  // afterEach(() => moxios.uninstall(axios));
   beforeEach(() => {
     mock.reset();
   });
@@ -62,7 +60,7 @@ describe('Auth actions', () => {
       const { loginResponse, signinData } = mockData;
       const expectedActions = {
         type: USER_LOGGED_IN,
-        user: jwt(loginResponse.token),
+        payload: jwt(loginResponse.token),
       };
       const store = mockStore({});
       mock

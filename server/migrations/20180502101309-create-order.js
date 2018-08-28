@@ -4,10 +4,10 @@ module.exports = {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
     quantity: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
     status: {
       type: Sequelize.STRING,
@@ -15,26 +15,26 @@ module.exports = {
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     mealId: {
       type: Sequelize.INTEGER,
       references: {
         model: 'Meals',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     userId: {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
       },
-    }
+    },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Orders')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Orders'),
 };

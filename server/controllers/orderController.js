@@ -5,13 +5,12 @@ import { checkPagination, paginatedData } from '../helpers/paginate';
  * @class
  */
 class OrderController {
-
   /**
    * @description creates a user order
    * @method createOrder
-   * @param {string} req 
+   * @param {string} req
    * @param {object} res
-   * @returns {object} - response to be sent to the client 
+   * @returns {object} - response to be sent to the client
    */
   static createOrder(req, res) {
     const {
@@ -37,9 +36,9 @@ class OrderController {
 
   /**
    * @description modify user order
-   * @param {string} req 
+   * @param {string} req
    * @param {object} res
-   * @returns {object} 
+   * @returns {object} res
    */
   static modifyOrder(req, res) {
     Order
@@ -54,11 +53,11 @@ class OrderController {
             result: 'updated',
             message: newOrder,
           });
-        }).catch(err => res.status(400).json({
+        }).catch(() => res.status(400).json({
           result: 'failed',
           message: 'cannot create order, put a valid input',
         }));
-      }).catch(err => res.status(404).json({
+      }).catch(() => res.status(404).json({
         result: 'failed',
         message: 'No order exist with that Id',
       }));
@@ -78,6 +77,7 @@ class OrderController {
         Meal, User,
       ],
       limit,
+      paranoid: false,
       offset,
       order: [['id', 'DESC']],
     })
@@ -93,7 +93,47 @@ class OrderController {
           pagination: paginatedData(page, limit, orders),
           data: orders.rows,
         });
-      }).catch(error => res.status(500).send({
+      }).catch(() => res.status(500).send({
+        success: false,
+        message: 'failed to get all orders',
+      }));
+  }
+
+  /**
+   * @summary method to get caterer order histories
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} res
+   */
+  static CatererOrders(req, res) {
+    const { page, limit, offset } = checkPagination(req);
+    Order.findAndCountAll({
+      include: [
+        {
+          model: Meal,
+          where: {
+            userId: req.user.id,
+          },
+        }, User,
+      ],
+      limit,
+      paranoid: false,
+      offset,
+      order: [['id', 'DESC']],
+    })
+      .then((orders) => {
+        if (orders.count === 0) {
+          return res.status(404).send({
+            success: false,
+            message: 'Order is empty',
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          pagination: paginatedData(page, limit, orders),
+          data: orders.rows,
+        });
+      }).catch(() => res.status(500).send({
         success: false,
         message: 'failed to get all orders',
       }));
@@ -130,10 +170,11 @@ class OrderController {
         pagination: paginatedData(page, limit, userOrders),
         data: userOrders.rows,
       });
-    }).catch(err => res.status(500).send({
+    }).catch(() => res.status(500).send({
       success: false,
       message: 'cannot get customer orders',
     }));
   }
 }
+
 export default OrderController;

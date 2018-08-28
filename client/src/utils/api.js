@@ -8,23 +8,9 @@ import instance from './instance';
  * @param {object} obj - data to be sent
  * @returns {object} data - response
  */
-const api = async (url, method, obj) => {
+const api = async (url, method, obj = {}) => {
   try {
-    let response;
-    switch (method) {
-      case 'put':
-        response = await instance.put(url, obj);
-        break;
-      case 'post':
-        response = await instance.post(url, obj);
-        break;
-      case 'delete':
-        response = await instance.delete(url, obj);
-        break;
-      default:
-        response = await instance.get(url);
-        break;
-    }
+    const response = await instance[method](url, obj);
     const { data } = response;
     return data;
   } catch (err) {

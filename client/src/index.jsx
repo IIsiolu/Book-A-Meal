@@ -11,6 +11,7 @@ import verifyToken from './utils/verifyToken';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 import './static/css/index.css';
 
+// returns store object passed into provider
 const store = configureStore();
 
 // verifies token in local storage

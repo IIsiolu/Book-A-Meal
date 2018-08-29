@@ -102,14 +102,11 @@ class MealOptions extends Component {
     try {
       let response =await uploadImage(event.target.files[0])
       const { data } = response;
-      console.log(data)
       const fileURL = data.secure_url;
-      console.log(fileURL);
       this.setState({
         data: { ...this.state.data, image: fileURL}
      });
     } catch(err) {
-      console.log(err)
       return err
     }
   }

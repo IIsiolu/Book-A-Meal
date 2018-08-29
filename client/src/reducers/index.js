@@ -13,6 +13,11 @@ import isOverlayOpened from './isOverlayOpened';
 import orderHistories from './orderHistory';
 import userOrders from './userOrders';
 
+/**
+ * @summary turns an object whose values are different reducing functions
+ *  into a single reducing function
+ * @returns {function} combineReducers
+ */
 export default combineReducers({
   user,
   imageUpload,

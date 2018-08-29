@@ -5,18 +5,20 @@ import {
   NotFoundPage, SignupPage, LoginPage,
   DashboardPage, LandingPage, MealPage,
   TodayMenuPage, AdminSignUp, MenuPage,
-  UserOrders, Profile,
+  UserOrders,
 } from './components/pages';
 import Authenticate from './utils/Authenticate';
 import Navigate from './utils/Navigate';
 
 /**
  * stateless component
- * @summary method to render component when location matches the route path
+ * @summary method to render exact component when location matche
+ * s the route path
  * @param {string} location - The path been called
  * @returns {JSX} jsx
  */
 const App = ({ location }) => (
+  // switch allows just one route to match in a group
   <Switch>
     <Route
       location={location}
@@ -33,7 +35,6 @@ const App = ({ location }) => (
     <Route path="/menu" exact component={Authenticate(MenuPage)} />
     <Route path="/adminSignup" exact component={Authenticate(AdminSignUp)} />
     <Route path="/orders" exact component={Authenticate(UserOrders)} />
-    <Route path="/profile" exact component={Authenticate(Profile)} />
     <Route exact path="*" component={NotFoundPage} />
   </Switch>
 );

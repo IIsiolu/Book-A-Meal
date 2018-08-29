@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @class
+ * @constructor
+ */
 class OrderItem extends Component {
 
   static propTypes = {
@@ -18,12 +22,13 @@ class OrderItem extends Component {
     };
   }
 
+  // increase meal quantity
   increment = () => {
-    console.log('incrementing')
     this.props.increaseQuantity(this.props.order.mealId,
        parseInt(this.props.order.quantity)+1)
   }
 
+  // decrease meal quantity
   decrement = () => {
     let {quantity} = this.props.order;
     let {order} = this.props;
@@ -31,9 +36,9 @@ class OrderItem extends Component {
        parseInt(order.quantity)-1) : '';
   }
 
+  // handles conChange events
   onChange = (e) => {
     this.props.increaseQuantity(this.props.order.mealId, e.target.value)
-    console.log(this.state)
   }
 
   render() {

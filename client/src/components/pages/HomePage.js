@@ -36,6 +36,11 @@ class TodayMenuPage extends Component {
     this.props.menuForToday(this.todaysDate());
   }
 
+  /**
+   *@summary formats todays date
+   *@function todaysDate
+   @returns {string} date
+   */
   todaysDate = () => {
     const today = new Date();
     const day = today.getDate() < 10 ? 
@@ -45,6 +50,12 @@ class TodayMenuPage extends Component {
     return `${today.getFullYear()}-${month}-${day}`;
   }
 
+  /**
+   * @summary method to handle pagination click event
+   * @function handlePageChange
+   * @param {object} selected
+   * @returns {void}
+   */
   handlePageChange = ({selected}) => {
     const page = selected + 1;
     localStorage.setItem('currentUserOPage', page);
@@ -53,7 +64,7 @@ class TodayMenuPage extends Component {
   }
 
   /**
-   * Component life cycle triggered on every state update
+   * Component life cycle triggered after update occurs
    * @method componentDidUpdate
    * @returns {undefined}
    */
@@ -311,7 +322,7 @@ TodayMenuPage.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = ({ user, menuForToday, order, isOverlayOpened }) => ({
+const mapStateToProps = ({ menuForToday, order, isOverlayOpened }) => ({
   menus: menuForToday.menus,
   isMenu: menuForToday.success,
   placedOrders: order.orders,

@@ -25,15 +25,15 @@ class SignupForm extends Component {
     }
   }
     
-  
+  // handle change events
   onChange = (e) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
   }
 
+  // sets the role
   check = (check) => {
-    console.log(check.target.checked)
     check.target.checked ? this.setState({
       data: {...this.state.data, role: 'admin'}
     }) : this.setState({
@@ -41,6 +41,7 @@ class SignupForm extends Component {
     })
   }
   
+  // makes an api call once submit button is clicked
   onSubmit =(e) => {
     e.preventDefault();
     const errors = this.validate(this.state.data);
@@ -50,6 +51,7 @@ class SignupForm extends Component {
     }
   }
 
+  // validates form inputs
   validate(data) {
     const errors = {};
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -66,6 +68,11 @@ class SignupForm extends Component {
     return errors;
   }
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     const { data, errors } = this.state;
     return (

@@ -2,6 +2,10 @@ import React, { component } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
+/**
+ * @class
+ * @constructor
+ */
 class FoodModal extends React.Component {
   constructor() {
     super();
@@ -10,27 +14,28 @@ class FoodModal extends React.Component {
       data: {}
     };
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
+  /**
+   * @summary is invoked right before calling the render method, both on the
+   *  initial mount and on subsequent updates.
+   * @param {object} props 
+   * @param {object} state 
+   * @returns {object} state
+   */
   static getDerivedStateFromProps(props, state){
     const selectedMeal = props.menus.find((menu) => (
       menu.id == props.overlayId
     ))
-    console.log('>>>>>>>>>>>>>>',props.menus)
     return {
       data: selectedMeal
     }
   }
 
+  // opens the modal
   openModal() {
     this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
   }
 
   onSubmit = (e) => {
@@ -48,13 +53,7 @@ class FoodModal extends React.Component {
     });
   }
 
-  upload = (e) => {
-    this.props.imageUpload(e.target.files[0])
-  }
-
   render() {
-    const {data} = this.state
-    console.log(this.state)
     let info = this.state.data
    
     return (

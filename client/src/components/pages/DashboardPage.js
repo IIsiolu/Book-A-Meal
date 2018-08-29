@@ -32,7 +32,7 @@ class DashboardPage extends Component {
     const page = selected + 1;
     localStorage.setItem('currentOrderPage', page);
     const currentPage = localStorage.getItem('currentOrderPage');
-    this.props.orderHistory(currentPage);
+    this.props.orderHistory(this.props.role, currentPage);
   }
 
   /**

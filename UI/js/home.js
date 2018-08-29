@@ -1,5 +1,4 @@
 const order= (input, sent) => {
-	console.log(input)
 	let dom = document.createElement('div');
 	dom.id = input;
 	dom.style.width = "100px";

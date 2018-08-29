@@ -46,14 +46,6 @@ export default (sequelize, DataTypes) => {
       },
     },
   }, {
-
-    // hooks: {
-    //   afterValidate: (user, options) => {
-    //     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', typeof user.password, user.password);
-    //     user.password = bcrypt.hashSync(user.password, 10);
-    //     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', user.password);
-    //   },
-    // },
   });
   User.associate = (models) => {
     User.hasMany(models.Order, {

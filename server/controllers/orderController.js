@@ -74,10 +74,13 @@ class OrderController {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({
       include: [
-        Meal, User,
+        {
+          model: Meal,
+          paranoid: false,
+        },
+        User,
       ],
       limit,
-      paranoid: false,
       offset,
       order: [['id', 'DESC']],
     })
@@ -111,13 +114,13 @@ class OrderController {
       include: [
         {
           model: Meal,
+          paranoid: false,
           where: {
             userId: req.user.id,
           },
         }, User,
       ],
       limit,
-      paranoid: false,
       offset,
       order: [['id', 'DESC']],
     })
@@ -150,7 +153,10 @@ class OrderController {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({
       include: [
-        Meal, User,
+        {
+          model: Meal,
+          paranoid: false,
+        }, User,
       ],
       limit,
       offset,

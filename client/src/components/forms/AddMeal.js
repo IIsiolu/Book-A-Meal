@@ -4,6 +4,11 @@ import { Form, Button, Message } from 'semantic-ui-react';
 import InlineError from '../messages/inlineError';
 import swal from 'sweetalert';
 
+/**
+ * @summary creates a new meal
+ * @class
+ * @constructor
+ */
 class AddMeal extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +24,10 @@ class AddMeal extends Component {
     };
   }
   
+  /**
+   * @param {object} prevProps 
+   * @returns {void}
+   */
   componentDidUpdate(prevProps) {
     if (this.props.isImageSuccess == true) {
       this.setState({
@@ -45,17 +54,16 @@ class AddMeal extends Component {
     }
   }
 
+  // handles meal for change events
   onChange = (e) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
   }
 
+  // makes an api call after form is filled
   onSubmit =(e) => {
     e.preventDefault();
-    console.log(e);
-    
-    // console.log(this.state.data);
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if(Object.keys(errors).length==0){
@@ -63,6 +71,7 @@ class AddMeal extends Component {
     }
   }
 
+  // validates form inputs
   validate(data) {
     const errors = {};
     const nameRegex = /^([a-z']+(-| )?)+$/i
@@ -76,10 +85,16 @@ class AddMeal extends Component {
     return errors;
   }
   
+  // uploads an image to cloudinary
   upload =(e) => {
     this.props.imageUpload(e.target.files[0], 'addMeal')
   }
 
+  /**
+   * @description renders user view
+   * @method render
+   * @returns {JSX} jsx
+   */
   render() {
     const { data, errors } = this.state;
     return (

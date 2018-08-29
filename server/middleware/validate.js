@@ -301,9 +301,6 @@ class Validate {
    * @returns {object} res
    */
   static updateOrder(req, res, next) {
-    // console.log({
-    //   body: req.body,
-    // });
     if (req.body.mealId && isNaN(req.body.mealId)) {
       return res.status(400).send({
         success: false,

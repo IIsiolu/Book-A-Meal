@@ -21,7 +21,10 @@ const MealCard = ({ meal, addedMenus, menus }) => (
       <p>{meal.description}</p>
     </div>
     <div className="add-menu">
-      <button className="capitalize" onClick={() => addedMenus(meal)} > {menus.some((item) => meal.id === item.id) === true ? 'added to menu' : 'add to menu'}  </button>
+      <button className="capitalize" onClick={() => addedMenus(meal)} >
+        {menus.some(item => meal.id === item.id) === true ?
+         'added to menu' : 'add to menu'}
+      </button>
     </div>
   </div>
 );
@@ -29,6 +32,7 @@ const MealCard = ({ meal, addedMenus, menus }) => (
 MealCard.propTypes = {
   meal: PropTypes.object.isRequired,
   addedMenus: PropTypes.func.isRequired,
+  menus: PropTypes.array.isRequired,
 };
 
 export default MealCard;

@@ -7,7 +7,7 @@ import OrderRow from './OrderRow';
 class Orders extends Component {
 
   allOrders = () => (
-    this.props.orders.map((order, key) => <OrderRow key={key} order={order} /> )
+    this.props.orders.map((order, key) => <OrderRow key={key} id={key} order={order} /> )
   )
 /**
  * renders view
@@ -20,12 +20,12 @@ class Orders extends Component {
         <h2>Order Histories</h2>
         <div className='order-row-container'>
           <div className='o-row-item'>Id</div>
+          <div className='o-row-item'>Order Id</div>
           <div className='o-row-item'>Meal-Name</div>
           <div className='o-row-item'>Customer</div>
           <div className='o-row-item'>quantity</div>
           <div className='o-row-item'>Amount</div>
           <div className='o-row-item'>Order-Date</div>
-          <div className='o-row-item'>status</div>
         </div>
         {this.props.orders.length ? this.allOrders() : ''}
       </div>

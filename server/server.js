@@ -43,11 +43,14 @@ app.get('/api/v1', (req, res) => {
   });
 });
 
+// allows serving of the files emitted from webpack
 app.use(webpackMiddleware(webpack(webpackConfig), {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
 }));
 
+// allows to to add hot reloading into an
+// existing server without webpack-dev-server.
 app.use(webpackHotMiddleware(webpack(webpackConfig)));
 
 app.get('*', (req, res) => {

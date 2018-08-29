@@ -11,7 +11,6 @@ const TopNav = ({ logout }) => (
   <div className="top-nav stay-top">
     <h2 className="logo capitalize">book-a-meal</h2>
     <div className="right-nav">
-      <Link className="nav-text" to="/profile">Profile</Link>
       <Link className="nav-text" to="/">Dashboard</Link>
       <h2 onClick={logout} className="nav-text-h"> Log-out</h2>
     </div>

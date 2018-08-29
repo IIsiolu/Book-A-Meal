@@ -25,6 +25,7 @@ class MealPage extends Component {
   }
 
   /**
+   * @summary react lifecycle method invoked before render
    * @method componentWillMount
    * @returns {undefined}
    */
@@ -36,6 +37,7 @@ class MealPage extends Component {
   }
   
   /**
+   * @summary a react lifecycle method invoked after render
    * @method componentDidMount
    * @returns {undefined}
    */
@@ -83,14 +85,19 @@ class MealPage extends Component {
       this.props.allMeals.map((meal, i) =>
        <MealOptions {...this.props} key={i}
         meal={meal} />) : this.renderNoMeal() 
-    )
+  )
 
   //  check if meal exist in the page
   isMeal = () => (
     this.props.allMeals.length? true : false
   )
 
-  // handles pagination click event
+  /**
+   * @summary method to handle pagination click event
+   * @function handlePageChange
+   * @param {object} selected
+   * @returns {void}
+   */
   handlePageChange = ({selected}) => {
     const page = selected + 1;
     localStorage.setItem('currentMealPage', page);
@@ -177,7 +184,6 @@ MealPage.propTypes = {
 
 const mapstatetoProps = ({ user, imageUpload, createMeal,
    fetchMeals, updateMeals, deleteMeal }) => ({
-  isAuthenticated: user.isAuthenticated,
   role: user.user.role,
   success: imageUpload.success,
   imageUploadError: imageUpload.error,
@@ -187,7 +193,6 @@ const mapstatetoProps = ({ user, imageUpload, createMeal,
   isMealAdded: createMeal.mealsuccessful,
   isImageSuccess: createMeal.isImageSuccess,
   mealImageUrl: createMeal.imageUrl,
-  imageId: imageUpload.id,
   isLoading: imageUpload.loading,
   allMeals: fetchMeals.meals,
   fetchedMeals: fetchMeals.success,

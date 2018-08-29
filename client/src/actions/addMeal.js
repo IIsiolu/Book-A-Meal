@@ -4,7 +4,7 @@ import * as actionTypes from './actionsTypes';
 /**
  * @function isLoading
  * @param {boolean} bool
- * @returns {void}
+ * @returns {object} action
  */
 export const isLoading = bool => ({
   type: actionTypes.CREATING_MEAL,

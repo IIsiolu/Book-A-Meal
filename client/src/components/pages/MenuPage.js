@@ -83,6 +83,7 @@ class MenuPage extends Component {
   submit = () => {
     this.props.createMenu(this.props.menus, this.state.date.date)
   }
+
   // sweet alert
   alert = () => (
     swal("Menu Created", "Your menu has been created successfully!", "success")
@@ -177,7 +178,7 @@ class MenuPage extends Component {
     />
   )
 
-// meal cards
+  // meal cards
   mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
     (this.props.allMeals.map((meal, key) =>
      <MealCard addedMenus={this.addedMenus} menus={this.props.menus} meal={meal} key={key} /> ))
@@ -229,6 +230,7 @@ const mapstatetoProps = ({ user, fetchMeals, menu }) => ({
   pageSize: fetchMeals.pagination.pageSize,
   totalCount: fetchMeals.pagination.totalCount,
 });
+
 export default connect(mapstatetoProps, { addToMenu, fetchMeals,
    removeMeal, createMenu, logout, changeMErrorState,
     changeMSuccessState, clearMenu })(MenuPage);

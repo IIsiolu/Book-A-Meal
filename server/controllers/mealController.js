@@ -80,9 +80,8 @@ class MealController {
   }
 
   /**
-   * 
-   * @param {*} req 
-   * @param {*} res 
+   * @param {string} req
+   * @param {object} res
    * @returns {object} res
    */
   static catererMeals(req, res) {

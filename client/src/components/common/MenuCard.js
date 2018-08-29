@@ -40,7 +40,7 @@ MenuCard.propTypes = {
   meal: PropTypes.object.isRequired,
   addMealToOrder: PropTypes.func.isRequired,
   isOverlayOpened: PropTypes.func.isRequired,
-  placedOrders: PropTypes.object.isRequired,
+  placedOrders: PropTypes.array.isRequired,
 };
 
 export default MenuCard;

@@ -7,7 +7,7 @@
     "start": "babel-watch ./server/server.js",
     "devserver": "concurrently \"npm start\" \"npm run webpack:watch\"",
     "test": "npm run migrations && npm run start:test",
-    "migrations": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "migrations": "sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "NODE_ENV=production && NODE_END=production && npm run migrations && npm run webpack:build",
     "start:test": "nyc mocha --timeout 50000 --exit --require babel-core/register server/test/test/index.text.js",

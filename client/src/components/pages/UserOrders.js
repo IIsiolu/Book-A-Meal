@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
-import { userOrders, logout } from '../../actions';
+import { ToastContainer, toast } from 'react-toastify';
+import { userOrders, logout, editOrder } from '../../actions';
 import { Orders, OrderNav } from '../common';
 
 /**
@@ -74,20 +75,20 @@ class UserOrders extends Component {
         <div className="user-orders-c">
           <Orders {...this.props} />
         </div>
-        
+        <ToastContainer autoClose={2000}/>
         {this.props.orders.length && this.renderPagination()}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ user, userOrders }) => ({
-  role: user.isAuthenticated,
-  orders: userOrders.orders,
-  page: userOrders.pagination.page,
-  pageCount: userOrders.pagination.pageCount,
-  pageSize: userOrders.pagination.pageSize,
-  totalCount: userOrders.pagination.totalCount,
+const mapStateToProps = ({ user, orderHistories }) => ({
+  role: user.user.role,
+  orders: orderHistories.orders,
+  page: orderHistories.pagination.page,
+  pageCount: orderHistories.pagination.pageCount,
+  pageSize: orderHistories.pagination.pageSize,
+  totalCount: orderHistories.pagination.totalCount,
 });
 
-export default connect(mapStateToProps, { userOrders, logout })(UserOrders);
+export default connect(mapStateToProps, { userOrders, logout, editOrder })(UserOrders);

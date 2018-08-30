@@ -3,6 +3,22 @@ import { menuState } from './initState';
 
 const menu = (state = menuState, action) => {
   switch (action.type) {
+    case actionsTypes.MENU_FOR_TODAY:
+      return {
+        ...state,
+        todayMenu: action.payload.menu,
+        success: true,
+        pagination: {
+          ...state.pagination,
+          ...action.payload.pagination.pagination,
+        },
+      };
+    case actionsTypes.GET_MENU_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        success: false,
+      };
     case actionsTypes.MENU_ADDED:
       return {
         ...state,
@@ -21,22 +37,21 @@ const menu = (state = menuState, action) => {
     case actionsTypes.MENU_CREATED:
       return {
         ...state,
-        success: true,
+        created: true,
         isError: false,
         createMenuError: null,
-        createdMenus: [...state.createdMenus, action.payload],
       };
     case actionsTypes.MENU_ERROR:
       return {
         ...state,
         isError: true,
-        success: false,
+        created: false,
         createMenuError: action.payload,
       };
     case actionsTypes.CHANGE_MENU_SUCCESS:
       return {
         ...state,
-        success: action.payload,
+        created: action.payload,
       };
     case actionsTypes.CHANGE_MENU_ERROR:
       return {

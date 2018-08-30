@@ -9,6 +9,7 @@ import { setUser } from './actions/auth';
 import verifyToken from './utils/verifyToken';
 
 import '../../node_modules/semantic-ui-css/semantic.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './static/css/index.css';
 
 // returns store object passed into provider
@@ -20,6 +21,7 @@ if (verifyToken(localStorage.myUserT)) {
   const decode = jwt(user);
   store.dispatch(setUser(decode));
 }
+
 /**
  * @summary method to render a React element into the DOM in the
  *  supplied container and return a reference to the component

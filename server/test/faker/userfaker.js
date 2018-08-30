@@ -9,9 +9,9 @@ const userfake = {
     password: '1234567',
   },
   singupUser1: {
-    firstname: 'Test',
+    firstname: 'korede',
     lastname: 'lastnames',
-    email: 'testuser@example.com',
+    email: 'korede@example.com',
     password: '1234567',
   },
   loginUser: {
@@ -37,11 +37,11 @@ const userfake = {
     password: '12345',
   },
   loginUser1: {
-    email: 'testuser@example.com',
+    email: 'korede@example.com',
     password: '12345',
   },
   loginUser2: {
-    email: 'testuser@example.com',
+    email: 'korede@example.com',
     password: '1234567',
   },
   loginerror1: {
@@ -68,14 +68,14 @@ const userfake = {
     password: '12345999',
   },
   adminsignup: {
-    firstname: 'test',
-    lastname: 'admin',
-    email: 'admin123@gmail.com',
+    firstname: 'donald',
+    lastname: 'trump',
+    email: 'donaldTrump@gmail.com',
     password: 'adminqwe1234',
-    role: 'admin',
+    role: 'caterer',
   },
   adminLogin: {
-    email: 'admin123@gmail.com',
+    email: 'donaldTrump@gmail.com',
     password: 'adminqwe1234',
   },
 };

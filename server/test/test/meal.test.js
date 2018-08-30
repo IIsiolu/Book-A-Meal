@@ -1,7 +1,7 @@
 import request from 'supertest';
 import chai from 'chai';
 import server from '../../server';
-import testData from '../faker/mealFaker';
+import mealDetails from '../faker/mealFaker';
 import { validToken, adminToken } from '../../test/test/user.test';
 
 const { expect } = chai;
@@ -18,10 +18,10 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
-  it('should return an error if the token is not present when adding a meal', (done) => {
+  it('should return 403 when adding a meal without a token', (done) => {
     request(server)
       .post('/api/v1/meals')
-      .send(testData.newMeal)
+      .send(mealDetails.newMeal)
       .end((error, res) => {
         expect(403);
         expect(res.body.message).to.include('You need to sign up or login');
@@ -34,51 +34,51 @@ describe('Book-a-meal MEAL Test', () => {
   it('should return error if token is not vaild when adding new MEAL', (done) => {
     request(server)
       .post('/api/v1/meals')
-      .send(testData.newMeal)
+      .send(mealDetails.newMeal)
       .set('Authorization', 'jdjdjdjdjdj')
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
   });
 
 
-  it('should return error if login user is not an admin when adding new MEAL', (done) => {
+  it('should return 403 if logged in user tries to add a meal', (done) => {
     request(server)
       .post('/api/v1/meals')
-      .send(testData.newMeal2)
+      .send(mealDetails.newMeal2)
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
   });
 
 
-  it('should return error if login is admin and MEAL name is empty', (done) => {
+  it('should return 400 if user is a caterer and MEAL name is empty', (done) => {
     request(server)
       .post('/api/v1/meals')
-      .send(testData.newMeal1)
+      .send(mealDetails.newMeal1)
       .set('Authorization', adminToken.token)
       .end((error, res) => {
-        expect(403);
+        expect(400);
         expect(res.body.errorMessage).to.include('input meal name');
         if (error) done(error);
         done();
       });
   });
 
-  it('should return error if login is admin and description is empty', (done) => {
+  it('should return 400 if login is caterer and description is empty', (done) => {
     request(server)
       .post('/api/v1/meals')
-      .send(testData.newMeal3)
+      .send(mealDetails.newMeal3)
       .set('Authorization', adminToken.token)
       .end((error, res) => {
-        expect(403);
+        expect(400);
         expect(res.body.errorMessage).to.include('input meal description');
         if (error) done(error);
         done();
@@ -86,34 +86,16 @@ describe('Book-a-meal MEAL Test', () => {
   });
 
   it(
-    'should save MEAL to database if login is ' +
-      'admin and and body is filed correctly',
+    `should save MEAL to database if login is 
+    caterer and and body is filed correctly`,
     (done) => {
       request(server)
         .post('/api/v1/meals')
-        .send(testData.newMeal4)
+        .send(mealDetails.newMeal2)
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.data);
-          // .to.include('success');
-          if (error) done(error);
-          done();
-        });
-    },
-  );
-
-  it(
-    `should save MEAL5 to database if login is 
-    admin and and body is filed correctly`,
-    (done) => {
-      request(server)
-        .post('/api/v1/meals')
-        .send(testData.newMeal5)
-        .set('Authorization', adminToken.token)
-        .end((error, res) => {
-          expect(201);
-          expect(res.body.data);
+          expect(res.body.success).to.be.true;
           if (error) done(error);
           done();
         });
@@ -122,62 +104,76 @@ describe('Book-a-meal MEAL Test', () => {
 
   it(
     `should save MEAL to database if login is 
-    admin and and body is filed correctly`,
+    caterer and and body is filed correctly`,
     (done) => {
       request(server)
         .post('/api/v1/meals')
-        .send(testData.newMeal2)
+        .send(mealDetails.newMeal4)
         .set('Authorization', adminToken.token)
         .end((error, res) => {
           expect(201);
-          expect(res.body.data);
+          expect(res.body.success).to.be.true;
           if (error) done(error);
           done();
         });
     },
   );
 
-  it('should fail to return all the MEALS in database, if user is not an admin', (done) => {
+
+  it('should fail to return all the MEALS in database, if user is not a caterer', (done) => {
     request(server)
       .get('/api/v1/meals')
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
   });
 
-  it('should return all the MEALS in database, if user an admin', (done) => {
+  it('should return all the MEALS in database, if user a caterer', (done) => {
     request(server)
       .get('/api/v1/meals')
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(200);
-        expect(res.body.data);
+        expect(res.body.success);
+        if (error) done(error);
+        done();
+      });
+  });
+
+  it('should return all the MEALS for a caterer', (done) => {
+    request(server)
+      .get('/api/v1/meals/caterer')
+      .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(200);
+        expect(res.body.meals);
         if (error) done(error);
         done();
       });
   });
 
 
-  it('should return error if login user is not an admin when updating MEAL', (done) => {
+  it('should return error if login user is not a caterer when updating MEAL', (done) => {
     request(server)
       .put('/api/v1/meals/1')
-      .send(testData.newMeal6)
+      .send(mealDetails.newMeal6)
       .set('Authorization', validToken.token)
       .end((error, res) => {
-        expect(401);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(403);
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
   });
-  it('should return error if no token', (done) => {
+
+  it('should return error if token is not present when updating a meal', (done) => {
     request(server)
       .put('/api/v1/meals/1')
-      .send(testData.newMeal6)
+      .send(mealDetails.newMeal6)
       .end((error, res) => {
         expect(403);
         expect(res.body.message).to.include('You need to sign up or login');
@@ -188,7 +184,7 @@ describe('Book-a-meal MEAL Test', () => {
   it('should return error if MEAL ID is incorrect', (done) => {
     request(server)
       .put('/api/v1/meals/xx')
-      .send(testData.newMeal6)
+      .send(mealDetails.newMeal6)
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(404);
@@ -197,33 +193,33 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
-  it('should should Update a MEAL when Token is correct', (done) => {
+  it('should Update a MEAL when Token is present and user is a caterer', (done) => {
     request(server)
-      .put('/api/v1/meals/2')
-      .send(testData.newMeal6)
+      .put('/api/v1/meals/1')
+      .send(mealDetails.newMeal6)
       .set('Authorization', adminToken.token)
       .end((error, res) => {
-        expect(404);
-        expect(res.body.message).to.include('updated');
+        expect(200);
+        expect(res.body.message).to.include('meal updated successfully');
         if (error) done(error);
         done();
       });
   });
 
-
-  it('should return error if login user is not an admin when deleting MEAL', (done) => {
+  it('should return error if login user is not a caterer when deleting MEAL', (done) => {
     request(server)
       .delete('/api/v1/meals/1')
-      .send(testData.newMeal6)
+      .send(mealDetails.newMeal6)
       .set('Authorization', validToken.token)
       .end((error, res) => {
-        expect(401);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(403);
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
   });
-  it('should return error if admin inputs invalid id for meal when deleting', (done) => {
+
+  it('should return error if caterer inputs invalid meal ID', (done) => {
     request(server)
       .delete('/api/v1/meals/xx')
       .set('Authorization', adminToken.token)
@@ -233,9 +229,10 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
-  it('should Authenticated user should delete a meal', (done) => {
+
+  it('should delete a meal when authenticated user is a caterer', (done) => {
     request(server)
-      .delete('/api/v1/meals/1')
+      .delete('/api/v1/meals/2')
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(200);

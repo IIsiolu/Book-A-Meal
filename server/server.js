@@ -4,11 +4,17 @@ import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import bodyParser from 'body-parser';
 import webpack from 'webpack';
+import io from 'socket.io';
 import cors from 'cors';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 import { userRouter, mealRouter, menuRouter, orderRouter } from './routes';
+
+import socket from './socket';
+
+// const io = require('socket.io')(httpServer, { wsEngine: 'ws' });
+
 
 const swaggerUi = require('swagger-ui-express');
 
@@ -28,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(cors());
 
+// serve file from any static folder
 app.use('/', express.static(path.resolve(__dirname, '/dist')));
 app.use('*', express.static(path.resolve(__dirname, '/dist')));
 
@@ -77,4 +84,6 @@ app.put('*', (req, res) => {
 
 const port = process.env.PORT || 7000;
 
-app.listen(port);
+const server = app.listen(port);
+const socketServer = io.listen(server);
+socket(socketServer);

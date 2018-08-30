@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
+import socket from '../../utils/socket';
 import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common/';
 import { menuForToday, addMealToOrder,
    removeOrder, increaseQuantity,
@@ -22,6 +24,7 @@ class TodayMenuPage extends Component {
     this.state = {
       isToggled: false
     }
+    this.socketClient = socket(this);
   }
 
   /**
@@ -34,6 +37,10 @@ class TodayMenuPage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.menuForToday(this.todaysDate());
+  }
+
+  showToast = () => {
+    toast.success('order notification');
   }
 
   /**
@@ -75,10 +82,6 @@ class TodayMenuPage extends Component {
       this.props.successState(false);
       this.toggle();
       this.props.clearOrder()
-    }
-    if (this.props.isOrderError === true) {
-      swal("Order error", 'error ordering meal' , "error");
-      this.props.errState(false);
     }
   }
 
@@ -149,8 +152,21 @@ class TodayMenuPage extends Component {
     </div>
   )
 
+
+
   // called when order button is clicked
-  submit = () => this.props.requestForOrder(this.props.placedOrders)
+  checkout = () => {
+    swal("Input delivery address", {
+      content: "input",
+    })
+    .then((value) => {
+      swal(`your delivery address is: ${value}`);
+      value.length > 5 ? 
+      this.props.requestForOrder(this.props.placedOrders, value)
+       : swal('Order Error','input delivery address', 'error')
+    });
+    
+  }
 
   // calculate total meal costs
   subTotal = () => {
@@ -247,7 +263,7 @@ class TodayMenuPage extends Component {
           <div className="cat">
             <button className='clear-cart' 
             onClick={this.deleteMeal}>Clear Cart</button>
-            <button onClick={this.submit}>Check out</button>
+            <button onClick={this.checkout}>Check out</button>
           </div>
         </div>
       </div>
@@ -308,6 +324,7 @@ class TodayMenuPage extends Component {
           addMealToOrder={this.addMealToOrder}  />
         }
         </div>
+        <ToastContainer autoClose={2000}/>
         {this.props.isMenu && this.renderPagination()}
         <Footer />
       </div>
@@ -322,9 +339,9 @@ TodayMenuPage.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = ({ menuForToday, order, isOverlayOpened }) => ({
-  menus: menuForToday.menus,
-  isMenu: menuForToday.success,
+const mapStateToProps = ({ menu, order, isOverlayOpened }) => ({
+  menus: menu.todayMenu,
+  isMenu: menu.success,
   placedOrders: order.orders,
   isOpened: isOverlayOpened.open,
   overlayId: isOverlayOpened.id,
@@ -332,10 +349,10 @@ const mapStateToProps = ({ menuForToday, order, isOverlayOpened }) => ({
   isOrderError: order.isError,
   orderError: order.error,
   orderSuccessful: order.success,
-  page: menuForToday.pagination.page,
-  pageCount: menuForToday.pagination.pageCount,
-  pageSize: menuForToday.pagination.pageSize,
-  totalCount: menuForToday.pagination.totalCount,
+  page: menu.pagination.page,
+  pageCount: menu.pagination.pageCount,
+  pageSize: menu.pagination.pageSize,
+  totalCount: menu.pagination.totalCount,
 });
 
 export default connect(mapStateToProps, { logout, menuForToday,

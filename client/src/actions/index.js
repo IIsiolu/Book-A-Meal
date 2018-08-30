@@ -2,38 +2,29 @@
 import isModalOpened from './isModalOpened';
 import isOverlayOpened from './overlayModal';
 
-export { userOrders } from './userOrders';
-
-export { orderHistory } from './OrderHistory';
-
-export { logIn, signup, logout, signupState, editProfile } from './auth';
+export { changeErrState, changeSuccessState } from './helpers';
 
 export {
-  changeSuccessState, deleteMeal,
-  DeleteErrorState,
-} from './deleteMeal';
+  createMeal, fetchMeals, createMealErr, updateMealFetched, mealSuccess,
+  updateMeal, deleteMeal, mealSuccessState, mealError, mealFetched,
+  errorFetchingMeal,
+} from './meal';
 
-export { createMeal, mealSuccessState } from './addMeal';
+export {
+  menuForToday, addToMenu, removeMeal, createMenu, changeMErrorState,
+  changeMSuccessState, clearMenu, getMenu,
+} from './menus';
+
+export { orderHistory, userOrders } from './OrderHistory';
+
+export { logIn, signup, logout, signupState, editProfile } from './auth';
 
 export { imageUpload, clearMealImage } from './imageUpload';
 
 export {
-  updateMeal, changeMealError,
-  changeMealSuccess,
-} from './updateMeal';
-export {
   addMealToOrder, removeOrder,
   increaseQuantity, requestForOrder, clearOrder,
-  successState, errState,
+  successState, errState, recentOrders, editOrder,
 } from './order';
-
-export { menuForToday } from './menuForToday';
-
-export {
-  addToMenu, removeMeal, createMenu, changeMErrorState,
-  changeMSuccessState, clearMenu,
-} from './menu';
-
-export { fetchMeals } from './fetchMeals';
 
 export { isModalOpened, isOverlayOpened };

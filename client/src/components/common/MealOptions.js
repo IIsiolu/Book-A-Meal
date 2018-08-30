@@ -15,29 +15,24 @@ class MealOptions extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: {
+      mealInfo: {
         id: props.meal.id,
         name: props.meal.name,
         image: props.meal.image,
         price: props.meal.price,
         description: props.meal.description,
       },
-      id: props.meal.id,
       edit: false,
       errors: {}
     }
   }
-  // sweet alert
-  alert = () => (
-    swal("Meal Updated", "Your meal has been updated successfully!", "success")
-  )
 
   /**
    * @method componentDidUpdate
    * @param {*} prevProps - previous props
    * @param {*} prevState - previous state
    */
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (Object.keys(this.state.errors).length ) {
       let error= '';
       for(let err in this.state.errors){
@@ -46,65 +41,52 @@ class MealOptions extends Component {
       swal("Meal error", error , "error")
       this.state.errors = {};
     }
-    if (this.props.mealUpdated === true ) {
-      this.alert();
-      this.props.changeMealSuccess(false);
-    }
-    if ( this.props.isUpdateMealError === true) {
-      swal("Meal error", 'error updating meal' , "error");
-      this.props.changeMealError(false);
-    }
-    if(this.props.isMealDeleteError === true) {
-      swal("Meal error", 'error deleting meal' , "error")
-      this.props.DeleteErrorState(false);
-    }
-    if(this.props.mealDeleted === true) {
-      swal("Meal Deleted",
-       'Your meal has been deleted successfully' , "success");
-      this.props.changeSuccessState(false);
-    }
-    let newVal = Object.keys(this.props.meal).every((meal) =>
-    Object.is(this.props.meal[meal], prevProps.meal[meal]) === true
-  )
-    !newVal && this.setState({
-      data: {...this.state.data, ...this.props.meal}
+    let isMealUpdated = Object.keys(this.props.meal).every((meal) =>
+      Object.is(this.props.meal[meal], prevProps.meal[meal]) === true
+    )
+    !isMealUpdated && this.setState({
+      mealInfo: {...this.state.mealInfo, ...this.props.meal}
     })
   }
   
   // validates meal inputs
-  validate(data) {
+  validate(meal) {
     const errors = {};
     const nameRegex = /^([a-z']+(-| )?)+$/i
-    if (!nameRegex.test(data.name) || !data.name) errors.name = 'Invalid name';
-    if (!Number.isInteger(data.price)) errors.price = 'invalid number';
+    if (!nameRegex.test(meal.name) || !meal.name) errors.name = 'Invalid name';
+    if (isNaN(meal.price)) errors.price = 'invalid number';
     return errors
   }
 
-  // function to update meal
-  submit = () => {
-    const errors = this.validate(this.state.data);
+  /**
+   * @summary updates a meal with valid meal inputs
+   * @returns {Function} updateMeal
+   */
+  updateMeal = () => {
+    const errors = this.validate(this.state.mealInfo);
     this.setState({ 
-      errors: errors,
+      errors,
      });
-    if(Object.keys(errors).length==0){
+    if (Object.keys(errors).length == 0) {
       this.setState({ 
         edit: !this.state.edit,
        });
-      let stateArr = Object.keys(formerState.data);
-      let notUpdated = stateArr.every((key) =>
-       Object.is(formerState.data[key], this.state.data[key]) === true)
-       return notUpdated ? '' : this.props.updateMeal(this.state.data)
+      let previousMeal = Object.keys(formerState.mealInfo);
+      // checks if changes are made
+      let isMealUpdated = previousMeal.every((key) =>
+       Object.is(formerState.mealInfo[key], this.state.mealInfo[key]) === true)
+    return isMealUpdated ? null : this.props.updateMeal(this.state.mealInfo)
     }
   }
 
-  // function to upload meal to cloudinary
+  // function to upload meal image to cloudinary
   upload = async (event) => {
     try {
       let response =await uploadImage(event.target.files[0])
       const { data } = response;
       const fileURL = data.secure_url;
       this.setState({
-        data: { ...this.state.data, image: fileURL}
+        mealInfo: { ...this.state.mealInfo, image: fileURL}
      });
     } catch(err) {
       return err
@@ -122,7 +104,7 @@ class MealOptions extends Component {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.props.deleteMeal(this.state.data.id);
+        this.props.deleteMeal(this.state.mealInfo.id);
       } else {
         swal("Your meal is safe!");
       }
@@ -147,7 +129,7 @@ class MealOptions extends Component {
   // meal input event
   onChange =(e) => {
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
+      mealInfo: { ...this.state.mealInfo, [e.target.name]: e.target.value },
     });
   }
   
@@ -157,12 +139,10 @@ class MealOptions extends Component {
    * @returns {JSX} jsx
    */
   render() {
-    const { errors } = this.state;
-    const data = this.props.meal;
     return (
       <div className="m-c-container">
         <div className="m-c-imgcontainer">
-          <img className="" src={this.state.data.image} alt="my food" />
+          <img className="" src={this.state.mealInfo.image} alt="my food" />
           <div className={this.state.edit ? "food-E-overlay" : 'hide'}></div>
           <div className={this.state.edit ? "foodies-info" : 'hide'}>
                       <input
@@ -179,7 +159,7 @@ class MealOptions extends Component {
             <input className={this.state.edit? 
               'myInputs card-input meal-name-input' :
                'meal-name-input clear-default'} onChange={this.onChange}
-                name="name" type="text" value={this.state.data.name}
+                name="name" type="text" value={this.state.mealInfo.name}
                  disabled={!this.state.edit} />
             <div className="meal-currency">
               <h5>&#8358;</h5>
@@ -187,13 +167,13 @@ class MealOptions extends Component {
                 'myInputs card-input meal-currency-input' :
                  'clear-default meal-currency-input' } 
                  onChange={this.onChange} name='price' type="text" 
-                 value={this.state.data.price} disabled={!this.state.edit} />
+                 value={this.state.mealInfo.price} disabled={!this.state.edit} />
             </div>
           </div>
           <textarea className={this.state.edit? 'myInputs meal-i-t':
            'meal-i-t clear-default'} onChange={this.onChange} id="advanced"
             name="description"
-                  value={this.state.data.description}
+                  value={this.state.mealInfo.description}
                   disabled={!this.state.edit}
                   rows="3" cols="33" maxLength="120"
                   wrap="hard">
@@ -207,7 +187,7 @@ class MealOptions extends Component {
         </div>
         <div className={this.state.edit ? 'down-btn' : 'hide'}>
           <button className='btn-style left-area'
-           onClick={this.submit}>Save</button>
+           onClick={this.updateMeal}>Save</button>
           <button className='btn-style right-area'
            onClick={this.cancel}>Cancel</button>
         </div>

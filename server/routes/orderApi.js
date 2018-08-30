@@ -13,7 +13,7 @@ orderRouter.post(
 );
 
 orderRouter.put(
-  '/:orderId', Auth.verifyToken, Validate.updateOrder,
+  '/:orderId', Auth.verify, Validate.updateOrder,
   OrderController.modifyOrder,
 );
 

@@ -27,19 +27,19 @@ const mealFaker = {
     image: faker.image.imageUrl(),
   },
   newMeal4: {
-    name: 'Eba',
+    name: faker.name.findName(),
     description: faker.lorem.paragraph(),
     price: faker.commerce.price(),
     image: faker.image.imageUrl(),
   },
   newMeal5: {
-    name: 'Ewela',
+    name: 'Jollof',
     description: faker.lorem.paragraph(),
     price: faker.commerce.price(),
     image: faker.image.imageUrl(),
   },
   newMeal6: {
-    name: 'Ewel',
+    name: 'spagetti',
     description: faker.lorem.paragraph(),
     price: faker.commerce.price(),
     image: faker.image.imageUrl(),

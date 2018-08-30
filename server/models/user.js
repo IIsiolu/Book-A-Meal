@@ -40,8 +40,8 @@ export default (sequelize, DataTypes) => {
           msg: 'input your quantity',
         },
         isIn: {
-          args: [['admin', 'user', 'super-admin']],
-          msg: "Must be an 'admin' or 'user'",
+          args: [['caterer', 'user', 'super-admin']],
+          msg: "Must be a 'caterer' or 'user'",
         },
       },
     },

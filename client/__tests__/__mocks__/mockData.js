@@ -1,17 +1,21 @@
 const mockData = {
   authResponse: {
     success: true,
-    data: {
-      firstname: 'oluwafemi',
-      lastname: 'adekunle',
-      role: 'user',
-      email: 'phem4@gmail.ciu',
-    },
+    message: 'user created successfully',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJ1c2VyIiwiZmlyc3RuYW1lIjoib2x1d2FmZW1pIiwiaWF0IjoxNTM0MTE0MzQ0LCJleHAiOjE1MzU5MTQzNDR9.nrCV-E_kCU4ZNSnz8Z9fG34wSdvGTyOrBmru5DdvPF4',
   },
   loginResponse: {
     success: true,
     message: 'Welcome oluwafemi',
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJ1c2VyIiwiZmlyc3RuYW1lIjoib2x1d2FmZW1pIiwiaWF0IjoxNTM0MTE0MzQ0LCJleHAiOjE1MzU5MTQzNDR9.nrCV-E_kCU4ZNSnz8Z9fG34wSdvGTyOrBmru5DdvPF4',
+  },
+  invalidPassRes: {
+    success: false,
+    message: 'Email or password is incorrect',
+  },
+  notExistResponse: {
+    success: true,
+    message: 'User does not exist',
   },
   signUpData: {
     firstname: 'oluwafemi',
@@ -19,21 +23,36 @@ const mockData = {
     password: 'user123',
     email: 'phem4@gmail.ciu',
   },
+  catererSignup: {
+    firstname: 'oluwafemi',
+    lastname: 'adekunle',
+    password: 'user123',
+    email: 'caterer@gmail.com',
+    role: 'caterer',
+  },
   signinData: {
     password: 'user123',
     email: 'phem4@gmail.ciu',
   },
+  invalidSignin: {
+    password: 'user12',
+    email: 'phem4@gmail.ciu',
+  },
+  invalidUser: {
+    email: 'user@user.com',
+    password: 'pass123',
+  },
   signupFailure: {
     message: 'User already exist',
   },
-  mealData: {
+  ofadaRice: {
     name: 'ofadas',
     price: 2000,
     description: 'Users  are very much satisfied with such delicacy',
     image: 'https://medium.com/the-andela-way/a-simple',
   },
-  mealData2: {
-    name: 'ofadas',
+  bread: {
+    name: 'bread',
     price: 'yyy',
     description: 'Users  are very much satisfied with such delicacy',
     image: 'https://medium.com/the-andela-way/a-simple',
@@ -48,9 +67,9 @@ const mockData = {
     id: 1,
     price: 17000,
   },
-  mealSuccess: {
+  mealSuccessRes: {
     success: true,
-    data: {
+    meal: {
       id: 1,
       description: 'Users  are very much satisfied with such delicacy',
       price: 2000,
@@ -59,6 +78,7 @@ const mockData = {
       updatedAt: '2018-08-25T09:34:46.290Z',
       createdAt: '2018-08-25T09:34:46.290Z',
       userId: 1,
+      deletedAt: null,
     },
   },
   mealExist: {
@@ -74,24 +94,28 @@ const mockData = {
     message: 'invalid meal name',
   },
   mealUpdateSuccess: {
-    success: true,
-    message: 'updated',
+    header: 'Meal Updated',
+    message: 'Your meal has been updated successfully!',
+    type: 'success',
   },
   mealUpdate2: {
     id: 1,
     price: 'price',
   },
   invalidPriceUdate: {
-    success: false,
-    message: 'invalid meal price',
+    header: 'Meal Update Error',
+    message: 'Error updating meal',
+    type: 'error',
   },
   mealDeleted: {
-    success: true,
-    message: 'meal successfully deleted!',
+    header: 'Meal Deleted',
+    message: 'Your meal has been deleted successfully',
+    type: 'success',
   },
   deleteMealError: {
-    success: false,
-    message: 'There is no meal with that id!!',
+    header: 'Meal Error',
+    message: 'Error deleting meal',
+    type: 'error',
   },
   userOrder: {
     orders: [

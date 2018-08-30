@@ -39,9 +39,8 @@ class SignupPage extends Component {
    * @returns {void}
    */
   componentDidUpdate(){
-    if(this.props.signedUp === true) {
-      this.props.logIn(this.state, this.props.history);
-      this.props.signupState(false);
+    if(this.props.isAuthenticated === true) {
+      this.props.history.push('/');
     }
   }
 
@@ -83,10 +82,11 @@ SignupPage.propTypes = {
 }
 
 // maps state to props
-const mapStateToProps = state => ({
-    error: state.user.error,
-    loading: state.user.loading,
-    signedUp: state.user.signedUp
+const mapStateToProps = ({user}) => ({
+    isAuthenticated: user.isAuthenticated,
+    error: user.error,
+    loading: user.loading,
+    signedUp: user.signedUp
 })
 
 // mapstate for states, dispatch functions

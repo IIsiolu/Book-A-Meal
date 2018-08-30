@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
+import { ToastContainer, toast } from 'react-toastify';
 import { SideNav, TopNav, Orders } from '../common/';
-import { logout, orderHistory } from '../../actions/';
+import { logout, orderHistory, recentOrders, editOrder } from '../../actions/';
+import socket from '../../utils/socket';
 
 /**
  * Caterer dashboard page
@@ -12,6 +14,19 @@ import { logout, orderHistory } from '../../actions/';
  * @extends Component
  */
 class DashboardPage extends Component {
+
+  constructor() {
+    super();
+    this.socketClient = socket(this);
+  }
+
+  connect = () => {
+    alert("connected: ", this.socket.id);
+  }
+
+  showToast = () => {
+    toast.success('you have a new order');
+  }
 
   /**
    * @method componentDidMount
@@ -73,6 +88,7 @@ class DashboardPage extends Component {
             <Orders {...this.props} />
             {this.props.orders.length && this.renderPagination()}
           </div>
+          <ToastContainer autoClose={2000}/>
         </div>
       </div>
     );
@@ -97,4 +113,4 @@ const mapstatetoProps = ({ user, orderHistories }) => ({
 });
 
 export default connect(mapstatetoProps,
-   { logout, orderHistory })(DashboardPage);
+   { logout, orderHistory, recentOrders, editOrder })(DashboardPage);

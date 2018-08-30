@@ -1,28 +1,45 @@
-import { createdOrder } from '../../src/actions/order';
 import {
-  MENU_CREATED, CLEAR_MENUS, MENU_ADDED,
-  MENU_ERROR, CHANGE_MENU_ERROR, CHANGE_MENU_SUCCESS,
+  MENU_CREATED, CLEAR_MENUS, MENU_ADDED, MENU_FOR_TODAY, REMOVE_A_MENU_ITEM,
+  MENU_ERROR, CHANGE_MENU_ERROR, CHANGE_MENU_SUCCESS, GET_MENU_ERROR,
 } from '../../src/actions/actionsTypes';
 import menu from '../../src/reducers/menu';
 import { menuState } from '../../src/reducers/initState';
 
-describe('Order Reducer', () => {
+describe('Menu Reducer', () => {
   it(
-    'should return Order initial state',
+    'should return Menu initial state',
     () => {
       expect(menu(undefined, {})).toEqual(menuState);
     },
   );
 
   it(
-    'should set success to true when action type is MENU_CREATED',
+    'should set created to true when action type is MENU_CREATED',
     () => {
       const action = {
         type: MENU_CREATED,
       };
       const newState = menu(menuState, action);
-      expect(newState.success).toBe(true);
+      expect(newState.created).toBe(true);
       expect(newState.isError).toBe(false);
+    },
+  );
+
+  it(
+    'should set success to true when action type is MENU_FOR_TODAY',
+    () => {
+      const action = {
+        type: MENU_FOR_TODAY,
+        payload: {
+          menu: [{ name: 'rice' }, { name: 'beans' }],
+          pagination: {
+            pagination: { data: 1 },
+          },
+        },
+      };
+      const newState = menu(menuState, action);
+      expect(newState.success).toBe(true);
+      expect(newState.todayMenu.length).toBeGreaterThan(1);
     },
   );
 
@@ -33,8 +50,21 @@ describe('Order Reducer', () => {
         type: MENU_ERROR,
       };
       const newState = menu(menuState, action);
-      expect(newState.success).toBe(false);
+      expect(newState.created).toBe(false);
       expect(newState.isError).toBe(true);
+    },
+  );
+
+  it(
+    'should set success to false when action type is GET_MENU_ERROR',
+    () => {
+      const action = {
+        type: GET_MENU_ERROR,
+        payload: 'error',
+      };
+      const newState = menu(menuState, action);
+      expect(newState.success).toBe(false);
+      expect(newState.error).toEqual('error');
     },
   );
 
@@ -58,7 +88,7 @@ describe('Order Reducer', () => {
         payload: false,
       };
       const newState = menu(menuState, action);
-      expect(newState.success).toBe(false);
+      expect(newState.created).toBe(false);
     },
   );
 
@@ -78,10 +108,22 @@ describe('Order Reducer', () => {
     () => {
       const action = {
         type: MENU_ADDED,
-        payload: { name: 'rice' },
+        payload: { id: 1, name: 'rice' },
       };
       const newState = menu(menuState, action);
       expect(newState.menus).toEqual([{ name: 'rice' }]);
+    },
+  );
+
+  it(
+    'should add meal to menu when action type is REMOVE_A_MENU_ITEM',
+    () => {
+      const action = {
+        type: REMOVE_A_MENU_ITEM,
+        payload: { id: 1, name: 'beans' },
+      };
+      const newState = menu(menuState, action);
+      expect(newState.menus).toEqual([{ id: 1, name: 'beans' }]);
     },
   );
 });

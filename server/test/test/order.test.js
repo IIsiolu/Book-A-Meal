@@ -31,8 +31,7 @@ describe('Book-a-meal Order Test', () => {
   });
 
   it(
-    'should return 404 if login is ' +
-    'user and order is empty',
+    'should return 404 if user order is empty ',
     (done) => {
       request(server)
         .get('/api/v1/orders/userOrder')
@@ -47,7 +46,7 @@ describe('Book-a-meal Order Test', () => {
     },
   );
 
-  it('should return 404 if login is admin and order is empty', (done) => {
+  it('should return 404 if login is caterer and order is empty', (done) => {
     request(server)
       .get('/api/v1/orders')
       .set('Authorization', adminToken.token)
@@ -73,7 +72,7 @@ describe('Book-a-meal Order Test', () => {
       });
   });
 
-  it('should return error if token is vaild but user is an admin', (done) => {
+  it('should return error if token is vaild but user is a caterer', (done) => {
     request(server)
       .get('/api/v1/orders/userOrder')
       .set('Authorization', adminToken.token)
@@ -190,6 +189,7 @@ describe('Book-a-meal Order Test', () => {
         });
     },
   );
+
   it(
     'should return 400 if login is ' +
     'user and Order body contains invalid data',
@@ -208,57 +208,79 @@ describe('Book-a-meal Order Test', () => {
   );
 
   it(
-    'should return 200 if login is ' +
-    'user update is successful',
+    'should return 200 if authenticated user updates an order ',
     (done) => {
       request(server)
         .put('/api/v1/orders/1')
-        .send(testData.newUpdate)
+        .send(testData.newUpdate.orders)
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(200);
-          expect(res.body.result)
-            .to.include('updated');
+          expect(res.body.success).to.true
           if (error) done(error);
           done();
         });
     },
   );
 
-  it(
-    'should return 200 if login is ' +
-    'user update is successful',
-    (done) => {
-      request(server)
-        .put('/api/v1/orders/1')
-        .send(testData.newUpdate2)
-        .set('Authorization', validToken.token)
-        .end((error, res) => {
-          expect(200);
-          expect(res.body.result)
-            .to.include('updated');
-          if (error) done(error);
-          done();
-        });
-    },
-  );
+  // it(
+  //   'should return 200 if login is ' +
+  //   'user update is successful',
+  //   (done) => {
+  //     request(server)
+  //       .put('/api/v1/orders/1')
+  //       .send(testData.newUpdate2)
+  //       .set('Authorization', validToken.token)
+  //       .end((error, res) => {
+  //         expect(200);
+  //         expect(res.body.result)
+  //           .to.include('updated');
+  //         if (error) done(error);
+  //         done();
+  //       });
+  //   },
+  // );
 
   it('should fail to return all the ORDER in database, if user is not valid', (done) => {
     request(server)
-      .get('/api/v1/orders')
+      .get('/api/v1/orders/userOrder')
       .set('Authorization', 'fjhFJfvuiuivwov')
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('Authentication failed');
         if (error) done(error);
         done();
       });
   });
 
-  it('should return all the ORDERs in database, if user is an admin', (done) => {
+  it('should fail to return all the ORDER in database, if user is not valid', (done) => {
+    request(server)
+      .get('/api/v1/orders/catererOrders')
+      .set('Authorization', 'fjhFJfvuiuivwov')
+      .end((error, res) => {
+        expect(403);
+        expect(res.body.message).to.include('You have to be a caterer');
+        if (error) done(error);
+        done();
+      });
+  });
+
+  it('should return all the ORDERs in database, if user is a caterer', (done) => {
     request(server)
       .get('/api/v1/orders')
       .set('Authorization', adminToken.token)
+      .end((error, res) => {
+        expect(200);
+        expect(res.body.success).to.be.true;
+        if (error) done(error);
+        done();
+      });
+  });
+
+  it('should return an authenticated user order', (done) => {
+    request(server)
+      .get('/api/v1/orders/userOrder')
+      .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(200);
         expect(res.body.success).to.be.true;
@@ -277,6 +299,7 @@ describe('Book-a-meal Order Test', () => {
         done();
       });
   });
+
   it('should return error if ORDER route is incorrect', (done) => {
     request(server)
       .get('/api/v1/ord')

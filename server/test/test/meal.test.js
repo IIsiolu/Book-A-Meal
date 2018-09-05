@@ -111,6 +111,7 @@ describe('Book-a-meal MEAL Test', () => {
         .send(mealDetails.newMeal4)
         .set('Authorization', adminToken.token)
         .end((error, res) => {
+          console.log('>>>>>>>>>>>>>>>>>>>>>>>', res.body);
           expect(201);
           expect(res.body.success).to.be.true;
           if (error) done(error);
@@ -118,7 +119,6 @@ describe('Book-a-meal MEAL Test', () => {
         });
     },
   );
-
 
   it('should fail to return all the MEALS in database, if user is not a caterer', (done) => {
     request(server)
@@ -156,7 +156,6 @@ describe('Book-a-meal MEAL Test', () => {
       });
   });
 
-
   it('should return error if login user is not a caterer when updating MEAL', (done) => {
     request(server)
       .put('/api/v1/meals/1')
@@ -181,6 +180,7 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
+
   it('should return error if MEAL ID is incorrect', (done) => {
     request(server)
       .put('/api/v1/meals/xx')
@@ -193,6 +193,7 @@ describe('Book-a-meal MEAL Test', () => {
         done();
       });
   });
+  
   it('should Update a MEAL when Token is present and user is a caterer', (done) => {
     request(server)
       .put('/api/v1/meals/1')

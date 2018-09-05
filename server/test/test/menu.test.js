@@ -30,7 +30,6 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-
   it('should return error if token is not vaild when adding new MENU', (done) => {
     request(server)
       .post('/api/v1/menu')
@@ -44,8 +43,7 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-
-  it('should return error if login user is not an admin when adding new MENU', (done) => {
+  it('should return error if login user is not a caterer when adding new MENU', (done) => {
     request(server)
       .post('/api/v1/menu')
       .send(testData.newMenu2)
@@ -57,7 +55,6 @@ describe('Book-a-meal MENU Test', () => {
         done();
       });
   });
-
 
   it('should return 403 if login is admin and menuId is empty', (done) => {
     request(server)
@@ -72,7 +69,7 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-  it('should return error if login is admin and date is empty', (done) => {
+  it('should return error if login user is a caterer and date is empty', (done) => {
     request(server)
       .post('/api/v1/menu')
       .send(testData.newMenu4)
@@ -87,7 +84,7 @@ describe('Book-a-meal MENU Test', () => {
 
   it(
     'should save MENU to database if login is ' +
-      'admin and and body is filed correctly',
+      'caterer and and body is filed correctly',
     (done) => {
       request(server)
         .post('/api/v1/menu')
@@ -136,7 +133,6 @@ describe('Book-a-meal MENU Test', () => {
     },
   );
 
-
   it(
     'should return 400 if login is ' +
     'admin and menu is not an array',
@@ -154,6 +150,7 @@ describe('Book-a-meal MENU Test', () => {
         });
     },
   );
+
   it(
     'should return 400 if login is ' +
     'admin and menu contains incorrect data input',
@@ -184,7 +181,7 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-  it('should return all the MENU in database, if user is an admin', (done) => {
+  it('should return all the MENU in database, if user is a caterer', (done) => {
     request(server)
       .get('/api/v1/menu?date=2018-01-01')
       .set('Authorization', validToken.token)
@@ -196,7 +193,6 @@ describe('Book-a-meal MENU Test', () => {
       });
   });
 
-
   it('should return 403 if no token', (done) => {
     request(server)
       .get('/api/v1/menu/')
@@ -207,6 +203,7 @@ describe('Book-a-meal MENU Test', () => {
         done();
       });
   });
+
   it('should return error if MENU date is incorrect', (done) => {
     request(server)
       .get('/api/v1/menu?date=2001-100-100')
@@ -218,6 +215,7 @@ describe('Book-a-meal MENU Test', () => {
         done();
       });
   });
+
   it('should return error if MENU date is not in db', (done) => {
     request(server)
       .get('/api/v1/menu?date=1993-10-11')
@@ -229,52 +227,4 @@ describe('Book-a-meal MENU Test', () => {
         done();
       });
   });
-//   it('should Update a MEAL when Token is correct', (done) => {
-//     request(server)
-//       .put('/api/v1/meals/2')
-//       .send(testData.newMeal6)
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(404);
-//         expect(res.body.result).to.include('updated');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-
-
-//   it('return error if login user is not an admin when deleting MEAL', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/1')
-//       .send(testData.newMeal6)
-//       .set('Authorization', validToken.token)
-//       .end((error, res) => {
-//         expect(401);
-//         expect(res.body.message).to.include('You have to be a caterer');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-//   it('return error if admin inputs invalid id for meal when deleting', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/xx')
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(404);
-//         if (error) done(error);
-//         done();
-//       });
-//   });
-//   it('Authenticated user should delete a meal', (done) => {
-//     request(server)
-//       .delete('/api/v1/meals/1')
-//       .set('Authorization', adminToken.token)
-//       .end((error, res) => {
-//         expect(200);
-//         expect(res.body.message).to.include('meal successfully deleted!');
-//         if (error) done(error);
-//         done();
-//       });
-//   });
 });
-

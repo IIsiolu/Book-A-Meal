@@ -30,7 +30,7 @@ class MenuPage extends Component {
    */
   componentWillMount() {
     const { role } = this.props;
-    if (!(role === 'admin' || role === 'super-admin')) {
+    if (!(role === 'caterer' || role === 'super-admin')) {
       this.props.history.push('/');
     }
   }
@@ -51,7 +51,6 @@ class MenuPage extends Component {
    */
   componentDidUpdate(prevProps) {
     if(this.props.success) {
-      this.alert();
       this.props.changeMSuccessState(false);
       this.openMenuSlider();
       this.props.clearMenu();
@@ -85,9 +84,9 @@ class MenuPage extends Component {
   }
 
   // sweet alert
-  alert = () => (
-    swal("Menu Created", "Your menu has been created successfully!", "success")
-  )
+  // alert = () => (
+  //   swal("Menu Created", "Your menu has been created successfully!", "success")
+  // )
 
   // ate button
   dateBtn = () => (
@@ -179,7 +178,7 @@ class MenuPage extends Component {
   )
 
   // meal cards
-  mealCards = () => this.props.fetchedMeals ? (this.props.allMeals.length ? 
+  mealCards = () => this.props.allMeals.length ? (this.props.allMeals.length ? 
     (this.props.allMeals.map((meal, key) =>
      <MealCard addedMenus={this.addedMenus} menus={this.props.menus} meal={meal} key={key} /> ))
     :(this.renderNoMeal())) : (this.renderNoMeal());
@@ -209,26 +208,25 @@ MenuPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  fetchedMeals: PropTypes.bool.isRequired,
+  // fetchedMeals: PropTypes.bool.isRequired,
   fetchMeals: PropTypes.func.isRequired,
   addToMenu: PropTypes.func.isRequired,
   menus: PropTypes.array.isRequired,
   removeMeal: PropTypes.func.isRequired
 };
 
-const mapstatetoProps = ({ user, fetchMeals, menu }) => ({
+const mapstatetoProps = ({ user, meals, menu }) => ({
   isAuthenticated: user.isAuthenticated,
   role: user.user.role,
-  allMeals: fetchMeals.meals,
-  fetchedMeals: fetchMeals.success,
+  allMeals: meals.meals,
   menus: menu.menus,
   isError: menu.isError,
-  success: menu.success,
+  success: menu.created,
   createdMenuError: menu.createMenuError,
-  page: fetchMeals.pagination.page,
-  pageCount: fetchMeals.pagination.pageCount,
-  pageSize: fetchMeals.pagination.pageSize,
-  totalCount: fetchMeals.pagination.totalCount,
+  page: meals.pagination.page,
+  pageCount: meals.pagination.pageCount,
+  pageSize: meals.pagination.pageSize,
+  totalCount: meals.pagination.totalCount,
 });
 
 export default connect(mapstatetoProps, { addToMenu, fetchMeals,

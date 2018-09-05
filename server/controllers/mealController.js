@@ -25,7 +25,6 @@ class MealController {
         },
       })
       .spread((meal, created) => {
-        // created becomes null if meal is not created
         if (!created) {
           return res.status(409).json({
             success: false,
@@ -34,7 +33,7 @@ class MealController {
         }
         return res.status(201).json({
           success: true,
-          data: meal,
+          meal,
         });
       }).catch((err) => {
         res.status(500).send({
@@ -63,17 +62,18 @@ class MealController {
         paranoid: true,
         order: [['id', 'DESC']],
       })
-      .then((meal) => {
-        if (meal.count === 0) {
-          return res.status(404).send({
+      .then((meals) => {
+        if (meals.count === 0) {
+          // no content
+          return res.status(204).send({
             success: false,
             message: 'Meal is empty',
           });
         }
         res.status(200).json({
           success: true,
-          pagination: paginatedData(page, limit, meal),
-          data: meal.rows,
+          pagination: paginatedData(page, limit, meals),
+          meals: meals.rows,
         });
       })
       .catch(() => res.status(500).json('unexpected error'));
@@ -97,17 +97,17 @@ class MealController {
         paranoid: true,
         order: [['id', 'DESC']],
       })
-      .then((meal) => {
-        if (meal.count === 0) {
-          return res.status(404).send({
+      .then((meals) => {
+        if (meals.count === 0) {
+          return res.status(204).send({
             success: false,
             message: 'Meal is empty',
           });
         }
         res.status(200).json({
           success: true,
-          pagination: paginatedData(page, limit, meal),
-          data: meal.rows,
+          pagination: paginatedData(page, limit, meals),
+          meals: meals.rows,
         });
       })
       .catch(() => res.status(500).json('unexpected error'));
@@ -132,7 +132,7 @@ class MealController {
       meal.update({ ...userInfo, ...req.body }).then(() => {
         res.status(200).json({
           success: true,
-          message: 'updated',
+          message: 'meal updated successfully',
         });
       }).catch(() => res.status(400).json({
         success: false,

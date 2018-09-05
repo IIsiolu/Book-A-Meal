@@ -35,7 +35,7 @@ class SignupForm extends Component {
   // sets the role
   check = (check) => {
     check.target.checked ? this.setState({
-      data: {...this.state.data, role: 'admin'}
+      data: {...this.state.data, role: 'caterer'}
     }) : this.setState({
       data: {...this.state.data, role: 'user'}
     })

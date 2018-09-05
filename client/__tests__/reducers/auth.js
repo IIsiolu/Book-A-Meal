@@ -1,7 +1,8 @@
 import {
-  USER_SIGN_UP, USER_SIGNUP_ERROR,
-  USER_LOGGED_IN, LOGIN_ERROR, SET_CURRENT_USER,
+  USER_SIGN_UP, USER_SIGNUP_ERROR, CHANGE_SIGN_UP,
+  USER_LOGGED_IN, LOGIN_ERROR, SET_CURRENT_USER, LOADING,
 } from '../../src/actions/actionsTypes';
+import { logout } from '../../src/actions';
 import user from '../../src/reducers/user';
 import { userState } from '../../src/reducers/initState';
 
@@ -12,6 +13,18 @@ describe('Auth Reducer', () => {
       expect(user(undefined, {})).toEqual(userState);
     },
   );
+
+  it(
+    'should set loading to true when action type is LOADING',
+    () => {
+      const action = {
+        type: LOADING,
+      };
+      const newState = user(userState, action);
+      expect(newState.loading).toBe(true);
+    },
+  );
+
   it(
     'should set signedUp to true when action type is USER_SIGN_UP',
     () => {
@@ -22,6 +35,20 @@ describe('Auth Reducer', () => {
       expect(newState.signedUp).toBe(true);
     },
   );
+
+  it(
+    'should change signUp state when action type is CHANGE_SIGN_UP',
+    () => {
+      const action = {
+        type: CHANGE_SIGN_UP,
+        payload: false,
+      };
+      const newState = user(userState, action);
+      expect(newState.signedUp).toBe(false);
+    },
+  );
+
+
   it(
     'should set signedUp to false and signUpError to true ' +
      'when action type is USER_ERROR',
@@ -60,6 +87,7 @@ describe('Auth Reducer', () => {
       expect(newState.loginSuccess).toBe(false);
     },
   );
+
   it(
     'sets success to true when action type is SET_CURRENT_USER' +
     'user data to store',
@@ -76,4 +104,20 @@ describe('Auth Reducer', () => {
       expect(newState.user.token).toBe('token');
     },
   );
+
+  // it(
+  //   'should clear the token and logout a user when ' +
+  //   'logout action is called',
+  //   () => {
+  //     const action = {
+  //       type: SET_CURRENT_USER,
+  //       payload: {
+  //         token: 'token',
+  //       },
+  //     };
+  //     const newState = user(userState, action);
+  //     expect(newState.isAuthenticated).toBe(false);
+  //   },
+  // );
+
 });

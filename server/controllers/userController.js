@@ -35,15 +35,14 @@ class UserController {
             message: 'User already exist',
           });
         }
-        const createdUser = {
-          firstname: user.firstname,
-          lastname: user.lastname,
+        const token = jwt.sign({
+          id: user.id,
           role: user.role,
-          email: user.email,
-        };
+        }, secret, { expiresIn: '500h' });
         return res.status(201).send({
           success: true,
-          data: createdUser,
+          message: 'user created successfully',
+          token,
         });
       }).catch(() => {
         res.status(500).send({
@@ -63,118 +62,41 @@ class UserController {
   */
   static async signin(req, res) {
     try {
-      const check = await User.findOne({
+      const user = await User.findOne({
         where: {
           email: req.body.email,
         },
       });
-      // check contains object with data Values
-      if (check) {
-        bcrypt.compare(req.body.password, check.password, (err, response) => {
+      // user contains object with data Values
+      if (user) {
+        bcrypt.compare(req.body.password, user.password, (error, response) => {
           if (response) {
             const token = jwt.sign({
-              id: check.id,
-              role: check.role,
+              id: user.id,
+              role: user.role,
             }, secret, { expiresIn: '500h' });
             return res.status(200).json({
               success: true,
-              message: `Welcome ${check.firstname}`,
+              message: `Welcome ${user.firstname}`,
               token,
             });
           }
-          return res.status(409).send({
+          return res.status(401).send({
             success: false,
-            error: err,
+            error,
             message: 'Email or password is incorrect',
           });
         });
       } else {
         res.status(404).json({
           success: false,
-          message: 'Email or password incorrect',
+          message: 'User does not exist',
         });
       }
     } catch (err) {
       res.status(500).send({
         success: false,
         message: 'User cannot be signed in',
-      });
-    }
-  }
-
-  /**
-   * @function userProfile
-   * @param {string} req
-   * @param {object} res
-   * @returns {object} res
-   */
-  static async userProfile(req, res) {
-    try {
-      const profile = await User.findOne({
-        where: {
-          id: req.user.id,
-        },
-      });
-      if (profile) {
-        const userData = {
-          firstname: profile.firstname,
-          lastname: profile.lastname,
-          email: profile.email,
-        };
-        res.status(200).send({
-          success: true,
-          data: userData,
-        });
-      } else {
-        res.status(404).json({
-          success: false,
-          message: 'user does not exist',
-        });
-      }
-    } catch (err) {
-      return res.status(500).send({
-        success: false,
-        message: 'error updating user',
-      });
-    }
-  }
-
-  /**
-  * Edit user
-  * @description Edit user
-  * @param  {string} req - request object
-  * @param  {Object} res - response object
-  * @returns {Object}  response to be sent to client
-  */
-  static async editUser(req, res) {
-    try {
-      const check = await User.findOne({
-        where: {
-          email: req.body.email,
-        },
-      });
-      if (check) {
-        const userInfo = Object.assign({}, check);
-        check.update({ ...userInfo, ...req.body }).then((update) => {
-          res.status(200).send({
-            success: true,
-            data: update,
-          });
-        }).catch(err => res.status(400).send({
-          success: false,
-          error: err,
-          message: 'user update failed',
-        }));
-      } else {
-        res.status(404).json({
-          success: false,
-          message: 'user does not exist',
-        });
-      }
-    } catch (err) {
-      return res.status(500).send({
-        success: false,
-        message: 'error updating user',
       });
     }
   }
@@ -196,7 +118,7 @@ class UserController {
         });
       }
       return res.status(404).send({
-        result: 'failed',
+        message: 'failed',
       });
     } catch (err) {
       return res.json({

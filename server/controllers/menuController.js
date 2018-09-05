@@ -22,7 +22,7 @@ class MenuController {
       where: { date: data, userId },
     }).then((found) => {
       if (found) {
-        res.status(400).send({
+        res.status(409).send({
           success: false,
           message: 'meal already exist for that day',
         });
@@ -32,12 +32,11 @@ class MenuController {
         }).then((created) => {
           res.status(201).send({
             success: true,
-            data: created,
+            menu: created,
           });
-        }).catch(err => res.status(500).send({
+        }).catch(() => res.status(500).send({
           success: false,
           message: 'something went wrong',
-          err,
         }));
       }
     });
@@ -61,19 +60,20 @@ class MenuController {
           message: 'no menu for that day',
         });
       }
-      let datas = [];
+      // meal ID's
+      let meals = [];
       menuId.forEach((menu) => {
-        datas = [...datas, ...menu.mealId];
+        meals = [...meals, ...menu.mealId];
       });
       const menuMeals = await Meal.findAndCountAll({
-        where: { id: datas },
+        where: { id: meals },
         limit,
         offset,
       });
       return res.status(200).send({
         success: true,
         pagination: paginatedData(page, limit, menuMeals),
-        data: menuMeals.rows,
+        menu: menuMeals.rows,
       });
     } catch (err) {
       return res(500).send({

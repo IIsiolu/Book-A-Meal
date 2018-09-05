@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import swal from 'sweetalert';
 import { TopNav, MealOptions } from '../common/';
-import {AddMeal}  from '../forms';
+import { AddMeal }  from '../forms';
 import { logout, imageUpload, createMeal, fetchMeals, clearMealImage,
-   updateMeal, deleteMeal, changeMealSuccess, changeMealError,
-    changeSuccessState,
+   updateMeal, deleteMeal,
      mealSuccessState, DeleteErrorState } from '../../actions';
 
 /**
@@ -31,7 +30,7 @@ class MealPage extends Component {
    */
   componentWillMount() {
     const { role } = this.props;
-    if (!(role === 'admin' || role === 'super-admin')) {
+    if (!(role === 'caterer' || role === 'super-admin')) {
       this.props.history.push('/');
     }
   }
@@ -49,11 +48,6 @@ class MealPage extends Component {
   imageUpload = (image) => (
     this.props.imageUpload(image)
    )
-
-  //  function to create a new meal
-  submit = (meals) => (
-    this.props.createMeal(meals)
-  )
 
   /**
    * Called if there is no meal in the page
@@ -73,23 +67,17 @@ class MealPage extends Component {
     })
   )
 
-  // sweet alert
-  alert = () => (
-    swal("Meal Updated",
-     "Your meal has been updated successfully!", "success")
-  )
-
   // meal container
   mealContainer = () => (
      this.props.allMeals.length ? 
-      this.props.allMeals.map((meal, i) =>
-       <MealOptions {...this.props} key={i}
-        meal={meal} />) : this.renderNoMeal() 
+      this.props.allMeals.map((meal, key) => (
+       <MealOptions {...this.props} key={key} meal={meal} />))
+      : this.renderNoMeal()
   )
 
   //  check if meal exist in the page
   isMeal = () => (
-    this.props.allMeals.length? true : false
+    this.props.allMeals.length ? true : false
   )
 
   /**
@@ -178,40 +166,38 @@ MealPage.propTypes = {
   imageUpload: PropTypes.func.isRequired,
   updateMeal: PropTypes.func.isRequired,
   createMeal: PropTypes.func.isRequired,
-  changeMealSuccess: PropTypes.func.isRequired,
-  changeMealError: PropTypes.func.isRequired,
+  // changeMealSuccess: PropTypes.func.isRequired,
+  // changeMealError: PropTypes.func.isRequired,
 };
 
-const mapstatetoProps = ({ user, imageUpload, createMeal,
-   fetchMeals, updateMeals, deleteMeal }) => ({
+const mapstatetoProps = ({ user, imageUpload, meals }) => ({
   role: user.user.role,
   success: imageUpload.success,
   imageUploadError: imageUpload.error,
-  addMealError: createMeal.error,
-  mealCreated: createMeal.success,
-  creatingMeal: createMeal.loading,
-  isMealAdded: createMeal.mealsuccessful,
-  isImageSuccess: createMeal.isImageSuccess,
-  mealImageUrl: createMeal.imageUrl,
+  addMealError: meals.error,
+  // mealCreated: createMeal.success,
+  creatingMeal: meals.loading,
+  isMealAdded: meals.mealsuccessful,
+  isImageSuccess: meals.isImageSuccess,
+  mealImageUrl: meals.imageUrl,
   isLoading: imageUpload.loading,
-  allMeals: fetchMeals.meals,
-  fetchedMeals: fetchMeals.success,
-  updatingMeal: updateMeals.loading,
-  mealUpdated: updateMeals.success,
-  mealUpdatedId: updateMeal.meal,
-  isUpdateMealError: updateMeal.isError,
-  updateMealError: updateMeals.error,
-  mealDeleted: deleteMeal.success,
-  deletingMeal: deleteMeal.loading,
-  isMealDeleteError: deleteMeal.isMealDeleteError,
-  deleteMealError: deleteMeal.error,
-  page: fetchMeals.pagination.page,
-  pageCount: fetchMeals.pagination.pageCount,
-  pageSize: fetchMeals.pagination.pageSize,
-  totalCount: fetchMeals.pagination.totalCount,
+  allMeals: meals.meals,
+  // fetchedMeals: meals.success,
+  // updatingMeal: updateMeals.loading,
+  // mealUpdated: updateMeals.success,
+  // mealUpdatedId: updateMeal.meal,
+  // isUpdateMealError: updateMeal.isError,
+  // updateMealError: updateMeals.error,
+  // mealDeleted: deleteMeal.success,
+  // deletingMeal: deleteMeal.loading,
+  // isMealDeleteError: deleteMeal.isMealDeleteError,
+  // deleteMealError: deleteMeal.error,
+  page: meals.pagination.page,
+  pageCount: meals.pagination.pageCount,
+  pageSize: meals.pagination.pageSize,
+  totalCount: meals.pagination.totalCount,
 });
 
 export default connect(mapstatetoProps, { logout, imageUpload, createMeal,
    fetchMeals, updateMeal, deleteMeal, clearMealImage,
-    changeMealSuccess, changeMealError, changeSuccessState,
      mealSuccessState, DeleteErrorState })(MealPage);

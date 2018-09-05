@@ -1,17 +1,14 @@
 import { combineReducers } from 'redux';
 import user from './user';
 import imageUpload from './imageUploadReducer';
-import createMeal from './createMeal';
-import fetchMeals from './fetchMeals';
 import isModalOpened from './isModalOpened';
-import updateMeals from './updateMeal';
-import deleteMeal from './deleteMeal';
 import menu from './menu';
-import menuForToday from './menuForToday';
 import order from './order';
 import isOverlayOpened from './isOverlayOpened';
 import orderHistories from './orderHistory';
-import userOrders from './userOrders';
+import apiResponse from './apiResponse';
+import spinner from './spinner';
+import meals from './meals';
 
 /**
  * @summary turns an object whose values are different reducing functions
@@ -21,15 +18,12 @@ import userOrders from './userOrders';
 export default combineReducers({
   user,
   imageUpload,
-  createMeal,
-  fetchMeals,
+  meals,
   isModalOpened,
-  updateMeals,
-  deleteMeal,
   menu,
-  menuForToday,
   order,
   orderHistories,
-  userOrders,
   isOverlayOpened,
+  apiResponse,
+  spinner,
 });

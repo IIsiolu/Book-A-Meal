@@ -17,27 +17,28 @@ import Navigate from './utils/Navigate';
  * @param {string} location - The path been called
  * @returns {JSX} jsx
  */
-const App = ({ location }) => (
+const App = ({ location }) =>
   // switch allows just one route to match in a group
-  <Switch>
-    <Route
-      location={location}
-      path="/"
-      exact
-      component={Navigate(LandingPage)}
-    />
-    <Route path="/index" exact component={LandingPage} />
-    <Route path="/login" exact component={LoginPage} />
-    <Route path="/signup" exact component={SignupPage} />
-    <Route path="/dashboard" exact component={Authenticate(DashboardPage)} />
-    <Route path="/meal" exact component={Authenticate(MealPage)} />
-    <Route path="/home" exact component={Authenticate(TodayMenuPage)} />
-    <Route path="/menu" exact component={Authenticate(MenuPage)} />
-    <Route path="/adminSignup" exact component={Authenticate(AdminSignUp)} />
-    <Route path="/orders" exact component={Authenticate(UserOrders)} />
-    <Route exact path="*" component={NotFoundPage} />
-  </Switch>
-);
+  (
+    <Switch>
+      <Route
+        location={location}
+        path="/"
+        exact
+        component={Navigate(LandingPage)}
+      />
+      <Route path="/index" exact component={LandingPage} />
+      <Route path="/login" exact component={LoginPage} />
+      <Route path="/signup" exact component={SignupPage} />
+      <Route path="/dashboard" exact component={Authenticate(DashboardPage)} />
+      <Route path="/meal" exact component={Authenticate(MealPage)} />
+      <Route path="/home" exact component={Authenticate(TodayMenuPage)} />
+      <Route path="/menu" exact component={Authenticate(MenuPage)} />
+      <Route path="/adminSignup" exact component={Authenticate(AdminSignUp)} />
+      <Route path="/orders" exact component={Authenticate(UserOrders)} />
+      <Route exact path="*" component={NotFoundPage} />
+    </Switch>
+  );
 
 /**
  * @summary validates props

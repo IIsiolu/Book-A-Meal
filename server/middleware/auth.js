@@ -48,13 +48,43 @@ class Auth {
     if (token) {
       const secret = process.env.SECRET;
       jwt.verify(token, secret, (err, data) => {
-        if (err || !(data.role === 'admin' || data.role === 'super-admin')) {
+        if (err || !(data.role === 'caterer' || data.role === 'super-admin')) {
           return res.status(401).json({
-            message: 'You have to be an admin',
+            message: 'You have to be a caterer',
           });
         }
         req.user = data;
 
+        next();
+      });
+    } else {
+      // return 403 if token is not present
+      return res.status(403).json({
+        message: 'You need to sign up or login',
+      });
+    }
+  }
+
+  /**
+   * @description verifies token
+   * @function verify
+   * @param {string} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} res
+   */
+  static verify(req, res, next) {
+    const token = req.body.token || req.query.token
+     || req.headers.authorization;
+    if (token) {
+      const secret = process.env.SECRET;
+      jwt.verify(token, secret, (err, data) => {
+        if (err || !(data.role === 'user' || data.role === 'caterer')) {
+          return res.status(401).json({
+            message: 'Authentication failed',
+          });
+        }
+        req.user = data;
         next();
       });
     } else {

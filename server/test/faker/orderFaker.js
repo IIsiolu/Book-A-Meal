@@ -50,26 +50,17 @@ const orderFaker = {
     ],
   },
   newUpdate: {
-    orders: [
-      {
-        mealId: 2,
-        quantity: 5,
-      },
-      {
-        mealId: 2,
-        quantity: 5,
-      },
-    ],
+    orders: { quantity: 4, status: 'pending' },
   },
 
   newUpdate2: {
     orders: [
       {
-        mealId: 2,
+        mealId: 1,
         quantity: 9,
       },
       {
-        mealId: 2,
+        mealId: 1,
         quantity: 3,
       },
     ],

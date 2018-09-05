@@ -9,6 +9,9 @@ module.exports = {
     quantity: {
       type: Sequelize.INTEGER,
     },
+    address: {
+      type: Sequelize.STRING,
+    },
     status: {
       type: Sequelize.STRING,
       defaultValue: 'pending',

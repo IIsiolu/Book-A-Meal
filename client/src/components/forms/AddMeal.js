@@ -38,8 +38,8 @@ class AddMeal extends Component {
       });
       this.props.clearMealImage();
     }
-    if(this.props.isMealAdded === true ){
-      swal("Meal Added", "Your meal has been added successfully!", "success")
+    if (this.props.isMealAdded === true ) {
+      // swal("Meal Added", "Your meal has been added successfully!", "success")
       this.props.mealSuccessState(false);
       this.setState({
         data: {
@@ -81,7 +81,7 @@ class AddMeal extends Component {
     if (!data.description && !nameRegex.test(data.description))
      errors.description = "invalid description";
     if (!data.image) errors.image = "upload a valid image"
-    if (!data.price) errors.price = "Can't be blank"
+    if (isNaN(data.price)) errors.price = "Can't be blank"
     return errors;
   }
   

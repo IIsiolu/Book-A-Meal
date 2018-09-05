@@ -38,7 +38,7 @@ describe('Book-a-meal MENU Test', () => {
       .set('Authorization', 'jdjdjdjdjdj')
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
@@ -52,7 +52,7 @@ describe('Book-a-meal MENU Test', () => {
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(403);
-        expect(res.body.message).to.include('You have to be an admin');
+        expect(res.body.message).to.include('You have to be a caterer');
         if (error) done(error);
         done();
       });
@@ -104,7 +104,7 @@ describe('Book-a-meal MENU Test', () => {
 
   it(
     'should return 201 if login is ' +
-    'admin and and body is filled correctly',
+    'caterer and and body is filled correctly',
     (done) => {
       request(server)
         .post('/api/v1/menu')
@@ -118,6 +118,25 @@ describe('Book-a-meal MENU Test', () => {
         });
     },
   );
+
+  it(
+    'should return 409 if login is ' +
+    'caterer and and body is filled correctly',
+    (done) => {
+      request(server)
+        .post('/api/v1/menu')
+        .send(testData.newMenu6)
+        .set('Authorization', adminToken.token)
+        .end((error, res) => {
+          expect(409);
+          expect(res.body.success).to.be.false;
+          if (error) done(error);
+          done();
+        });
+    },
+  );
+
+
   it(
     'should return 400 if login is ' +
     'admin and menu is not an array',
@@ -152,6 +171,7 @@ describe('Book-a-meal MENU Test', () => {
         });
     },
   );
+
   it('should fail to return all the MENU in database, if user is not valid', (done) => {
     request(server)
       .get('/api/v1/menu')
@@ -175,6 +195,7 @@ describe('Book-a-meal MENU Test', () => {
         done();
       });
   });
+
 
   it('should return 403 if no token', (done) => {
     request(server)
@@ -229,7 +250,7 @@ describe('Book-a-meal MENU Test', () => {
 //       .set('Authorization', validToken.token)
 //       .end((error, res) => {
 //         expect(401);
-//         expect(res.body.message).to.include('You have to be an admin');
+//         expect(res.body.message).to.include('You have to be a caterer');
 //         if (error) done(error);
 //         done();
 //       });

@@ -1,5 +1,7 @@
 import api from '../utils/api';
 import * as actionTypes from './actionsTypes';
+import { isLoading } from './meal';
+import socket from '../utils/socket';
 
 const addToOrder = meal => ({
   type: actionTypes.ADD_TO_ORDER,
@@ -24,12 +26,20 @@ const removeAnOrder = meal => ({
 export const addMealToOrder = meal => (dispatch) => {
   const mealData = {
     mealId: meal.id,
+    catererId: meal.userId,
     name: meal.name,
     quantity: 1,
     mealImg: meal.image,
     mealCost: meal.price,
   };
   return dispatch(addToOrder(mealData));
+};
+
+export const recentOrders = order => (dispatch) => {
+  dispatch({
+    type: actionTypes.RECENT_ORDER,
+    payload: order,
+  });
 };
 
 export const removeOrder = mealId => (dispatch) => {
@@ -70,12 +80,59 @@ export const errState = bool => dispatch => (
  * @param {object} orders
  * @returns {void}
  */
-export const requestForOrder = orders => async (dispatch) => {
+export const requestForOrder = (orders, address) => async (dispatch) => {
+  dispatch(isLoading(true));
   try {
-    const response = await api('orders', 'post', { orders });
-    const { data } = response;
-    dispatch(createdOrder(data));
+    const customerOrders = orders.map(meal => ({
+      ...meal, address,
+    }));
+    const response = await api('orders', 'post', { orders: customerOrders });
+    const { order } = response;
+    dispatch(isLoading(false));
+    dispatch(createdOrder(order));
+    const send = socket();
+    orders.forEach((meal, key) => {
+      send.orderMeal(meal.catererId, order[key]);
+    });
   } catch (err) {
-    dispatch(orderError(err));
+    dispatch(isLoading(false));
+    dispatch({
+      type: actionTypes.API_ERR_RESPONSE,
+      payload: {
+        header: 'Order Error',
+        message: 'Order could not be requested',
+        type: 'error',
+      },
+    });
+    // dispatch(orderError(err));
+  }
+};
+
+export const editOrder = orders => async (dispatch) => {
+  dispatch(isLoading(true));
+  try {
+    const response = await api(`orders/${orders.id}`, 'put', orders);
+    dispatch(isLoading(false));
+
+    dispatch({
+      type: actionTypes.API_SUCCESS_RESPONSE,
+      payload: {
+        header: 'Order Updated',
+        message: 'Order updated successfully',
+        type: 'success',
+      },
+    });
+    const send = socket();
+    send.role() === 'user' ? '' : send.modifyOrder(response.order);
+  } catch (err) {
+    dispatch(isLoading(false));
+    dispatch({
+      type: actionTypes.API_ERR_RESPONSE,
+      payload: {
+        header: 'Order Error',
+        message: 'Order could not be edited',
+        type: 'error',
+      },
+    });
   }
 };

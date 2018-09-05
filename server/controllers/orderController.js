@@ -20,17 +20,18 @@ class OrderController {
     const allOrders = orders.map(newOrder => ({
       mealId: newOrder.mealId,
       quantity: newOrder.quantity,
+      address: newOrder.address,
       userId,
     }));
     Order
       .bulkCreate(allOrders, { individualHooks: true }).then((created) => {
         res.status(201).send({
           success: true,
-          data: created,
+          order: created,
         });
-      }).catch(err => res.status(500).send({
+      }).catch(() => res.status(500).send({
         success: false,
-        error: err,
+        message: 'unexpected error',
       }));
   }
 
@@ -48,17 +49,23 @@ class OrderController {
         },
       }).then((order) => {
         const orderInfo = Object.assign({}, order);
+        if (order.status !== 'pending') {
+          res.status(401).json({
+            success: false,
+            message: 'order cannot be modified',
+          });
+        }
         order.update({ ...orderInfo, ...req.body }).then((newOrder) => {
           res.status(200).json({
-            result: 'updated',
-            message: newOrder,
+            success: true,
+            order: newOrder,
           });
         }).catch(() => res.status(400).json({
-          result: 'failed',
-          message: 'cannot create order, put a valid input',
+          success: false,
+          message: 'cannot modify order, insert a valid input',
         }));
       }).catch(() => res.status(404).json({
-        result: 'failed',
+        success: false,
         message: 'No order exist with that Id',
       }));
   }

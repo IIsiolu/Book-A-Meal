@@ -27,20 +27,15 @@ export const signupError = error => ({
   error,
 });
 
-export const connectin = loading => ({
+export const connecting = loading => ({
   type: actionTypes.LOADING,
   payload: loading,
 });
 
 export const editUserProfile = user => ({
   type: actionTypes.EDIT_USER_PROFILE,
-  payload: user
-})
-
-export const editProfilErr = err => ({
-  type: actionTypes.EDIT_PROFILE_ERR,
-  payload: err
-})
+  payload: user,
+});
 
 /**
  * @description login user to the app
@@ -49,15 +44,15 @@ export const editProfilErr = err => ({
  * @returns {object} response
  */
 export const logIn = (credentials, history) => async (dispatch) => {
-  dispatch(connectin(true));
+  dispatch(connecting(true));
   try {
     const response = await api('auth/login', 'post', credentials);
     const { token } = response;
     localStorage.setItem('myUserT', token);
     const userDecode = jwt(token);
-    const pass = { ...userDecode, token };
-    dispatch(userLoggedIn(pass));
-    const navigate = userDecode.role === 'admin' ? '/dashboard' : '/';
+    const userInfo = { ...userDecode, token };
+    dispatch(userLoggedIn(userInfo));
+    const navigate = userDecode.role === 'caterer' ? '/dashboard' : '/';
     history.push(navigate);
     return response;
   } catch (err) {
@@ -79,9 +74,14 @@ export const signupState = bool => (dispatch) => {
  * @returns {object} response
  */
 export const signup = credentials => async (dispatch) => {
-  dispatch(connectin(true));
+  dispatch(connecting(true));
   try {
     const response = await api('auth/signup', 'post', credentials);
+    const { token } = response;
+    localStorage.setItem('myUserT', token);
+    const userDecode = jwt(token);
+    const userInfo = { ...userDecode, token };
+    dispatch(userLoggedIn(userInfo));
     dispatch(userSignup(response));
   } catch (err) {
     dispatch(signupError(err));
@@ -95,15 +95,10 @@ export const signup = credentials => async (dispatch) => {
  * @returns {void}
  */
 export const logout = () => (dispatch) => {
-  localStorage.clear();
-  dispatch(userLoggedIn({}));
-};
-
-export const editProfile = credentials => async (dispatch) => {
   try {
-    const response = await api('profile', 'post', credentials);
-    dispatch(editUserProfile(response));
+    localStorage.clear();
+    dispatch(userLoggedIn({}));
   } catch (err) {
-    dispatch(editProfilErr(err));
+    return err;
   }
 };

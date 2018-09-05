@@ -29,6 +29,16 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'input delivery address',
+        },
+      },
+    },
     mealId: {
       type: DataTypes.INTEGER,
       allowNull: false,

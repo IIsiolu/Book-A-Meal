@@ -27,8 +27,8 @@ const mealFaker = {
     image: faker.image.imageUrl(),
   },
   newMeal4: {
-    name: faker.name.findName(),
-    description: faker.lorem.paragraph(),
+    name: 'yam',
+    description: 'very wonderful meal',
     price: faker.commerce.price(),
     image: faker.image.imageUrl(),
   },

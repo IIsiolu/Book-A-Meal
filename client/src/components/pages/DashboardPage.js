@@ -86,7 +86,7 @@ class DashboardPage extends Component {
           <SideNav role={this.props.role} />
           <div className = "order-bar" >
             <Orders {...this.props} />
-            {this.props.orders.length && this.renderPagination()}
+            {this.props.orders.length>0 && this.renderPagination()}
           </div>
           <ToastContainer autoClose={2000}/>
         </div>

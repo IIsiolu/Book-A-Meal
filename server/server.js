@@ -13,9 +13,6 @@ import { userRouter, mealRouter, menuRouter, orderRouter } from './routes';
 
 import socket from './socket';
 
-// const io = require('socket.io')(httpServer, { wsEngine: 'ws' });
-
-
 const swaggerUi = require('swagger-ui-express');
 
 const swaggerDocument = require('../swagger.json');

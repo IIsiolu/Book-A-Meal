@@ -196,7 +196,7 @@ class MenuPage extends Component {
           <div className = "menupage-meals">
             {this.mealCards()}
           </div>
-          {this.props.allMeals.length && this.renderPagination()}
+          {this.props.allMeals.length>0 && this.renderPagination()}
           {this.props.menus.length>0 && this.menuSlider()}
         </div>
       </div>

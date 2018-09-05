@@ -69,7 +69,7 @@ class MealPage extends Component {
 
   // meal container
   mealContainer = () => (
-     this.props.allMeals.length ? 
+     this.props.allMeals.length>0 ? 
       this.props.allMeals.map((meal, key) => (
        <MealOptions {...this.props} key={key} meal={meal} />))
       : this.renderNoMeal()
@@ -145,7 +145,7 @@ class MealPage extends Component {
 
             </div>
           </div>
-          {this.props.allMeals.length && this.renderPagination()}
+          {this.props.allMeals.length>0 && this.renderPagination()}
           <div className = {this.state.isNavOpened?
              'add-meal-c go-left': 'add-meal-c'}>
             <AddMeal {...this.props} open={this.openNavSlider}

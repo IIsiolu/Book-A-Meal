@@ -18,6 +18,7 @@ describe('Book-a-meal Order Test', () => {
         done();
       });
   });
+
   it('should return error if token is not present when making order', (done) => {
     request(server)
       .post('/api/v1/orders')
@@ -223,24 +224,6 @@ describe('Book-a-meal Order Test', () => {
     },
   );
 
-  // it(
-  //   'should return 200 if login is ' +
-  //   'user update is successful',
-  //   (done) => {
-  //     request(server)
-  //       .put('/api/v1/orders/1')
-  //       .send(testData.newUpdate2)
-  //       .set('Authorization', validToken.token)
-  //       .end((error, res) => {
-  //         expect(200);
-  //         expect(res.body.result)
-  //           .to.include('updated');
-  //         if (error) done(error);
-  //         done();
-  //       });
-  //   },
-  // );
-
   it('should fail to return all the ORDER in database, if user is not valid', (done) => {
     request(server)
       .get('/api/v1/orders/userOrder')
@@ -311,4 +294,3 @@ describe('Book-a-meal Order Test', () => {
       });
   });
 });
-

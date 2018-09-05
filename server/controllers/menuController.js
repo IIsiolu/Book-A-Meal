@@ -15,11 +15,11 @@ class MenuController {
   static createMenu(req, res) {
     const { date } = req.body;
     const userId = req.user.id;
-    const data = new Date(date);
+    const menuDate = new Date(date);
     const meals = { ...req.body, userId };
 
     Menu.findOne({
-      where: { date: data, userId },
+      where: { date: menuDate, userId },
     }).then((found) => {
       if (found) {
         res.status(409).send({

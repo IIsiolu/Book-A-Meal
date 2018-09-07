@@ -263,8 +263,8 @@ class Validate {
    * @returns {object} res
    */
   static validateOrder(req, res, next) {
-    req.checkBody('orders', 'input meal Orders').notEmpty();
-    const cusOrders = req.body.orders;
+    req.checkBody('order', 'input meal Orders').notEmpty();
+    const cusOrders = req.body.order;
     const errors = req.validationErrors();
     if (errors) {
       const errorMessage = errors.map(err => err.msg);
@@ -275,14 +275,14 @@ class Validate {
       return;
       // stop the req from proceeding
     }
-    if (!Array.isArray(cusOrders) || cusOrders.length === 0) {
+    if (!Array.isArray(cusOrders.meals) || cusOrders.meals.length === 0) {
       res.status(400).send({
         success: false,
-        message: 'Input must be an array of orders',
+        message: 'meals must be an array of orders',
       });
       return;
     }
-    if (cusOrders.every(checkObj) === false) {
+    if (cusOrders.meals.every(checkObj) === false) {
       res.status(400).send({
         success: false,
         message: 'Meal Id and quantity must be an Integer',

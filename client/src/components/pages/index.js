@@ -1,4 +1,4 @@
-import TodayMenuPage from './HomePage';
+import MenuForToday from './MenuForToday';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import NotFoundPage from './NotFoundPage';
@@ -10,7 +10,7 @@ import AdminSignUp from './AdminSignUp';
 import UserOrders from './UserOrders';
 
 export {
-  TodayMenuPage,
+  MenuForToday,
   LoginPage,
   NotFoundPage,
   DashboardPage,

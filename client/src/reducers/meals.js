@@ -1,40 +1,45 @@
 import { mealState } from './initState';
-import * as actionsTypes from '../actions/actionsTypes';
+import {
+  MEAL_ADDED, MEAL_FETCHED, CREATE_MEAL_ERROR,
+  UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
+  CREATING_MEAL, FETCH_MEAL_ERROR, ADD_MEAL_IMAGE_ERR,
+  ADD_MEAL_SUCCESS_STATE, ADDED_MEAL_IMAGE, CLEAR_MEAL_IMAGE,
+} from '../actions/actionsTypes';
 
 const meals = (state = mealState, action) => {
   switch (action.type) {
-    case actionsTypes.CREATING_MEAL:
+    case CREATING_MEAL:
       return {
         ...state,
         loading: action.payload,
       };
-    case actionsTypes.ADD_MEAL_SUCCESS_STATE:
+    case ADD_MEAL_SUCCESS_STATE:
       return {
         ...state,
         mealsuccessful: action.payload,
       };
-    case actionsTypes.ADDED_MEAL_IMAGE:
+    case ADDED_MEAL_IMAGE:
       return {
         ...state,
         isImageSuccess: true,
         imageUrl: action.payload,
         isImageError: false,
       };
-    case actionsTypes.ADD_MEAL_IMAGE_ERR:
+    case ADD_MEAL_IMAGE_ERR:
       return {
         ...state,
         isImageSuccess: false,
         isImageError: true,
         ImageUploadError: action.payload,
       };
-    case actionsTypes.CLEAR_MEAL_IMAGE:
+    case CLEAR_MEAL_IMAGE:
       return {
         ...state,
         imageUrl: '',
         isImageSuccess: false,
 
       };
-    case actionsTypes.CREATE_MEAL_ERROR:
+    case CREATE_MEAL_ERROR:
       return {
         ...state,
         success: false,
@@ -42,7 +47,7 @@ const meals = (state = mealState, action) => {
         error: action.payload,
         loading: false,
       };
-    case actionsTypes.MEAL_FETCHED:
+    case MEAL_FETCHED:
       return {
         ...state,
         meals: action.payload.meals,
@@ -52,7 +57,7 @@ const meals = (state = mealState, action) => {
           ...action.payload.pagination.pagination,
         },
       };
-    case actionsTypes.FETCH_MEAL_ERROR:
+    case FETCH_MEAL_ERROR:
       return {
         ...state,
         meals: [],
@@ -60,18 +65,18 @@ const meals = (state = mealState, action) => {
         loading: false,
 
       };
-    case actionsTypes.MEAL_ADDED:
+    case MEAL_ADDED:
       return {
         ...state,
         meals: [...state.meals, action.payload],
       };
-    case actionsTypes.UPDATE_FETCH_MEAL:
+    case UPDATE_FETCH_MEAL:
       return {
         ...state,
         mealsuccessful: true,
         meals: [action.payload, ...state.meals.filter(meal => meal.id !== action.payload.id)],
       };
-    case actionsTypes.DELETE_FETCH_MEAL:
+    case DELETE_FETCH_MEAL:
       return {
         ...state,
         meals: [...state.meals.filter(meal => meal.id !== action.payload)],

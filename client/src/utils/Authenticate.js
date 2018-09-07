@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from './spinner';
-import PopUp from './errorPopup';
+import PopUp from './PopUp';
 import { changeErrState, changeSuccessState } from '../actions';
 
 /**

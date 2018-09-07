@@ -6,15 +6,8 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    quantity: {
-      type: Sequelize.INTEGER,
-    },
     address: {
       type: Sequelize.STRING,
-    },
-    status: {
-      type: Sequelize.STRING,
-      defaultValue: 'pending',
     },
     createdAt: {
       allowNull: false,
@@ -23,13 +16,6 @@ module.exports = {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE,
-    },
-    mealId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Meals',
-        key: 'id',
-      },
     },
     userId: {
       type: Sequelize.INTEGER,

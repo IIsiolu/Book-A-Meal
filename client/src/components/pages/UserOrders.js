@@ -20,6 +20,13 @@ class UserOrders extends Component {
     this.props.userOrders();
   }
 
+  componentWillMount() {
+    const { role } = this.props;
+    if (!(role === 'user')) {
+      this.props.history.push('/');
+    }
+  }
+
   /**
    * handle pagination click event
    * @function handlePageChange
@@ -82,13 +89,14 @@ class UserOrders extends Component {
   }
 }
 
-const mapStateToProps = ({ user, orderHistories }) => ({
+const mapStateToProps = ({ user, orderHistory }) => ({
   role: user.user.role,
-  orders: orderHistories.orders,
-  page: orderHistories.pagination.page,
-  pageCount: orderHistories.pagination.pageCount,
-  pageSize: orderHistories.pagination.pageSize,
-  totalCount: orderHistories.pagination.totalCount,
+  orders: orderHistory.orders,
+  page: orderHistory.pagination.page,
+  pageCount: orderHistory.pagination.pageCount,
+  pageSize: orderHistory.pagination.pageSize,
+  totalCount: orderHistory.pagination.totalCount,
 });
 
-export default connect(mapStateToProps, { userOrders, logout, editOrder })(UserOrders);
+export default connect(mapStateToProps, { userOrders,
+   logout, editOrder })(UserOrders);

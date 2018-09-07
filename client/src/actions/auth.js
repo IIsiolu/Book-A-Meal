@@ -1,40 +1,38 @@
 import jwt from 'jwt-decode';
-import * as actionTypes from './actionsTypes';
+import {
+  LOGOUT, LOGIN_ERROR, USER_LOGGED_IN, SET_CURRENT_USER,
+  USER_SIGN_UP, USER_SIGNUP_ERROR, LOADING, CHANGE_SIGN_UP,
+} from './actionsTypes';
 import api from '../utils/api';
 
 export const userSignup = user => ({
-  type: actionTypes.USER_SIGN_UP,
+  type: USER_SIGN_UP,
   payload: user,
 });
 
 export const loginError = error => ({
-  type: actionTypes.LOGIN_ERROR,
+  type: LOGIN_ERROR,
   payload: error,
 });
 
 export const userLoggedIn = user => ({
-  type: actionTypes.USER_LOGGED_IN,
+  type: USER_LOGGED_IN,
   payload: user,
 });
 
 export const setUser = user => ({
-  type: actionTypes.SET_CURRENT_USER,
+  type: SET_CURRENT_USER,
   payload: user,
 });
 
 export const signupError = error => ({
-  type: actionTypes.USER_SIGNUP_ERROR,
+  type: USER_SIGNUP_ERROR,
   error,
 });
 
 export const connecting = loading => ({
-  type: actionTypes.LOADING,
+  type: LOADING,
   payload: loading,
-});
-
-export const editUserProfile = user => ({
-  type: actionTypes.EDIT_USER_PROFILE,
-  payload: user,
 });
 
 /**
@@ -48,7 +46,7 @@ export const logIn = (credentials, history) => async (dispatch) => {
   try {
     const response = await api('auth/login', 'post', credentials);
     const { token } = response;
-    localStorage.setItem('myUserT', token);
+    localStorage.setItem('myUserToken', token);
     const userDecode = jwt(token);
     const userInfo = { ...userDecode, token };
     dispatch(userLoggedIn(userInfo));
@@ -62,7 +60,7 @@ export const logIn = (credentials, history) => async (dispatch) => {
 
 export const signupState = bool => (dispatch) => {
   dispatch({
-    type: actionTypes.CHANGE_SIGN_UP,
+    type: CHANGE_SIGN_UP,
     payload: bool,
   });
 };
@@ -78,7 +76,7 @@ export const signup = credentials => async (dispatch) => {
   try {
     const response = await api('auth/signup', 'post', credentials);
     const { token } = response;
-    localStorage.setItem('myUserT', token);
+    localStorage.setItem('myUserToken', token);
     const userDecode = jwt(token);
     const userInfo = { ...userDecode, token };
     dispatch(userLoggedIn(userInfo));
@@ -98,6 +96,9 @@ export const logout = () => (dispatch) => {
   try {
     localStorage.clear();
     dispatch(userLoggedIn({}));
+    dispatch({
+      type: LOGOUT,
+    });
   } catch (err) {
     return err;
   }

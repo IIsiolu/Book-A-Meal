@@ -58,6 +58,7 @@ export const userOrders = (page, limit, offset) => async (dispatch) => {
     const response = await api(`orders/userOrder?page=${page}
     &limit=${limit}&offset=${offset}`, 'get');
     dispatch(isLoading(false));
+    console.log(response);
     dispatch({
       type: actionTypes.USER_ORDERS,
       payload: response,

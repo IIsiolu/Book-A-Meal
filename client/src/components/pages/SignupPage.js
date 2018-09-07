@@ -38,8 +38,14 @@ class SignupPage extends Component {
    * @method componentDidUpdate
    * @returns {void}
    */
-  componentDidUpdate(){
-    if(this.props.isAuthenticated === true) {
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.goBack();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/');
     }
   }

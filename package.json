@@ -4,8 +4,9 @@
   "description": "book a meal",
   "main": "server.js",
   "scripts": {
-    "start": "babel-watch ./server/server.js",
-    "devserver": "concurrently \"npm start\" \"npm run webpack:watch\"",
+    "start": "node ./server/server.js",
+    "start:server": "babel-watch ./server/server.js",
+    "devserver": "concurrently \"npm run start:server\" \"npm run webpack:watch\"",
     "test": "sequelize db:migrate:undo:all && sequelize db:migrate && npm run start:test",
     "migrations": "sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

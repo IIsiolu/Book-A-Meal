@@ -28,6 +28,13 @@ class DashboardPage extends Component {
     toast.success('you have a new order');
   }
 
+  componentWillMount() {
+    const { role } = this.props;
+    if (!(role === 'caterer' || role === 'super-admin')) {
+      this.props.history.push('/');
+    }
+  }
+
   /**
    * @method componentDidMount
    * @param {void} 
@@ -103,13 +110,13 @@ DashboardPage.propTypes = {
   orderHistory: PropTypes.func.isRequired,
 };
 
-const mapstatetoProps = ({ user, orderHistories }) => ({
+const mapstatetoProps = ({ user, orderHistory }) => ({
   role: user.user.role,
-  orders: orderHistories.orderHistory,
-  page: orderHistories.pagination.page,
-  pageCount: orderHistories.pagination.pageCount,
-  pageSize: orderHistories.pagination.pageSize,
-  totalCount: orderHistories.pagination.totalCount,
+  orders: orderHistory.orderHistory,
+  page: orderHistory.pagination.page,
+  pageCount: orderHistory.pagination.pageCount,
+  pageSize: orderHistory.pagination.pageSize,
+  totalCount: orderHistory.pagination.totalCount,
 });
 
 export default connect(mapstatetoProps,

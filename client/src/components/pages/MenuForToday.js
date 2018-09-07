@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
 import { logout } from '../../actions/auth';
+import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common';
 import socket from '../../utils/socket';
-import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common/';
 import { menuForToday, addMealToOrder,
-   removeOrder, increaseQuantity,
+   removeOrder, increaseQuantity, userOrders,
    requestForOrder, isOverlayOpened,
     clearOrder, successState, errState } from '../../actions';
 
@@ -17,7 +17,7 @@ import { menuForToday, addMealToOrder,
  * @class
  * @constructor
  */
-class TodayMenuPage extends Component {
+class MenuForToday extends Component {
 
   constructor() {
     super();
@@ -103,6 +103,13 @@ class TodayMenuPage extends Component {
     }
   }
 
+  componentWillMount() {
+    const { role } = this.props;
+    if (!(role === 'user')) {
+      this.props.history.push('/');
+    }
+  }
+
   /**
    * display menu cards
    * @function menuCards
@@ -159,10 +166,10 @@ class TodayMenuPage extends Component {
     swal("Input delivery address", {
       content: "input",
     })
-    .then((value) => {
-      swal(`your delivery address is: ${value}`);
-      value.length > 5 ? 
-      this.props.requestForOrder(this.props.placedOrders, value)
+    .then((address) => {
+      swal(`your delivery address is: ${address}`);
+      address.length > 5 ? 
+      this.props.requestForOrder(this.props.placedOrders, address, this.socketClient)
        : swal('Order Error','input delivery address', 'error')
     });
     
@@ -332,14 +339,15 @@ class TodayMenuPage extends Component {
   }
 }
 
-TodayMenuPage.propTypes = {
+MenuForToday.propTypes = {
   logout: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-const mapStateToProps = ({ menu, order, isOverlayOpened }) => ({
+const mapStateToProps = ({ user, menu, order, isOverlayOpened }) => ({
+  role: user.user.role,
   menus: menu.todayMenu,
   isMenu: menu.success,
   placedOrders: order.orders,
@@ -355,6 +363,6 @@ const mapStateToProps = ({ menu, order, isOverlayOpened }) => ({
   totalCount: menu.pagination.totalCount,
 });
 
-export default connect(mapStateToProps, { logout, menuForToday,
+export default connect(mapStateToProps, { logout, menuForToday, userOrders,
    addMealToOrder, removeOrder, increaseQuantity, requestForOrder,
-    isOverlayOpened, clearOrder, successState, errState })(TodayMenuPage);
+    isOverlayOpened, clearOrder, successState, errState })(MenuForToday);

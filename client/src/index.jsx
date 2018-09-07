@@ -16,8 +16,8 @@ import './static/css/index.css';
 const store = configureStore();
 
 // verifies token in local storage
-if (verifyToken(localStorage.myUserT)) {
-  const user = localStorage.getItem('myUserT');
+if (verifyToken(localStorage.myUserToken)) {
+  const user = localStorage.getItem('myUserToken');
   const decode = jwt(user);
   store.dispatch(setUser(decode));
 }

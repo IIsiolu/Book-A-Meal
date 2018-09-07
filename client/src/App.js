@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   NotFoundPage, SignupPage, LoginPage,
   DashboardPage, LandingPage, MealPage,
-  TodayMenuPage, AdminSignUp, MenuPage,
+  MenuForToday, AdminSignUp, MenuPage,
   UserOrders,
 } from './components/pages';
 import Authenticate from './utils/Authenticate';
@@ -32,7 +32,7 @@ const App = ({ location }) =>
       <Route path="/signup" exact component={SignupPage} />
       <Route path="/dashboard" exact component={Authenticate(DashboardPage)} />
       <Route path="/meal" exact component={Authenticate(MealPage)} />
-      <Route path="/home" exact component={Authenticate(TodayMenuPage)} />
+      <Route path="/home" exact component={Authenticate(MenuForToday)} />
       <Route path="/menu" exact component={Authenticate(MenuPage)} />
       <Route path="/adminSignup" exact component={Authenticate(AdminSignUp)} />
       <Route path="/orders" exact component={Authenticate(UserOrders)} />

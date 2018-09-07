@@ -80,19 +80,21 @@ export const errState = bool => dispatch => (
  * @param {object} orders
  * @returns {void}
  */
-export const requestForOrder = (orders, address) => async (dispatch) => {
+export const requestForOrder = (orders, address, socketClient) => async (dispatch) => {
+  console.log('>>>>>>>>>>>', orders);
   dispatch(isLoading(true));
   try {
-    const customerOrders = orders.map(meal => ({
-      ...meal, address,
-    }));
-    const response = await api('orders', 'post', { orders: customerOrders });
+    const customerOrder = {
+      meals: orders,
+      address,
+    };
+    const response = await api('orders', 'post', { order: customerOrder });
     const { order } = response;
     dispatch(isLoading(false));
     dispatch(createdOrder(order));
-    const send = socket();
+    const socket = socketClient;
     orders.forEach((meal, key) => {
-      send.orderMeal(meal.catererId, order[key]);
+      socket.orderMeal(meal.catererId, order[key]);
     });
   } catch (err) {
     dispatch(isLoading(false));
@@ -122,8 +124,10 @@ export const editOrder = orders => async (dispatch) => {
         type: 'success',
       },
     });
+    console.log('>>>>>>>>>>>*******', response)
     const send = socket();
-    send.role() === 'user' ? '' : send.modifyOrder(response.order);
+    send.role() === 'user' ? '' :
+     send.modifyOrder({...response.order, userId: orders.userId});
   } catch (err) {
     dispatch(isLoading(false));
     dispatch({

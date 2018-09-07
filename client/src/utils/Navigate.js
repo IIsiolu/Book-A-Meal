@@ -16,22 +16,23 @@ export default function (ComposedComponent) {
  * @extends {Component}
  */
   class Navigate extends Component {
+    /**
+     * @summary navigates to caterer dashboard or user homepage
+     * @returns {void} void
+     */
     componentWillMount() {
-      if (this.props.user.role === 'caterer' || this.props.user.role === 'super-admin') {
+      if (this.props.user.role === 'caterer' ||
+       this.props.user.role === 'super-admin') {
         this.props.history.push('/dashboard');
       } else if (this.props.user.role === 'user') {
         this.props.history.push('/index');
       }
     }
 
-    componentWillUpdate(nextProps) {
-      if (nextProps.user.role === 'caterer') {
-        this.props.history.push('/dashboard');
-      } else if (nextProps.user.role === 'user') {
-        this.props.history.push('/index');
-      }
-    }
-
+    /**
+     * @summary returns composed component
+     * @returns {JSX} jsx
+     */
     render() {
       return (
         <ComposedComponent {...this.props} />
@@ -49,6 +50,7 @@ export default function (ComposedComponent) {
       push: PropTypes.func.isRequired,
     }).isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
   };
   return connect(mapStateToProps)(Navigate);
 }

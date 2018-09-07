@@ -1,4 +1,4 @@
-import { Order, User, Meal } from '../models';
+import { Order, User, Meal, OrderMeal } from '../models';
 import { checkPagination, paginatedData } from '../helpers/paginate';
 
 /**
@@ -12,27 +12,45 @@ class OrderController {
    * @param {object} res
    * @returns {object} - response to be sent to the client
    */
-  static createOrder(req, res) {
-    const {
-      orders,
-    } = req.body;
+  static async createOrder(req, res) {
+    const { order } = req.body;
     const userId = req.user.id;
-    const allOrders = orders.map(newOrder => ({
-      mealId: newOrder.mealId,
-      quantity: newOrder.quantity,
-      address: newOrder.address,
-      userId,
-    }));
-    Order
-      .bulkCreate(allOrders, { individualHooks: true }).then((created) => {
+    // array of mealId
+    const mealIdArray = order.meals.map(meal => meal.mealId);
+    try {
+      // finds array of mealId, returns id and price
+      const mealInfo = await Meal.findAll({
+        where: { id: mealIdArray },
+        attributes: ['id', 'price'],
+      });
+      if (mealInfo.length) {
+        const createdOrder = await Order.create({
+          userId,
+          address: order.address,
+        });
+        const allOrders = order.meals.map((newOrder, index) => ({
+          mealId: newOrder.mealId,
+          quantity: newOrder.quantity,
+          orderId: createdOrder.id,
+          cost: mealInfo[index].price * newOrder.quantity,
+        }));
+        const allMeals = await OrderMeal.bulkCreate(allOrders);
         res.status(201).send({
           success: true,
-          order: created,
+          order: allMeals,
         });
-      }).catch(() => res.status(500).send({
+      } else {
+        res.status(404).send({
+          success: false,
+          message: 'That meal does not exist',
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
         success: false,
-        message: 'unexpected error',
-      }));
+        message: error,
+      });
+    }
   }
 
   /**
@@ -42,7 +60,7 @@ class OrderController {
    * @returns {object} res
    */
   static modifyOrder(req, res) {
-    Order
+    OrderMeal
       .findOne({
         where: {
           id: req.params.orderId,
@@ -115,7 +133,7 @@ class OrderController {
    * @param {object} res
    * @returns {object} res
    */
-  static CatererOrders(req, res) {
+  static catererOrders(req, res) {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({
       include: [
@@ -156,7 +174,7 @@ class OrderController {
    * @param {object} res - object response
    * @returns {object} - response to be sent to client
    */
-  static cusOrder(req, res) {
+  static customerOrders(req, res) {
     const { page, limit, offset } = checkPagination(req);
     Order.findAndCountAll({
       include: [
@@ -181,7 +199,7 @@ class OrderController {
       return res.status(200).send({
         success: true,
         pagination: paginatedData(page, limit, userOrders),
-        data: userOrders.rows,
+        orders: userOrders.rows,
       });
     }).catch(() => res.status(500).send({
       success: false,

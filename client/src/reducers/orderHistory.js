@@ -14,7 +14,7 @@ const initialState = {
     totalCount: 0,
   },
 };
-const orderHistories = (state = initialState, action) => {
+const orderHistory = (state = initialState, action) => {
   switch (action.type) {
     case actionsTypes.FETCHING_ORDER_HISTORY:
       return {
@@ -32,7 +32,7 @@ const orderHistories = (state = initialState, action) => {
         loading: false,
         error: null,
         isError: false,
-        orders: action.payload.data,
+        orders: action.payload.orders,
         pagination: {
           ...state.pagination,
           ...action.payload.pagination.pagination,
@@ -73,4 +73,4 @@ const orderHistories = (state = initialState, action) => {
   }
 };
 
-export default orderHistories;
+export default orderHistory;

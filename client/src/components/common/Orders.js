@@ -24,15 +24,12 @@ class Orders extends Component {
       <div className="order-h-c">
         <h2>Order Histories</h2>
         <div className='order-row-container'>
-          <div className='o-row-item'>Order Id</div>
-          <div className='o-row-item'>Meal-Name</div>
+          <div className='o-row-item'>S/N</div>
           <div className='o-row-item'>Customer</div>
-          <div className='o-row-item'>Quantity</div>
-          <div className='o-row-item'>Amount</div>
-          <div className='o-row-item'>Status</div>
+          <div className='o-row-item'>Cost</div>
           <div className='o-row-item'>Address</div>
           <div className='o-row-item'>Order-Date</div>
-          <div className='o-row-item'>Modify</div>
+          <div className='o-row-item'>Order Details</div>
         </div>
         {this.props.orders.length ? this.allOrders() : ''}
       </div>

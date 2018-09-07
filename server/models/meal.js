@@ -45,8 +45,10 @@ export default (sequelize, DataTypes) => {
     },
   }, { paranoid: true });
   Meal.associate = (models) => {
-    Meal.hasMany(models.Order, {
+    Meal.belongsToMany(models.Order, {
+      through: 'OrderMeal',
       foreignKey: 'mealId',
+      otherKey: 'orderId',
     });
     Meal.hasMany(models.Menu, {
       foreignKey: 'mealId',

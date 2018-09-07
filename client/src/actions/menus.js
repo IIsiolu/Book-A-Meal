@@ -1,39 +1,43 @@
 import api from '../utils/api';
-import * as actionTypes from './actionsTypes';
+import {
+  MENU_FOR_TODAY, GET_MENU_ERROR, MENU_ADDED, CHANGE_MENU_ERROR,
+  REMOVE_A_MENU_ITEM, MENU_CREATED, MENU_ERROR, CHANGE_MENU_SUCCESS,
+  API_SUCCESS_RESPONSE,
+} from './actionsTypes';
 import { isLoading } from './meal';
 
 const menuAdded = mealId => ({
-  type: actionTypes.MENU_ADDED,
+  type: MENU_ADDED,
   payload: mealId,
 });
 
 const menuSuccess = message => ({
-  type: actionTypes.API_SUCCESS_RESPONSE,
+  type: API_SUCCESS_RESPONSE,
   payload: message,
 });
 
 export const getMenu = menu => ({
-  type: actionTypes.MENU_FOR_TODAY,
+  type: MENU_FOR_TODAY,
   payload: menu,
 });
 
 export const getMenuError = menu => ({
-  type: actionTypes.GET_MENU_ERROR,
+  type: GET_MENU_ERROR,
   payload: menu,
 });
 
 export const createdMenu = menu => ({
-  type: actionTypes.MENU_CREATED,
+  type: MENU_CREATED,
   payload: menu,
 });
 
 export const menuError = error => ({
-  type: actionTypes.MENU_ERROR,
+  type: MENU_ERROR,
   payload: error,
 });
 
 const remove = meal => ({
-  type: actionTypes.REMOVE_A_MENU_ITEM,
+  type: REMOVE_A_MENU_ITEM,
   payload: meal,
 });
 
@@ -41,26 +45,20 @@ export const addToMenu = meal => (dispatch) => {
   dispatch(menuAdded(meal));
 };
 
-export const clearMenu = () => dispatch => (
-  dispatch({
-    type: actionTypes.CLEAR_MENUS,
-  })
-);
-
 export const removeMeal = mealId => (dispatch) => {
   dispatch(remove(mealId));
 };
 
 export const changeMErrorState = bool => dispatch => (
   dispatch({
-    type: actionTypes.CHANGE_MENU_ERROR,
+    type: CHANGE_MENU_ERROR,
     payload: bool,
   })
 );
 
 export const changeMSuccessState = bool => dispatch => (
   dispatch({
-    type: actionTypes.CHANGE_MENU_SUCCESS,
+    type: CHANGE_MENU_SUCCESS,
     payload: bool,
   })
 );

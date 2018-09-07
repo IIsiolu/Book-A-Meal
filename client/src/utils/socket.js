@@ -2,12 +2,12 @@ import jwt from 'jwt-decode';
 
 const io = require('socket.io-client/dist/socket.io');
 
-const user = localStorage.getItem('myUserT');
+const user = localStorage.getItem('myUserToken');
 
 const decode = user && jwt(user);
 
 export default (_this) => {
-  const socket = io.connect('http://localhost:7000');
+  const socket = io.connect('https://book-meal.herokuapp.com/');
   socket.on('connect', () => {
     socket.emit('private room', decode.id, (cb) => {
     });
@@ -21,6 +21,7 @@ export default (_this) => {
 
   socket.on('order notification', (order) => {
     _this.showToast();
+    _this.props.userOrders();
   });
 
   /**

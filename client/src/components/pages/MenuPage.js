@@ -6,8 +6,7 @@ import swal from 'sweetalert';
 import { TopNav, MealCard, MenuItems } from '../common/';
 import InlineError from '../messages/inlineError';
 import { addToMenu, fetchMeals, removeMeal, createMenu,
-   logout, changeMErrorState, changeMSuccessState,
-    clearMenu } from '../../actions';
+   logout, changeMErrorState, changeMSuccessState } from '../../actions';
 
 /**
  * Menu Page
@@ -53,7 +52,6 @@ class MenuPage extends Component {
     if(this.props.success) {
       this.props.changeMSuccessState(false);
       this.openMenuSlider();
-      this.props.clearMenu();
     }
   }
 
@@ -82,11 +80,6 @@ class MenuPage extends Component {
   submit = () => {
     this.props.createMenu(this.props.menus, this.state.date.date)
   }
-
-  // sweet alert
-  // alert = () => (
-  //   swal("Menu Created", "Your menu has been created successfully!", "success")
-  // )
 
   // ate button
   dateBtn = () => (
@@ -179,8 +172,9 @@ class MenuPage extends Component {
 
   // meal cards
   mealCards = () => this.props.allMeals.length ? (this.props.allMeals.length ? 
-    (this.props.allMeals.map((meal, key) =>
-     <MealCard addedMenus={this.addedMenus} menus={this.props.menus} meal={meal} key={key} /> ))
+    (this.props.allMeals.map((meal, key) => 
+     <MealCard addedMenus={this.addedMenus}
+      menus={this.props.menus} meal={meal} key={key} /> ))
     :(this.renderNoMeal())) : (this.renderNoMeal());
 
   /**
@@ -231,4 +225,4 @@ const mapstatetoProps = ({ user, meals, menu }) => ({
 
 export default connect(mapstatetoProps, { addToMenu, fetchMeals,
    removeMeal, createMenu, logout, changeMErrorState,
-    changeMSuccessState, clearMenu })(MenuPage);
+    changeMSuccessState })(MenuPage);

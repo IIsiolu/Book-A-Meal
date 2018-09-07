@@ -105,7 +105,7 @@ describe('Book-a-meal Order Test', () => {
       .set('Authorization', validToken.token)
       .end((error, res) => {
         expect(400);
-        expect(res.body.errorMessage).to.include('input meal Orders');
+        expect(res.body.message).to.include('meals must be an array of orders');
         if (error) done(error);
         done();
       });
@@ -130,7 +130,7 @@ describe('Book-a-meal Order Test', () => {
     (done) => {
       request(server)
         .post('/api/v1/orders')
-        .send(testData.newOrder5)
+        .send(testData.bunmiOrder)
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(201);
@@ -147,7 +147,7 @@ describe('Book-a-meal Order Test', () => {
     (done) => {
       request(server)
         .post('/api/v1/orders')
-        .send(testData.newOrder5)
+        .send(testData.waleOrder)
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(201);
@@ -184,7 +184,7 @@ describe('Book-a-meal Order Test', () => {
         .set('Authorization', validToken.token)
         .end((error, res) => {
           expect(400);
-          expect(res.body.message).to.include('Order input Errors');
+          expect(res.body.message).to.include('meals must be an array of orders');
           if (error) done(error);
           done();
         });
@@ -250,7 +250,7 @@ describe('Book-a-meal Order Test', () => {
 
   it('should return all the ORDERs in database, if user is a caterer', (done) => {
     request(server)
-      .get('/api/v1/orders')
+      .get('/api/v1/orders/catererOrders')
       .set('Authorization', adminToken.token)
       .end((error, res) => {
         expect(200);

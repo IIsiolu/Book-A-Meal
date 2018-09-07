@@ -20,6 +20,18 @@ class LoginPage extends Component {
     this.props.logIn(data, this.props.history)
   )
 
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
+
   /**
    * @description renders user view
    * @method render
@@ -58,9 +70,10 @@ LoginPage.propTypes = {
 }
 
 // maps state to props
-const mapStateToProps = state => ({
-    error: state.user.loginError,
-    loading: state.user.loading
+const mapStateToProps = ({user}) => ({
+    error: user.loginError,
+    loading: user.loading,
+    isAuthenticated: user.isAuthenticated
 })
 
 // mapstate for states, dispatch functions

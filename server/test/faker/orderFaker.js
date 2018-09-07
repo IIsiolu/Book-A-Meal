@@ -37,17 +37,35 @@ const orderFaker = {
     mealId: 1,
     quantity: '',
   },
-  newOrder5: {
-    orders: [
-      {
-        mealId: 2,
-        quantity: 5,
-      },
-      {
-        mealId: 2,
-        quantity: 5,
-      },
-    ],
+  bunmiOrder: {
+    order: {
+      meals: [
+        {
+          mealId: 2,
+          quantity: 5,
+        },
+        {
+          mealId: 2,
+          quantity: 5,
+        },
+      ],
+      address: 'andelean way',
+    },
+  },
+  waleOrder: {
+    order: {
+      meals: [
+        {
+          mealId: 2,
+          quantity: 5,
+        },
+        {
+          mealId: 2,
+          quantity: 5,
+        },
+      ],
+      address: 'andelean way',
+    },
   },
   newUpdate: {
     orders: { quantity: 4, status: 'pending' },
@@ -78,22 +96,31 @@ const orderFaker = {
     ],
   },
   newOrder7: {
-    orders: [],
+    order: {
+      meals: [],
+      address: 'london way',
+    },
   },
   newOrder8: {
-    orders: [],
+    order: {
+      meals: [],
+      address: 'ggggggggg',
+    },
   },
   newOrder9: {
-    orders: [
-      {
-        mealId: 'y',
-        quantity: 5,
-      },
-      {
-        mealId: 2,
-        quantity: 5,
-      },
-    ],
+    order: {
+      meals: [
+        {
+          mealId: 'y',
+          quantity: 5,
+        },
+        {
+          mealId: 2,
+          quantity: 5,
+        },
+      ],
+      address: 'hello world',
+    },
   },
 };
 

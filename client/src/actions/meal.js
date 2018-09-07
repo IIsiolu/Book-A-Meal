@@ -1,6 +1,6 @@
 import api from '../utils/api';
 import {
-  START_LOADER, MEAL_ADDED, MEAL_FETCHED, MEAL_UPDATED,
+  START_LOADER, MEAL_ADDED, MEAL_FETCHED,
   UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
   CREATING_MEAL, FETCH_MEAL_ERROR,
   ADD_MEAL_SUCCESS_STATE,
@@ -44,11 +44,6 @@ export const mealFetched = data => ({
 export const mealSuccess = message => ({
   type: API_SUCCESS_RESPONSE,
   payload: message,
-});
-
-const mealUpdated = meal => ({
-  type: MEAL_UPDATED,
-  payload: meal,
 });
 
 export const updateMealFetched = meal => ({

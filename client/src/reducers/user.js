@@ -23,7 +23,6 @@ const user = (state = userState, action) => {
         signedUp: true,
         signUpError: false,
         error: null,
-        user: action.payload,
       };
     case actionsTypes.CHANGE_SIGN_UP:
       return {

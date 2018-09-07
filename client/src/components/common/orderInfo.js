@@ -70,7 +70,6 @@ class OrderInfo extends Component {
    */
   render() {
     const { order, role } = this.props;
-    console.log(role)
     const catereOptions = [
       { key: 1, text: 'delivered', value: 'delivered' },
       { key: 2, text: 'cancel', value: 'cancelled' },

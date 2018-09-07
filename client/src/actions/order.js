@@ -81,7 +81,6 @@ export const errState = bool => dispatch => (
  * @returns {void}
  */
 export const requestForOrder = (orders, address, socketClient) => async (dispatch) => {
-  console.log('>>>>>>>>>>>', orders);
   dispatch(isLoading(true));
   try {
     const customerOrder = {
@@ -124,7 +123,6 @@ export const editOrder = orders => async (dispatch) => {
         type: 'success',
       },
     });
-    console.log('>>>>>>>>>>>*******', response)
     const send = socket();
     send.role() === 'user' ? '' :
      send.modifyOrder({...response.order, userId: orders.userId});

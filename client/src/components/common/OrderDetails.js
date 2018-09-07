@@ -9,7 +9,6 @@ import OrderInfo from './orderInfo';
  */
 class OrderDetails extends Component {
   constructor(props) {
-    console.log(props.order);
     super(props);
     this.state = {
       modalIsOpen: false,

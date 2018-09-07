@@ -111,7 +111,6 @@ describe('Book-a-meal MEAL Test', () => {
         .send(mealDetails.newMeal4)
         .set('Authorization', adminToken.token)
         .end((error, res) => {
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>', res.body);
           expect(201);
           expect(res.body.success).to.be.true;
           if (error) done(error);

@@ -39,7 +39,10 @@ class MenuController {
           message: 'something went wrong',
         }));
       }
-    });
+    }).catch(() => res.status(500).send({
+      success: false,
+      message: 'something went wrong',
+    }));
   }
 
   /**

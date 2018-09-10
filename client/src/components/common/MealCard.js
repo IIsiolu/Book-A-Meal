@@ -30,7 +30,12 @@ const MealCard = ({ meal, addedMenus, menus }) => (
 );
 
 MealCard.propTypes = {
-  meal: PropTypes.object.isRequired,
+  meal: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
   addedMenus: PropTypes.func.isRequired,
   menus: PropTypes.array.isRequired,
 };

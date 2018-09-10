@@ -1,0 +1,4 @@
+--exit
+--require babel-core/register
+--ui bdd
+--timeout 50000

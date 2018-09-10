@@ -91,10 +91,12 @@ export const requestForOrder = (orders, address, socketClient) => async (dispatc
     const { order } = response;
     dispatch(isLoading(false));
     dispatch(createdOrder(order));
-    const socket = socketClient;
-    orders.forEach((meal, key) => {
-      socket.orderMeal(meal.catererId, order[key]);
-    });
+    if (socketClient) {
+      const socket = socketClient;
+      orders.forEach((meal, key) => {
+        socket.orderMeal(meal.catererId, order[key]);
+      });
+    }
   } catch (err) {
     dispatch(isLoading(false));
     dispatch({
@@ -105,7 +107,6 @@ export const requestForOrder = (orders, address, socketClient) => async (dispatc
         type: 'error',
       },
     });
-    // dispatch(orderError(err));
   }
 };
 
@@ -125,7 +126,7 @@ export const editOrder = orders => async (dispatch) => {
     });
     const send = socket();
     send.role() === 'user' ? '' :
-     send.modifyOrder({...response.order, userId: orders.userId});
+      send.modifyOrder({ ...response.order, userId: orders.userId });
   } catch (err) {
     dispatch(isLoading(false));
     dispatch({

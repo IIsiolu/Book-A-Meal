@@ -1,6 +1,6 @@
 
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const OrderMeal = sequelize.define('OrderMeal', {
     id: {
       primaryKey: true,

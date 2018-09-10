@@ -9,8 +9,6 @@ mealRouter.post(
   MealController.createMeal,
 );
 
-mealRouter.get('/meals', Auth.verifyAdmin, MealController.allMeals);
-
 mealRouter.get('/meals/caterer', Auth.verifyAdmin, MealController.catererMeals);
 
 mealRouter.put(

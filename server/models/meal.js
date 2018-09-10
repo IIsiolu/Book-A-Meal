@@ -49,12 +49,15 @@ export default (sequelize, DataTypes) => {
       through: 'OrderMeal',
       foreignKey: 'mealId',
       otherKey: 'orderId',
+      onDelete: 'CASCADE',
     });
     Meal.hasMany(models.Menu, {
       foreignKey: 'mealId',
+      onDelete: 'CASCADE',
     });
     Meal.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
     // associations can be defined here
   };

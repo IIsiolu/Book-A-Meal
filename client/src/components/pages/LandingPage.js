@@ -16,7 +16,7 @@ import food4 from '../../static/images/food4.jpg';
  * @param {logout} logout - logout function
  * @return {jsx} jsx
  */
-const LandingPage = ({ isAuthenticated, logout }) => (
+export const LandingPage = ({ isAuthenticated, logout }) => (
   <div className="container">
     <LandingNav
       isAuthenticated={isAuthenticated}
@@ -129,42 +129,35 @@ const LandingPage = ({ isAuthenticated, logout }) => (
         <h2>Testimonials</h2>
         <div className="testimonial-collection">
           <div className="test-item">
-            <p>“ Ceplicaboserde miuas nerafae kertyerauas
-               vitaesa eniptaiad esertyatya
-                    nemo volernatur aut oditaut. Suspendisse potenti.
-                     Sed fermentum, libero eget euismod
-                    convallis, justo lectus egestas dui,
-                     eu tempor lectus risus a dolor. Suspendisse tempor quam
-                    sapien molestie nec...”
+            <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa
+               eniptaiad esertyatya nemo volernatur aut oditaut. Suspendisse
+              potenti. Sed fermentum, libero eget euismod convallis, justo
+              lectus egestas dui, eu tempor lectus risus a dolor.
+              Suspendisse tempor quam sapien molestie nec...”
             </p>
             <h4>Olisa nayo,</h4>
             <h4>Client</h4>
           </div>
           <div className="test-item">
-            <p>“ Ceplicaboserde miuas nerafae
-               kertyerauas vitaesa eniptaiad esertyatya
-                    nemo volernatur aut oditaut.
-                     Suspendisse potenti. Sed fermentum, libero eget euismod
-                    convallis, justo lectus egestas dui,
-                     eu tempor lectus risus a dolor. Suspendisse tempor quam
-                    sapien molestie nec...”
+            <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa
+               eniptaiad esertyatya nemo volernatur aut oditaut. Suspendisse
+              potenti. Sed fermentum, libero eget euismod convallis, justo
+              lectus egestas dui, eu tempor lectus risus a dolor.
+              Suspendisse tempor quam sapien molestie nec...”
             </p>
             <h4>Oluwa Mark,</h4>
             <h4>Client</h4>
           </div>
           <div className="test-item">
             <p>“ Ceplicaboserde miuas nerafae kertyerauas vitaesa
-               eniptaiad esertyatya
-                    nemo volernatur aut oditaut. Suspendisse potenti.
-                     Sed fermentum, libero eget euismod
-                    convallis, justo lectus egestas dui, eu tempor lectus
-                     risus a dolor. Suspendisse tempor quam
-                    sapien molestie nec...”
+               eniptaiad esertyatya nemo volernatur aut oditaut. Suspendisse
+              potenti. Sed fermentum, libero eget euismod convallis, justo
+              lectus egestas dui, eu tempor lectus risus a dolor.
+              Suspendisse tempor quam sapien molestie nec...”
             </p>
             <h4>Keith Buttler,</h4>
             <h4>Client</h4>
           </div>
-
         </div>
 
       </div>
@@ -205,7 +198,6 @@ const LandingPage = ({ isAuthenticated, logout }) => (
   </div>
 );
 
-// props validation
 const mapStateToProps = ({ user }) => ({
   isAuthenticated: user.isAuthenticated,
 });

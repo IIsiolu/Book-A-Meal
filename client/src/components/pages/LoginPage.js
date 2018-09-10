@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import LoginForm from '../forms/LoginForm';
 import { logIn } from '../../actions';
 
@@ -9,28 +9,36 @@ import { logIn } from '../../actions';
  * @class
  * @constructor
  */
-class LoginPage extends Component {
-
+export class LoginPage extends Component {
   /**
-   * @description handles submission of form data
-   * @param {object} data
-   * @returns {void}
+   * @method componentWillMount
+   * @returns {undefined}
    */
-  submit = (data) => (
-    this.props.logIn(data, this.props.history)
-  )
-
   componentWillMount() {
     if (this.props.isAuthenticated) {
       this.props.history.push('/');
     }
   }
 
+  /**
+   * @method componentDidUpdate
+   * @returns {undefined}
+   */
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
       this.props.history.push('/');
     }
   }
+
+  /**
+   * @description handles submission of form data
+   * @param {object} data
+   * @returns {void}
+   */
+  submit = data => (
+    this.props.logIn(data, this.props.history)
+  )
+
 
   /**
    * @description renders user view
@@ -51,7 +59,8 @@ class LoginPage extends Component {
             <div className="info">
               <h2 className="info-h capitalize">already have an account?</h2>
               <p className="info-p">Use your email and
-                password to login below</p>
+                password to login below
+              </p>
               <LoginForm submit={this.submit} {...this.props} />
             </div>
           </div>
@@ -63,18 +72,19 @@ class LoginPage extends Component {
 
 // props validation
 LoginPage.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired
-    }).isRequired,
-    logIn: PropTypes.func.isRequired
-}
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  logIn: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 // maps state to props
-const mapStateToProps = ({user}) => ({
-    error: user.loginError,
-    loading: user.loading,
-    isAuthenticated: user.isAuthenticated
-})
+const mapStateToProps = ({ user }) => ({
+  error: user.loginError,
+  loading: user.loading,
+  isAuthenticated: user.isAuthenticated,
+});
 
 // mapstate for states, dispatch functions
-export default connect(mapStateToProps, {logIn})(LoginPage);
+export default connect(mapStateToProps, { logIn })(LoginPage);

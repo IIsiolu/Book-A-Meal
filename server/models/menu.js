@@ -37,9 +37,11 @@ export default (sequelize, DataTypes) => {
   Menu.associate = (models) => {
     Menu.belongsTo(models.Meal, {
       foreignKey: 'mealId',
+      onDelete: 'CASCADE',
     });
     Menu.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
     // associations can be defined here
   };

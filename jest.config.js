@@ -8,18 +8,17 @@ module.exports = {
   ],
   collectCoverage: true,
   collectCoverageFrom: [
-    '**/client/src/**/*.{js,jsx}',
+    '**/client/src/**/**/*.{js,jsx}',
   ],
   testPathIgnorePatterns: [
     '<rootDir>/__tests__/__mocks__',
     '<rootDir>/__tests__/setupTest',
   ],
   coveragePathIgnorePatterns: [
-    '<rootDir>/src/components/*',
     '<rootDir>/public',
-    '<rootDir>/src/',
     '<rootDir>/src/index.jsx',
     '<rootDir>/__tests__/__mocks__/*',
   ],
+  moduleNameMapper: { '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/__tests__/__mocks__/assetsTransformer.js', '\\.(css|less)$': '<rootDir>/__tests__/__mocks__/assetsTransformer.js' },
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

@@ -8,26 +8,25 @@ import { logout, orderHistory, recentOrders, editOrder } from '../../actions/';
 import socket from '../../utils/socket';
 
 /**
- * Caterer dashboard page
+ * @description Caterer dashboard page
  * @class DashboardPage
- * @returns {jsx}
+ * @returns {jsx} jsx
  * @extends Component
  */
-class DashboardPage extends Component {
-
+export class DashboardPage extends Component {
+  /**
+   * @constructor
+   */
   constructor() {
     super();
     this.socketClient = socket(this);
   }
 
-  connect = () => {
-    alert("connected: ", this.socket.id);
-  }
-
-  showToast = () => {
-    toast.success('you have a new order');
-  }
-
+  /**
+   * @summary react stateless component
+   * called before a component mounts
+   * @returns {void} void
+   */
   componentWillMount() {
     const { role } = this.props;
     if (!(role === 'caterer' || role === 'super-admin')) {
@@ -37,7 +36,7 @@ class DashboardPage extends Component {
 
   /**
    * @method componentDidMount
-   * @param {void} 
+   * @param {void} void
    * @returns {undefined}
    */
   componentDidMount() {
@@ -45,12 +44,18 @@ class DashboardPage extends Component {
   }
 
   /**
+   * @function showToast
+   * @returns {function} toast
+   */
+  showToast = () => toast.success('you have a new order');
+
+  /**
    * handle pagination click events
    * @method handlePageChange
    * @param {selected} true or false
    * @returns {undefined}
    */
-  handlePageChange = ({selected}) => {
+  handlePageChange = ({ selected }) => {
     const page = selected + 1;
     localStorage.setItem('currentOrderPage', page);
     const currentPage = localStorage.getItem('currentOrderPage');
@@ -60,23 +65,23 @@ class DashboardPage extends Component {
   /**
    * renders pagination button
    * @method renderPagination
-   * @returns {jsx}
+   * @returns {jsx} jsx
    */
   renderPagination = () => (
-    <ReactPaginate 
+    <ReactPaginate
       previousLabel={<i className="fa fa-chevron-left" />}
       nextLabel={<i className="fa fa-chevron-right" />}
       breakLabel={<a href="">...</a>}
-      breakClassName={'break-me'}
+      breakClassName="break-me"
       pageCount={this.props.pageCount}
       initialPage={this.props.page - 1}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={this.handlePageChange}
       disableInitialCallback
-      containerClassName={'pagination'}
-      subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
+      containerClassName="pagination"
+      subContainerClassName="pages pagination"
+      activeClassName="active"
     />
   )
 
@@ -87,15 +92,15 @@ class DashboardPage extends Component {
    */
   render() {
     return (
-      <div className='admin-form-container'>
+      <div className="admin-form-container">
         <TopNav logout={this.props.logout} />
-        <div className = "form-con-bg">
+        <div className="form-con-bg">
           <SideNav role={this.props.role} />
-          <div className = "order-bar" >
+          <div className="order-bar" >
             <Orders {...this.props} />
-            {this.props.orders.length>0 && this.renderPagination()}
+            {this.props.orders.length > 0 && this.renderPagination()}
           </div>
-          <ToastContainer autoClose={2000}/>
+          <ToastContainer autoClose={2000} />
         </div>
       </div>
     );
@@ -106,8 +111,12 @@ DashboardPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  role: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   orderHistory: PropTypes.func.isRequired,
+  orders: PropTypes.array.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
 };
 
 const mapstatetoProps = ({ user, orderHistory }) => ({
@@ -119,5 +128,9 @@ const mapstatetoProps = ({ user, orderHistory }) => ({
   totalCount: orderHistory.pagination.totalCount,
 });
 
-export default connect(mapstatetoProps,
-   { logout, orderHistory, recentOrders, editOrder })(DashboardPage);
+export default connect(
+  mapstatetoProps,
+  {
+    logout, orderHistory, recentOrders, editOrder,
+  },
+)(DashboardPage);

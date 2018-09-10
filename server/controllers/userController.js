@@ -44,10 +44,11 @@ class UserController {
           message: 'user created successfully',
           token,
         });
-      }).catch(() => {
+      }).catch((err) => {
         res.status(500).send({
           success: false,
           message: 'User cannot be created',
+          err,
         });
       });
   }

@@ -14,8 +14,8 @@ const MenuCard = ({ addMealToOrder, meal, isOverlayOpened, placedOrders }) =>
       <div className="cardt">
         <img className="food-img" src={meal.image} alt="my food" />
         <div
+          className="menu-modal meal-overlay mous"
           onClick={() => isOverlayOpened(true, meal.id)}
-          className="meal-overlay mous"
         >
           <h2 className="f-detail">Food Details</h2>
         </div>

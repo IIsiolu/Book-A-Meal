@@ -7,7 +7,7 @@ import {
   errorFetchingMeal, mealError,
 } from '../../src/actions';
 
-import { MEAL_ADDED, FETCH_MEAL_ERROR, MEAL_UPDATED, MEAL_UPDATE_ERROR }
+import { MEAL_ADDED, FETCH_MEAL_ERROR, UPDATE_FETCH_MEAL, MEAL_UPDATE_ERROR }
   from '../../src/actions/actionsTypes';
 import mockData from '../__mocks__/mockData';
 
@@ -25,7 +25,7 @@ describe('Create Meal actions', () => {
   it('creates a new meal with valid inputs', (done) => {
     const { mealSuccessRes, ofadaRice } = mockData;
     const expectedActions = {
-      type: MEAL_ADDED,
+      type: UPDATE_FETCH_MEAL,
       payload: mealSuccessRes.meal,
     };
     const store = mockStore({});

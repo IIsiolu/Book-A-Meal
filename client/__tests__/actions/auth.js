@@ -41,7 +41,7 @@ describe('Auth actions', () => {
       const { invalidPassRes, invalidSignin } = mockData;
       const expectedActions = {
         type: LOGIN_ERROR,
-        payload: invalidPassRes,
+        payload: invalidPassRes.message,
       };
       const store = mockStore({});
       mock
@@ -72,19 +72,19 @@ describe('Auth actions', () => {
   });
 
   it(
-    'should dispatch USER_SIGNUP_ERROR action when a user ' +
-  'provides a username that already exists on the application',
+    'should dispatch USER_SIGNUP_ERROR when a user ' +
+  'provides a username that already exist on the application',
     (done) => {
-      const { signupFailure, signUpData } = mockData;
+      const { signupFailure, signupDetail } = mockData;
       const expectedActions = {
         type: USER_SIGNUP_ERROR,
         error: signupFailure.message,
       };
       const store = mockStore({});
       mock
-        .onPost('auth/signup', signUpData)
+        .onPost('auth/signup', signupDetail)
         .reply(409, signupFailure);
-      store.dispatch(signup(signUpData))
+      store.dispatch(signup(signupDetail))
         .then(() => {
           expect(store.getActions()[1]).toEqual(expectedActions);
           done();
@@ -118,7 +118,7 @@ describe('Auth actions', () => {
       const { notExistResponse, invalidUser } = mockData;
       const expectedActions = {
         type: LOGIN_ERROR,
-        payload: notExistResponse,
+        payload: notExistResponse.message,
       };
       const store = mockStore({});
       mock
@@ -138,7 +138,7 @@ describe('Auth actions', () => {
       const { invalidPassRes, invalidSignin } = mockData;
       const expectedActions = {
         type: LOGIN_ERROR,
-        payload: invalidPassRes,
+        payload: invalidPassRes.message,
       };
       const store = mockStore({});
       mock
@@ -162,7 +162,7 @@ describe('Auth actions', () => {
       };
       const store = mockStore({});
       store.dispatch(logout());
-      expect(store.getActions()).toEqual([expectedActions]);
+      expect(store.getActions()[0]).toEqual(expectedActions);
       done();
     },
   );

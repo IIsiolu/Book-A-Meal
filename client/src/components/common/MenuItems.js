@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @description react functional component
@@ -21,5 +22,10 @@ const MenuItems = ({ menu, removeMeal }) => (
     </div>
   </div>
 );
+
+MenuItems.propTypes = {
+  removeMeal: PropTypes.func.isRequired,
+  menu: PropTypes.object.isRequired,
+};
 
 export default MenuItems;

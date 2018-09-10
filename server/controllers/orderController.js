@@ -68,7 +68,7 @@ class OrderController {
       }).then((order) => {
         const orderInfo = Object.assign({}, order);
         if (order.status !== 'pending') {
-          res.status(401).json({
+          return res.status(401).json({
             success: false,
             message: 'order cannot be modified',
           });
@@ -85,45 +85,6 @@ class OrderController {
       }).catch(() => res.status(404).json({
         success: false,
         message: 'No order exist with that Id',
-      }));
-  }
-
-  /**
-   * Get all Orders
-   * @description get all customer orders
-   * @param {string} req - request
-   * @param {object} res - object response
-   * @returns {object} - response to be sent to client
-   */
-  static allOrders(req, res) {
-    const { page, limit, offset } = checkPagination(req);
-    Order.findAndCountAll({
-      include: [
-        {
-          model: Meal,
-          paranoid: false,
-        },
-        User,
-      ],
-      limit,
-      offset,
-      order: [['id', 'DESC']],
-    })
-      .then((orders) => {
-        if (orders.count === 0) {
-          return res.status(404).send({
-            success: false,
-            message: 'Order is empty',
-          });
-        }
-        return res.status(200).json({
-          success: true,
-          pagination: paginatedData(page, limit, orders),
-          data: orders.rows,
-        });
-      }).catch(() => res.status(500).send({
-        success: false,
-        message: 'failed to get all orders',
       }));
   }
 
@@ -201,10 +162,12 @@ class OrderController {
         pagination: paginatedData(page, limit, userOrders),
         orders: userOrders.rows,
       });
-    }).catch(() => res.status(500).send({
-      success: false,
-      message: 'cannot get customer orders',
-    }));
+    }).catch((err) => {
+      res.status(500).send({
+        success: false,
+        message: 'cannot get customer orders',
+      });
+    });
   }
 }
 

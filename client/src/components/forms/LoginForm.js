@@ -10,43 +10,44 @@ import InlineError from '../messages/inlineError';
  * @extends {React.Component}
  */
 class LoginForm extends Component {
-  constructor(){
-    super()
+  /**
+   * @constructor
+   */
+  constructor() {
+    super();
     this.state = {
-      data: {
+      userInfo: {
         email: '',
         password: '',
       },
-      loading: false,
       errors: {},
-    }
+    };
   }
-  
+
   // handle change events
   onChange = (e) => {
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
+      userInfo: { ...this.state.userInfo, [e.target.name]: e.target.value },
     });
   }
 
   // makes an api call once submit button is clicked
   onSubmit = (e) => {
     e.preventDefault();
-    const errors = this.validate(this.state.data);
+    const errors = this.validate(this.state.userInfo);
     this.setState({ errors });
-    if(Object.keys(errors).length==0){
-      this.props.submit(this.state.data)
+    if (Object.keys(errors).length === 0) {
+      this.props.submit(this.state.userInfo);
     }
   }
 
   // validates form inputs
-  validate(data) {
+  validate = (userInfo) => {
     const errors = {};
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
-    if (!emailRegex.test(data.email) || !data.email)
-     errors.email = 'Invalid email';
-    if (!data.password) errors.password = "Can't be blank";
+    if (!emailRegex.test(userInfo.email) || !userInfo.email) { errors.email = 'Invalid email'; }
+    if (!userInfo.password) errors.password = "Can't be blank";
     return errors;
   }
 
@@ -56,48 +57,52 @@ class LoginForm extends Component {
    * @returns {JSX} jsx
    */
   render() {
-    const { data, errors } = this.state;
+    const { userInfo, errors } = this.state;
     return (
-      <Form  onSubmit={this.onSubmit} loading={this.props.loading} >
+      <Form onSubmit={this.onSubmit} loading={this.props.loading} >
         { this.props.error && <Message negative>
-            <Message.Header> Something went wrong </Message.Header>
-            <p>{this.props.error} </p>
+          <Message.Header> Something went wrong </Message.Header>
+          <p>{this.props.error} </p>
         </Message>}
         <Form.Field error={!!errors.email}>
-          <label className="input-form" htmlFor='email'> Email </label>
+          <label className="input-form" htmlFor="email"> Email </label>
           <input
-            type='email'
-            id='email' name='email'
-            value={data.email}
+            type="email"
+            id="email"
+            name="email"
+            value={userInfo.email}
             onChange={this.onChange}
-            placeholder='example@example.com' />
-            {errors.email && <InlineError text={errors.email} /> }
+            placeholder="example@example.com"
+          />
+          {errors.email && <InlineError text={errors.email} /> }
         </Form.Field>
         <Form.Field error={!!errors.password}>
-          <label htmlFor='password'> Password </label>
+          <label htmlFor="password"> Password </label>
           <input
-            type='password'
-            id='password'
-            name='password'
-            placeholder='Make it secure'
-            value={data.password}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Make it secure"
+            value={userInfo.password}
             onChange={this.onChange}
-            />
-            {errors.password && <InlineError text={errors.password} /> }
+          />
+          {errors.password && <InlineError text={errors.password} /> }
 
         </Form.Field>
         <div className="log-sign">
           <Button type="submit" primary>Login</Button>
           <Link to="/signup">don't have an account? SIGNUP</Link>
         </div>
-        
+
       </Form>
     );
   }
 }
 
 LoginForm.propTypes = {
-  submit: PropTypes.func.isRequired
-}
+  submit: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 export default LoginForm;

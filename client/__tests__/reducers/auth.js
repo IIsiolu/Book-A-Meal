@@ -37,19 +37,6 @@ describe('Auth Reducer', () => {
   );
 
   it(
-    'should change signUp state when action type is CHANGE_SIGN_UP',
-    () => {
-      const action = {
-        type: CHANGE_SIGN_UP,
-        payload: false,
-      };
-      const newState = user(userState, action);
-      expect(newState.signedUp).toBe(false);
-    },
-  );
-
-
-  it(
     'should set signedUp to false and signUpError to true ' +
      'when action type is USER_ERROR',
     () => {

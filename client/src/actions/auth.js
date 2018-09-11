@@ -58,13 +58,6 @@ export const logIn = (credentials, history) => async (dispatch) => {
   }
 };
 
-export const signupState = bool => (dispatch) => {
-  dispatch({
-    type: CHANGE_SIGN_UP,
-    payload: bool,
-  });
-};
-
 /**
  * @function signup
  * @description Signup user with valid credentials

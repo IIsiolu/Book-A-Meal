@@ -2,13 +2,12 @@ import request from 'supertest';
 import { expect } from 'chai';
 import orderCredential from '../faker/orderFaker';
 import server from '../../server/server';
-import { sequelize, Meal, User, OrderMeal, Order } from '../../server/models';
+import { User } from '../../server/models';
 import {
-  insertOrderSeed, kunleToken, mondayMeal, generateToken,
-  insertUserSeed, insertOrderMeal, yummyKitchenToken, hashPassword,
+  insertOrderSeed, mondayMeal, generateToken,
+  insertOrderMeal, hashPassword,
 } from '../seed/testSeeds';
 
-const token = kunleToken;
 let catererToken = '';
 let userToken = '';
 

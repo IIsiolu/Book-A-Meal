@@ -2,13 +2,7 @@ import request from 'supertest';
 import { expect } from 'chai';
 import userCredential from '../faker/userfaker';
 import server from '../../server/server';
-import { sequelize, Meal, User, Order, OrderMeal } from '../../server/models';
-import {
-  insertMealSeed, invalidIdToken,
-  insertTestUser, donaldKitchenToken, yummyKitchenToken,
-} from '../seed/testSeeds';
-
-const donaldKitchen = donaldKitchenToken;
+import { insertTestUser } from '../seed/testSeeds';
 
 describe('User endpoint', () => {
   before(async () => {

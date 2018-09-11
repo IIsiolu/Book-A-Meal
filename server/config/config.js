@@ -7,7 +7,6 @@ module.exports =
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres',
-    // logging: false,
   },
   test: {
     username: 'adekunleoluwafemi',

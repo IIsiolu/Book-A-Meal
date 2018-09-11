@@ -2,17 +2,16 @@ import request from 'supertest';
 import { expect } from 'chai';
 import mealCredential from '../faker/mealFaker';
 import server from '../../server/server';
-import { sequelize, Meal, User, OrderMeal } from '../../server/models';
+import { User } from '../../server/models';
 import {
   insertMealSeed, invalidIdToken, generateToken,
-  insertUserSeed, donaldKitchenToken, hashPassword,
+  hashPassword,
 } from '../seed/testSeeds';
 
-const donaldKitchen = donaldKitchenToken;
 let adminToken = '';
 describe('Meal endpoint', () => {
   before(async () => {
-    const generatedUser =  await User.create({
+    const generatedUser = await User.create({
       firstname: 'domino',
       lastname: 'pizza',
       email: 'dominopizza@gmail.com',

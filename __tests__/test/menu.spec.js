@@ -2,13 +2,12 @@ import request from 'supertest';
 import { expect } from 'chai';
 import menuCredential from '../faker/menuFaker';
 import server from '../../server/server';
-import { Meal, User, Order, OrderMeal, Menu } from '../../server/models';
+import { User } from '../../server/models';
 import {
   mondayMenus, invalidIdToken, hashPassword, generateToken,
-  insertUserSeed, donaldKitchenToken, invalidUserToken, kunleToken, insertMenuSeed,
+  insertMenuSeed,
 } from '../seed/testSeeds';
 
-const donaldKitchen = donaldKitchenToken;
 let userToken = '';
 let catererToken = '';
 

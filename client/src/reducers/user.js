@@ -24,11 +24,6 @@ const user = (state = userState, action) => {
         signUpError: false,
         error: null,
       };
-    case actionsTypes.CHANGE_SIGN_UP:
-      return {
-        ...state,
-        signedUp: action.payload,
-      };
     case actionsTypes.USER_LOGGED_IN:
       return {
         ...state,

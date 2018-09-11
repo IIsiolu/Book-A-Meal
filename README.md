@@ -8,7 +8,6 @@ vendor know what the customers want to eat.
 <br />
 
 ## Application Features
-- Super Admin to create caterer
 - Caterer to add a new meal
 - Caterer to Modify and update meal
 - Caterer to Delete a meal

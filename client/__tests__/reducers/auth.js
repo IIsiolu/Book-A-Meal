@@ -2,7 +2,6 @@ import {
   USER_SIGN_UP, USER_SIGNUP_ERROR,
   USER_LOGGED_IN, LOGIN_ERROR, SET_CURRENT_USER, LOADING,
 } from '../../src/actions/actionsTypes';
-import { logout } from '../../src/actions';
 import user from '../../src/reducers/user';
 import { userState } from '../../src/reducers/initState';
 

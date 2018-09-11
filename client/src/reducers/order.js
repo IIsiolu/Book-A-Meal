@@ -39,11 +39,6 @@ const order = (state = orderState, action) => {
         ...state,
         success: action.payload,
       };
-    case actionsTypes.CHANGE_ORDER_ERR_STATE:
-      return {
-        ...state,
-        isError: action.payload,
-      };
     case actionsTypes.ORDER_ERROR:
       return {
         ...state,

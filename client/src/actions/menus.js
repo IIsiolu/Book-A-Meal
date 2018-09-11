@@ -1,6 +1,6 @@
 import api from '../utils/api';
 import {
-  MENU_FOR_TODAY, GET_MENU_ERROR, MENU_ADDED, CHANGE_MENU_ERROR,
+  MENU_FOR_TODAY, GET_MENU_ERROR, MENU_ADDED,
   REMOVE_A_MENU_ITEM, MENU_CREATED, MENU_ERROR, CHANGE_MENU_SUCCESS,
   API_SUCCESS_RESPONSE,
 } from './actionsTypes';
@@ -48,13 +48,6 @@ export const addToMenu = meal => (dispatch) => {
 export const removeMeal = mealId => (dispatch) => {
   dispatch(remove(mealId));
 };
-
-export const changeMErrorState = bool => dispatch => (
-  dispatch({
-    type: CHANGE_MENU_ERROR,
-    payload: bool,
-  })
-);
 
 export const changeMSuccessState = bool => dispatch => (
   dispatch({

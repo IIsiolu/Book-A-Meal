@@ -24,11 +24,6 @@ const imageUpload = (state = initialState, action) => {
         loading: false,
         imageUrl: action.payload,
       };
-    case actionsTypes.IMAGE_ID:
-      return {
-        ...state,
-        id: action.payload,
-      };
     case actionsTypes.IMAGE_UPLOAD_ERROR:
       return {
         ...state,

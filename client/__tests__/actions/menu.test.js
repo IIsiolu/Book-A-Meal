@@ -2,11 +2,11 @@ import expect from 'expect';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {
-  createMenu, createdMenu, changeMErrorState, getMenu,
-  menuError, changeMSuccessState, menuForToday,
+  createMenu, createdMenu,
+  menuError, changeMSuccessState,
 } from '../../src/actions/menus';
 
-import { CHANGE_MENU_SUCCESS, CHANGE_MENU_ERROR, API_SUCCESS_RESPONSE }
+import { CHANGE_MENU_SUCCESS }
   from '../../src/actions/actionsTypes';
 import mockData from '../__mocks__/mockData';
 
@@ -58,31 +58,4 @@ describe('Create Menu actions', () => {
     expect(store.getActions()).toEqual([expectedActions]);
     done();
   });
-
-  it('should change error state when' +
-  ' CHANGE_MENU_ERROR is dispatched', (done) => {
-    const expectedActions = [{
-      type: CHANGE_MENU_ERROR,
-      payload: false,
-    }];
-    const store = mockStore({});
-    store.dispatch(changeMErrorState(false));
-    expect(store.getActions()).toEqual(expectedActions);
-    done();
-  });
-
-  // it('should get menu for the date 2018-06-10', (done) => {
-  //   const { fetchMealSuccess } = mockData;
-  //   const expectedActions = getMenu(fetchMealSuccess);
-  //   const store = mockStore({});
-  //   const date = '2018-06-10';
-  //   mock
-  //     .onGet(`menu?date=${date}?page=${page}&limit=${limit}&offset=${offset}`)
-  //     .reply(200, fetchMealSuccess);
-  //   store.dispatch(menuForToday(date, 1, 1, 1)).then(() => {
-  //     expect(store.getActions()[2]).toEqual(expectedActions);
-  //     done();
-  //   });
-  // });
-
 });

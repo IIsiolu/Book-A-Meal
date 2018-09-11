@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { SignupForm } from '../forms';
-import { signup, signupState } from '../../actions';
+import { signup } from '../../actions';
 
 /**
  * @class
@@ -94,5 +94,4 @@ const mapStateToProps = ({ user }) => ({
 // mapstate for states, dispatch functions
 export default connect(mapStateToProps, {
   signup,
-  signupState,
 })(SignupPage);

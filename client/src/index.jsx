@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import jwt from 'jwt-decode';
 import App from './App';
 import configureStore from './store';
-import { setUser } from './actions/auth';
+import { setUser } from './actions/user';
 import verifyToken from './utils/verifyToken';
 
 import '../../node_modules/semantic-ui-css/semantic.min.css';

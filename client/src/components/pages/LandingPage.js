@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/auth';
+import { logout } from '../../actions/user';
 import { Footer, LandingNav } from '../common/';
 import food1 from '../../static/images/food1.jpg';
 import food2 from '../../static/images/food2.jpg';

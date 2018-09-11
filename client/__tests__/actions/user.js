@@ -93,7 +93,7 @@ describe('Auth actions', () => {
   );
 
   it(
-    'creates SET_CURRENT_USER when login action is successful',
+    'dispatch SET_CURRENT_USER when login action is successful',
     (done) => {
       const { loginResponse, signinData } = mockData;
       const expectedActions = {

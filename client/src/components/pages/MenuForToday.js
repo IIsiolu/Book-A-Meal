@@ -4,14 +4,14 @@ import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
-import { logout } from '../../actions/auth';
+import { logout } from '../../actions/user';
 import { Footer, MenuCard, OrderItem, FoodModal, MenuNav } from '../common';
 import socket from '../../utils/socket';
 import {
   menuForToday, addMealToOrder,
   removeOrder, increaseQuantity, userOrders,
   requestForOrder, isOverlayOpened,
-  clearOrder, successState, errState,
+  clearOrder, successState,
 } from '../../actions';
 
 /**
@@ -408,5 +408,4 @@ export default connect(mapStateToProps, {
   isOverlayOpened,
   clearOrder,
   successState,
-  errState,
 })(MenuForToday);

@@ -7,12 +7,14 @@ module.exports =
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres',
+    // logging: false,
   },
   test: {
-    username: 'root',
-    password: null,
-    database: 'database_test',
+    username: 'adekunleoluwafemi',
+    password: 'phemonick',
+    database: 'book_a_meal_test',
     host: '127.0.0.1',
+    port: 5432,
     dialect: 'postgres',
   },
   production: {

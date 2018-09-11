@@ -12,7 +12,7 @@ const TopNav = ({ logout }) => (
     <h2 className="logo capitalize">book-a-meal</h2>
     <div className="right-nav">
       <Link className="nav-text" to="/dashboard">Dashboard</Link>
-      <h2 onClick={logout} className="nav-text-h"> Log-out</h2>
+      <h2 onClick={logout} className="logout-btn nav-text-h"> Log-out</h2>
     </div>
   </div>
 );

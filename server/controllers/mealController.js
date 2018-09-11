@@ -35,48 +35,12 @@ class MealController {
           success: true,
           meal,
         });
-      }).catch((err) => {
+      }).catch(() => {
         res.status(500).send({
           success: false,
           message: 'failed to create meal',
-          err,
         });
       });
-  }
-
-  /**
-   * All Meals
-   * @description method to allow caterers get all meals in Database
-   * @param {string} req - request
-   * @param {object} res - object response
-   * @returns {object} - response to be sent to client
-   */
-  static allMeals(req, res) {
-    // err
-    const { page, limit, offset } = checkPagination(req);
-    // find and count the total number of items in DB
-    Meal
-      .findAndCountAll({
-        limit,
-        offset,
-        paranoid: true,
-        order: [['id', 'DESC']],
-      })
-      .then((meals) => {
-        if (meals.count === 0) {
-          // no content
-          return res.status(204).send({
-            success: false,
-            message: 'Meal is empty',
-          });
-        }
-        res.status(200).json({
-          success: true,
-          pagination: paginatedData(page, limit, meals),
-          meals: meals.rows,
-        });
-      })
-      .catch(() => res.status(500).json('unexpected error'));
   }
 
   /**
@@ -110,7 +74,10 @@ class MealController {
           meals: meals.rows,
         });
       })
-      .catch(() => res.status(500).json('unexpected error'));
+      .catch(() => res.status(500).json({
+        success: false,
+        message: 'unexpected error',
+      }));
   }
 
   /**

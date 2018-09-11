@@ -27,10 +27,14 @@ export default (sequelize, DataTypes) => {
   }, {});
   Order.associate = (models) => {
     Order.belongsToMany(models.Meal, {
-      through: 'OrderMeal', foreignKey: 'orderId', otherKey: 'mealId',
+      through: 'OrderMeal',
+      foreignKey: 'orderId',
+      otherKey: 'mealId',
+      onDelete: 'CASCADE',
     });
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
     // associations can be defined here
   };

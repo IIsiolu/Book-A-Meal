@@ -111,19 +111,19 @@ describe('Menu Reducer', () => {
         payload: { id: 1, name: 'rice' },
       };
       const newState = menu(menuState, action);
-      expect(newState.menus).toEqual([{ name: 'rice' }]);
+      expect(newState.menus).toEqual([{ id: 1, name: 'rice' }]);
     },
   );
 
   it(
-    'should add meal to menu when action type is REMOVE_A_MENU_ITEM',
+    'should remove a meal when action type is REMOVE_A_MENU_ITEM',
     () => {
       const action = {
         type: REMOVE_A_MENU_ITEM,
         payload: { id: 1, name: 'beans' },
       };
       const newState = menu(menuState, action);
-      expect(newState.menus).toEqual([{ id: 1, name: 'beans' }]);
+      expect(newState.menus).toEqual([]);
     },
   );
 });

@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { userOrders, logout, editOrder } from '../../actions';
 import { Orders, OrderNav } from '../common';
 
 /**
  * @class UserOrders
  */
-class UserOrders extends Component {
+export class UserOrders extends Component {
+  /**
+   * React component life cycle called before a
+   * component mounts
+   * @returns {undefined} undefined
+   */
+  componentWillMount() {
+    const { role } = this.props;
+    if (!(role === 'user')) {
+      this.props.history.push('/');
+    }
+  }
 
   /**
    * React life cycle to fetch user Orders
@@ -20,19 +31,12 @@ class UserOrders extends Component {
     this.props.userOrders();
   }
 
-  componentWillMount() {
-    const { role } = this.props;
-    if (!(role === 'user')) {
-      this.props.history.push('/');
-    }
-  }
-
   /**
    * handle pagination click event
    * @function handlePageChange
    * @returns {undefined}
    */
-  handlePageChange = ({selected}) => {
+  handlePageChange = ({ selected }) => {
     const page = selected + 1;
     localStorage.setItem('currentUserOPage', page);
     const currentPage = localStorage.getItem('currentUserOPage');
@@ -45,20 +49,20 @@ class UserOrders extends Component {
    * @returns {JSX} jsx
    */
   renderPagination = () => (
-    <ReactPaginate 
+    <ReactPaginate
       previousLabel={<i className="fa fa-chevron-left" />}
       nextLabel={<i className="fa fa-chevron-right" />}
       breakLabel={<a href="">...</a>}
-      breakClassName={'break-me'}
+      breakClassName="break-me"
       pageCount={this.props.pageCount}
       initialPage={this.props.page - 1}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={this.handlePageChange}
       disableInitialCallback
-      containerClassName={'pagination'}
-      subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
+      containerClassName="pagination"
+      subContainerClassName="pages pagination"
+      activeClassName="active"
     />
   );
 
@@ -82,12 +86,25 @@ class UserOrders extends Component {
         <div className="user-orders-c">
           <Orders {...this.props} />
         </div>
-        <ToastContainer autoClose={2000}/>
+        <ToastContainer autoClose={2000} />
         {this.props.orders.length && this.renderPagination()}
       </div>
     );
   }
 }
+
+UserOrders.propTypes = {
+  role: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  orders: PropTypes.array.isRequired,
+  userOrders: PropTypes.func.isRequired,
+  editOrder: PropTypes.func.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
 
 const mapStateToProps = ({ user, orderHistory }) => ({
   role: user.user.role,
@@ -98,5 +115,8 @@ const mapStateToProps = ({ user, orderHistory }) => ({
   totalCount: orderHistory.pagination.totalCount,
 });
 
-export default connect(mapStateToProps, { userOrders,
-   logout, editOrder })(UserOrders);
+export default connect(mapStateToProps, {
+  userOrders,
+  logout,
+  editOrder,
+})(UserOrders);

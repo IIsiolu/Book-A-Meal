@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 /**
  * @class OrderInfo
@@ -22,41 +23,50 @@ class OrderInfo extends Component {
     };
   }
 
-  setEditable = () => (
-    this.setState({
-      editable: true
-    })
-  )
-
+  /**
+   * 
+   * @param {object} prevProps
+   * @returns {void} void
+   */
   componentDidUpdate(prevProps) {
-    if(this.props.order.OrderMeal.status !== prevProps.order.OrderMeal.status){
+    if (this.props.order.OrderMeal.status !== prevProps.order.OrderMeal.status) {
       this.props.order.OrderMeal.status === 'pending' && this.setEditable();
-      this.props.order.OrderMeal.status !== 'pending' && this.setEditable();
     }
   }
 
-  quantity = (e) => {
+  onChange = (e, { value }) => {
     this.setState({
-      orderValues: {...this.state.orderValues,
-         quantity: parseInt(e.target.value) }
-    })
+      orderValues: { ...this.state.orderValues, status: value },
+    });
   }
 
-  onChange = (e, {value}) => {
+  setEditable = () => (
     this.setState({
-      orderValues: {...this.state.orderValues, status: value }
+      editable: true,
     })
+  )
+
+  quantity = (e) => {
+    this.setState({
+      orderValues: {
+        ...this.state.orderValues,
+        quantity: parseInt(e.target.value),
+      },
+    });
   }
 
   save = () => {
-    this.props.editOrder({...this.state.orderValues,
-       id: this.props.order.OrderMeal.id, userId: this.props.userId})
+    this.props.editOrder({
+      ...this.state.orderValues,
+      id: this.props.order.OrderMeal.id,
+      userId: this.props.userId,
+    });
   }
 
   edit = () => {
     this.setState({
-      editOrder: !this.state.editOrder
-    })
+      editOrder: !this.state.editOrder,
+    });
   }
 
   cancel = () => {
@@ -73,11 +83,11 @@ class OrderInfo extends Component {
     const catereOptions = [
       { key: 1, text: 'delivered', value: 'delivered' },
       { key: 2, text: 'cancel', value: 'cancelled' },
-    ]
+    ];
 
     const userOptions = [
       { key: 1, text: 'cancel', value: 'cancelled' },
-    ]
+    ];
     return (
       <div className="order-history-item">
         <div className="order-item-img">
@@ -89,13 +99,15 @@ class OrderInfo extends Component {
           <div>Qty:
             {
               this.state.editOrder && role === 'user' ?
-                <input type="number"
-                  className='order-item-qty'
-                  id="quantity" name="quantity"
+                <input
+                  type="number"
+                  className="order-item-qty"
+                  id="quantity"
+                  name="quantity"
                   min="1"
-                  onChange = {this.quantity}
+                  onChange={this.quantity}
                   value={this.state.orderValues.quantity}
-                 />
+                />
                  :
                 order.OrderMeal.quantity
             }
@@ -107,13 +119,13 @@ class OrderInfo extends Component {
         <div className="order-status">
           <p>Status</p>
           {
-            this.state.editOrder ? 
+            this.state.editOrder ?
               <Dropdown
                 selection
                 wrapSelection={false}
                 options={role === 'user' ? userOptions : catereOptions}
                 onChange={this.onChange}
-                placeholder='status'
+                placeholder="status"
               />
               :
               order.OrderMeal.status
@@ -121,20 +133,23 @@ class OrderInfo extends Component {
         </div>
         <div className="call-to-action-btn">
           {
-            this.state.editable && order.OrderMeal.status === 'pending' && 
-            <div className='save-cancel-btn'>
-              {this.state.editOrder ? 
+            this.state.editable && order.OrderMeal.status === 'pending' &&
+            <div className="save-cancel-btn">
+              {this.state.editOrder ?
                 <div className="call-to-actn">
-                  <button className='save-item'onClick={this.save}>
+                  <button className="save-item"onClick={this.save}>
                     Save
                   </button>
-                  <button className='clear-cart' onClick = {this.cancel}>
+                  <button className="clear-cart" onClick={this.cancel}>
                     Cancel
                   </button>
-                </div> 
-              : 
-                <button className='edit-order-item'
-                 onClick={this.edit}>edit</button>
+                </div>
+              :
+                <button
+                  className="edit-order-item"
+                  onClick={this.edit}
+                >edit
+                </button>
               }
             </div>
           }
@@ -143,5 +158,12 @@ class OrderInfo extends Component {
     );
   }
 }
+
+OrderInfo.propTypes = {
+  order: PropTypes.object.isRequired,
+  editOrder: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
+};
 
 export default OrderInfo;

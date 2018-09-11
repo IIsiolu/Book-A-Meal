@@ -215,5 +215,13 @@ const mockData = {
   menuFailure: {
     message: 'invalid date input',
   },
+  waleOrder: {
+    order: {
+      meals: [
+        { mealId: 1, quantity: 4 }, { mealId: 2, quantity: 7 },
+      ],
+      address: 'london road andela',
+    },
+  },
 };
 export default mockData;

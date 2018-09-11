@@ -71,18 +71,18 @@ describe('Create Menu actions', () => {
     done();
   });
 
-  it('should get menu for the date 2018-06-10', (done) => {
-    const { fetchMealSuccess } = mockData;
-    const expectedActions = getMenu(fetchMealSuccess);
-    const store = mockStore({});
-    const date = '2018-06-10';
-    mock
-      .onGet(`menu?date=${date}?page=${page}&limit=${limit}&offset=${offset}`)
-      .reply(200, fetchMealSuccess);
-    store.dispatch(menuForToday(date, 1, 1, 1)).then(() => {
-      expect(store.getActions()[2]).toEqual(expectedActions);
-      done();
-    });
-  });
+  // it('should get menu for the date 2018-06-10', (done) => {
+  //   const { fetchMealSuccess } = mockData;
+  //   const expectedActions = getMenu(fetchMealSuccess);
+  //   const store = mockStore({});
+  //   const date = '2018-06-10';
+  //   mock
+  //     .onGet(`menu?date=${date}?page=${page}&limit=${limit}&offset=${offset}`)
+  //     .reply(200, fetchMealSuccess);
+  //   store.dispatch(menuForToday(date, 1, 1, 1)).then(() => {
+  //     expect(store.getActions()[2]).toEqual(expectedActions);
+  //     done();
+  //   });
+  // });
 
 });

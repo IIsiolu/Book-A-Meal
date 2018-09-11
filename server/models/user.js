@@ -50,6 +50,7 @@ export default (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Order, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
     // associations can be defined here
   };

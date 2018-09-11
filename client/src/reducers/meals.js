@@ -1,6 +1,6 @@
 import { mealState } from './initState';
 import {
-  MEAL_ADDED, MEAL_FETCHED, CREATE_MEAL_ERROR,
+  MEAL_FETCHED, CREATE_MEAL_ERROR,
   UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
   CREATING_MEAL, FETCH_MEAL_ERROR, ADD_MEAL_IMAGE_ERR,
   ADD_MEAL_SUCCESS_STATE, ADDED_MEAL_IMAGE, CLEAR_MEAL_IMAGE,
@@ -64,11 +64,6 @@ const meals = (state = mealState, action) => {
         success: false,
         loading: false,
 
-      };
-    case MEAL_ADDED:
-      return {
-        ...state,
-        meals: [...state.meals, action.payload],
       };
     case UPDATE_FETCH_MEAL:
       return {

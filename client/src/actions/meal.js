@@ -1,6 +1,6 @@
 import api from '../utils/api';
 import {
-  START_LOADER, MEAL_ADDED, MEAL_FETCHED,
+  START_LOADER, MEAL_FETCHED,
   UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
   CREATING_MEAL, FETCH_MEAL_ERROR,
   ADD_MEAL_SUCCESS_STATE,
@@ -29,12 +29,6 @@ export const mealSuccessState = bool => (dispatch) => {
     payload: bool,
   });
 };
-
-// dispatch
-export const mealAdded = data => ({
-  type: MEAL_ADDED,
-  payload: data,
-});
 
 export const mealFetched = data => ({
   type: MEAL_FETCHED,

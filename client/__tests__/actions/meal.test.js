@@ -4,10 +4,10 @@ import thunk from 'redux-thunk';
 import {
   createMeal, fetchMeals, mealSuccess, mealFetched,
   createMealErr, updateMeal, deleteMeal,
-  errorFetchingMeal, mealError,
+  mealError,
 } from '../../src/actions';
 
-import { MEAL_ADDED, FETCH_MEAL_ERROR, UPDATE_FETCH_MEAL, MEAL_UPDATE_ERROR }
+import { FETCH_MEAL_ERROR, UPDATE_FETCH_MEAL }
   from '../../src/actions/actionsTypes';
 import mockData from '../__mocks__/mockData';
 
@@ -41,10 +41,6 @@ describe('Create Meal actions', () => {
   it('should dispatch CREATE_MEAL_ERROR when' +
    ' a meal already Exist ', (done) => {
     const { mealExist, mealData } = mockData;
-    // const expectedActions = {
-    //   type: CREATE_MEAL_ERROR,
-    //   payload: mealExist.message,
-    // };
     const expectedActions = createMealErr(mealExist.message);
     const store = mockStore({});
     mock
@@ -59,10 +55,6 @@ describe('Create Meal actions', () => {
   it('should dispatch CREATE_MEAL_ERROR when' +
    ' there is invalid price ', (done) => {
     const { inValidMealPrice, bread } = mockData;
-    // const expectedActions = {
-    //   type: CREATE_MEAL_ERROR,
-    //   payload: inValidMealPrice.message,
-    // };
     const expectedActions = createMealErr(inValidMealPrice.message);
     const store = mockStore({});
     mock
@@ -90,10 +82,6 @@ describe('Create Meal actions', () => {
 
   it('should update a meal that already exist', (done) => {
     const { mealUpdateSuccess, mealUpdate } = mockData;
-    // const expectedActions = {
-    //   type: MEAL_UPDATED,
-    //   payload: mealUpdateSuccess,
-    // };
     const expectedActions = mealSuccess(mealUpdateSuccess);
     const store = mockStore({});
     mock
@@ -107,10 +95,6 @@ describe('Create Meal actions', () => {
 
   it('should dispatch MEAL_UPDATE_ERROR for invalid meal price', (done) => {
     const { invalidPriceUdate, mealUpdate2 } = mockData;
-    // const expectedActions = {
-    //   type: MEAL_UPDATE_ERROR,
-    //   payload: invalidPriceUdate.message,
-    // };
     const expectedActions = mealError(invalidPriceUdate);
     const store = mockStore({});
     mock

@@ -1,5 +1,5 @@
 import {
-  MENU_FOR_TODAY, GET_MENU_ERROR, MENU_ADDED, CHANGE_MENU_ERROR,
+  MENU_FOR_TODAY, GET_MENU_ERROR, MENU_ADDED,
   REMOVE_A_MENU_ITEM, MENU_CREATED, MENU_ERROR, CHANGE_MENU_SUCCESS,
 } from '../actions/actionsTypes';
 import { menuState } from './initState';
@@ -51,11 +51,6 @@ const menu = (state = menuState, action) => {
       return {
         ...state,
         created: action.payload,
-      };
-    case CHANGE_MENU_ERROR:
-      return {
-        ...state,
-        isError: action.payload,
       };
     default:
       return state;

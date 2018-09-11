@@ -1,8 +1,7 @@
 import {
-  USER_SIGN_UP, USER_SIGNUP_ERROR, CHANGE_SIGN_UP,
+  USER_SIGN_UP, USER_SIGNUP_ERROR,
   USER_LOGGED_IN, LOGIN_ERROR, SET_CURRENT_USER, LOADING,
 } from '../../src/actions/actionsTypes';
-import { logout } from '../../src/actions';
 import user from '../../src/reducers/user';
 import { userState } from '../../src/reducers/initState';
 
@@ -91,20 +90,4 @@ describe('Auth Reducer', () => {
       expect(newState.user.token).toBe('token');
     },
   );
-
-  // it(
-  //   'should clear the token and logout a user when ' +
-  //   'logout action is called',
-  //   () => {
-  //     const action = {
-  //       type: SET_CURRENT_USER,
-  //       payload: {
-  //         token: 'token',
-  //       },
-  //     };
-  //     const newState = user(userState, action);
-  //     expect(newState.isAuthenticated).toBe(false);
-  //   },
-  // );
-
 });

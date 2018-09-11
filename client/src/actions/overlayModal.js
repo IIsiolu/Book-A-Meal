@@ -1,14 +1,13 @@
-import * as actionTypes from './actionsTypes';
+import { IS_OVERLAY_OPENED, IS_OVERLAY_ID } from './actionsTypes';
 
 const isOverlayOpened = (opened, id) => (dispatch) => {
   dispatch({
-    type: actionTypes.IS_OVERLAY_OPENED,
+    type: IS_OVERLAY_OPENED,
     payload: opened,
   });
   return dispatch({
-    type: actionTypes.IS_OVERLAY_ID,
+    type: IS_OVERLAY_ID,
     payload: id,
   });
 };
 export default isOverlayOpened;
-

@@ -11,20 +11,20 @@ export {
 } from './meal';
 
 export {
-  menuForToday, addToMenu, removeMeal, createMenu, changeMErrorState,
+  menuForToday, addToMenu, removeMeal, createMenu,
   changeMSuccessState, clearMenu, getMenu,
 } from './menus';
 
 export { orderHistory, userOrders } from './OrderHistory';
 
-export { logIn, signup, logout, signupState, editProfile } from './auth';
+export { logIn, signup, logout } from './user';
 
 export { imageUpload, clearMealImage } from './imageUpload';
 
 export {
   addMealToOrder, removeOrder,
   increaseQuantity, requestForOrder, clearOrder,
-  successState, errState, recentOrders, editOrder,
+  successState, editOrder,
 } from './order';
 
 export { isModalOpened, isOverlayOpened };

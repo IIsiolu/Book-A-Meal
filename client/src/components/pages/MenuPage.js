@@ -6,7 +6,7 @@ import { TopNav, MealCard, MenuItems } from '../common/';
 import InlineError from '../messages/inlineError';
 import {
   addToMenu, fetchMeals, removeMeal, createMenu,
-  logout, changeMErrorState, changeMSuccessState,
+  logout, changeMSuccessState,
 } from '../../actions';
 
 /**
@@ -264,6 +264,5 @@ export default connect(mapstatetoProps, {
   removeMeal,
   createMenu,
   logout,
-  changeMErrorState,
   changeMSuccessState,
 })(MenuPage);

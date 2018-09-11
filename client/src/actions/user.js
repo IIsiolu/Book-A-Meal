@@ -1,7 +1,7 @@
 import jwt from 'jwt-decode';
 import {
   LOGOUT, LOGIN_ERROR, USER_LOGGED_IN, SET_CURRENT_USER,
-  USER_SIGN_UP, USER_SIGNUP_ERROR, LOADING, CHANGE_SIGN_UP,
+  USER_SIGN_UP, USER_SIGNUP_ERROR, LOADING,
 } from './actionsTypes';
 import api from '../utils/api';
 

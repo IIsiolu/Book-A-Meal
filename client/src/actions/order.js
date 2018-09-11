@@ -35,13 +35,6 @@ export const addMealToOrder = meal => (dispatch) => {
   return dispatch(addToOrder(mealData));
 };
 
-export const recentOrders = order => (dispatch) => {
-  dispatch({
-    type: actionTypes.RECENT_ORDER,
-    payload: order,
-  });
-};
-
 export const removeOrder = mealId => (dispatch) => {
   dispatch(removeAnOrder(mealId));
 };
@@ -63,13 +56,6 @@ export const increaseQuantity = (mealId, quantity) => dispatch => (
 export const successState = bool => dispatch => (
   dispatch({
     type: actionTypes.CHANGE_ORDER_SUC_STATE,
-    payload: bool,
-  })
-);
-
-export const errState = bool => dispatch => (
-  dispatch({
-    type: actionTypes.CHANGE_ORDER_ERR_STATE,
     payload: bool,
   })
 );

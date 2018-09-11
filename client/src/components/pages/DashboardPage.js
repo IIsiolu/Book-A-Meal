@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import { ToastContainer, toast } from 'react-toastify';
 import { SideNav, TopNav, Orders } from '../common/';
-import { logout, orderHistory, recentOrders, editOrder } from '../../actions/';
+import { logout, orderHistory, editOrder } from '../../actions/';
 import socket from '../../utils/socket';
 
 /**
@@ -131,6 +131,6 @@ const mapstatetoProps = ({ user, orderHistory }) => ({
 export default connect(
   mapstatetoProps,
   {
-    logout, orderHistory, recentOrders, editOrder,
+    logout, orderHistory, editOrder,
   },
 )(DashboardPage);

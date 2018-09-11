@@ -1,5 +1,5 @@
 import {
-  MEAL_ADDED, CREATE_MEAL_ERROR, UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
+ CREATE_MEAL_ERROR, UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
   ADD_MEAL_SUCCESS_STATE, CLEAR_MEAL_IMAGE, ADD_MEAL_IMAGE_ERR,
   ADDED_MEAL_IMAGE, CREATING_MEAL, MEAL_FETCHED, FETCH_MEAL_ERROR,
 } from '../../src/actions/actionsTypes';
@@ -11,18 +11,6 @@ describe('Add Meal Reducer', () => {
     'should return create Meal initial state',
     () => {
       expect(meals(undefined, {})).toEqual(mealState);
-    },
-  );
-
-  it(
-    'should update the meals array way action type is MEAL_ADDED',
-    () => {
-      const action = {
-        type: MEAL_ADDED,
-        payload: { name: 'ofada', price: 200 },
-      };
-      const newState = meals(mealState, action);
-      expect(newState.meals.length).toBeGreaterThanOrEqual(1);
     },
   );
 

@@ -16,16 +16,6 @@ const initialState = {
 };
 const orderHistory = (state = initialState, action) => {
   switch (action.type) {
-    case actionsTypes.FETCHING_ORDER_HISTORY:
-      return {
-        ...state,
-        loading: action.payload,
-      };
-    case actionsTypes.FETCHING_USER_ORDERS:
-      return {
-        ...state,
-        loading: action.payload,
-      };
     case actionsTypes.USER_ORDERS:
       return {
         ...state,
@@ -48,11 +38,6 @@ const orderHistory = (state = initialState, action) => {
           ...state.pagination,
           ...action.payload.pagination.pagination,
         },
-      };
-    case actionsTypes.RECENT_ORDER:
-      return {
-        ...state,
-        orderHistory: [action.payload, ...state.orderHistory],
       };
     case actionsTypes.ORDER_HISTORY_ERROR:
       return {

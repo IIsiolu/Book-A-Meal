@@ -1,6 +1,6 @@
 import {
-  MENU_CREATED, CLEAR_MENUS, MENU_ADDED, MENU_FOR_TODAY, REMOVE_A_MENU_ITEM,
-  MENU_ERROR, CHANGE_MENU_ERROR, CHANGE_MENU_SUCCESS, GET_MENU_ERROR,
+  MENU_CREATED, MENU_ADDED, MENU_FOR_TODAY, REMOVE_A_MENU_ITEM,
+  MENU_ERROR, CHANGE_MENU_SUCCESS, GET_MENU_ERROR,
 } from '../../src/actions/actionsTypes';
 import menu from '../../src/reducers/menu';
 import { menuState } from '../../src/reducers/initState';
@@ -69,18 +69,6 @@ describe('Menu Reducer', () => {
   );
 
   it(
-    'should change isError state when action type is CHANGE_MENU_ERROR',
-    () => {
-      const action = {
-        type: CHANGE_MENU_ERROR,
-        payload: false,
-      };
-      const newState = menu(menuState, action);
-      expect(newState.isError).toBe(false);
-    },
-  );
-
-  it(
     'should change success state when action type is CHANGE_MENU_SUCCESS',
     () => {
       const action = {
@@ -89,17 +77,6 @@ describe('Menu Reducer', () => {
       };
       const newState = menu(menuState, action);
       expect(newState.created).toBe(false);
-    },
-  );
-
-  it(
-    'should clear the menu state when action type is CLEAR_MENUS',
-    () => {
-      const action = {
-        type: CLEAR_MENUS,
-      };
-      const newState = menu(menuState, action);
-      expect(newState.menus).toEqual([]);
     },
   );
 

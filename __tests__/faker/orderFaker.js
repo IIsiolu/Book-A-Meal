@@ -9,6 +9,14 @@ const orderFaker = {
     },
 
   },
+  invalidOrder: {
+    order: {
+      meals: {
+        mealId: 211, quantity: 40,
+      },
+      address: 'no 3, moruff street, oshodi',
+    },
+  },
 
   wrongMeal: {
     order: {
@@ -32,6 +40,17 @@ const orderFaker = {
     quantity: 'x',
   },
 
+  nikeOrder: {
+    order: {
+      meals: [
+        { mealId: 'x', quantity: 'quantity' },
+      ],
+      address: 'london road andela',
+    },
+  },
+
+  emptyOrder: {
+  },
 
 };
 

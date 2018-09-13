@@ -52,7 +52,7 @@ class OrderRow extends Component {
 }
 
 OrderRow.propTypes = {
-  order: PropTypes.array.isRequired,
+  order: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   editOrder: PropTypes.func.isRequired,
 };

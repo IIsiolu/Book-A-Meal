@@ -52,7 +52,6 @@ describe('Meal Page test-suite', () => {
     const MealPageWrapper = shallow(<MealPage {...props} />);
     const RenderNoMealDiv = MealPageWrapper.find('.no-meal');
     expect(RenderNoMealDiv.exists()).toBeFalsy();
-    // expect(RenderNoMealDiv.hasClass('m-mealoptions')).toBeTruthy();
     MealPageWrapper.setProps({
       allMeals: [],
     });

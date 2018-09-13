@@ -202,7 +202,6 @@ class Validate {
    * @returns {object} res
    */
   static validateMenuInput(req, res, next) {
-    req.checkBody('mealId', 'input menu Id').notEmpty();
     req.checkBody('date', 'input menu date').notEmpty();
     const meal = req.body.mealId;
     const errors = req.validationErrors();
@@ -218,18 +217,19 @@ class Validate {
     if (!Array.isArray(meal) || meal.length === 0) {
       res.status(400).send({
         success: false,
-        message: 'Input must be an array',
+        message: 'meal cannot be empty',
       });
       return;
     } else if (meal.every(checkInt) === false) {
       res.status(400).send({
         success: false,
-        message: 'Array input must be integer',
+        message: 'mealId must be an array of number',
       });
       return;
     }
     if (!req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      res.status(400).json({
+      res.status(400).send({
+        success: false,
         message: 'invalid date input',
       });
       return;
@@ -248,6 +248,7 @@ class Validate {
     if (req.query.date && !checkDate(req.query.date)) {
       return (
         res.status(400).send({
+          success: false,
           message: 'invalid date input',
         })
       );
@@ -273,7 +274,6 @@ class Validate {
         errorMessage,
       });
       return;
-      // stop the req from proceeding
     }
     if (!Array.isArray(cusOrders.meals) || cusOrders.meals.length === 0) {
       res.status(400).send({

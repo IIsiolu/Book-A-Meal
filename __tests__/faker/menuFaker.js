@@ -10,6 +10,18 @@ const menuFaker = {
     date: '2018-10-17',
     mealId: [1, 2],
   },
+  invalidMenuDate: {
+    date: '25-14-2018',
+    mealId: [1, 2],
+  },
+  invalidMealId: {
+    date: '2018-10-17',
+    mealId: ['x', 'y'],
+  },
+  septemberMenu: {
+    date: '2018-10-17',
+    mealId: [],
+  },
 };
 
 export default menuFaker;

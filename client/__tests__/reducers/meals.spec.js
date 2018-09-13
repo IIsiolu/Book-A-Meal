@@ -1,5 +1,5 @@
 import {
- CREATE_MEAL_ERROR, UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
+  CREATE_MEAL_ERROR, UPDATE_FETCH_MEAL, DELETE_FETCH_MEAL,
   ADD_MEAL_SUCCESS_STATE, CLEAR_MEAL_IMAGE, ADD_MEAL_IMAGE_ERR,
   ADDED_MEAL_IMAGE, CREATING_MEAL, MEAL_FETCHED, FETCH_MEAL_ERROR,
 } from '../../src/actions/actionsTypes';
@@ -98,7 +98,7 @@ describe('Add Meal Reducer', () => {
       const action = {
         type: MEAL_FETCHED,
         payload: {
-          meals: [{id: 1, name: 'ofada', price: 2000 }],
+          meals: [{ id: 1, name: 'ofada', price: 2000 }],
           pagination: {
             pagination: 10,
           },
@@ -151,5 +151,4 @@ describe('Add Meal Reducer', () => {
       expect(newState.meals.length).toBeLessThan(1);
     },
   );
-
 });

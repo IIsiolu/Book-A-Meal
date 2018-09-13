@@ -12,9 +12,6 @@ import mockData from '../__mocks__/mockData';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-const page = 1;
-const limit = 1;
-const offset = 1;
 
 describe('Create Menu actions', () => {
   beforeEach(() => {

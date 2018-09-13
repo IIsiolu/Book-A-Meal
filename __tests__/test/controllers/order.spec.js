@@ -80,7 +80,6 @@ describe('Order endpoint', () => {
         .set('Authorization', userToken)
         .send(orderCredential.wrongMeal)
         .end((error, res) => {
-          console.log('>>>>>>>>>>>>>>>>>>>', res.body);
           expect(res.status).to.equal(404);
           expect(res.body.success).to.be.false;
           expect(res.body.message).to.include('That meal does not exist');

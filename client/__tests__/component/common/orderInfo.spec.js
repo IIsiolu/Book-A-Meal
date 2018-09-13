@@ -28,11 +28,14 @@ describe('OrderInfo Component test-suite', () => {
     expect(props.editOrder).toHaveBeenCalled();
   });
 
-  it('should change order status state to delivered when onChange is called', () => {
-    const OrderDetailsRapper = shallow(<OrderInfo {...props} />);
-    OrderDetailsRapper.instance().onChange('event', { value: 'delivered' });
-    expect(OrderDetailsRapper.state().orderValues.status).toEqual('delivered');
-  });
+  it(
+    'should change order status state to delivered when onChange is called',
+    () => {
+      const OrderDetailsRapper = shallow(<OrderInfo {...props} />);
+      OrderDetailsRapper.instance().onChange('event', { value: 'delivered' });
+      expect(OrderDetailsRapper.state().orderValues.status).toEqual('delivered');
+    },
+  );
 
   it('should make order uneditable when editable state is false', () => {
     const OrderDetailsRapper = shallow(<OrderInfo {...props} />);

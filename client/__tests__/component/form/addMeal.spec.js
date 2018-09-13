@@ -1,8 +1,5 @@
 import React from 'react';
-import sweetalert from 'sweetalert';
 import AddMeal from '../../../src/components/forms/AddMeal';
-
-jest.mock('sweetalert');
 
 describe('Add Meal Component test-suite', () => {
   const props = {
@@ -16,15 +13,6 @@ describe('Add Meal Component test-suite', () => {
     creatingMeal: false,
     addMealError: '',
     open: jest.fn(),
-  };
-
-  const state = {
-    mealInformation: {
-      name: '',
-      price: 0,
-      description: '',
-      image: '',
-    },
   };
 
   it('renders properly', () => {

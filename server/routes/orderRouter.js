@@ -17,7 +17,10 @@ orderRouter.put(
   OrderController.modifyOrder,
 );
 
-orderRouter.get('/catererOrders', Auth.verifyAdmin, OrderController.catererOrders);
+orderRouter.get(
+  '/catererOrders', Auth.verifyAdmin,
+  OrderController.catererOrders,
+);
 
 orderRouter.get('/userOrder', Auth.verifyToken, OrderController.customerOrders);
 

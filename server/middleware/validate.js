@@ -104,7 +104,7 @@ class Validate {
    * @returns {object} res
    */
   static validateSignin(req, res, next) {
-    req.checkBody('email', 'invalid email address')
+    req.checkBody('email', 'Your email address is invalid. Please enter a valid address')
       .isEmail();
     req.sanitizeBody('email')
       .normalizeEmail({
@@ -309,7 +309,7 @@ class Validate {
     } else if (req.body.quantity && isNaN(req.body.quantity)) {
       return res.status(400).send({
         success: false,
-        message: 'quantity must be a number',
+        message: 'Your order quantity is invalid, quantity must be a number',
       });
     }
     next();

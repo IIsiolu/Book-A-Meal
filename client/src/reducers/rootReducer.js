@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import user from './user';
 import imageUpload from './imageUpload';
-import isModalOpened from './isModalOpened';
 import menu from './menu';
 import order from './order';
 import isOverlayOpened from './isOverlayOpened';
@@ -20,7 +19,6 @@ const reducers = combineReducers({
   user,
   imageUpload,
   meals,
-  isModalOpened,
   menu,
   order,
   orderHistory,

@@ -1,12 +1,12 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import menuCredential from '../faker/menuFaker';
-import server from '../../server/server';
-import { User } from '../../server/models';
+import menuCredential from '../../faker/menuFaker';
+import server from '../../../server/server';
+import { User } from '../../../server/models';
 import {
   mondayMenus, invalidIdToken, hashPassword, generateToken,
   insertMenuSeed,
-} from '../seed/testSeeds';
+} from '../../seed/testSeeds';
 
 let userToken = '';
 let catererToken = '';

@@ -16,23 +16,15 @@ export const userOrderErr = data => ({
 /**
  * @description get order histories
  * @function orderHistory
- * @param {string} role
  * @param {number} page
  * @param {number} limit
  * @param {number} offset
  * @returns {void}
  */
-export const orderHistory = (role, page, limit, offset) => async (dispatch) => {
+export const orderHistory = (page, limit, offset) => async (dispatch) => {
   dispatch(isLoading(true));
   try {
-    let response;
-    if (role === 'super-admin') {
-      response = await api(`orders?page=${page}
-      &limit=${limit}&offset=${offset}`, 'get');
-    } else {
-      response = await api(`orders/catererOrders?page=${page}
-      &limit=${limit}&offset=${offset}`, 'get');
-    }
+    const response = await api(`orders/catererOrders?page=${page}&limit=${limit}&offset=${offset}`, 'get');
     dispatch(isLoading(false));
     dispatch({
       type: actionTypes.GET_ORDER_HISTORY,
@@ -55,8 +47,7 @@ export const orderHistory = (role, page, limit, offset) => async (dispatch) => {
 export const userOrders = (page, limit, offset) => async (dispatch) => {
   dispatch(isLoading(true));
   try {
-    const response = await api(`orders/userOrder?page=${page}
-    &limit=${limit}&offset=${offset}`, 'get');
+    const response = await api(`orders/userOrder?page=${page}&limit=${limit}&offset=${offset}`, 'get');
     dispatch(isLoading(false));
     dispatch({
       type: actionTypes.USER_ORDERS,

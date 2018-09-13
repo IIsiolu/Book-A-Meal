@@ -1,15 +1,8 @@
 import isEmpty from 'lodash/isEmpty';
 import * as actionsTypes from '../actions/actionsTypes';
-// loading state
-// most suitable things to have in a token
-const initialState = {
-  loading: false,
-  success: false,
-  error: null,
-  imageUrl: null,
-  id: null,
-};
-const imageUpload = (state = initialState, action) => {
+import { imageInitState } from './initState';
+
+const imageUpload = (state = imageInitState, action) => {
   switch (action.type) {
     case actionsTypes.IMAGE_LOADING:
       return {

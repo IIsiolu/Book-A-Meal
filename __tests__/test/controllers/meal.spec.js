@@ -1,12 +1,12 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import mealCredential from '../faker/mealFaker';
-import server from '../../server/server';
-import { User } from '../../server/models';
+import mealCredential from '../../faker/mealFaker';
+import server from '../../../server/server';
+import { User } from '../../../server/models';
 import {
   insertMealSeed, invalidIdToken, generateToken,
   hashPassword,
-} from '../seed/testSeeds';
+} from '../../seed/testSeeds';
 
 let adminToken = '';
 describe('Meal endpoint', () => {

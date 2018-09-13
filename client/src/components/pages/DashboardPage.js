@@ -40,7 +40,7 @@ export class DashboardPage extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.props.orderHistory(this.props.role);
+    this.props.orderHistory();
   }
 
   /**
@@ -59,7 +59,7 @@ export class DashboardPage extends Component {
     const page = selected + 1;
     localStorage.setItem('currentOrderPage', page);
     const currentPage = localStorage.getItem('currentOrderPage');
-    this.props.orderHistory(this.props.role, currentPage);
+    this.props.orderHistory(currentPage);
   }
 
   /**

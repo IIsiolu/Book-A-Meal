@@ -22,6 +22,10 @@ const userfake = {
     email: 'wrong@gmail.com',
     password: '123445455',
   },
+  invalidEmail: {
+    email: '',
+    password: 'password',
+  },
 };
 
 export default userfake;

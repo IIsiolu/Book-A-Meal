@@ -8,7 +8,7 @@ const addToOrder = meal => ({
   payload: meal,
 });
 
-export const createdOrder = meal => ({
+const createdOrder = meal => ({
   type: actionTypes.ORDER_CREATED,
   payload: meal,
 });

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="1">
+
+  <testsuite name="authentication.signin.spec"
+    errors="0" failures="0" hostname="" id="" package="authentication" skipped="0"
+    tests="1" time="12.53" timestamp="Wed, 12 Sep 2018 17:37:44 GMT">
+  
+    <testcase name="Login User" classname="authentication.signin.spec" time="12.53" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

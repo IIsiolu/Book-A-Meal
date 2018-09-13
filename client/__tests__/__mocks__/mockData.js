@@ -223,5 +223,72 @@ const mockData = {
       address: 'london road andela',
     },
   },
+  orderSuccess: {
+    success: true,
+    pagination:
+       {
+         pagination: {
+           page: 1, pageCount: 1, pageSize: 1, totalCount: 2,
+         },
+       },
+    orders:
+       [{
+         id: 3,
+         address: 'london road andela',
+         userId: 3,
+         createdAt: '2018-09-12T10:26:30.786Z',
+         updatedAt: '2018-09-12T10:26:30.786Z',
+         Meals: [{
+           id: 2,
+           name: 'joloofRice',
+           description: 'Users  are very much satisfied with such delicacy',
+           price: 2000,
+           image: 'https://medium.com/the-andela-way/a-simple',
+           userId: 1,
+           createdAt: '2018-08-25T12:58:34.198Z',
+           updatedAt: '2018-08-25T12:58:34.198Z',
+         }],
+         User: {
+           firstname: 'oluwafemi',
+           lastname: 'adekunle',
+           email: 'phem4@gmail.ciu',
+         },
+       }],
+  },
+  mealOrderSuccess: {
+    success: true,
+    order:
+     [{
+       id: null,
+       orderId: 3,
+       mealId: 211,
+       status: 'pending',
+       quantity: 40,
+       createdAt: '2018-09-13T01:49:55.464Z',
+       updatedAt: '2018-09-13T01:49:55.464Z',
+     },
+     {
+       id: null,
+       orderId: 3,
+       mealId: 212,
+       status: 'pending',
+       quantity: 17,
+       createdAt: '2018-09-13T01:49:55.464Z',
+       updatedAt: '2018-09-13T01:49:55.464Z',
+     }],
+  },
+  bisiOrder: {
+    order: {
+      meals: [
+        { mealId: 211, quantity: 40 }, { mealId: 212, quantity: 17 },
+      ],
+      address: 'london road andela',
+    },
+
+  },
+  orderFailure: {
+    success: false,
+  },
+
 };
 export default mockData;

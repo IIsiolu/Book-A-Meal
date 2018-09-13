@@ -1,5 +1,3 @@
-
-import isModalOpened from './isModalOpened';
 import isOverlayOpened from './overlayModal';
 
 export { changeErrState, changeSuccessState } from './helpers';
@@ -27,4 +25,4 @@ export {
   successState, editOrder,
 } from './order';
 
-export { isModalOpened, isOverlayOpened };
+export { isOverlayOpened };

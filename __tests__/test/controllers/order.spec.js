@@ -1,12 +1,12 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import orderCredential from '../faker/orderFaker';
-import server from '../../server/server';
-import { User } from '../../server/models';
+import orderCredential from '../../faker/orderFaker';
+import server from '../../../server/server';
+import { User } from '../../../server/models';
 import {
   insertOrderSeed, mondayMeal, generateToken,
   insertOrderMeal, hashPassword,
-} from '../seed/testSeeds';
+} from '../../seed/testSeeds';
 
 let catererToken = '';
 let userToken = '';
@@ -80,6 +80,7 @@ describe('Order endpoint', () => {
         .set('Authorization', userToken)
         .send(orderCredential.wrongMeal)
         .end((error, res) => {
+          console.log('>>>>>>>>>>>>>>>>>>>', res.body);
           expect(res.status).to.equal(404);
           expect(res.body.success).to.be.false;
           expect(res.body.message).to.include('That meal does not exist');

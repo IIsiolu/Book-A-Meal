@@ -1,8 +1,8 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import userCredential from '../faker/userfaker';
-import server from '../../server/server';
-import { insertTestUser } from '../seed/testSeeds';
+import userCredential from '../../faker/userfaker';
+import server from '../../../server/server';
+import { insertTestUser } from '../../seed/testSeeds';
 
 describe('User endpoint', () => {
   before(async () => {
@@ -62,7 +62,7 @@ describe('User endpoint', () => {
         });
     });
 
-    it('returns 401 if email or password is incorrect when a user tries to login', (done) => {
+    it('should return 401 if email or password is incorrect when a user tries to login', (done) => {
       request(server)
         .post('/api/v1/auth/login')
         .send(userCredential.loginWalex)

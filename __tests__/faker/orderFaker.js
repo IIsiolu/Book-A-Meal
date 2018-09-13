@@ -28,6 +28,11 @@ const orderFaker = {
     status: 'invalid',
   },
 
+  inValidMealId: {
+    quantity: 'x',
+  },
+
+
 };
 
 export default orderFaker;

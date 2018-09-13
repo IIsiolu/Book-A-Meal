@@ -41,6 +41,14 @@ export const todayMenuState = {
   },
 };
 
+export const imageInitState = {
+  loading: false,
+  success: false,
+  error: null,
+  imageUrl: null,
+  id: null,
+};
+
 export const orderState = {
   orders: [],
   loading: false,

@@ -42,6 +42,18 @@ export const hashPassword = (value) => {
   return hash;
 };
 
+export const defaultUser = () => {
+  User.create({
+    firstname: 'donald',
+    email: 'dukekitchen@gmail.com',
+    lastname: 'Kitchen',
+    role: 'caterer',
+    password: hashPassword('mypassword'),
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  });
+};
+
 const testUsers = [
   {
     id: 50,

@@ -42,18 +42,6 @@ export const hashPassword = (value) => {
   return hash;
 };
 
-export const defaultUser = () => {
-  User.create({
-    firstname: 'donald',
-    email: 'dukekitchen@gmail.com',
-    lastname: 'Kitchen',
-    role: 'caterer',
-    password: hashPassword('mypassword'),
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-  });
-};
-
 const testUsers = [
   {
     id: 50,
@@ -175,7 +163,7 @@ const mondayMenu = [
     name: 'bronance',
     description: 'very cool for breakfast',
     price: 5000,
-    image: 'https://www.image.jpg',
+    image: 'https://res.cloudinary.com/dtioo2hf0/image/upload/v1536315678/ztzs0pi40u4yoysp3wl1.jpg',
     userId: 72,
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -186,7 +174,7 @@ const mondayMenu = [
     name: 'longresco',
     description: 'very cool for breakfast',
     price: 5000,
-    image: 'https://www.image.jpg',
+    image: 'https://res.cloudinary.com/dtioo2hf0/image/upload/v1536315514/omxdwkoxm0obcta4x2aq.jpg',
     userId: 72,
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -238,7 +226,6 @@ const orderMeal = [
     quantity: 15,
   },
 ];
-
 
 export const insertUserSeed = () => (
   User.bulkCreate(users)

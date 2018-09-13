@@ -159,7 +159,7 @@ class AddMeal extends Component {
         <Form.Field error={!!errors.image}>
           <input
             type="file"
-            id="file"
+            id="imageupload"
             name="file"
             accept="image/*"
             value={mealInformation.file}

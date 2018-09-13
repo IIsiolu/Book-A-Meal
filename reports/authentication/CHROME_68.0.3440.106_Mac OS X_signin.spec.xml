@@ -5,9 +5,9 @@
 
   <testsuite name="authentication.signin.spec"
     errors="0" failures="0" hostname="" id="" package="authentication" skipped="0"
-    tests="1" time="12.53" timestamp="Wed, 12 Sep 2018 17:37:44 GMT">
+    tests="1" time="15.15" timestamp="Thu, 13 Sep 2018 08:49:27 GMT">
   
-    <testcase name="Login User" classname="authentication.signin.spec" time="12.53" assertions="3">
+    <testcase name="Login User" classname="authentication.signin.spec" time="15.15" assertions="3">
 
     
 

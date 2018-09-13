@@ -6,3 +6,5 @@ dist
 /dist/
 coverage
 .nyc_output
+reports
+/client/coverage

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="userpage.signup.spec"
+    errors="0" failures="0" hostname="" id="" package="userpage" skipped="0"
+    tests="4" time="60.91" timestamp="Thu, 13 Sep 2018 09:05:12 GMT">
+  
+    <testcase name="User Sign Up Form" classname="userpage.signup.spec" time="15.43" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Menu for today page" classname="userpage.signup.spec" time="30.15" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User order history" classname="userpage.signup.spec" time="12.82" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User Home Page" classname="userpage.signup.spec" time="2.508" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

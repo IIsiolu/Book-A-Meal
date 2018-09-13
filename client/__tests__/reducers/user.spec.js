@@ -5,7 +5,7 @@ import {
 import user from '../../src/reducers/user';
 import { userState } from '../../src/reducers/initState';
 
-describe('Auth Reducer', () => {
+describe('User Reducer', () => {
   it(
     'should return signUp initial state',
     () => {

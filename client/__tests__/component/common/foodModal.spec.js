@@ -5,6 +5,7 @@ describe('FoodModal Component test-suite', () => {
   const props = {
     addMealToOrder: jest.fn(),
     isOverlayOpened: jest.fn(),
+    isOpened: false,
     overlayId: 1,
     placedOrders: [],
     menus: [

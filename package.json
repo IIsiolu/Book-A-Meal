@@ -23,6 +23,20 @@
     "webpack:build": "rm -rf dist && webpack ",
     "build-production": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors"
   },
+  "nyc": {
+    "exclude": [
+      "tests",
+      "UI",
+      "client",
+      "client/__tests__",
+      "__tests__",
+      "dist",
+      "e2eTest"
+    ],
+    "include": [
+      "server"
+    ]
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
@@ -109,6 +123,7 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
+    "babel-plugin-istanbul": "^5.0.1",
     "babel-preset-stage-1": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "chromedriver": "^2.41.0",
